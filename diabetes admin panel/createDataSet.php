@@ -101,13 +101,13 @@
                         <li><a href="index.php">Home</a></li>
                         <li><a href="createDataSet.php">Create Data Set</a></li>
                         <li><a href="addDoctors.php">Add Doctors</a></li>
-                        <li><a href="manageDOctors.php">Manage Doctors</a></li>
+                        <li><a href="manageDoctors.php">Manage Doctors</a></li>
                         <li><a href="manageUsers.php">Manage Users</a></li>
                         <li><a href="Logout.php"><?php 
                           // if(!isset($_COOKIE['username']))
-                          //   echo "LOGIN";
+                          //   echo "Login";
                           // else
-                          //   echo "LOGOUT";
+                          //   echo "Logout";
                         ?></a></li>
                     </ul>
                 </div> 
@@ -127,7 +127,7 @@
                    <form method="POST" action=" " enctype="multipart/form-data">
                      <input type="file" name="dataSet">
                      <br><br>
-                     <input type="submit" name="upload" value="Upload" class="btn btn-primary">
+                     <input type="submit" name="upload" value="Upload" class="btn  btn-block btn-primary">
                  </form>      
                 </div>    
             </div>

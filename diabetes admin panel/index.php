@@ -32,7 +32,18 @@
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+
     <![endif]-->
+    <style type="text/css">
+        .logo{
+            position: absolute;
+            top: 30%;
+        }
+
+        #home-block{
+            position: absolute;
+            top:50%;
+        }
     </style>
   </head>
 <body>
@@ -52,13 +63,13 @@
                         <li><a href="index.php">Home</a></li>
                         <li><a href="createDataSet.php">Create Data Set</a></li>
                         <li><a href="addDoctors.php">Add Doctors</a></li>
-                        <li><a href="manageDOctors.php">Manage Doctors</a></li>
+                        <li><a href="manageDoctors.php">Manage Doctors</a></li>
                         <li><a href="manageUsers.php">Manage Users</a></li>
                         <li><a href="Logout.php"><?php 
                           if(!isset($_COOKIE['username']))
-                            echo "LOGIN";
+                            echo "Login";
                           else
-                            echo "LOGOUT";
+                            echo "Logout";
                         ?></a></li>
                     </ul>
                 </div>
@@ -69,9 +80,9 @@
     
     <!--HOME SECTION-->
     <div id="home-sec">
-        <div class="container"  >
+        <div class="container">
             <div class="row text-center">
-                <div  class="col-md-12" >
+                <div  class="col-md-12" id="home-block" >
                     <span class="head-main" >Diabetes Prediction System</span> 
                 </div>
             </div>

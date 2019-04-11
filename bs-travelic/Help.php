@@ -55,9 +55,9 @@
                         <li><a href="Contact.php">Contact Us</a></li>
                         <li><a href="Logout.php"><?php 
                           if(!isset($_COOKIE['username']))
-                            echo "LOGIN";
+                            echo "Login";
                           else
-                            echo "LOGOUT";
+                            echo "Logout";
                         ?></a></li>
                 </ul>
             </div>  

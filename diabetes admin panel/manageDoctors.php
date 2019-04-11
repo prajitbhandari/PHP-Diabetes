@@ -50,13 +50,13 @@
                         <li><a href="index.php">Home</a></li>
                         <li><a href="createDataSet.php">Create Data Set</a></li>
                         <li><a href="addDoctors.php">Add Doctors</a></li>
-                        <li><a href="manageDOctors.php">Manage Doctors</a></li>
+                        <li><a href="manageDoctors.php">Manage Doctors</a></li>
                         <li><a href="manageUsers.php">Manage Users</a></li>
                         <li><a href="Logout.php"><?php 
                           if(!isset($_COOKIE['username']))
-                            echo "LOGIN";
+                            echo "Login";
                           else
-                            echo "LOGOUT";
+                            echo "Logout";
                         ?></a></li>
                 </ul>
             </div>  
@@ -71,7 +71,8 @@
        <div class="container">
             <div class="row g-pad-bottom">
                 <div class="text-center g-pad-bottom">
-                   <div class="col-md-12 col-sm-12 alert-info">
+                     <div class="col-md-12 col-sm-12 alert-info" style="width: 98%;
+                     margin-left: 12px; border-radius: 8px;">
                         <h4><i class="fa fa-user-md fa-2x" ></i>&nbsp;Manage Doctors</h4>
                                      
                     </div>  

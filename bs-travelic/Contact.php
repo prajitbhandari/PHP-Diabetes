@@ -130,9 +130,9 @@ if(isset($_POST['submit'])){
                         <li><a href="Contact.php">Contact Us</a></li>
                         <li><a href="Logout.php"><?php 
                           if(!isset($_COOKIE['username']))
-                            echo "LOGIN";
+                            echo "Login";
                           else
-                            echo "LOGOUT";
+                            echo "Logout";
                         ?></a></li>
                 </ul>
             </div>
@@ -217,7 +217,7 @@ if(isset($_POST['submit'])){
                                     <br>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" name ="submit" class="btn btn-success">Submit Request</button>
+                                        <button type="submit" name ="submit" class="btn btn-block btn-success">Submit Request</button>
                                     </div>
                                 </div>
                             </div>

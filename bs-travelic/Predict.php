@@ -8,7 +8,6 @@ if(isset($_POST['predict'])){
     //    header('location:adminLogin.php?xy=1');
     // }
   //check for Pregnancy number
-   //check for glucose value
   if (isset($_POST['pregnancy']) && !empty($_POST['pregnancy']) ){
     $pregnancy = $_POST['pregnancy'];
     if(!preg_match('/^[0-9]+$/', $pregnancy)){
@@ -180,9 +179,9 @@ if(isset($_POST['predict'])){
                         <li><a href="Contact.php">Contact Us</a></li>
                         <li><a href="Logout.php"><?php 
                           if(!isset($_COOKIE['username']))
-                            echo "LOGIN";
+                            echo "Login";
                           else
-                            echo "LOGOUT";
+                            echo "Logout";
                         ?></a></li>
                     </ul>
                 </div> 
@@ -294,7 +293,7 @@ if(isset($_POST['predict'])){
                           </div>
 
                           <div class="form-group">
-                             <button type="submit"  name="predict" class="btn btn-primary">Predict</button>
+                             <button type="submit"  name="predict" class="btn btn-block btn-primary">Predict</button>
                           </div>
 
                         </form><br/><br/>
