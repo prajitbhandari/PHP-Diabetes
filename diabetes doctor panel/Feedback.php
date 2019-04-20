@@ -1,21 +1,47 @@
-<?php 
- require "connect.php";
- //query to select data
- $sql="select * from tbl_doctor";
- //execute query and return result object
- $result=mysqli_query($conn,$sql);
- //default array
- $data=array();
-  if(mysqli_num_rows($result)>0){
-    while($d=mysqli_fetch_assoc($result)){
-      array_push($data,$d);
+<?php
+//check for button click---form submit
+$result='';
+if(isset($_POST['add'])){
+  $err = array();
+
+  //check for Doctor Name
+  if (isset($_POST['docName']) && !empty($_POST['docName']) ){
+    $docName = $_POST['docName'];
+    if (!preg_match("/^[a-zA-Z ]*$/",$docName)) {
+      $err['docName'] = "*Invalid Name";
     }
-    
-  }else{
-    echo "data not found";
+     }else {
+    $err['docName'] = "*Enter Doctor Name";
   }
+
+
+  //check for Doctor Address
+  if (isset($_POST['feedback']) && !empty($_POST['feedback'])){
+    $feedback = $_POST['feedback'];
+    if (!preg_match("/^[a-zA-Z0-9 ]*$/",$feedback)) {
+      $err['feedback'] = "*Invalid Feedback";
+    }
+  }else {
+    $err['feedback'] = "*Enter Doctor Feedback";
+    }
   
+
+  
+  //check for number of error
+  if(count($err) == 0) {
+    require "connect.php";
+    $sql = "insert into tbl_feedback (docName,feedback) values ('$docName','$feedback')";
+    $res=mysqli_query($conn, $sql);
+    
+    if ($res){
+      $result='<div class="alert alert-success"> Feedback Added Successfully</div>';
+    }   
+  }else{
+      $result='<div class="alert alert-danger">Failed to Add Feedback</div>';
+    }
+}
 ?>
+
 
 
 <!DOCTYPE html>
@@ -51,7 +77,13 @@
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]--></head>
+    <![endif]-->
+      <style type="text/css">
+         .errorDisplay{
+          color: red;
+         }
+      </style>
+  </head>
 <body>
      <!-- NAV SECTION -->
          <div class="navbar navbar-inverse navbar-fixed-top">
@@ -68,11 +100,8 @@
             <div class="navbar-collapse collapse" >
                 <ul class="nav navbar-nav navbar-right" id="nav-list">
                         <li><a href="index.php">Home</a></li>
-                        <li><a href="Predict.php">Predict Disease</a></li>
-                        <li><a href="viewDoctor.php">View Doctors</a></li>
-                        <li><a href="doctorResponse.php">Doctors Response</a></li>
-                        <li><a href="Help.php">Help</a></li>
-                        <li><a href="Contact.php">Contact Us</a></li>
+                        <li><a href="viewReport.php">View Report</a></li>
+                        <li><a href="Feedback.php">Feedback </a></li>
                         <li><a href="Logout.php"><?php 
                           if(!isset($_COOKIE['username']))
                             echo "Login";
@@ -92,41 +121,43 @@
        <div class="container">
             <div class="row g-pad-bottom">
                 <div class="text-center g-pad-bottom">
-                    <div class="col-md-12 col-sm-12 alert-info" style="width: 98%;
-                     margin-left: 12px; border-radius: 8px;">
-                        <h4><i class="fa fa-user-md fa-2x" ></i>&nbsp;Available Doctors</h4>
+                   <div class="col-md-6 col-md-offset-3 alert-info" style="width: 559px;
+                     margin-left: 306px; border-radius: 8px;">
+                        <h4><i class="fa fa-user-md fa-2x"></i>&nbsp; Doctor Feedback</h4>
                                      
-                    </div>    
+                    </div> 
                 </div>
-              </div>
-
+                  </div>
            <div class="row g-pad-bottom" >
-                <div class="col-md-12 col-sm-12" >
-                   <table class="table table-bordered table-striped">
-                      <thead class="bg-success">
-                          <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">E-mail</th>
-                            <th scope="col">Phone</th>
-                            <th scope="col">Qualification</th>
-                            <th scope="col">Query</th>
-                          </tr>
-                     </thead>
-                     <tbody>
-                        <?php foreach ($data as $info){?>
-                          <tr>
-                            <th scope="row"><?php echo $info['Id'] ?></th>
-                            <td><?php echo $info['docName'] ?></td>
-                            <td><?php echo $info['docAddress'] ?></td>
-                            <td><?php echo $info['docEmail'] ?></td>
-                            <td><?php echo $info['docPhone'] ?></td>
-                            <td><?php echo $info['docQualification'] ?></td>
-                          </tr>
-                         <?php } ?>  
-                      </tbody>
-                    </table>
+                <div class="col-md-6 col-md-offset-3">
+                   <form method="POST" action="Feedback.php" name="doctorFeedbackForm">
+                      <div class="form-group">
+                        <?php echo $result;?>
+                            <br>
+                      </div>
+                      <div class="form-group">
+                        <label for="docName">DocName</label>
+                        <input type="text" class="form-control" name="docName" id="docName" placeholder="Enter Doctor Name">
+                        <span class="errorDisplay">
+                                <?php if (isset($err['docName'])){
+                                echo $err['docName'];
+                              } ?>
+                        </span>
+                            <br>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="feedback">FeedBack</label>
+                        <textarea type="text" class="form-control" name="feedback" id="feedback" placeholder="Please Provie some Feedback"></textarea>
+                        <span class="errorDisplay">
+                                <?php if (isset($err['feedback'])){
+                                echo $err['feedback'];
+                              } ?>
+                        </span>
+                            <br>
+                      </div>
+                      <button type="submit" name="add" class="btn btn-block btn-primary">Add</button>
+                    </form>
                 </div>
            </div>
        </div>

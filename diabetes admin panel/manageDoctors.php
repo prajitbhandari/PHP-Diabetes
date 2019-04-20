@@ -1,3 +1,24 @@
+<?php 
+ require "connect.php";
+ //query to select data
+ $sql="select * from tbl_doctor";
+ //execute query and return result object
+ $result=mysqli_query($conn,$sql);
+ //default array
+ $data=array();
+  if(mysqli_num_rows($result)>0){
+    while($d=mysqli_fetch_assoc($result)){
+      array_push($data,$d);
+    }
+    
+  }else{
+    echo "data not found";
+  }
+  
+?>
+
+
+
 <!DOCTYPE html>
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
@@ -83,39 +104,28 @@
                    <table class="table table-bordered table-striped">
                         <thead class="bg-success">
                             <tr>
-                              <th scope="col">#</th>
+                              <th scope="col">ID</th>
                               <th scope="col">DoctorName</th>
                               <th scope="col">Email</th>
                               <th scope="col">Phone</th>
                               <th scope="col">Address</th>
-                              <th scope="col">Action</th>
+                              <th scope="col">Qualification</th>
+                              <th colspan="2" scope="col" style="text-align: center;">Action</th>
                             </tr>
                        </thead>
                        <tbody>
-                            <tr>
-                              <th scope="row">1</th>
-                              <td>Mark</td>
-                              <td>xyz@gmail.com</td>
-                              <td>12345687</td>
-                              <td>ktm</td>
-                              <td><a href="">Delete</a></td>
-                            </tr>
-                            <tr>
-                              <th scope="row">2</th>
-                              <td>Jack</td>
-                              <td>jack@gmail.com</td>
-                              <td>12345687</td>
-                              <td>Pkr</td>
-                              <td><a href="">Delete</a></td>
-                            </tr>
-                            <tr>
-                              <th scope="row">3</th>
-                              <td>John</td>
-                              <td>john@gmail.com</td>
-                              <td>12345687</td>
-                              <td>DML</td>
-                              <td><a href="">Delete</a></td>
-                            </tr>
+                            <?php foreach ($data as $in){?>
+                              <tr>
+                                <td><?php echo $in['Id'] ?> </td>
+                                <td><?php echo $in['docName'] ?> </td>
+                                <td><?php echo $in['docEmail'] ?> </td>
+                                <td><?php echo $in['docPhone'] ?> </td>
+                                <td><?php echo $in['docAddress'] ?> </td>
+                                <td><?php echo $in['docQualification'] ?> </td>
+                                <td><a href="delete_doctor.php ?id=<?php echo $in['Id']?>"onclick="return confirm('Are you sure u want to delete')">Delete</a>
+                                <td><a href="edit_doctor.php ?id=<?php echo $in['Id']?>"onclick="return confirm('Are you sure u want to Edit')">Edit</a>  
+                              </tr>
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>

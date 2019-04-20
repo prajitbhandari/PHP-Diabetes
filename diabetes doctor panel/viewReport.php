@@ -1,13 +1,12 @@
-﻿<?php
+﻿
+<?php
 
     $msg='';
-    require "connect.php";
     if (isset($_POST['upload'])){
-        $err = array();
-        $filename=$_FILES['file']['name'];
-        $fileerror=$_FILES['file']['error'];
-        $filesize=$_FILES['file']['size'];
-        $filetmp=$_FILES['file']['tmp_name'];
+        $filename=$_FILES['dataSet']['name'];
+        $fileerror=$_FILES['dataSet']['error'];
+        $filesize=$_FILES['dataSet']['size'];
+        $filetmp=$_FILES['dataSet']['tmp_name'];
         $fileext=explode('.',$filename);
         $filecheck=strtolower(end($fileext));
         $fileextstored=array('csv');
@@ -18,44 +17,19 @@
                 // type validation
                 if (in_array($filecheck, $fileextstored)){
                     # code...
-                    if ($filesize<=50000000 ) {
+                    if ($filesize<=20000000 ) {
                         
-                        // $destinationfile='upload/'.$filename;
-                        // $result=move_uploaded_file($filetmp, $destinationfile);
-                         $file = fopen($filetmp, "r");
-                         $first=true;
-                         $second=true;
-                         echo '<br>';echo '<br>';echo '<br>';echo '<br>';
-                         $sqlInsert = "insert into tbl_dataSet (Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age,Outcome) values";
-                         while (($column = fgetcsv($file, 10000, ",")) !== FALSE ) { 
-                            if(!$first){
-                                
-                                if(!$second){
-                                    
-                                     $sqlInsert = $sqlInsert.",";
-                                     
-                                }
-                                
-                                $second=false;
-                                $sqlInsert = $sqlInsert."('$column[0]','$column[1]','$column[2]','$column[3]','$column[4]','$column[5]','$column[6]','$column[7]','$column[8]')";
-                                
-                                
-                                 
-                                 
-                                }
-                                $first= false;
+                        $destinationfile='upload/'.$filename;
+                        $result=move_uploaded_file($filetmp, $destinationfile);
+                        
+                        if($result){
+                            $msg="<div class='alert alert-success col-md-4 col-md-offset-4'>File successfully uploaded</div>";
+                        }else{
+                            $msg="<div class='alert alert-danger col-md-4 col-md-offset-4'>File Upload Failed</div>";
+                        }
 
-                            }//end of while loop
-                            $result = mysqli_query($conn, $sqlInsert);            
-                                   if ($result) {
-                                        // header("Location: createDataSet.php");
-                                        $msg="<div class='alert alert-success col-md-4 col-md-offset-4'>File successfully uploaded</div>";
-                                    } else {
-                                        $msg="<div class='alert alert-danger col-md-4 col-md-offset-4'>File Upload Failed</div>";
-                                    }
-                            
                     }else{
-                        $msg= "<div class='alert alert-dangercol-md-4 col-md-offset-4'>File Size Invalid</div>";
+                        $msg= "<div class='alert alert-dangercol-md-4 col-md-offset-4'>File Size Too Large! than 2 mb</div>";
                     }
 
                 }else{
@@ -63,11 +37,11 @@
                 }
             }
             else{
-                $msg="<div class='alert alert-danger col-md-4 col-md-offset-4'>Select a file</div>";
+                $msg="<div class='alert alert-danger col-md-4 col-md-offset-4'>File Error!</div>";
             }
                 
     }
-?> 
+    ?> 
 
 <!DOCTYPE html>
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
@@ -124,16 +98,14 @@
                 </div>
                 <div class="navbar-collapse collapse" >
                     <ul class="nav navbar-nav navbar-right" id="nav-list">
-                        <li><a href="index.php">Home</a></li>
-                        <li><a href="createDataSet.php">Create Data Set</a></li>
-                        <li><a href="addDoctors.php">Add Doctors</a></li>
-                        <li><a href="manageDoctors.php">Manage Doctors</a></li>
-                        <li><a href="manageUsers.php">Manage Users</a></li>
+                       <li><a href="index.php">Home</a></li>
+                        <li><a href="viewReport.php">View Report</a></li>
+                        <li><a href="Feedback.php">Feedback </a></li>
                         <li><a href="Logout.php"><?php 
-                          // if(!isset($_COOKIE['username']))
-                          //   echo "Login";
-                          // else
-                          //   echo "Logout";
+                          if(!isset($_COOKIE['username']))
+                            echo "Login";
+                          else
+                            echo "Logout";
                         ?></a></li>
                     </ul>
                 </div> 
@@ -146,12 +118,12 @@
         <div class="container ">
             <div class="row">
                 <?php 
-                    echo $msg; echo "<br>";
+                    echo $msg;
                 ?>
                <div class="col-md-4 col-sm-4 col-sm-offset-4 " >
                      <h4>Create New Data set</h4>
                    <form method="POST" action=" " enctype="multipart/form-data">
-                     <input type="file" name="file">
+                     <input type="file" name="dataSet">
                      <br><br>
                      <input type="submit" name="upload" value="Upload" class="btn  btn-block btn-primary">
                  </form>      

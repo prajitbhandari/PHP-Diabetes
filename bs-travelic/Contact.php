@@ -5,7 +5,7 @@ if(isset($_POST['submit'])){
     //check for username
     if (isset($_POST['name']) && !empty($_POST['name'])){
         $name = $_POST['name'];
-        if (!preg_match("/^([a-zA-Z' ]+)$/","name")){
+        if (!preg_match("/^[a-zA-Z' ]*$/",$name)){
             $err['name'] = "Invalid Name";  
         }
         
@@ -23,15 +23,16 @@ if(isset($_POST['submit'])){
        else {
         $err['email'] = "*Enter Email";
     }
+
     //check for phone
     if (isset($_POST['phone']) && !empty($_POST['phone'])){
         $phone = $_POST['phone'];
-       if(!preg_match('/^[0-9]{10}+$/', $phone)){
-            $err['phone'] = "*Invalid Phone";
-        } 
+        if (!preg_match("/^[0-9 ]{10}+$/",$phone)){
+            $err['phone'] = "Invalid Phone";  
+        }
         
     }else{
-        $err['phone'] = "*Enter Phone number";
+        $err['phone'] = "*Enter the phone";
     }
 
     //check for message
@@ -43,24 +44,18 @@ if(isset($_POST['submit'])){
     }
 
      //check for number of error
-          // if(count($err) == 0) {
-          //   require "connect.php";
-          //   $sql = "insert into tbl_contact(Name,Email,Message) values 
-          //   ('$name','$email','$message')";
+          if(count($err) == 0) {
+            require "connect.php";
+            $sql = "insert into tbl_contact(name,email,phone,message) values 
+            ('$name','$email','$phone','$message')";
 
-          //   $result=mysqli_query($conn, $sql);
-          //   if ($result){
-          //     echo "Successfully Booked";  
-          //   }else{
-          //     echo "Booking failed";
-          //   }   
-          // }
-    if (count($err)==0) {
-      $result='<div class="alert alert-success"> Contact Submitted</div>';
-    }
-    else  {
-    $result='<div class="alert alert-danger">Contact Failure</div>';
-  }
+            $result=mysqli_query($conn, $sql);
+            if ($result){
+              $result='<div class="alert alert-success"> Contact added Successful</div>';
+            }   
+          }else{
+              $result='<div class="alert alert-danger"> Contact Failed</div>';
+            }
    
  }
 ?>
@@ -80,7 +75,7 @@ if(isset($_POST['submit'])){
     <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
-     <title>Multipager Template- Travelic </title>
+     <title>Contact </title>
     <!--REQUIRED STYLE SHEETS-->
     <!-- BOOTSTRAP CORE STYLE CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -99,17 +94,16 @@ if(isset($_POST['submit'])){
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-
-    <style type="text/css">
+       <style type="text/css">
+        
         .errorDisplay{
             color:red;
         }
-    </style>
-
+       </style> 
 </head>
 <body>
      <!-- NAV SECTION -->
-         <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar navbar-inverse navbar-fixed-top" id="nav">
        
         <div class="container">
             <div class="navbar-header">
@@ -118,11 +112,11 @@ if(isset($_POST['submit'])){
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">YOUR LOGO</a>
+                  <span class="logo">DPS</span>
             </div>
             <div class="navbar-collapse collapse" >
                 <ul class="nav navbar-nav navbar-right" id="nav-list">
-                        <li><a href="index.php">Home</a></li>
+                    <li><a href="index.php">Home</a></li>
                         <li><a href="Predict.php">Predict Disease</a></li>
                         <li><a href="viewDoctor.php">View Doctors</a></li>
                         <li><a href="doctorResponse.php">Doctors Response</a></li>
@@ -141,102 +135,97 @@ if(isset($_POST['submit'])){
     </div>
      <!--END NAV SECTION -->
     
-  
-
-    <!--CONTACT SECTION-->    
+    
     <section  >
         <div class="container">
-            <div class="row">
-                <div class="row g-pad-bottom">
-                    <div class="col-md-6  ">
-                        <h2>Contact Us</h2>
-                     
-                        <p>
-                             <strong> Address: </strong> &nbsp;Maitidevi,Kathmandu
-                            <br />
-                            <strong> Phone: </strong> &nbsp;+977-9842687243
-                            <br />
-                            <strong> Email: </strong> &nbsp;diabetesprediction@gmail.com
-                            <br />
-                            Please fill out the form below and we will get back to you as soon as possible. Need quicker answers? Call us at given numbers.          
-                        </p>
-                        <form action="Contact.php" method="POST" name="contactForm">
-                            <div class="row form-group ">
-                              <div class="col-md-12 col-sm-12 ">
-                                  <?php echo $result; ?>    
-                              </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6  ">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name ="name"  placeholder="Name">
-                                        <div class="errorDisplay">
-                                            <?php if (isset($err['name'])){
-                                                echo $err['name'];
-                                            } ?>
-                                        </div>
+             
+            <div class="row g-pad-bottom">
+                <div class="col-md-6 col-sm-6">
+                    <h2>Contact Us</h2>
+                 
+                    <p>
+                         <strong> Address: </strong> &nbsp;Maitidevi,Kathmandu
+                        <br />
+                        <strong> Phone: </strong> &nbsp;9842687243
+                        <br />
+                        <strong> Email: </strong> &nbsp;everesttravel&tours@gmail.com
+                        <br />
+                        Please fill out the form below and we will get back to you as soon as possible. Need quicker answers? Call us at given numbers.          
+                    </p>
+                    <form method="POST">
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <div class="form-group">
+                                    <?php echo $result;?>
                                     <br>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6 ">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="email"  placeholder="Email address">
-                                        <div class="errorDisplay">
-                                            <?php if (isset($err['email'])){
-                                            echo $err['email'];
-                                            } ?>
-                                        </div>
-                                    <br>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="phone" placeholder="Phone">
-                                        <div class="errorDisplay">
-                                            <?php if (isset($err['phone'])){
-                                            echo $err['phone'];
-                                            } ?>
-                                        </div>
-                                    <br>
-                                    </div>
                                 </div>
                                 
                             </div>
-                            <div class="row">
-                                <div class="col-md-12 ">
-                                    <div class="form-group">
-                                        <textarea name="message" id="message" name="message" class="form-control" rows="3" 
-                                        placeholder="Message"></textarea>
-                                        <div class="errorDisplay">
-                                            <?php if (isset($err['message'])){
-                                            echo $err['message'];
-                                            } ?>
-                                        </div>
-                                    <br>
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="submit" name ="submit" class="btn btn-block btn-success">Submit Request</button>
-                                    </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 ">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Name" name="name">
+                                      <div class="errorDisplay">
+                                        <?php if (isset($err['name'])){
+                                         echo $err['name'];
+                                        } ?>
+                                      </div>
+                                     <br>
                                 </div>
                             </div>
-                        </form>
-                    </div>
 
-                    <div class="col-md-6  ">
-                        <h2>About Us</h2>
-                        <p>Diabetes Prediction System is a web based application 
-                        that aims in providing quality health services to the people.
-                        The main purpose to develop this application is to collect
-                        the data related to symptoms or behaviour of user and calculate
-                        the probability of whether the user may have suffered from a particular
-                        disease or not and to notify the user about the risk he/she has.For the 
-                        existing user who are suffered earlier from a particular disease,this
-                        application checks for probability of the next disease or wheter they 
-                        have been cured previous disease</p>
-                    </div>
-            </div>     
+                            <div class="col-md-6 ">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Email address" name="email">
+                                    <div class="errorDisplay">
+                                        <?php if (isset($err['email'])){
+                                        echo $err['email'];
+                                        } ?>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <div class="form-group">
+                                    <input type="text" name="phone" id="phone"  class="form-control" rows="3" placeholder="Phone">
+                                    <div class="errorDisplay">
+                                        <?php if (isset($err['phone'])){
+                                        echo $err['phone'];
+                                        } ?>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <div class="form-group">
+                                    <textarea name="message" id="message"  class="form-control" rows="3" placeholder="Message"></textarea>
+                                    <div class="errorDisplay">
+                                        <?php if (isset($err['message'])){
+                                        echo $err['message'];
+                                        } ?>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success" name="submit">Submit Request</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+               <!--  <div class="col-md-6">
+                   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.3794981426213!2d85.3322217150153!3d27.705566782792655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb199ffe9d7c6b%3A0x91b3a969f305a0bc!2sMaitidevi%2C+Kathmandu+44600!5e0!3m2!1sen!2snp!4v1549095261378" width="570" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+                </div> -->
+            </div>
         </div>
     </section>
     <!--END CONTACT SECTION-->

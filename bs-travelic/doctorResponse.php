@@ -1,3 +1,24 @@
+<?php 
+ require "connect.php";
+ //query to select data
+ $sql="select * from tbl_feedback";
+ //execute query and return result object
+ $result=mysqli_query($conn,$sql);
+ //default array
+ $data=array();
+  if(mysqli_num_rows($result)>0){
+    while($d=mysqli_fetch_assoc($result)){
+      array_push($data,$d);
+    }
+    
+  }else{
+    echo "data not found";
+  }
+  
+?>
+
+
+
 <!DOCTYPE html>
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
@@ -84,27 +105,19 @@
                    <table class="table table-bordered table-striped">
                         <thead class="bg-success">
                             <tr>
-                              <th scope="col">#</th>
+                              <th scope="col">Id</th>
                               <th scope="col">Name</th>
                               <th scope="col">Feedback</th>
                             </tr>
                        </thead>
                        <tbody>
+                        <?php foreach ($data as $info){?>
                             <tr>
-                              <th scope="row">1</th>
-                              <td>Mark</td>
-                              <td>Otto</td>
+                              <th scope="row"><?php echo $info['Id'] ?></th>
+                              <td><?php echo $info['docName'] ?></td>
+                              <td><?php echo $info['feedback'] ?></td>
                             </tr>
-                            <tr>
-                              <th scope="row">2</th>
-                              <td>Jacob</td>
-                              <td>Thornton</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">3</th>
-                              <td>Larry</td>
-                              <td>the Bird</td>
-                            </tr>
+                          <?php }?>
                         </tbody>
                     </table>
                 </div>

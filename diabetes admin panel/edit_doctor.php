@@ -1,16 +1,34 @@
+<?php 
+ require "connect.php";
+ //query to select data
+ $Id=$_GET['id'];
+ $sql="select * from tbl_doctor where Id='$Id'";
+ //execute query and return result object
+ $result=mysqli_query($conn,$sql);
+ //default array
+ $data=array();
+  if(mysqli_num_rows($result)>0){
+    while($d=mysqli_fetch_assoc($result)){
+      array_push($data,$d);
+    }
+    
+  }else{
+    echo "data not found";
+  }
+  
+?>
+
+
 <?php
 //check for button click---form submit
 $result='';
-if(isset($_POST['add'])){
+if(isset($_POST['update'])){
   $err = array();
   
-   // if(!isset($_COOKIE['adminName'])){
-    //    header('location:adminLogin.php?xy=1');
-    // }
   //check for Doctor Name
   if (isset($_POST['docName']) && !empty($_POST['docName']) ){
     $docName = $_POST['docName'];
-        if (!preg_match("/^[a-zA-Z' ]*$/",$docName)) {
+    if (!preg_match("/^[a-zA-Z]+$/",$docName)) {
       $err['docName'] = "*Invalid Name";
     }
      }else {
@@ -29,13 +47,13 @@ if(isset($_POST['add'])){
 
   
   //check for Doctor Phone
-  if (isset($_POST['docPhone']) && !empty($_POST['docPhone']) ){
+if (isset($_POST['docPhone']) && !empty($_POST['docPhone'])){
     $docPhone = $_POST['docPhone'];
-    if (!preg_match("/^[0-9]{10}+$/",$docPhone)) {
-      $err['docPhone'] = "*Invalid Doctor Phone Number";
-    }
-     }else {
-    $err['docPhone'] = "*Enter Doctor Phone Number";
+    if(!preg_match('/^[0-9]{10}+$/', $docPhone)){
+      $err['docPhone'] = "*Enter Valid Contact number";
+    } 
+  }else{
+    $err['docPhone'] = "*Enter contact number";
   }
 
   //check for Doctor Address
@@ -52,7 +70,7 @@ if(isset($_POST['add'])){
   //check for Qualification
   if (isset($_POST['docQualification']) && !empty($_POST['docQualification']) ){
     $docQualification = $_POST['docQualification'];
-    if (!preg_match("/^[a-zA-Z ]+$/",$docQualification)) {
+    if (!preg_match("/^[a-zA-Z ]*$/",$docQualification)) {
       $err['docQualification'] = "*Invalid Doctor Qualification";
     }
      }else {
@@ -63,16 +81,17 @@ if(isset($_POST['add'])){
   // check for number of error
   if(count($err) == 0) {
     require "connect.php";
-    $sql = "insert into tbl_doctor(docName,docEmail,docPhone,docAddress,docQualification) values 
-    ('$docName','$docEmail','$docPhone','docAddress','$docQualification')";
+
+    $sql ="update tbl_doctor set docName='$docName',docEmail='$docEmail',docPhone='$docPhone',docAddress='$docAddress',docQualification='$docQualification'
+    where Id=$Id";
     $res=mysqli_query($conn, $sql);
     
     if ($res){
-      $result='<div class="alert alert-success"> Doctor Added Successfully</div>';
+      $result='<div class="alert alert-success"> Doctor Updated Successfully</div>';
+    }else{
+      $result='<div class="alert alert-danger">Failed to Update Doctor</div>';
     }   
-  }else{
-      $result='<div class="alert alert-danger">Failed to Add Doctor</div>';
-    }
+  }
 
 }
 ?>
@@ -160,20 +179,21 @@ if(isset($_POST['add'])){
                 <div class="text-center g-pad-bottom">
                    <div class="col-md-6 col-md-offset-3 alert-info" style="width: 559px;
                      margin-left: 306px; border-radius: 8px;">
-                        <h4><i class="fa fa-user-md fa-2x"></i>&nbsp;Add Doctors</h4>
+                        <h4><i class="fa fa-user-md fa-2x"></i>&nbsp;Update Doctors</h4>
                                      
                     </div> 
                 </div>
                   </div>
            <div class="row g-pad-bottom" >
                 <div class="col-md-6 col-md-offset-3">
-                   <form method="POST" action="addDoctors.php" name="doctorForm">
+                  <?php foreach ($data as $info){?>
+                   <form method="POST" action="" name="doctorForm">
                       <?php 
                           echo $result;
                       ?>
                       <div class="form-group">
                         <label for="docName">DocName</label>
-                        <input type="text" class="form-control" name="docName" id="docName" placeholder="Enter Doctor Name">
+                        <input type="text" class="form-control" name="docName" id="docName" value="<?php echo $info['docName']?>">
                         <span class="errorDisplay">
                                 <?php if (isset($err['docName'])){
                                 echo $err['docName'];
@@ -184,7 +204,7 @@ if(isset($_POST['add'])){
 
                       <div class="form-group">
                         <label for="docEmail">E-mail</label>
-                        <input type="text" class="form-control" name="docEmail" id="docEmail" aria-describedby="emailHelp" placeholder="Enter E-mail Address">
+                        <input type="text" class="form-control" name="docEmail" id="docEmail" value="<?php echo $info['docEmail']?>">
                         <span class="errorDisplay">
                                 <?php if (isset($err['docEmail'])){
                                 echo $err['docEmail'];
@@ -195,7 +215,7 @@ if(isset($_POST['add'])){
 
                       <div class="form-group">
                         <label for="docPhone">Phone</label>
-                        <input type="text" class="form-control" name="docPhone" id="docPhone" placeholder="Enter your Phone Number">
+                        <input type="text" class="form-control" name="docPhone" id="docPhone"value="<?php echo $info['docPhone']?> ">
                         <span class="errorDisplay">
                             <?php if (isset($err['docPhone'])){
                                 echo $err['docPhone'];
@@ -206,7 +226,7 @@ if(isset($_POST['add'])){
                       
                       <div class="form-group">
                         <label for="docAddress">Address</label>
-                        <input type="text" class="form-control" name="docAddress" id="docAddress" placeholder="Enter your Address">
+                        <input type="text" class="form-control" name="docAddress" id="docAddress" value="<?php echo $info['docAddress']?> ">
                         <span class="errorDisplay">
                                 <?php if (isset($err['docAddress'])){
                                 echo $err['docAddress'];
@@ -217,7 +237,7 @@ if(isset($_POST['add'])){
                       
                       <div class="form-group">
                         <label for="docQualification">Qualification</label>
-                        <input type="text" class="form-control" name="docQualification" id="docQualification" placeholder="Enter Your Qualification">
+                        <input type="text" class="form-control" name="docQualification" id="docQualification" value="<?php echo $info['docQualification']?>">
                         <span class="errorDisplay">
                                 <?php if (isset($err['docQualification'])){
                                 echo $err['docQualification'];
@@ -225,8 +245,9 @@ if(isset($_POST['add'])){
                         </span>
                             <br>
                       </div>
+                      <?php } ?>
 
-                      <button type="submit" name="add" class="btn btn-block btn-primary">Add</button>
+                      <button type="submit" name="update" class="btn btn-block btn-primary">Update</button>
                     </form>
                 </div>
            </div>
