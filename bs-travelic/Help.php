@@ -1,19 +1,30 @@
+<?php 
+ require "connect.php";
+ //query to select data
+ $sql="select * from tbl_help";
+ //execute query and return result object
+ $result=mysqli_query($conn,$sql);
+ //default array
+ $data=array();
+  if(mysqli_num_rows($result)>0){
+    while($d=mysqli_fetch_assoc($result)){
+      array_push($data,$d);
+    }
+    
+  }else{
+    echo "data not found";
+  }
+  
+?>
+
+
 <!DOCTYPE html>
-<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
-<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
+
 <html lang="en">
-<!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!--[if IE]>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <![endif]-->
-    <title>Multipager Template- Travelic </title>
+    <title>Diabetes Prediction System </title>
     <!--REQUIRED STYLE SHEETS-->
     <!-- BOOTSTRAP CORE STYLE CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -27,11 +38,7 @@
     <link href="assets/css/style.css" rel="stylesheet" />
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]--></head>
+</head>
 <body>
      <!-- NAV SECTION -->
          <div class="navbar navbar-inverse navbar-fixed-top">
@@ -76,34 +83,22 @@
                       <caption>Diabetes Disease View:Sheet 1</caption>
                       <thead class="bg-success">
                         <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Attributes</th>
+                          <th scope="col">Id</th>
+                          <th scope="col">Attribute</th>
                           <th scope="col">Description</th>
-                          <th scope="col">Values</th>
+                          <th scope="col">Value</th>
                         </tr>
                       </thead>
                       
                       <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>Continuous</td>
-                        </tr>
-                        
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>Continuous</td>
-                        </tr>
-                        
-                        <tr>
-                          <th scope="row">3</th>
-                          <td>Larry</td>
-                          <td>the Bird</td>
-                          <td>Continuous</td>
-                        </tr>
+                        <?php foreach ($data as $info){?>
+                          <tr>
+                            <th scope="row"><?php echo $info['Id'] ?></th>
+                            <td><?php echo $info['attribute'] ?></td>
+                            <td><?php echo $info['description'] ?></td>
+                            <td><?php echo $info['value'] ?></td>
+                          </tr>
+                        <?php }?>  
                         </tbody>
                     </table>
                 </div>
@@ -120,8 +115,6 @@
     </div>
     <!-- END FOOTER SECTION -->
 
-    <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
-    <!-- CORE JQUERY  -->
     <script src="assets/plugins/jquery-1.10.2.js"></script>
     <!-- BOOTSTRAP CORE SCRIPT   -->
     <script src="assets/plugins/bootstrap.min.js"></script>  

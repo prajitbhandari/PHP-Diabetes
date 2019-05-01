@@ -1,66 +1,57 @@
 <?php
-//check for button click---form submit
-$result='';
-if(isset($_POST['add'])){
-  $err = array();
 
-  //check for Doctor Name
-  if (isset($_POST['docName']) && !empty($_POST['docName']) ){
-    $docName = $_POST['docName'];
-    if (!preg_match("/^[a-zA-Z ]*$/",$docName)) {
-      $err['docName'] = "*Invalid Name";
-    }
-     }else {
-    $err['docName'] = "*Enter Doctor Name";
-  }
-
-
-  //check for Doctor Address
-  if (isset($_POST['feedback']) && !empty($_POST['feedback'])){
-    $feedback = $_POST['feedback'];
-    if (!preg_match("/^[a-zA-Z0-9 ]*$/",$feedback)) {
-      $err['feedback'] = "*Invalid Feedback";
-    }
-  }else {
-    $err['feedback'] = "*Enter Doctor Feedback";
-    }
+  $result='';
   
+  //check for button click---form submit
+  if(isset($_POST['add'])){
+    $err = array();
 
-  
-  //check for number of error
-  if(count($err) == 0) {
-    require "connect.php";
-    $sql = "insert into tbl_feedback (docName,feedback) values ('$docName','$feedback')";
-    $res=mysqli_query($conn, $sql);
+    //check for Doctor Name
+    if (isset($_POST['docName']) && !empty($_POST['docName']) ){
+      $docName = $_POST['docName'];
+      if (!preg_match("/^[a-zA-Z ]*$/",$docName)) {
+        $err['docName'] = "*Invalid Name";
+      }
+       }else {
+      $err['docName'] = "*Enter Doctor Name";
+    }
+
+
+    //check for Doctor Address
+    if (isset($_POST['feedback']) && !empty($_POST['feedback'])){
+      $feedback = $_POST['feedback'];
+      if (!preg_match("/^[a-zA-Z0-9 ]*$/",$feedback)) {
+        $err['feedback'] = "*Invalid Feedback";
+      }
+    }else {
+      $err['feedback'] = "*Enter Doctor Feedback";
+    }
     
-    if ($res){
-      $result='<div class="alert alert-success"> Feedback Added Successfully</div>';
-    }   
-  }else{
-      $result='<div class="alert alert-danger">Failed to Add Feedback</div>';
-    }
-}
+
+    
+    //check for number of error
+    if(count($err) == 0) {
+      require "connect.php";
+      $sql = "insert into tbl_feedback (docName,feedback) values ('$docName','$feedback')";
+      $res=mysqli_query($conn, $sql);
+      
+      if ($res){
+        $result='<div class="alert alert-success"> Feedback Added Successfully</div>';
+      }   
+    }else{
+        $result='<div class="alert alert-danger">Failed to Add Feedback</div>';
+      }
+  }
 ?>
 
 
 
 <!DOCTYPE html>
-<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
-<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
 <html lang="en">
-<!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!--[if IE]>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <![endif]-->
-    <title>Multipager Template- Travelic </title>
-    <!--REQUIRED STYLE SHEETS-->
+    <title>Diabetes Prediction System </title>
     <!-- BOOTSTRAP CORE STYLE CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLE CSS -->
@@ -73,11 +64,7 @@ if(isset($_POST['add'])){
     <link href="assets/css/style.css" rel="stylesheet" />
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
+
       <style type="text/css">
          .errorDisplay{
           color: red;
@@ -87,30 +74,30 @@ if(isset($_POST['add'])){
 <body>
      <!-- NAV SECTION -->
          <div class="navbar navbar-inverse navbar-fixed-top">
-       
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">YOUR LOGO</a>
-            </div>
-            <div class="navbar-collapse collapse" >
-                <ul class="nav navbar-nav navbar-right" id="nav-list">
-                        <li><a href="index.php">Home</a></li>
-                        <li><a href="viewReport.php">View Report</a></li>
-                        <li><a href="Feedback.php">Feedback </a></li>
-                        <li><a href="Logout.php"><?php 
-                          if(!isset($_COOKIE['username']))
-                            echo "Login";
-                          else
-                            echo "Logout";
-                        ?></a></li>
-                </ul>
-            </div>  
-        </div>
+            <div class="container">
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">YOUR LOGO</a>
+              </div>
+
+              <div class="navbar-collapse collapse" >
+                  <ul class="nav navbar-nav navbar-right" id="nav-list">
+                      <li><a href="index.php">Home</a></li>
+                      <li><a href="viewReport.php">View Report</a></li>
+                      <li><a href="Feedback.php">Feedback </a></li>
+                      <li><a href="Logout.php"><?php 
+                        if(!isset($_COOKIE['username']))
+                          echo "Login";
+                        else
+                          echo "Logout";
+                      ?></a></li>
+                  </ul>
+              </div>  
+          </div>
     </div>
      <!--END NAV SECTION -->
     
@@ -127,38 +114,41 @@ if(isset($_POST['add'])){
                                      
                     </div> 
                 </div>
-                  </div>
-           <div class="row g-pad-bottom" >
-                <div class="col-md-6 col-md-offset-3">
-                   <form method="POST" action="Feedback.php" name="doctorFeedbackForm">
-                      <div class="form-group">
-                        <?php echo $result;?>
-                            <br>
-                      </div>
-                      <div class="form-group">
-                        <label for="docName">DocName</label>
-                        <input type="text" class="form-control" name="docName" id="docName" placeholder="Enter Doctor Name">
-                        <span class="errorDisplay">
-                                <?php if (isset($err['docName'])){
-                                echo $err['docName'];
-                              } ?>
-                        </span>
-                            <br>
-                      </div>
+            </div>
 
-                      <div class="form-group">
-                        <label for="feedback">FeedBack</label>
-                        <textarea type="text" class="form-control" name="feedback" id="feedback" placeholder="Please Provie some Feedback"></textarea>
-                        <span class="errorDisplay">
-                                <?php if (isset($err['feedback'])){
-                                echo $err['feedback'];
-                              } ?>
-                        </span>
-                            <br>
-                      </div>
-                      <button type="submit" name="add" class="btn btn-block btn-primary">Add</button>
-                    </form>
-                </div>
+           <div class="row g-pad-bottom" >
+              <div class="col-md-6 col-md-offset-3">
+                <form method="POST" action="Feedback.php" name="doctorFeedbackForm">
+                  <div class="form-group">
+                    <?php echo $result;?>
+                    <br>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="docName">DocName</label>
+                    <input type="text" class="form-control" name="docName" id="docName" placeholder="Enter Doctor Name">
+                    <span class="errorDisplay">
+                            <?php if (isset($err['docName'])){
+                            echo $err['docName'];
+                          } ?>
+                    </span>
+                        <br>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="feedback">FeedBack</label>
+                    <textarea type="text" class="form-control" name="feedback" id="feedback" placeholder="Please Provie some Feedback"></textarea>
+                    <span class="errorDisplay">
+                            <?php if (isset($err['feedback'])){
+                            echo $err['feedback'];
+                          } ?>
+                    </span>
+                        <br>
+                  </div>
+
+                  <button type="submit" name="add" class="btn btn-block btn-primary">Add</button>
+                </form>
+              </div>
            </div>
        </div>
    </section>
@@ -167,12 +157,11 @@ if(isset($_POST['add'])){
 
     <!--FOOTER SECTION -->
     <div id="footer">
-        2014 www.yourdomain.com | All Right Reserved  
+        2019 www.yourdomain.com | All Right Reserved  
          
     </div>
     <!-- END FOOTER SECTION -->
 
-    <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
     <!-- CORE JQUERY  -->
     <script src="assets/plugins/jquery-1.10.2.js"></script>
     <!-- BOOTSTRAP CORE SCRIPT   -->

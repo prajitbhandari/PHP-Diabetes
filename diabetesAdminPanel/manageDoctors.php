@@ -1,40 +1,30 @@
 <?php 
- require "connect.php";
- //query to select data
- $sql="select * from tbl_doctor";
- //execute query and return result object
- $result=mysqli_query($conn,$sql);
- //default array
- $data=array();
-  if(mysqli_num_rows($result)>0){
-    while($d=mysqli_fetch_assoc($result)){
-      array_push($data,$d);
+   require "connect.php";
+   //query to select data
+   $sql="select * from tbl_doctor";
+   //execute query and return result object
+   $result=mysqli_query($conn,$sql);
+   //default array
+   $data=array();
+    if(mysqli_num_rows($result)>0){
+      while($d=mysqli_fetch_assoc($result)){
+        array_push($data,$d);
+      }
+      
+    }else{
+      echo "data not found";
     }
-    
-  }else{
-    echo "data not found";
-  }
   
 ?>
 
 
 
 <!DOCTYPE html>
-<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
-<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
 <html lang="en">
-<!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!--[if IE]>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <![endif]-->
-    <title>Multipager Template- Travelic </title>
+    <title>Diabetes Prediction System </title>
     <!--REQUIRED STYLE SHEETS-->
     <!-- BOOTSTRAP CORE STYLE CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -48,11 +38,7 @@
     <link href="assets/css/style.css" rel="stylesheet" />
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]--></head>
+</head>
 <body>
      <!-- NAV SECTION -->
          <div class="navbar navbar-inverse navbar-fixed-top">
@@ -64,13 +50,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">YOUR LOGO</a>
             </div>
+
             <div class="navbar-collapse collapse" >
                 <ul class="nav navbar-nav navbar-right" id="nav-list">
                         <li><a href="index.php">Home</a></li>
                         <li><a href="createDataSet.php">Create Data Set</a></li>
                         <li><a href="addDoctors.php">Add Doctors</a></li>
+                        <li><a href="addHelpInfo.php">Add HelpInfo</a></li>
+                        <li><a href="manageHelpInfo.php">Manage HelpInfo</a></li>
                         <li><a href="manageDoctors.php">Manage Doctors</a></li>
                         <li><a href="manageUsers.php">Manage Users</a></li>
                         <li><a href="Logout.php"><?php 
@@ -122,8 +110,8 @@
                                 <td><?php echo $in['docPhone'] ?> </td>
                                 <td><?php echo $in['docAddress'] ?> </td>
                                 <td><?php echo $in['docQualification'] ?> </td>
-                                <td><a href="delete_doctor.php ?id=<?php echo $in['Id']?>"onclick="return confirm('Are you sure u want to delete')">Delete</a>
-                                <td><a href="edit_doctor.php ?id=<?php echo $in['Id']?>"onclick="return confirm('Are you sure u want to Edit')">Edit</a>  
+                                <td><a href="delete_doctor.php?id=<?php echo $in['Id']?>"onclick="return confirm('Are you sure u want to delete')">Delete</a>
+                                <td><a href="edit_doctor.php?id=<?php echo $in['Id']?>"onclick="return confirm('Are you sure u want to Edit')">Edit</a>  
                               </tr>
                             <?php } ?>
                         </tbody>
@@ -137,12 +125,11 @@
 
     <!--FOOTER SECTION -->
     <div id="footer">
-        2014 www.yourdomain.com | All Right Reserved  
+        2019 www.yourdomain.com | All Right Reserved  
          
     </div>
     <!-- END FOOTER SECTION -->
 
-    <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
     <!-- CORE JQUERY  -->
     <script src="assets/plugins/jquery-1.10.2.js"></script>
     <!-- BOOTSTRAP CORE SCRIPT   -->

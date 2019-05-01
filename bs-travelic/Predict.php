@@ -1,135 +1,128 @@
 ﻿<?php
-//check for button click---form submit
-$result='';
-if(isset($_POST['predict'])){
-  $err = array();
-  
-   // if(!isset($_COOKIE['adminName'])){
-    //    header('location:adminLogin.php?xy=1');
-    // }
-  //check for Pregnancy number
-  if (isset($_POST['pregnancy']) && !empty($_POST['pregnancy']) ){
-    $pregnancy = $_POST['pregnancy'];
-    if(!preg_match('/^[0-9]+$/', $pregnancy)){
-      $err['pregnancy'] = "*Invalid Pregnancy Value";
-    }
-     }else {
-    $err['pregnancy'] = "*Enter Pregnancy Value";
-  }
 
-  //check for glucose value
-  if (isset($_POST['glucose']) && !empty($_POST['glucose']) ){
-    $glucose = $_POST['glucose'];
-    if(!preg_match('/^[0-9]+$/', $glucose)){
-      $err['glucose'] = "*Invalid Glucose Value";
-    }
-     }else {
-    $err['glucose'] = "*Enter Glucose Value";
-  }
+  $result='';
 
-  
-  //check for Blood Pressure
-  if (isset($_POST['BP']) && !empty($_POST['BP'])){
-    $BP = $_POST['BP'];
-    if(!preg_match('/^[0-9]+$/', $BP)){
-      $err['BP'] = "*Invalid Blood Pressure Value";
-    }
-  }else {
-    $err['BP'] = "*Enter Blood Pressure Value";
-  }
-
-  //check for SKin Thickness
-  if (isset($_POST['skin']) && !empty($_POST['skin'])){
-    $skin = $_POST['skin'];
-    if(!preg_match('/^[0-9]+$/', $skin)){
-      $err['skin'] = "*Invalid Skin Thickness Value";
-    }
-  }else {
-    $err['skin'] = "*Enter Skin Thickness Value";
-    }
-  
-
-  //check for Insulin
-  if (isset($_POST['insulin']) && !empty($_POST['insulin']) ){
-    $insulin = $_POST['insulin'];
-    if(!preg_match('/^[0-9]+$/', $insulin)){
-      $err['insulin'] = "*Invalid Insulin Value";
-    }
-     }else {
-    $err['insulin'] = "*Enter Insulin Value";
-  }
-
-  //check for BMI
-  if (isset($_POST['BMI']) && !empty($_POST['BMI']) ){
-    $BMI = $_POST['BMI'];
-    if(!preg_match('/^[0-9]+$/', $BMI)){
-      $err['BMI'] = "*Invalid BMI Value";
-    }
-     }else {
-    $err['BMI'] = "*Enter BMI Value";
-  }
-  //check for Pedegree Function
-  if (isset($_POST['pedegree']) && !empty($_POST['pedegree']) ){
-    $pedegree = $_POST['pedegree'];
-    if(!preg_match('/^[0-9]+$/', $pregnancy)){
-      $err['pedegree'] = "*Invalid Pedegree Value";
-    }
-     }else {
-    $err['pedegree'] = "*Enter Pedegree Value";
-  }
-
-  //check for age
-  if (isset($_POST['age']) && !empty($_POST['age'])){
-    $age = $_POST['age'];
-    if(!preg_match('/^[0-9]{2}+$/', $age)){
-      $err['age'] = "*Invalid age";
-    } 
-  }else{
-    $err['age'] = "*Enter your age";
-  }
-  //check for number of error
-  // if(count($err) == 0) {
-  //   require "connect.php";
-  //   $sql = "insert into tbl_package(Destination,Duration,PriceWithPlane,PriceWithBus,Inclusion,Exclusion,TripHighlight,Contact) values 
-  //   ('$destination','$duration','$priceWithPlane','$priceWithBus','$inclusion','$exclusion','$tripHighlight','$contact')";
-  //   $result=mysqli_query($conn, $sql);
+  //check for button click---form submit
+  if(isset($_POST['predict'])){
+    $err = array();
     
-  //   if ($result){
-  //     echo "User created successful";
-  //   }else{
-  //     echo "User creation failed";
-  //   }   
-  // }
-
-   if (count($err)==0) {
-      $result='<div class="alert alert-success"> Prediction Successful</div>';
+     // if(!isset($_COOKIE['adminName'])){
+      //    header('location:adminLogin.php?xy=1');
+      // }
+    //check for Pregnancy number
+    if (isset($_POST['pregnancy']) && !empty($_POST['pregnancy']) ){
+      $pregnancy = $_POST['pregnancy'];
+      if(!preg_match('/^[0-9]+$/', $pregnancy)){
+        $err['pregnancy'] = "*Invalid Pregnancy Value";
+      }
+       }else {
+      $err['pregnancy'] = "*Enter Pregnancy Value";
     }
-    else  {
-    $result='<div class="alert alert-danger">Prediction Failure</div>';
+
+    //check for glucose value
+    if (isset($_POST['glucose']) && !empty($_POST['glucose']) ){
+      $glucose = $_POST['glucose'];
+      if(!preg_match('/^[0-9]+$/', $glucose)){
+        $err['glucose'] = "*Invalid Glucose Value";
+      }
+       }else {
+      $err['glucose'] = "*Enter Glucose Value";
+    }
+
+    
+    //check for Blood Pressure
+    if (isset($_POST['BP']) && !empty($_POST['BP'])){
+      $BP = $_POST['BP'];
+      if(!preg_match('/^[0-9]+$/', $BP)){
+        $err['BP'] = "*Invalid Blood Pressure Value";
+      }
+    }else {
+      $err['BP'] = "*Enter Blood Pressure Value";
+    }
+
+    //check for SKin Thickness
+    if (isset($_POST['skin']) && !empty($_POST['skin'])){
+      $skin = $_POST['skin'];
+      if(!preg_match('/^[0-9]+$/', $skin)){
+        $err['skin'] = "*Invalid Skin Thickness Value";
+      }
+    }else {
+      $err['skin'] = "*Enter Skin Thickness Value";
+      }
+    
+
+    //check for Insulin
+    if (isset($_POST['insulin']) && !empty($_POST['insulin']) ){
+      $insulin = $_POST['insulin'];
+      if(!preg_match('/^[0-9]+$/', $insulin)){
+        $err['insulin'] = "*Invalid Insulin Value";
+      }
+       }else {
+      $err['insulin'] = "*Enter Insulin Value";
+    }
+
+    //check for BMI
+    if (isset($_POST['BMI']) && !empty($_POST['BMI']) ){
+      $BMI = $_POST['BMI'];
+      if(!preg_match('/^[0-9]+$/', $BMI)){
+        $err['BMI'] = "*Invalid BMI Value";
+      }
+       }else {
+      $err['BMI'] = "*Enter BMI Value";
+    }
+    //check for Pedegree Function
+    if (isset($_POST['pedegree']) && !empty($_POST['pedegree']) ){
+      $pedegree = $_POST['pedegree'];
+      if(!preg_match('/^[0-9]+$/', $pregnancy)){
+        $err['pedegree'] = "*Invalid Pedegree Value";
+      }
+       }else {
+      $err['pedegree'] = "*Enter Pedegree Value";
+    }
+
+    //check for age
+    if (isset($_POST['age']) && !empty($_POST['age'])){
+      $age = $_POST['age'];
+      if(!preg_match('/^[0-9]{2}+$/', $age)){
+        $err['age'] = "*Invalid age";
+      } 
+    }else{
+      $err['age'] = "*Enter your age";
+    }
+    //check for number of error
+    // if(count($err) == 0) {
+    //   require "connect.php";
+    //   $sql = "insert into tbl_package(Destination,Duration,PriceWithPlane,PriceWithBus,Inclusion,Exclusion,TripHighlight,Contact) values 
+    //   ('$destination','$duration','$priceWithPlane','$priceWithBus','$inclusion','$exclusion','$tripHighlight','$contact')";
+    //   $result=mysqli_query($conn, $sql);
+      
+    //   if ($result){
+    //     echo "User created successful";
+    //   }else{
+    //     echo "User creation failed";
+    //   }   
+    // }
+
+     if (count($err)==0) {
+        $result='<div class="alert alert-success"> Prediction Successful</div>';
+      }
+      else  {
+      $result='<div class="alert alert-danger">Prediction Failure</div>';
+    }
   }
-}
 ?>
 
 
 
 
 <!DOCTYPE html>
-<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
-<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
 <html lang="en">
-<!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!--[if IE]>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <![endif]-->
-   <title>Multipager Template- Travelic </title>
-    <!--REQUIRED STYLE SHEETS-->
+
+   <title>Diabetes Prediction System </title>
+    
     <!-- BOOTSTRAP CORE STYLE CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLE CSS -->
@@ -142,12 +135,6 @@ if(isset($_POST['predict'])){
     <link href="assets/css/style.css" rel="stylesheet" />
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-
-    <![endif]-->
     
     <style type="text/css">
         .errorDisplay{
@@ -321,12 +308,11 @@ if(isset($_POST['predict'])){
 
     <!--FOOTER SECTION -->
     <div id="footer">
-        2014 www.yourdomain.com | All Right Reserved  
+        2019 www.yourdomain.com | All Right Reserved  
          
     </div>
     <!-- END FOOTER SECTION -->
-
-    <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+    
     <!-- CORE JQUERY  -->
     <script src="assets/plugins/jquery-1.10.2.js"></script>
     <!-- BOOTSTRAP CORE SCRIPT   -->
