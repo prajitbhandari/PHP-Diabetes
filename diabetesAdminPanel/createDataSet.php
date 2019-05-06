@@ -1,8 +1,9 @@
-﻿<?php
+<?php
 
     $msg='';
     require "connect.php";
     if (isset($_POST['upload'])){
+
         $err = array();
         $filename=$_FILES['file']['name'];
         $fileerror=$_FILES['file']['error'];
@@ -14,7 +15,8 @@
         
         //check for file error  
             if ($fileerror == 0) {
-            // code...
+
+            // code.....
             // type validation
             if (in_array($filecheck, $fileextstored)){
                 # code...
@@ -37,22 +39,23 @@
                             }
                             
                             $second=false;
-                            $sqlInsert = $sqlInsert."('$column[0]','$column[1]','$column[2]','$column[3]','$column[4]','$column[5]','$column[6]','$column[7]','$column[8]')";
-                            
-                            
-                             
+                            $sqlInsert = $sqlInsert."('$column[0]','$column[1]','$column[2]','$column[3]','$column[4]','$column[5]','$column[6]','$column[7]',
+                            '$column[8]')";
                              
                             }
                             $first= false;
 
+
                         }//end of while loop
+
+
+
                         $result = mysqli_query($conn, $sqlInsert);            
-                               if ($result) {
-                                    // header("Location: createDataSet.php");
-                                    $msg="<div class='alert alert-success col-md-4 col-md-offset-4'>File successfully uploaded</div>";
-                                } else {
-                                    $msg="<div class='alert alert-danger col-md-4 col-md-offset-4'>File Upload Failed</div>";
-                                }
+                           if ($result) {
+                                $msg="<div class='alert alert-success col-md-4 col-md-offset-4'>File successfully uploaded</div>";
+                            } else {
+                                $msg="<div class='alert alert-danger col-md-4 col-md-offset-4'>File Upload Failed</div>";
+                            }
                         
                 }else{
                     $msg= "<div class='alert alert-dangercol-md-4 col-md-offset-4'>File Size Invalid</div>";
@@ -70,65 +73,99 @@
 ?> 
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Diabetes Prediction System </title>
-    <!-- BOOTSTRAP CORE STYLE CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
-    <!-- FONTAWESOME STYLE CSS -->
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
-    <!--ANIMATED FONTAWESOME STYLE CSS -->
-    <link href="assets/css/font-awesome-animation.css" rel="stylesheet" />
-     <!--PRETTYPHOTO MAIN STYLE -->
-    <link href="assets/css/prettyPhoto.css" rel="stylesheet" />
-       <!-- CUSTOM STYLE CSS -->
-    <link href="assets/css/style.css" rel="stylesheet" />
-    <!-- GOOGLE FONT -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <title>Diabetes Prediction System</title>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <style type="text/css">
-        #services-sec .row {
-          height: 500px;
-        }
+
+      body{
+        background-color:/* #0091ea;*/
+      }
+      #home-sec { 
+      background: url(../img/1.jpg) no-repeat 50% 50%;
+      background-attachment: fixed;
+      background-size: cover;
+      width: 100%;
+      display: block;
+      height: auto;
+      padding-top:190px;
+      min-height:650px;
+      color:#fff;
+    }
+
+    .head-main {
+        font-size:50px ;
+        font-weight:900;
+        border:5px outset  #fff;
+        padding:15px;
+        text-transform:uppercase;
+        color:#ff7043;
+    
+    }
+
+    #home-block{
+            position:absolute;
+            top:40%;
+            left:2%;
+    }
+
+    section {
+        padding-top:2px;
+        margin-top:2px;
+    }
+
+   #footer {
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        height: 60px;
+        background-color:#ff5252;
+        color: #000;
+        padding: 20px 50px 20px 50px;
+        text-align: right;
+        border-top: 1px solid #d6d6d6;
+    }
     </style>
-
 </head>
-
 <body>
-     <!-- NAV SECTION -->
-        <div class="navbar navbar-inverse navbar-fixed-top">
-           <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="navbar-collapse collapse" >
-                    <ul class="nav navbar-nav navbar-right" id="nav-list">
-                        <li><a href="index.php">Home</a></li>
-                        <li><a href="createDataSet.php">Create Data Set</a></li>
-                        <li><a href="addDoctors.php">Add Doctors</a></li>
-                        <li><a href="addHelpInfo.php">Add HelpInfo</a></li>
-                        <li><a href="manageHelpInfo.php">Manage HelpInfo</a></li>
-                        <li><a href="manageDoctors.php">Manage Doctors</a></li>
-                        <li><a href="manageUsers.php">Manage Users</a></li>
-                        <li><a href="Logout.php"><?php 
-                          // if(!isset($_COOKIE['username']))
-                          //   echo "Login";
-                          // else
-                          //   echo "Logout";
-                        ?></a></li>
-                    </ul>
-                </div> 
-            </div>
-        </div>
-     <!--END NAV SECTION -->
-  
-    <!--Package SECTION-->    
-    <section  id="services-sec">
+  <!-----------NAV SECTION-------->
+  <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="index.php">Home</a></li>
+              <li><a href="createDataSet.php">Create Data Set</a></li>
+              <li><a href="addDoctors.php">Add Doctors</a></li>
+              <li><a href="addHelpInfo.php">Add HelpInfo</a></li>
+              <li><a href="manageHelpInfo.php">Manage HelpInfo</a></li>
+              <li><a href="manageDoctors.php">Manage Doctors</a></li>
+              <li><a href="manageUsers.php">Manage Users</a></li>
+              <li><a href="viewEnquiry.php">View Enquiry</a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->  
+        </div><!--/.container-fluid -->
+      </nav>
+  <!-----------END NAV SECTION-------->
+
+  <br><br><br><br><br>
+
+    <!--HOME SECTION-->
+     <section >
         <div class="container ">
             <div class="row">
                 <?php 
@@ -145,25 +182,16 @@
             </div>
         </div>
     </section>
-    <!--END Package SECTION-->
+   
+   <br>
+    <!-- END Home SECTION -->
 
-    <!--FOOTER SECTION -->
+     <!--FOOTER SECTION -->
     <div id="footer">
-        2019 www.yourdomain.com | All Right Reserved  
+        2019 www.yourdomain.com|All Right Reserved  
          
-    </div>
+    </div><br>
     <!-- END FOOTER SECTION -->
-
-    <!-- CORE JQUERY  -->
-    <script src="assets/plugins/jquery-1.10.2.js"></script>
-    <!-- BOOTSTRAP CORE SCRIPT   -->
-    <script src="assets/plugins/bootstrap.min.js"></script>  
-     <!-- ISOTOPE SCRIPT   -->
-    <script src="assets/plugins/jquery.isotope.min.js"></script>
-    <!-- PRETTY PHOTO SCRIPT   -->
-    <script src="assets/plugins/jquery.prettyPhoto.js"></script>    
-    <!-- CUSTOM SCRIPTS -->
-    <script src="assets/js/custom.js"></script>
 
 </body>
 </html>

@@ -1,97 +1,111 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-    <title>Diabetes Prediction System </title>
-    <!-- BOOTSTRAP CORE STYLE CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
-    <!-- FONTAWESOME STYLE CSS -->
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
-    <!--ANIMATED FONTAWESOME STYLE CSS -->
-    <link href="assets/css/font-awesome-animation.css" rel="stylesheet" />
-     <!--PRETTYPHOTO MAIN STYLE -->
-    <link href="assets/css/prettyPhoto.css" rel="stylesheet" />
-       <!-- CUSTOM STYLE CSS -->
-    <link href="assets/css/style.css" rel="stylesheet" />
-    <!-- GOOGLE FONT -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-
+	<title>Diabetes Prediction System</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <style type="text/css">
-        .logo{
-            position: absolute;
-            top: 30%;
-        }
 
-        #home-block{
-            position: absolute;
-            top:50%;
+    	body{
+    		background-color: #0091ea;
+    	}
+	    #home-sec { 
+			background: url(../img/1.jpg) no-repeat 50% 50%;
+			background-attachment: fixed;
+			background-size: cover;
+			width: 100%;
+			display: block;
+			height: auto;
+			padding-top:190px;
+			min-height:650px;
+			color:#fff;
+		}
+
+		.head-main {
+		    font-size:50px ;
+		    font-weight:900;
+		    border:5px outset  #fff;
+		    padding:15px;
+		    text-transform:uppercase;
+		    color:#ff7043;
+    
+		}
+
+		#home-block{
+            position:absolute;
+            top:40%;
+            left:2%;
+		}
+
+		section {
+		    padding-top:2px;
+		    margin-top:2px;
+		}
+
+       #footer {
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            height: 60px;
+            background-color:#ff5252;
+            color: #000;
+            padding: 20px 50px 20px 50px;
+            text-align: right;
+            border-top: 1px solid #d6d6d6;
         }
     </style>
-  </head>
+</head>
 <body>
-     <!-- NAV SECTION -->
-        <div class="navbar navbar-inverse navbar-fixed-top" id="nav">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                      <span class="logo">DPS</span>
-                </div>
-                <div class="navbar-collapse collapse" >
-                    <ul class="nav navbar-nav navbar-right" id="nav-list">
-                        <li><a href="index.php">Home</a></li>
-                        <li><a href="createDataSet.php">Create Data Set</a></li>
-                        <li><a href="addDoctors.php">Add Doctors</a></li>
-                        <li><a href="addHelpInfo.php">Add HelpInfo</a></li>
-                        <li><a href="manageDoctors.php">Manage Doctors</a></li>
-                        <li><a href="manageUsers.php">Manage Users</a></li>
-                        <li><a href="Logout.php"><?php 
-                          if(!isset($_COOKIE['username']))
-                            echo "Login";
-                          else
-                            echo "Logout";
-                        ?></a></li>
-                    </ul>
-                </div>
-               
-            </div>
-    </div>
-     <!--END NAV SECTION -->
-    
+	<!-----------NAV SECTION-------->
+	<nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="index.php">Home</a></li>
+              <li><a href="createDataSet.php">Create Data Set</a></li>
+              <li><a href="addDoctors.php">Add Doctors</a></li>
+              <li><a href="addHelpInfo.php">Add HelpInfo</a></li>
+              <li><a href="manageHelpInfo.php">Manage HelpInfo</a></li>
+              <li><a href="manageDoctors.php">Manage Doctors</a></li>
+              <li><a href="manageUsers.php">Manage Users</a></li>
+              <li><a href="viewEnquiry.php">View Enquiry</a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->  
+        </div><!--/.container-fluid -->
+      </nav>
+	<!-----------END NAV SECTION-------->
+
     <!--HOME SECTION-->
     <div id="home-sec">
-        <div class="container">
+        <div class="container"  >
             <div class="row text-center">
-                <div  class="col-md-12" id="home-block" >
-                    <span class="head-main" >Diabetes Prediction System</span> 
+                <div  class="col-md-12" id="home-block">
+                    <span class="head-main">Diabetes Prediction System</span> 
                 </div>
             </div>
         </div>
     </div>
-  
-    <!--FOOTER SECTION -->
+    <!-- END Home SECTION -->
+
+     <!--FOOTER SECTION -->
     <div id="footer">
         2019 www.yourdomain.com|All Right Reserved  
          
     </div>
     <!-- END FOOTER SECTION -->
-
-    <!-- CORE JQUERY  -->
-    <script src="assets/plugins/jquery-1.10.2.js"></script>
-    <!-- BOOTSTRAP CORE SCRIPT   -->
-    <script src="assets/plugins/bootstrap.min.js"></script>  
-     <!-- ISOTOPE SCRIPT   -->
-    <script src="assets/plugins/jquery.isotope.min.js"></script>
-    <!-- PRETTY PHOTO SCRIPT   -->
-    <script src="assets/plugins/jquery.prettyPhoto.js"></script>    
-    <!-- CUSTOM SCRIPTS -->
-    <script src="assets/js/custom.js"></script>
 
 </body>
 </html>
