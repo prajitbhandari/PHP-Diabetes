@@ -30,7 +30,7 @@
 		    border:5px outset  #fff;
 		    padding:15px;
 		    text-transform:uppercase;
-		    color:#ff7043;
+		    color:#455a64;
     
 		}
 
@@ -76,13 +76,12 @@
               <li><a href="index.php">Home</a></li>
               <li><a href="createDataSet.php">Create Data Set</a></li>
               <li><a href="addDoctors.php">Add Doctors</a></li>
-              <li><a href="addHelpInfo.php">Add HelpInfo</a></li>
-              <li><a href="manageHelpInfo.php">Manage HelpInfo</a></li>
               <li><a href="manageDoctors.php">Manage Doctors</a></li>
               <li><a href="manageUsers.php">Manage Users</a></li>
               <li><a href="viewEnquiry.php">View Enquiry</a></li>
               <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
+            <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to Admin Panel</p>
           </div><!--/.nav-collapse -->  
         </div><!--/.container-fluid -->
       </nav>

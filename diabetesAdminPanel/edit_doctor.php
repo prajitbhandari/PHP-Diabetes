@@ -34,9 +34,9 @@
     $err = array();
     
     //check for Doctor First Name
-     if (isset($_POST['fname']) && !empty($_POST['fname']) ){
-      $fname = $_POST['fname'];
-     if (!preg_match("/^([a-zA-Z]+)$/",$fname)) {
+    if (isset($_POST['fname']) && !empty($_POST['fname']) ){
+      $fname = trim($_POST['fname']);
+      if (!preg_match("/^([a-zA-Z]+)$/",$fname)) {
         $err['fname'] = "*Invalid Doctor First Name";
       }
        }else {
@@ -45,7 +45,7 @@
 
      //check for Doctor Last Name
     if (isset($_POST['lname']) && !empty($_POST['lname']) ){
-      $lname = $_POST['lname'];
+      $lname = trim($_POST['lname']);
       if (!preg_match("/^([a-zA-Z]+)$/",$lname)) {
         $err['lname'] = "*Invalid Doctor Last  Name";
       }
@@ -55,9 +55,15 @@
 
     //check for Doctor Email
     if (isset($_POST['docEmail']) && !empty($_POST['docEmail']) ){
-      $docEmail = $_POST['docEmail'];
+      $docEmail = trim($_POST['docEmail']);
       if(!filter_var($docEmail,FILTER_VALIDATE_EMAIL)){
         $err['docEmail'] = "*Invalid Email Address";
+      }
+      require "connect.php";
+      $sql="select * from tbl_doctor where docEmail='$docEmail' AND Id!='$Id'";
+      $result=mysqli_query($conn, $sql);
+      if(mysqli_num_rows($result)>0){
+        $err['docEmail'] = "*Email Already Created";
       }
        }else {
       $err['docEmail'] = "*Enter Doctor Email Address";
@@ -66,9 +72,15 @@
     
     //check for Doctor Phone
     if (isset($_POST['docPhone']) && !empty($_POST['docPhone'])){
-        $docPhone = $_POST['docPhone'];
+        $docPhone = trim($_POST['docPhone']);
         if(!preg_match('/^[0-9]{10}$/', $docPhone)){
           $err['docPhone'] = "*Enter Valid Contact number";
+      }
+       require "connect.php";
+      $sql="select * from tbl_doctor where docPhone='$docPhone'AND Id!='$Id'";
+      $result=mysqli_query($conn, $sql);
+      if(mysqli_num_rows($result)>0){
+        $err['docPhone'] = "*Phone Number Already Created";
       } 
     }else{
       $err['docPhone'] = "*Enter contact number";
@@ -76,7 +88,7 @@
 
     //check for Doctor Address
      if (isset($_POST['docAddress']) && !empty($_POST['docAddress']) ){
-      $docAddress = $_POST['docAddress'];
+      $docAddress = trim($_POST['docAddress']);
       if (!preg_match("/^([a-zA-Z]+)$/",$docAddress)) {
         $err['docAddress'] = "*Invalid Doctor Address";
       }
@@ -87,7 +99,7 @@
 
     //check for Qualification
     if (isset($_POST['docQualification']) && !empty($_POST['docQualification']) ){
-      $docQualification = $_POST['docQualification'];
+      $docQualification = trim($_POST['docQualification']);
       if (!preg_match("/^([a-zA-Z]+)$/",$docQualification)) {
         $err['docQualification'] = "*Invalid Doctor Qualification";
       }
@@ -97,27 +109,39 @@
 
     // check for number of error
     if(count($err) == 0) {
-      echo '<br><br><br><br>';         
+      echo '<br><br><br><br>'; 
+      $Id=$_GET['id'];        
       if($fname==$DBfname && $lname==$DBlname && $docEmail==$DBdocEmail && $docPhone==$DBdocPhone && $docAddress==$DBdocAddress 
         && $docQualification==$DBdocQualification){
-        $msg= '<div class="alert alert-danger"> Please Change the content</div>';
+          $msg= '<div class="alert alert-danger"> Please Change the content</div>';
         
-      }
-    else{
-      require "connect.php";
+        }
+     else{
 
-      $sql ="update tbl_doctor set fname='$fname',lname='$lname',docEmail='$docEmail',docPhone='$docPhone',docAddress='$docAddress',
-      docQualification='$docQualification' where Id=$Id";
-      $res=mysqli_query($conn, $sql);
-      if ($res){
-        $msg= '<div class="alert alert-success"> Doctor Updated Successfully</div>';
-      }else{
-        $msg= '<div class="alert alert-danger">Failed to Update Doctor</div>';
+      $insql="select fname,lname from tbl_doctor  where fname='$fname' AND lname='$lname' AND Id!='$Id'";
+      $result=mysqli_query($conn, $insql);
+      if(mysqli_num_rows($result)>0){
+           $msg= '<div class="alert alert-danger">Doctor Name Already Created</div>';
+       }
+
+      else{
+        require "connect.php";
+        $sql ="update tbl_doctor set fname='$fname',lname='$lname',docEmail='$docEmail',docPhone='$docPhone',docAddress='$docAddress',
+        docQualification='$docQualification' where Id=$Id";
+        $res=mysqli_query($conn, $sql);
+        if ($res){
+          $msg= '<div class="alert alert-success"> Doctor Updated Successfully</div>';
+        }
+      }    
+      
+    }
+  }else{
+          $msg= '<div class="alert alert-danger">Failed to Update Doctor</div>';
       }  
-    }
-      
-      
-    }
+
+
+
+    //keep track of current text field value
    require "connect.php";
    //query to select data
    $Id=$_GET['id'];
@@ -134,7 +158,6 @@
   }
 ?>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -142,12 +165,19 @@
   <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <style type="text/css">
 
       body{
         background-color:/* #0091ea;*/
+      }
+
+      #my-nav{
+        position:absolute; 
+        top: 0px; 
+        width: 100%;
       }
       #home-sec { 
       background: url(../img/1.jpg) no-repeat 50% 50%;
@@ -182,22 +212,27 @@
         margin-top:2px;
     }
 
-   #footer {
-        /*position: fixed;
-        width: 100%;
-        bottom: 0;
-        height: 60px;*/
-        background-color:#ff5252;
-        color: #000;
-        padding: 20px 50px 20px 50px;
-        text-align: right;
-        border-top: 1px solid #d6d6d6;
-    }
+       #footer {
+            /*position: fixed;
+            width: 100%;
+            bottom: 0;
+            height: 60px;*/
+            background-color:#ff5252;
+            color: #000;
+            padding: 20px 50px 20px 50px;
+            text-align: right;
+            border-top: 1px solid #d6d6d6;
+        }
+
+        .errorDisplay{
+          color: red;
+        }
     </style>
 </head>
 <body>
   <!-----------NAV SECTION-------->
-  <nav class="navbar navbar-inverse">
+  
+  <nav class="navbar navbar-inverse" id="my-nav"">
         <div class="container-fluid">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -205,30 +240,27 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
-            </button>
-            
+            </button>     
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
               <li><a href="index.php">Home</a></li>
               <li><a href="createDataSet.php">Create Data Set</a></li>
               <li><a href="addDoctors.php">Add Doctors</a></li>
-              <li><a href="addHelpInfo.php">Add HelpInfo</a></li>
-              <li><a href="manageHelpInfo.php">Manage HelpInfo</a></li>
               <li><a href="manageDoctors.php">Manage Doctors</a></li>
               <li><a href="manageUsers.php">Manage Users</a></li>
               <li><a href="viewEnquiry.php">View Enquiry</a></li>
               <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
+            <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to Admin Panel</p>
           </div><!--/.nav-collapse -->  
         </div><!--/.container-fluid -->
-      </nav>
+      </nav><br><br><br><br>
   <!-----------END NAV SECTION-------->
 
     <!--HOME SECTION-->
       <section>
-       <section id="port-sec">
-       <div class="container">
+           <div class="container">
             <div class="row g-pad-bottom">
                 <div class="text-center g-pad-bottom">
                    <div class="col-md-6 col-md-offset-3 alert-info" style="width: 559px;
@@ -237,7 +269,7 @@
                                      
                     </div> 
                 </div>
-            </div>
+            </div><br>
 
             <div class="row g-pad-bottom" >
                 <div class="col-md-6 col-md-offset-3">
@@ -318,8 +350,7 @@
                 </div>
            </div>
        </div>
-   </section>
-
+      </section>
    <br>
     <!-- END Home SECTION -->
 

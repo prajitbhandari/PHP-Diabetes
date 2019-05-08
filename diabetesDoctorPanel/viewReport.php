@@ -4,6 +4,7 @@
     <title>Diabetes Prediction System</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -78,7 +79,8 @@
                 <li><a href="Feedback.php">Feedback </a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
-          </div><!--/.nav-collapse -->  
+            <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to Doctor Panel</p>
+            </div><!--/.nav-collapse -->  
         </div><!--/.container-fluid -->
       </nav>
     <!-----------END NAV SECTION-------->
@@ -88,7 +90,8 @@
         <div class="container ">
             <div class="row">
                <div class="col-md-4 col-sm-4 col-sm-offset-4 " >
-                    <h4>View Report Data</h4>
+                    <h2>View Report Data</h2>
+                    <h3>Coming Soon!!!</h3>
                         
                 </div>    
             </div>

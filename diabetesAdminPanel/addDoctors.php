@@ -6,19 +6,21 @@
   if(isset($_POST['add'])){
   $err = array();
 
+ 
+
   //check for Doctor First Name
   if (isset($_POST['fname']) && !empty($_POST['fname']) ){
-    $fname = $_POST['fname'];
+    $fname = trim($_POST['fname']);
       if(!preg_match("/^([a-zA-Z]+)$/",$fname)){
       $err['fname'] = "*Invalid First Name";
-    }
-     }else {
+    } 
+  }else {
     $err['fname'] = "*Enter Doctor First Name";
   }
 
   //check for Doctor Last Name
   if (isset($_POST['lname']) && !empty($_POST['lname']) ){
-    $lname = $_POST['lname'];
+    $lname = trim($_POST['lname']);
       if(!preg_match("/^([a-zA-Z]+)$/",$lname)){
       $err['lname'] = "*Invalid last Name";
     }
@@ -26,11 +28,19 @@
     $err['lname'] = "*Enter Doctor Last  Name";
   }
 
+  
+
   //check for Doctor Email
   if (isset($_POST['docEmail']) && !empty($_POST['docEmail']) ){
-    $docEmail = $_POST['docEmail'];
+    $docEmail = trim($_POST['docEmail']);
     if(!filter_var($docEmail,FILTER_VALIDATE_EMAIL)){
       $err['docEmail'] = "*Invalid Email Address";
+    }
+    require "connect.php";
+    $sql="select * from tbl_doctor where docEmail='$docEmail'";
+    $result=mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result)>0){
+      $err['docEmail'] = "*Email Already Created";
     }
      }else {
     $err['docEmail'] = "*Enter Doctor Email Address";
@@ -39,9 +49,15 @@
 
   //check for Doctor Phone
   if (isset($_POST['docPhone']) && !empty($_POST['docPhone']) ){
-    $docPhone = $_POST['docPhone'];
+    $docPhone = trim($_POST['docPhone']);
     if (!preg_match("/^[0-9]{10}$/",$docPhone)) {
       $err['docPhone'] = "*Invalid Doctor Phone Number";
+    }
+    require "connect.php";
+    $sql="select * from tbl_doctor where docPhone='$docPhone'";
+    $result=mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result)>0){
+      $err['docPhone'] = "*Phone Number Already Created";
     }
      }else {
     $err['docPhone'] = "*Enter Doctor Phone Number";
@@ -49,7 +65,7 @@
 
   //check for Doctor Address
   if (isset($_POST['docAddress']) && !empty($_POST['docAddress'])){
-    $docAddress = $_POST['docAddress'];
+    $docAddress = trim($_POST['docAddress']);
     if (!preg_match("/^([a-zA-Z0-9]+)$/",$docAddress)) {
       $err['docAddress'] = "*Invalid Address";
     }
@@ -60,7 +76,7 @@
 
   //check for Qualification
   if (isset($_POST['docQualification']) && !empty($_POST['docQualification']) ){
-    $docQualification = $_POST['docQualification'];
+    $docQualification = trim($_POST['docQualification']);
     if (!preg_match("/^[a-zA-Z]+$/",$docQualification)) {
       $err['docQualification'] = "*Invalid Doctor Qualification";
     }
@@ -71,22 +87,26 @@
 
   // check for number of error
   if(count($err) == 0) {
-    require "connect.php";
-    $sql = "insert into tbl_doctor(fname,lname,docEmail,docPhone,docAddress,docQualification) values 
-    ('$fname','$lname','$docEmail','$docPhone','docAddress','$docQualification')";
-    $res=mysqli_query($conn, $sql);
-    
-    if ($res){
-      $msg='<div class="alert alert-success"> Doctor Added Successfully</div>';
-    }   
-  }else{
-      $msg='<div class="alert alert-danger">Failed to Add Doctor</div>';
-    }
+      require "connect.php";
+       $insql="select * from tbl_doctor  where fname='$fname' AND lname='$lname'";
+       $res=mysqli_query($conn, $insql);
+       if(mysqli_num_rows($res)>0){
+           $msg= '<div class="alert alert-danger">Doctor Name Already Created</div>';
+     }else{
+        $addsql = "insert into tbl_doctor(fname,lname,docEmail,docPhone,docAddress,docQualification) values 
+      ('$fname','$lname','$docEmail','$docPhone','$docAddress','$docQualification')";
+      $result=mysqli_query($conn, $addsql);
+      if ($result){
+        $msg='<div class="alert alert-success"> Doctor Added Successful</div>';
+        }   
+      }
 
+    }
+    else{
+        $msg='<div class="alert alert-danger"> Doctor Failed to Add</div>';
+    }
   }
 ?>
-
-
 
 <!DOCTYPE html>
 <html>
@@ -95,6 +115,7 @@
   <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <style type="text/css">
@@ -146,6 +167,10 @@
             text-align: right;
             border-top: 1px solid #d6d6d6;
         }
+
+        .errorDisplay{
+          color: red;
+        }
     </style>
 </head>
 <body>
@@ -166,13 +191,12 @@
               <li><a href="index.php">Home</a></li>
               <li><a href="createDataSet.php">Create Data Set</a></li>
               <li><a href="addDoctors.php">Add Doctors</a></li>
-              <li><a href="addHelpInfo.php">Add HelpInfo</a></li>
-              <li><a href="manageHelpInfo.php">Manage HelpInfo</a></li>
               <li><a href="manageDoctors.php">Manage Doctors</a></li>
               <li><a href="manageUsers.php">Manage Users</a></li>
               <li><a href="viewEnquiry.php">View Enquiry</a></li>
               <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
+            <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to Admin Panel</p>
           </div><!--/.nav-collapse -->  
         </div><!--/.container-fluid -->
       </nav>

@@ -24,6 +24,7 @@
   <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <style type="text/css">
@@ -95,13 +96,12 @@
               <li><a href="index.php">Home</a></li>
               <li><a href="createDataSet.php">Create Data Set</a></li>
               <li><a href="addDoctors.php">Add Doctors</a></li>
-              <li><a href="addHelpInfo.php">Add HelpInfo</a></li>
-              <li><a href="manageHelpInfo.php">Manage HelpInfo</a></li>
               <li><a href="manageDoctors.php">Manage Doctors</a></li>
               <li><a href="manageUsers.php">Manage Users</a></li>
               <li><a href="viewEnquiry.php">View Enquiry</a></li>
               <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
+            <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to Admin Panel</p>
           </div><!--/.nav-collapse -->  
         </div><!--/.container-fluid -->
       </nav>
@@ -114,7 +114,8 @@
                 <div class="text-center g-pad-bottom">
                      <div class="col-md-12 col-sm-12 alert-info" style="width: 98%;
                      margin-left: 12px; border-radius: 8px;">
-                        <h4><i class="fa fa-user-md fa-2x" ></i>&nbsp;User Enquiry</h4>
+                        <h4><i class="" ></i>&nbsp;User Enquiry</h4>
+
                                      
                     </div>  
                 </div>

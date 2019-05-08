@@ -58,7 +58,7 @@
                             }
                         
                 }else{
-                    $msg= "<div class='alert alert-dangercol-md-4 col-md-offset-4'>File Size Invalid</div>";
+                    $msg= "<div class='alert alert-danger col-md-4 col-md-offset-4'>File Size Invalid</div>";
                 }
 
             }else{
@@ -150,13 +150,12 @@
               <li><a href="index.php">Home</a></li>
               <li><a href="createDataSet.php">Create Data Set</a></li>
               <li><a href="addDoctors.php">Add Doctors</a></li>
-              <li><a href="addHelpInfo.php">Add HelpInfo</a></li>
-              <li><a href="manageHelpInfo.php">Manage HelpInfo</a></li>
               <li><a href="manageDoctors.php">Manage Doctors</a></li>
               <li><a href="manageUsers.php">Manage Users</a></li>
               <li><a href="viewEnquiry.php">View Enquiry</a></li>
               <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
+            <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to Admin Panel</p>
           </div><!--/.nav-collapse -->  
         </div><!--/.container-fluid -->
       </nav>
@@ -167,7 +166,7 @@
     <!--HOME SECTION-->
      <section >
         <div class="container ">
-            <div class="row">
+            <div class="row">   
                 <?php 
                     echo $msg; echo "<br>";
                 ?>

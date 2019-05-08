@@ -8,7 +8,7 @@
 
     //check for Pregnancy number
     if (isset($_POST['pregnancy']) && !empty($_POST['pregnancy']) ){
-      $pregnancy = $_POST['pregnancy'];
+      $pregnancy = trim($_POST['pregnancy']);
       if(!preg_match('/^[0-9]+$/', $pregnancy)){
         $err['pregnancy'] = "*Invalid Pregnancy Value";
       }
@@ -18,7 +18,7 @@
 
     //check for glucose value
     if (isset($_POST['glucose']) && !empty($_POST['glucose']) ){
-      $glucose = $_POST['glucose'];
+      $glucose = trim($_POST['glucose']);
       if(!preg_match('/^[0-9]+$/', $glucose)){
         $err['glucose'] = "*Invalid Glucose Value";
       }
@@ -29,7 +29,7 @@
     
     //check for Blood Pressure
     if (isset($_POST['BP']) && !empty($_POST['BP'])){
-      $BP = $_POST['BP'];
+      $BP = trim($_POST['BP']);
       if(!preg_match('/^[0-9]+$/', $BP)){
         $err['BP'] = "*Invalid Blood Pressure Value";
       }
@@ -39,7 +39,7 @@
 
     //check for SKin Thickness
     if (isset($_POST['skin']) && !empty($_POST['skin'])){
-      $skin = $_POST['skin'];
+      $skin = trim($_POST['skin']);
       if(!preg_match('/^[0-9]+$/', $skin)){
         $err['skin'] = "*Invalid Skin Thickness Value";
       }
@@ -50,7 +50,7 @@
 
     //check for Insulin
     if (isset($_POST['insulin']) && !empty($_POST['insulin']) ){
-      $insulin = $_POST['insulin'];
+      $insulin = trim($_POST['insulin']);
       if(!preg_match('/^[0-9]+$/', $insulin)){
         $err['insulin'] = "*Invalid Insulin Value";
       }
@@ -60,7 +60,7 @@
 
     //check for BMI
     if (isset($_POST['BMI']) && !empty($_POST['BMI']) ){
-      $BMI = $_POST['BMI'];
+      $BMI = trim($_POST['BMI']);
       if(!preg_match('/^[0-9]+$/', $BMI)){
         $err['BMI'] = "*Invalid BMI Value";
       }
@@ -69,7 +69,7 @@
     }
     //check for Pedegree Function
     if (isset($_POST['pedegree']) && !empty($_POST['pedegree']) ){
-      $pedegree = $_POST['pedegree'];
+      $pedegree = trim($_POST['pedegree']);
       if(!preg_match('/^[0-9]+$/', $pregnancy)){
         $err['pedegree'] = "*Invalid Pedegree Value";
       }
@@ -79,7 +79,7 @@
 
     //check for age
     if (isset($_POST['age']) && !empty($_POST['age'])){
-      $age = $_POST['age'];
+      $age = trim($_POST['age']);
       if(!preg_match('/^[0-9]{2}$/', $age)){
         $err['age'] = "*Invalid age";
       } 
@@ -198,6 +198,7 @@
                 <li><a href="Contact.php">Contact Us</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
+            <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to User Panel</p>
           </div><!--/.nav-collapse -->  
         </div><!--/.container-fluid -->
       </nav>

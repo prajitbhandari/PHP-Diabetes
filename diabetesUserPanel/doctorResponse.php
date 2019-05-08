@@ -24,6 +24,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <style type="text/css">
@@ -100,6 +101,7 @@
                 <li><a href="Contact.php">Contact Us</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
+            <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to User Panel</p>
           </div><!--/.nav-collapse -->  
         </div><!--/.container-fluid -->
       </nav>
@@ -110,8 +112,8 @@
             <div class="row g-pad-bottom">
                 <div class="text-center g-pad-bottom">
                    <div class="col-md-12 col-sm-12 alert-info" style="width: 98%;
-                     margin-left: 12px; border-radius:8px;height:70px;">
-                        <h2><i class="fa fa-user-md fa-2x" ></i>&nbsp;Doctors Response</h2>
+                     margin-left: 12px; border-radius:8px;">
+                        <h3><i class="fa fa-user-md fa-2x" ></i>&nbsp;Doctors Response</h3>
                                      
                     </div>  
                 </div>

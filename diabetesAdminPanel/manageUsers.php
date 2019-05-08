@@ -1,21 +1,3 @@
-<?php 
-   require "connect.php";
-   //query to select data
-   $sql="select * from tbl_doctor";
-   //execute query and return result object
-   $result=mysqli_query($conn,$sql);
-   //default array
-   $data=array();
-    if(mysqli_num_rows($result)>0){
-      while($d=mysqli_fetch_assoc($result)){
-        array_push($data,$d);
-      }
-      
-    }else{
-      echo "data not found";
-    }
-  
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -108,52 +90,8 @@
   <!-----------END NAV SECTION-------->
 
     <!--HOME SECTION-->
-      <section id="port-sec">
-       <div class="container">
-            <div class="row g-pad-bottom">
-                <div class="text-center g-pad-bottom">
-                     <div class="col-md-12 col-sm-12 alert-info" style="width: 98%;
-                     margin-left: 12px; border-radius: 8px;">
-                        <h4><i class="fa fa-user-md fa-2x" ></i>&nbsp;Manage Doctors</h4>
-                                     
-                    </div>  
-                </div>
-            </div><br>
-            
-           <div class="row g-pad-bottom" >
-                <div class="col-md-12 col-sm-12" >
-                   <table class="table table-bordered table-striped">
-                        <thead class="bg-success">
-                            <tr>
-                              <th scope="col">ID</th>
-                              <th scope="col">First Name</th>
-                              <th scope="col">Last Name</th>
-                              <th scope="col">Email</th>
-                              <th scope="col">Phone</th>
-                              <th scope="col">Address</th>
-                              <th scope="col">Qualification</th>
-                              <th colspan="2" scope="col" style="text-align: center;">Action</th>
-                            </tr>
-                       </thead>
-                       <tbody>
-                            <?php foreach ($data as $in){?>
-                              <tr>
-                                <td><?php echo $in['Id'] ?> </td>
-                                <td><?php echo $in['fname'] ?> </td>
-                                <td><?php echo $in['lname'] ?> </td>
-                                <td><?php echo $in['docEmail'] ?> </td>
-                                <td><?php echo $in['docPhone'] ?> </td>
-                                <td><?php echo $in['docAddress'] ?> </td>
-                                <td><?php echo $in['docQualification'] ?> </td>
-                                <td><a class ="btn btn-primary btn-block" href="delete_doctor.php?id=<?php echo $in['Id']?>"onclick="return confirm('Are you sure u want to Delete?')">Delete</a>
-                                <td><a class ="btn btn-danger btn-block" href="edit_doctor.php?id=<?php echo $in['Id']?>"onclick="return confirm('Are you sure u want to Edit?')">Edit</a>  
-                              </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-                </div>
-           </div>
-       </div>
+   <section>
+      <h2 class="text-center">Manage User Coming Soon!!!!!</h2>    
    </section>
    <br>
     <!-- END Home SECTION -->

@@ -30,7 +30,7 @@
 		    border:5px outset  #fff;
 		    padding:15px;
 		    text-transform:uppercase;
-		    color:#ff7043;
+		    color:#455a64;
     
 		}
 
@@ -69,8 +69,8 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            
-          </div>
+         </div>
+
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="index.php">Home</a></li>
@@ -81,6 +81,7 @@
                 <li><a href="Contact.php">Contact Us</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
+            <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to User Panel</p>
           </div><!--/.nav-collapse -->  
         </div><!--/.container-fluid -->
       </nav>

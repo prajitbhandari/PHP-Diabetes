@@ -7,30 +7,30 @@
     $err = array();
 
     //check for Doctor First Name
-    if (isset($_POST['fname']) && !empty($_POST['fname']) ){
-      $fname = $_POST['fname'];
-      if(!preg_match("/^([a-zA-Z]+)$/",$fname)){
-        $err['fname'] = "*Invalid First Name";
-      }
-       }else {
-      $err['fname'] = "*Enter First  Name";
-    }
+    // if (isset($_POST['fname']) && !empty($_POST['fname']) ){
+    //   $fname = trim($_POST['fname']);
+    //   if(!preg_match("/^([a-zA-Z]+)$/",$fname)){
+    //     $err['fname'] = "*Invalid First Name";
+    //   }
+    //    }else {
+    //   $err['fname'] = "*Enter First  Name";
+    // }
 
      //check for Doctor Last  Name
-    if (isset($_POST['lname']) && !empty($_POST['lname']) ){
-      $lname = $_POST['lname'];
-      if(!preg_match("/^([a-zA-Z]+)$/",$lname)){
-        $err['lname'] = "*Invalid Last Name";
-      }
-       }else {
-      $err['lname'] = "*Enter Last  Name";
-    }
+    // if (isset($_POST['lname']) && !empty($_POST['lname']) ){
+    //   $lname = trim($_POST['lname']);
+    //   if(!preg_match("/^([a-zA-Z]+)$/",$lname)){
+    //     $err['lname'] = "*Invalid Last Name";
+    //   }
+    //    }else {
+    //   $err['lname'] = "*Enter Last  Name";
+    // }
 
 
     //check for Doctor Address
     if (isset($_POST['feedback']) && !empty($_POST['feedback'])){
-      $feedback = $_POST['feedback'];
-      if(!preg_match("/^([a-zA-Z0-9]+)$/",$feedback)){
+      $feedback = trim($_POST['feedback']);
+      if(!preg_match("/^([a-zA-Z0-9' ]+)$/",$feedback)){
         $err['feedback'] = "*Invalid Feedback";
       }
     }else {
@@ -42,7 +42,7 @@
     //check for number of error
     if(count($err) == 0) {
       require "connect.php";
-      $sql = "insert into tbl_feedback (fname,lname,feedback) values ('$fname','$lname','$feedback')";
+      $sql = "insert into tbl_feedback (feedback) values ($feedback')";
       $res=mysqli_query($conn, $sql);
       
       if ($res){
@@ -62,6 +62,7 @@
   <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <style type="text/css">
@@ -138,6 +139,7 @@
                 <li><a href="Feedback.php">Feedback </a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
+            <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to Doctor Panel</p>
           </div><!--/.nav-collapse -->  
         </div><!--/.container-fluid -->
       </nav>
@@ -164,28 +166,24 @@
                     <?php echo $msg;?>
                   </div>
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="fname">First Name</label>
                     <input type="text" class="form-control" name="fname" id="fname" placeholder="Enter Doctor First Name">
-                    <span class="errorDisplay">
-                            <?php if (isset($err['fname'])){
-                            echo $err['fname'];
-                          } ?>
-                    </span>
+                    <span class="errorDisplay"> -->
+                          
+                    <!-- </span>
                         <br>
-                  </div>
+                  </div> -->
 
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="lname">Last Name</label>
                     <input type="text" class="form-control" name="lname" id="lname" placeholder="Enter Doctor Last Name">
-                    <span class="errorDisplay">
-                            <?php if (isset($err['lname'])){
-                            echo $err['lname'];
-                          } ?>
-                    </span>
+                    <span class="errorDisplay"> -->
+                            
+                   <!--  </span>
                         <br>
-                  </div>
+                  </div> -->
 
 
                   <div class="form-group">

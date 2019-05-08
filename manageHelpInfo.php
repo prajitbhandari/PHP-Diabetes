@@ -1,7 +1,7 @@
 <?php 
    require "connect.php";
    //query to select data
-   $sql="select * from tbl_doctor";
+   $sql="select * from tbl_help";
    //execute query and return result object
    $result=mysqli_query($conn,$sql);
    //default array
@@ -65,10 +65,10 @@
     }
 
    #footer {
-        position: fixed;
+        /*position: fixed;
         width: 100%;
         bottom: 0;
-        height: 60px;
+        height: 60px;*/
         background-color:#ff5252;
         color: #000;
         padding: 20px 50px 20px 50px;
@@ -96,12 +96,13 @@
               <li><a href="index.php">Home</a></li>
               <li><a href="createDataSet.php">Create Data Set</a></li>
               <li><a href="addDoctors.php">Add Doctors</a></li>
+              <li><a href="addHelpInfo.php">Add HelpInfo</a></li>
+              <li><a href="manageHelpInfo.php">Manage HelpInfo</a></li>
               <li><a href="manageDoctors.php">Manage Doctors</a></li>
               <li><a href="manageUsers.php">Manage Users</a></li>
               <li><a href="viewEnquiry.php">View Enquiry</a></li>
               <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
-            <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to Admin Panel</p>
           </div><!--/.nav-collapse -->  
         </div><!--/.container-fluid -->
       </nav>
@@ -114,7 +115,7 @@
                 <div class="text-center g-pad-bottom">
                      <div class="col-md-12 col-sm-12 alert-info" style="width: 98%;
                      margin-left: 12px; border-radius: 8px;">
-                        <h4><i class="fa fa-user-md fa-2x" ></i>&nbsp;Manage Doctors</h4>
+                        <h4><i class=""></i>&nbsp;Manage Help Info</h4>
                                      
                     </div>  
                 </div>
@@ -125,13 +126,10 @@
                    <table class="table table-bordered table-striped">
                         <thead class="bg-success">
                             <tr>
-                              <th scope="col">ID</th>
-                              <th scope="col">First Name</th>
-                              <th scope="col">Last Name</th>
-                              <th scope="col">Email</th>
-                              <th scope="col">Phone</th>
-                              <th scope="col">Address</th>
-                              <th scope="col">Qualification</th>
+                              <th scope="col">Id</th>
+                              <th scope="col">Attribute</th>
+                              <th scope="col">Description</th>
+                              <th scope="col">Value</th>
                               <th colspan="2" scope="col" style="text-align: center;">Action</th>
                             </tr>
                        </thead>
@@ -139,14 +137,11 @@
                             <?php foreach ($data as $in){?>
                               <tr>
                                 <td><?php echo $in['Id'] ?> </td>
-                                <td><?php echo $in['fname'] ?> </td>
-                                <td><?php echo $in['lname'] ?> </td>
-                                <td><?php echo $in['docEmail'] ?> </td>
-                                <td><?php echo $in['docPhone'] ?> </td>
-                                <td><?php echo $in['docAddress'] ?> </td>
-                                <td><?php echo $in['docQualification'] ?> </td>
-                                <td><a class ="btn btn-primary btn-block" href="delete_doctor.php?id=<?php echo $in['Id']?>"onclick="return confirm('Are you sure u want to Delete?')">Delete</a>
-                                <td><a class ="btn btn-danger btn-block" href="edit_doctor.php?id=<?php echo $in['Id']?>"onclick="return confirm('Are you sure u want to Edit?')">Edit</a>  
+                                <td><?php echo $in['attribute'] ?> </td>
+                                <td><?php echo $in['description'] ?> </td>
+                                <td><?php echo $in['value'] ?> </td>
+                                <td><a class ="btn btn-primary btn-block"  href="edit_helpInfo.php?id=<?php echo $in['Id']?>"onclick="return confirm('Are you sure u want to Edit?')">Edit</a> </td> 
+                                <td><a class ="btn btn-danger btn-block" href="delete_helpInfo.php?id=<?php echo $in['Id']?>"onclick="return confirm('Are you sure u want to Delete?')">Delete</a></td>
                               </tr>
                             <?php } ?>
                         </tbody>

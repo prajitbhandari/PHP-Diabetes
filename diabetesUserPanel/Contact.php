@@ -4,7 +4,7 @@ if(isset($_POST['submit'])){
     $err = array();
     //check for firstname
     if (isset($_POST['fname']) && !empty($_POST['fname'])){
-        $fname = $_POST['fname'];
+        $fname = trim($_POST['fname']);
         if(!preg_match("/^([a-zA-Z]+)$/",$fname)){
             $err['fname'] = "Invalid First Name";  
         }
@@ -15,7 +15,7 @@ if(isset($_POST['submit'])){
 
      //check for lastname
     if (isset($_POST['lname']) && !empty($_POST['lname'])){
-        $lname = $_POST['lname'];
+        $lname = trim($_POST['lname']);
         if(!preg_match("/^([a-zA-Z]+)$/",$lname)){
             $err['lname'] = "Invalid Last Name";  
         }
@@ -26,7 +26,7 @@ if(isset($_POST['submit'])){
 
     //check for email
     if (isset($_POST['email']) && !empty($_POST['email'])){
-        $email= $_POST['email'];
+        $email= trim($_POST['email']);
         if(!(filter_var($email,FILTER_VALIDATE_EMAIL))){
             $err['email'] = "Invalid Email Address";  
         }
@@ -38,7 +38,7 @@ if(isset($_POST['submit'])){
 
     //check for phone
     if (isset($_POST['phone']) && !empty($_POST['phone'])){
-        $phone = $_POST['phone'];
+        $phone = trim($_POST['phone']);
         if (!preg_match("/^[0-9]{10}$/",$phone)){
             $err['phone'] = "Invalid Phone";  
         }
@@ -160,6 +160,7 @@ if(isset($_POST['submit'])){
                 <li><a href="Contact.php">Contact Us</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
+            <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to User Panel</p>
           </div><!--/.nav-collapse -->  
         </div><!--/.container-fluid -->
       </nav>
@@ -220,7 +221,7 @@ if(isset($_POST['submit'])){
                         <div class="row">   
                            <div class="col-md-12 ">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Email address" name="email">
+                                    <input type="text" class="form-control" placeholder="Enter E-mail Address" name="email">
                                     <div class="errorDisplay">
                                         <?php if (isset($err['email'])){
                                         echo $err['email'];
