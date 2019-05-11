@@ -1,0 +1,19 @@
+body{
+  background-image: url('../css/back.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  font-family: times new roman;
+}
+
+h1{
+  font-size: 40px;
+}
+
+.form-container{
+  position:absolute;
+  top: 25vh;
+  background: #fff;
+  padding:30px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px black;
+}
