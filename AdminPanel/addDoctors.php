@@ -84,23 +84,23 @@
     $err['docQualification'] = "*Enter Doctor Qualification";
   }
 
+  if(isset($_POST['docPassword'])&& !empty($_POST['docPassword']))
+  {
+    $docPassword=trim($_POST['docPassword']);
+  }else{
+    $err['docPassword']= "*Enter Doctor Password";
+  }
+
 
   // check for number of error
   if(count($err) == 0) {
       require "connect.php";
-       $insql="select * from tbl_doctor  where fname='$fname' AND lname='$lname'";
-       $res=mysqli_query($conn, $insql);
-       if(mysqli_num_rows($res)>0){
-           $msg= '<div class="alert alert-danger">Doctor Name Already Created</div>';
-     }else{
-        $addsql = "insert into tbl_doctor(fname,lname,docEmail,docPhone,docAddress,docQualification) values 
-      ('$fname','$lname','$docEmail','$docPhone','$docAddress','$docQualification')";
+      $addsql = "insert into tbl_doctor(fname,lname,docEmail,docPhone,docAddress,docQualification,docPassword) values 
+      ('$fname','$lname','$docEmail','$docPhone','$docAddress','$docQualification','$docPassword')";
       $result=mysqli_query($conn, $addsql);
       if ($result){
         $msg='<div class="alert alert-success"> Doctor Added Successful</div>';
         }   
-      }
-
     }
     else{
         $msg='<div class="alert alert-danger"> Doctor Failed to Add</div>';
@@ -190,6 +190,8 @@
             <ul class="nav navbar-nav navbar-right">
               <li><a href="adminIndex.php">Home</a></li>
               <li><a href="createDataSet.php">Create Data Set</a></li>
+              <li><a href="Predict.php">Predict Diabetes</a></li>
+              <li><a href="Help.php">Help</a></li>
               <li><a href="addDoctors.php">Add Doctors</a></li>
               <li><a href="manageDoctors.php">Manage Doctors</a></li>
               <li><a href="manageUsers.php">Manage Users</a></li>
@@ -245,7 +247,7 @@
 
                     <div class="form-group">
                       <label for="docEmail">E-mail</label>
-                      <input type="text" class="form-control" name="docEmail" id="docEmail" aria-describedby="emailHelp" placeholder="Enter E-mail Address">
+                      <input type="text" class="form-control" name="docEmail" id="docEmail" placeholder="Enter Doctor E-mail Address">
                       <span class="errorDisplay">
                               <?php if (isset($err['docEmail'])){
                               echo $err['docEmail'];
@@ -256,7 +258,7 @@
 
                     <div class="form-group">
                       <label for="docPhone">Phone</label>
-                      <input type="text" class="form-control" name="docPhone" id="docPhone" placeholder="Enter your Phone Number">
+                      <input type="text" class="form-control" name="docPhone" id="docPhone" placeholder="Enter Doctor  Phone Number">
                       <span class="errorDisplay">
                           <?php if (isset($err['docPhone'])){
                               echo $err['docPhone'];
@@ -267,7 +269,7 @@
                     
                     <div class="form-group">
                       <label for="docAddress">Address</label>
-                      <input type="text" class="form-control" name="docAddress" id="docAddress" placeholder="Enter your Address">
+                      <input type="text" class="form-control" name="docAddress" id="docAddress" placeholder="Enter DOctor Address">
                       <span class="errorDisplay">
                               <?php if (isset($err['docAddress'])){
                               echo $err['docAddress'];
@@ -278,10 +280,21 @@
                     
                     <div class="form-group">
                       <label for="docQualification">Qualification</label>
-                      <input type="text" class="form-control" name="docQualification" id="docQualification" placeholder="Enter Your Qualification">
+                      <input type="text" class="form-control" name="docQualification" id="docQualification" placeholder="Enter Doctor Qualification">
                       <span class="errorDisplay">
                               <?php if (isset($err['docQualification'])){
                               echo $err['docQualification'];
+                            } ?>
+                      </span>
+                          <br>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="docPassword">Password</label>
+                      <input type="text" class="form-control" name="docPassword" id="docPassword" placeholder="Enter Doctor Password">
+                      <span class="errorDisplay">
+                              <?php if (isset($err['docPassword'])){
+                              echo $err['docPassword'];
                             } ?>
                       </span>
                           <br>

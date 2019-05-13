@@ -95,6 +95,8 @@
             <ul class="nav navbar-nav navbar-right">
               <li><a href="adminIndex.php">Home</a></li>
               <li><a href="createDataSet.php">Create Data Set</a></li>
+              <li><a href="Predict.php">Predict Diabetes</a></li>
+              <li><a href="Help.php">Help</a></li>
               <li><a href="addDoctors.php">Add Doctors</a></li>
               <li><a href="manageDoctors.php">Manage Doctors</a></li>
               <li><a href="manageUsers.php">Manage Users</a></li>

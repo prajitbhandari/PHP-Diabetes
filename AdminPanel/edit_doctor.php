@@ -18,6 +18,7 @@
        $DBdocPhone=$info['docPhone'];
        $DBdocAddress=$info['docAddress'];
        $DBdocQualification=$info['docQualification'];
+       $DBdocPassword=$info['docPassword'];
       }
     }else{
       echo "data not found";
@@ -107,24 +108,25 @@
       $err['docQualification'] = "*Enter Doctor Qualification";
     }
 
+    //check for doctor password
+     if(isset($_POST['docPassword'])&& !empty($_POST['docPassword']))
+      {
+        $docPassword=trim($_POST['docPassword']);
+      }
+    else{
+        $err['docPassword']= "*Enter Doctor Password";
+      }
+
     // check for number of error
     if(count($err) == 0) {
       echo '<br><br><br><br>'; 
       $Id=$_GET['id'];        
       if($fname==$DBfname && $lname==$DBlname && $docEmail==$DBdocEmail && $docPhone==$DBdocPhone && $docAddress==$DBdocAddress 
-        && $docQualification==$DBdocQualification){
+        && $docQualification==$DBdocQualification && $docPassword==$DBdocPassword){
           $msg= '<div class="alert alert-danger"> Please Change the content</div>';
         
         }
      else{
-
-      $insql="select fname,lname from tbl_doctor  where fname='$fname' AND lname='$lname' AND Id!='$Id'";
-      $result=mysqli_query($conn, $insql);
-      if(mysqli_num_rows($result)>0){
-           $msg= '<div class="alert alert-danger">Doctor Name Already Created</div>';
-       }
-
-      else{
         require "connect.php";
         $sql ="update tbl_doctor set fname='$fname',lname='$lname',docEmail='$docEmail',docPhone='$docPhone',docAddress='$docAddress',
         docQualification='$docQualification' where Id=$Id";
@@ -132,9 +134,7 @@
         if ($res){
           $msg= '<div class="alert alert-success"> Doctor Updated Successfully</div>';
         }
-      }    
-      
-    }
+      }
   }else{
           $msg= '<div class="alert alert-danger">Failed to Update Doctor</div>';
       }  
@@ -246,6 +246,8 @@
             <ul class="nav navbar-nav navbar-right">
               <li><a href="adminIndex.php">Home</a></li>
               <li><a href="createDataSet.php">Create Data Set</a></li>
+              <li><a href="Predict.php">Predict Diabetes</a></li>
+              <li><a href="Help.php">Help</a></li>
               <li><a href="addDoctors.php">Add Doctors</a></li>
               <li><a href="manageDoctors.php">Manage Doctors</a></li>
               <li><a href="manageUsers.php">Manage Users</a></li>
@@ -340,6 +342,17 @@
                         <span class="errorDisplay">
                                 <?php if (isset($err['docQualification'])){
                                 echo $err['docQualification'];
+                              } ?>
+                        </span>
+                            <br>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="docPassword">Password</label>
+                        <input type="text" class="form-control" name="docPassword" id="docPassword" value="<?php echo $info['docPassword']?>">
+                        <span class="errorDisplay">
+                                <?php if (isset($err['docPassword'])){
+                                echo $err['docPassword'];
                               } ?>
                         </span>
                             <br>

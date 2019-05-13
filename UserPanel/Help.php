@@ -94,7 +94,6 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="userIndex.php">Home</a></li>
-                <li><a href="Predict.php">Predict Disease</a></li>
                 <li><a href="viewDoctor.php">View Doctors</a></li>
                 <li><a href="doctorResponse.php">Doctors Response</a></li>
                 <li><a href="Help.php">Help</a></li>

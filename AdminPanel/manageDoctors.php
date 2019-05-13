@@ -95,6 +95,8 @@
             <ul class="nav navbar-nav navbar-right">
               <li><a href="adminIndex.php">Home</a></li>
               <li><a href="createDataSet.php">Create Data Set</a></li>
+              <li><a href="Predict.php">Predict Diabetes</a></li>
+              <li><a href="Help.php">Help</a></li>
               <li><a href="addDoctors.php">Add Doctors</a></li>
               <li><a href="manageDoctors.php">Manage Doctors</a></li>
               <li><a href="manageUsers.php">Manage Users</a></li>
@@ -132,6 +134,7 @@
                               <th scope="col">Phone</th>
                               <th scope="col">Address</th>
                               <th scope="col">Qualification</th>
+                              <th scope="col">Password</th>                              
                               <th colspan="2" scope="col" style="text-align: center;">Action</th>
                             </tr>
                        </thead>
@@ -145,6 +148,7 @@
                                 <td><?php echo $in['docPhone'] ?> </td>
                                 <td><?php echo $in['docAddress'] ?> </td>
                                 <td><?php echo $in['docQualification'] ?> </td>
+                                <td><?php echo $in['docPassword'] ?> </td>
                                 <td><a class ="btn btn-primary btn-block" href="delete_doctor.php?id=<?php echo $in['Id']?>"onclick="return confirm('Are you sure u want to Delete?')">Delete</a>
                                 <td><a class ="btn btn-danger btn-block" href="edit_doctor.php?id=<?php echo $in['Id']?>"onclick="return confirm('Are you sure u want to Edit?')">Edit</a>  
                               </tr>

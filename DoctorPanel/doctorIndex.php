@@ -86,7 +86,8 @@ if(!isset($_COOKIE['docEmail'])){
                 <li><a href="Feedback.php">Feedback </a></li>
                 <li><a href="doctorlogout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
-            <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to Doctor Panel</p>
+            <span class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to Doctor Panel</span>&nbsp;
+            <span class="navbar-text" style="color:#fff;font-size: 16px;">logged in as: </span>
           </div><!--/.nav-collapse -->  
         </div><!--/.container-fluid -->
       </nav>

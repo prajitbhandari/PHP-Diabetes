@@ -1,3 +1,4 @@
+
 <?php
 
   $msg='';
@@ -166,25 +167,20 @@
                     <?php echo $msg;?>
                   </div>
 
-                  <!-- <div class="form-group">
-                    <label for="fname">First Name</label>
-                    <input type="text" class="form-control" name="fname" id="fname" placeholder="Enter Doctor First Name">
-                    <span class="errorDisplay"> -->
-                          
-                    <!-- </span>
-                        <br>
-                  </div> -->
-
-
-                  <!-- <div class="form-group">
-                    <label for="lname">Last Name</label>
-                    <input type="text" class="form-control" name="lname" id="lname" placeholder="Enter Doctor Last Name">
-                    <span class="errorDisplay"> -->
-                            
-                   <!--  </span>
-                        <br>
-                  </div> -->
-
+                    
+                   <?php if(isset($_COOKIE['docEmail'])){ ?>
+                      <div class="form-group">
+                        <label for="docEmail">Email</label>
+                        <input type="text" class="form-control" name="docEmail" id="docEmail" value="<?php echo $_COOKIE['docEmail']?>">
+                        <span class="errorDisplay">
+                              
+                        </span>
+                            <br>
+                      </div>
+                    <?php 
+                      }
+                    ?> 
+                  
 
                   <div class="form-group">
                     <label for="feedback">FeedBack</label>

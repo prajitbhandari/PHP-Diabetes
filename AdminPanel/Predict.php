@@ -11,7 +11,10 @@
       $pregnancy = trim($_POST['pregnancy']);
       if(!preg_match('/^[0-9]+$/', $pregnancy)){
         $err['pregnancy'] = "*Invalid Pregnancy Value";
+      }else if($pregnancy>20){
+         $err['pregnancy'] = "*Enter Pregnancy value  less than 20";
       }
+       
        }else {
       $err['pregnancy'] = "*Enter Pregnancy Value";
     }
@@ -21,6 +24,8 @@
       $glucose = trim($_POST['glucose']);
       if(!preg_match('/^[0-9]+$/', $glucose)){
         $err['glucose'] = "*Invalid Glucose Value";
+      } else if($glucose>500){
+          $err['glucose'] = "*Enter Glucose Value less than 500";
       }
        }else {
       $err['glucose'] = "*Enter Glucose Value";
@@ -32,6 +37,8 @@
       $BP = trim($_POST['BP']);
       if(!preg_match('/^[0-9]+$/', $BP)){
         $err['BP'] = "*Invalid Blood Pressure Value";
+      }else if($BP>500){
+        $err['BP'] = "*Enter Blood Pressure Value less than 500";
       }
     }else {
       $err['BP'] = "*Enter Blood Pressure Value";
@@ -42,6 +49,8 @@
       $skin = trim($_POST['skin']);
       if(!preg_match('/^[0-9]+$/', $skin)){
         $err['skin'] = "*Invalid Skin Thickness Value";
+      }else if($skin>22){
+        $err['skin'] = "*Enter Skin Thickness Value less than 22";
       }
     }else {
       $err['skin'] = "*Enter Skin Thickness Value";
@@ -53,8 +62,10 @@
       $insulin = trim($_POST['insulin']);
       if(!preg_match('/^[0-9]+$/', $insulin)){
         $err['insulin'] = "*Invalid Insulin Value";
-      }
-       }else {
+      }else if($insulin>500){
+          $err['skin'] = "*Enter Insulin Value less than 500";
+       }
+     }else {
       $err['insulin'] = "*Enter Insulin Value";
     }
 
@@ -63,15 +74,20 @@
       $BMI = trim($_POST['BMI']);
       if(!preg_match('/^[0-9]+$/', $BMI)){
         $err['BMI'] = "*Invalid BMI Value";
+      }else if($BMI>25){
+        $err['BMI'] = "*Enter BMI Value less than 25";
       }
        }else {
-      $err['BMI'] = "*Enter BMI Value";
-    }
+        $err['BMI'] = "*Enter BMI Value";
+      }
+
     //check for Pedegree Function
     if (isset($_POST['pedegree']) && !empty($_POST['pedegree']) ){
       $pedegree = trim($_POST['pedegree']);
-      if(!preg_match('/^[0-9]+$/', $pregnancy)){
+      if(!preg_match('/^[0-9]+$/', $pedegree)){
         $err['pedegree'] = "*Invalid Pedegree Value";
+      }else if($pedegree>25){
+        $err['pedegree'] = "*Enter Pedegree Value less than 25";
       }
        }else {
       $err['pedegree'] = "*Enter Pedegree Value";
@@ -80,32 +96,111 @@
     //check for age
     if (isset($_POST['age']) && !empty($_POST['age'])){
       $age = trim($_POST['age']);
-      if(!preg_match('/^[0-9]{2}$/', $age)){
+      if(!preg_match('/^[0-9]+$/', $age)){
         $err['age'] = "*Invalid age";
-      } 
+      } else if($age<21 || $age>100){
+          $err['age'] = "*Enter age between 21 and 100";
+      }
     }else{
       $err['age'] = "*Enter your age";
     }
-    //check for number of error
-    // if(count($err) == 0) {
-    //   require "connect.php";
-    //   $sql = "insert into tbl_package(Destination,Duration,PriceWithPlane,PriceWithBus,Inclusion,Exclusion,TripHighlight,Contact) values 
-    //   ('$destination','$duration','$priceWithPlane','$priceWithBus','$inclusion','$exclusion','$tripHighlight','$contact')";
-    //   $result=mysqli_query($conn, $sql);
-      
-    //   if ($result){
-    //     echo "User created successful";
-    //   }else{
-    //     echo "User creation failed";
-    //   }   
-    // }
 
+
+    //check for number of error
      if (count($err)==0) {
-        $msg='<div class="alert alert-success"> Prediction Successful</div>';
+
+      
+        function mean($arr) {
+          $num_of_elements = count($arr);
+          $sum=array_sum($arr);
+          $mean=$sum/$num_of_elements;
+          return $mean;
       }
-      else  {
-      $msg='<div class="alert alert-danger">Prediction Failure</div>';
-    }
+
+
+        function variance($arr) 
+          { 
+              
+              $num_of_elements = count($arr); 
+                $variance = 0.0; 
+                // calculating mean using array_sum() method 
+              $average = array_sum($arr)/$num_of_elements; 
+                
+              foreach($arr as $i) 
+              { 
+                  // sum of squares of differences between  
+                              // all numbers and means. 
+                  $variance += pow(($i - $average), 2); 
+              } 
+                
+              return (float) $variance/($num_of_elements-1);
+              // Input array 
+        
+        } 
+
+      /*-----------------------------likelihood Probability---------------*/
+      function likelihoodProb($x,$arr){
+        $partial= 1/sqrt(2*3.14*variance($arr));
+        $powr=(-(pow($x-mean($arr), 2))/(2*variance($arr)));
+        $exponential=exp($powr);
+        $prob=$partial*$exponential;
+        return $prob;
+      }
+
+      function maleresult(){
+
+           $maleresult= likelihoodProb(6,array(6,5.92,5.58,5.92))*likelihoodProb(130,array(180,190,170,165))*likelihoodProb(8,array(12,11,12,10))*0.5;
+           return $maleresult;
+      }
+
+      function femaleresult(){
+
+          $femaleresult= likelihoodProb(6,array(5,5.5,5.42,5.75))*likelihoodProb(130,array(100,150,130,150))*likelihoodProb(8,array(6,8,7,9))*0.5; 
+          return $femaleresult;
+      }
+
+
+      function result(){
+         if(maleresult()>femaleresult()){
+          echo "Given is male";
+         }else{
+          echo "Given is female";
+         }
+      }
+
+
+      echo "Male  Mean Height is ".mean(array(6,5.92,5.58,5.92));echo "<br>";
+      echo "Female Mean Height is ".mean(array(5,5.5,5.42,5.75)); echo "<br>";  
+
+      echo "<br>";
+
+      echo "Male Variance Height is ".variance(array(6,5.92,5.58,5.92));echo "<br>";    
+      echo "Female Variance Height is ".variance(array(5,5.5,5.42,5.75));echo "<br>";
+      echo "<br>";
+
+      echo "Male  Mean Weight is ".mean(array(180,190,170,165));echo "<br>";
+      echo "Female Mean Weight is ".mean(array(100,150,130,150)); echo "<br>"; 
+
+      echo "Male Variance Weight is ".variance(array(180,190,170,165));echo "<br>";    
+      echo "Female Variance Weight is ".variance(array(100,150,130,150));echo "<br>";
+      echo "<br>";
+
+      echo "Male  Mean Foot is ".mean(array(12,11,12,10));echo "<br>";
+      echo "Female Mean Foot is ".mean(array(6,8,7,9));echo "<br>";
+      echo "<br>";  
+
+      echo "Male Variance Foot is ".variance(array(12,11,12,10)); echo "<br>";   
+      echo "Female Variance Foot is ".variance(array(6,8,7,9));echo "<br>";
+      echo "<br>";
+
+      echo "Male result is".maleresult(); echo "<br>";
+      echo "Female result is".femaleresult(); echo "<br>";
+      echo "<br>";
+
+      echo result();
+
+     }
+      
   }
 ?>
 
@@ -159,10 +254,10 @@
     }
 
        #footer {
-            /*position: fixed;
+            position: fixed;
             width: 100%;
             bottom: 0;
-            height: 60px;*/
+            height: 60px;
             background-color:#ff5252;
             color: #000;
             padding: 20px 50px 20px 50px;
@@ -190,15 +285,17 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="userIndex.php">Home</a></li>
-                <li><a href="Predict.php">Predict Disease</a></li>
-                <li><a href="viewDoctor.php">View Doctors</a></li>
-                <li><a href="doctorResponse.php">Doctors Response</a></li>
-                <li><a href="Help.php">Help</a></li>
-                <li><a href="Contact.php">Contact Us</a></li>
-                <li><a href="userlogout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+              <li><a href="adminIndex.php">Home</a></li>
+              <li><a href="createDataSet.php">Create Data Set</a></li>
+              <li><a href="Predict.php">Predict Diabetes</a></li>
+              <li><a href="Help.php">Help</a></li>
+              <li><a href="addDoctors.php">Add Doctors</a></li>
+              <li><a href="manageDoctors.php">Manage Doctors</a></li>
+              <li><a href="manageUsers.php">Manage Users</a></li>
+              <li><a href="viewEnquiry.php">View Enquiry</a></li>
+              <li><a href="adminlogout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
-            <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to User Panel</p>
+            <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to Admin Panel</p>
           </div><!--/.nav-collapse -->  
         </div><!--/.container-fluid -->
       </nav>
@@ -208,16 +305,14 @@
     <section>
         <div class="container">
             <div class="row ">
-                   <div class="col-md-6 col-sm-6 ">
-                        <h4>Please Fill up the form to Predict Diabetes</h4>
+                   <div class="col-md-12 col-sm-12 ">
+                        <h4 class="text-center">Please Fill up the form to Predict Diabetes</h4>
                         <form  method="POST" action="Predict.php" name="predictForm">
-                           <div class="row form-group">
                               <div class="col-md-12 col-sm-12">
                                   <?php echo $msg; ?>    
                               </div>
-                            </div>
-                          
-                          <div class="form-group">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
                             <label for="inputPregnancy">Pregnancies</label>
                             <input type="text" class="form-control"  name ="pregnancy" id="inputPregnancy" placeholder="Enter Pregnancy Value">
                             <span class="errorDisplay">
@@ -225,7 +320,6 @@
                                 echo $err['pregnancy'];
                               } ?>
                             </span>
-                            <br>
                           </div>
                           
                           <div class="form-group">
@@ -236,7 +330,6 @@
                                 echo $err['glucose'];
                               } ?>
                             </span>
-                            <br>
                           </div>
                           
                           <div class="form-group">
@@ -247,7 +340,6 @@
                                 echo $err['BP'];
                               } ?>
                             </span>
-                            <br>
                           </div>
                           
                           <div class="form-group">
@@ -258,10 +350,13 @@
                                 echo $err['skin'];
                               } ?>
                             </span>
-                            <br>
                           </div>
+
+                        </div>
+
+                        <div class="col-md-6 col-sm-6">
                           
-                          <div class="form-group">
+                            <div class="form-group">
                             <label for="inputInsulin">Insulin</label>
                             <input type="text" class="form-control" name="insulin" id="inputInsulin" placeholder="Enter Insulin Value">
                             <span class="errorDisplay">
@@ -269,7 +364,6 @@
                                 echo $err['insulin'];
                               } ?>
                             </span>
-                            <br>
                           </div>
                           
                           <div class="form-group">
@@ -280,7 +374,6 @@
                                 echo $err['BMI'];
                               } ?>
                             </span>
-                            <br>
                           </div>
                           
                           <div class="form-group">
@@ -291,7 +384,6 @@
                                 echo $err['pedegree'];
                               } ?>
                             </span>
-                            <br>
                           </div>
 
                           <div class="form-group">
@@ -302,22 +394,16 @@
                                 echo $err['age'];
                               } ?>
                             </span>
-                            <br>
                           </div>
 
+                        </div> 
+
                           <div class="form-group">
-                             <button type="submit"  name="predict" class="btn btn-block btn-primary">Predict</button>
+                             <button type="submit" name="predict" class="btn btn-block btn-primary">Predict</button>
                           </div>
 
                         </form><br/><br/>
-                    </div> 
-
-                    <div class="col-md-6 col-sm-6">
-                         <h3>About Form</h3>
-                         <p>If You have any difficulties
-                         then visit the help section</p>
-                          
-                    </div>            
+                    </div>             
             </div>
         </div>
     </section><br>
