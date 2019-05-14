@@ -15,6 +15,33 @@
   if(isset($_POST['predict'])){
     $err = array();
 
+    //check for Patient First Name
+      if (isset($_POST['fname']) && !empty($_POST['fname']) ){
+        $fname = trim($_POST['fname']);
+          if(!preg_match("/^([a-zA-Z]+)$/",$fname)){
+          $err['fname'] = "*Invalid First Name";
+        } 
+      }else {
+        $err['fname'] = "*Enter Patient First Name";
+      }
+
+   //check for Patient Last Name
+    if (isset($_POST['lname']) && !empty($_POST['lname']) ){
+      $lname = trim($_POST['lname']);
+        if(!preg_match("/^([a-zA-Z]+)$/",$lname)){
+        $err['lname'] = "*Invalid last Name";
+      }
+       }else {
+      $err['lname'] = "*Enter Patient Last  Name";
+    }
+
+    //check for gender
+      if (isset($_POST['gender']) && !empty($_POST['gender'])){
+            $gender= $_POST['gender'];
+      } else {
+            $err['gender'] = "*Choose Gender";
+      }
+
     //check for Pregnancy number
     if (isset($_POST['pregnancy']) && !empty($_POST['pregnancy']) ){
       $pregnancy = trim($_POST['pregnancy']);
@@ -355,6 +382,50 @@
                                   <?php echo $msg; ?>    
                               </div>
                         <div class="col-md-6 col-sm-6">
+
+                          <div class="form-group">
+                              <label for="inputFname">First Name</label>
+                              <input type="text" class="form-control"  name ="fname" id="inputFname" placeholder="Enter Patient First Name">
+                              <span class="errorDisplay">
+                                  <?php if (isset($err['fname'])){
+                                  echo $err['fname'];
+                                } ?>
+                              </span>
+                          </div>
+
+                          <div class="form-group">
+                              <label for="inputLname">Last Name</label>
+                              <input type="text" class="form-control"  name ="lname" id="inputLname" placeholder="Enter Patient Last Name">
+                              <span class="errorDisplay">
+                                  <?php if (isset($err['lname'])){
+                                  echo $err['lname'];
+                                } ?>
+                              </span>
+                          </div>
+
+                          <div class="form-group">
+                              <label for="inputGender">Choose Gender</label><br>
+                              Male <input type="radio" name ="gender" value='Male' id="inputGender">&nbsp;
+                              Female <input type="radio" name ="gender" value='Female' >
+                              <span class="errorDisplay">
+                                  <?php if (isset($err['gender'])){
+                                  echo $err['gender'];
+                                } ?>
+                              </span>
+                          </div>  
+                          
+                          <br>
+                          <div class="form-group">
+                            <label for="inputDate">DOB</label>
+                            <input type="date" name ="dob" id="inputDate">&nbsp;
+                            <span class="errorDisplay">
+                                <?php if (isset($err['dob'])){
+                                echo $err['dob'];
+                              } ?>
+                            </span>     
+                          </div>  
+
+                          <br>
                             <div class="form-group">
                             <label for="inputPregnancy">Pregnancies</label>
                             <input type="text" class="form-control"  name ="pregnancy" id="inputPregnancy" placeholder="Enter Pregnancy Value">
@@ -374,7 +445,12 @@
                               } ?>
                             </span>
                           </div>
-                          
+
+                        </div>
+
+                        <div class="col-md-6 col-sm-6">
+
+
                           <div class="form-group">
                             <label for="inputBP">Blood Pressure</label>
                             <input type="text" class="form-control"  name="BP" id="inputBP" placeholder="Enter Blood Pressure Value">
@@ -394,10 +470,6 @@
                               } ?>
                             </span>
                           </div>
-
-                        </div>
-
-                        <div class="col-md-6 col-sm-6">
                           
                             <div class="form-group">
                             <label for="inputInsulin">Insulin</label>
