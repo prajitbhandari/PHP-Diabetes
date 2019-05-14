@@ -98,7 +98,7 @@
     //check for Pedegree Function
     if (isset($_POST['pedegree']) && !empty($_POST['pedegree']) ){
       $pedegree = trim($_POST['pedegree']);
-      if(!preg_match('/^([0-9]+\.+[0-9]+)$/', $pedegree)){
+      if(!preg_match('/^([0-9]+\.?[0-9]+)$/', $pedegree)){
         $err['pedegree'] = "*Invalid Pedegree Value";
       }else if($pedegree>50){
         $err['pedegree'] = "*Enter Pedegree Value less than 50";
@@ -225,14 +225,21 @@
     $probDiabetes = $diabetesResult/($diabetesResult+$noDiabetesResult);
     $probNoDiabetes = $noDiabetesResult/($diabetesResult+$noDiabetesResult);
 
-    $probDiabetesPercentage = $probDiabetes*100;
-    $probNoDiabetesPercentage =$probNoDiabetes*100;
+    $probDiabetesPercentage = round($probDiabetes,3)*100;
+    $probNoDiabetesPercentage =round($probNoDiabetes,3)*100;
+
+    echo "<br><br><br>";
+    echo $probDiabetes; echo '<br>';
+    echo $probDiabetesPercentage;echo '<br>';
+    
+    echo $probNoDiabetes; echo '<br>';
+    echo $probNoDiabetesPercentage;echo '<br>';
    
 
   if($diabetesResult>$noDiabetesResult){
-    $msg='<div class="alert alert-danger"> Patient has Diabetes chance of '.($probDiabetesPercentage).'</div>';
+    $msg='<div class="alert alert-danger"> Patient has Diabetes chance of '.($probDiabetesPercentage).'%</div>';
    }else{
-    $msg='<div class="alert alert-success"> Patient has no Diabetes chance of '.($probNoDiabetesPercentage).'</div>';
+    $msg='<div class="alert alert-success"> Patient has no Diabetes chance of '.($probNoDiabetesPercentage).'%</div>';
    }
 
   }
