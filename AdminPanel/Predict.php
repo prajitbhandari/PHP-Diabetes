@@ -1,5 +1,14 @@
 <?php
-
+   $dbPregnancy=array();
+   $dbGlucose=array();
+   $dbBP=array();
+   $dbSkin=array();
+   $dbInsulin=array();
+   $dbBMI=array();
+   $dbPedegree=array();
+   $dbAge=array();
+   $diabetesResult=null;
+   $noDiabetesResult=null;
   $msg='';
 
   //check for button click---form submit
@@ -49,8 +58,8 @@
       $skin = trim($_POST['skin']);
       if(!preg_match('/^[0-9]+$/', $skin)){
         $err['skin'] = "*Invalid Skin Thickness Value";
-      }else if($skin>22){
-        $err['skin'] = "*Enter Skin Thickness Value less than 22";
+      }else if($skin>50){
+        $err['skin'] = "*Enter Skin Thickness Value less than 50";
       }
     }else {
       $err['skin'] = "*Enter Skin Thickness Value";
@@ -58,13 +67,18 @@
     
 
     //check for Insulin
-    if (isset($_POST['insulin']) && !empty($_POST['insulin']) ){
+    if (isset($_POST['insulin'])){
+      if($_POST['insulin']!=""){
       $insulin = trim($_POST['insulin']);
       if(!preg_match('/^[0-9]+$/', $insulin)){
         $err['insulin'] = "*Invalid Insulin Value";
       }else if($insulin>500){
           $err['skin'] = "*Enter Insulin Value less than 500";
        }
+     }
+     else{
+      $err['insulin'] = "*Enter Insulin Value";
+     }
      }else {
       $err['insulin'] = "*Enter Insulin Value";
     }
@@ -72,10 +86,10 @@
     //check for BMI
     if (isset($_POST['BMI']) && !empty($_POST['BMI']) ){
       $BMI = trim($_POST['BMI']);
-      if(!preg_match('/^[0-9]+$/', $BMI)){
+      if(!preg_match('/^([0-9]+\.?[0-9]+)$/', $BMI)){
         $err['BMI'] = "*Invalid BMI Value";
-      }else if($BMI>25){
-        $err['BMI'] = "*Enter BMI Value less than 25";
+      }else if($BMI>50){
+        $err['BMI'] = "*Enter BMI Value less than 50";
       }
        }else {
         $err['BMI'] = "*Enter BMI Value";
@@ -84,10 +98,10 @@
     //check for Pedegree Function
     if (isset($_POST['pedegree']) && !empty($_POST['pedegree']) ){
       $pedegree = trim($_POST['pedegree']);
-      if(!preg_match('/^[0-9]+$/', $pedegree)){
+      if(!preg_match('/^([0-9]+\.+[0-9]+)$/', $pedegree)){
         $err['pedegree'] = "*Invalid Pedegree Value";
-      }else if($pedegree>25){
-        $err['pedegree'] = "*Enter Pedegree Value less than 25";
+      }else if($pedegree>50){
+        $err['pedegree'] = "*Enter Pedegree Value less than 50";
       }
        }else {
       $err['pedegree'] = "*Enter Pedegree Value";
@@ -106,100 +120,122 @@
     }
 
 
-    //check for number of error
-     if (count($err)==0) {
+    function mean($arr) {
+      $num_of_elements = count($arr);
+      $mean=0.0;
+      $sum=array_sum($arr);
+      $mean=$sum/$num_of_elements;
+      return  (float) $mean;
+    }
 
-      
-        function mean($arr) {
-          $num_of_elements = count($arr);
-          $sum=array_sum($arr);
-          $mean=$sum/$num_of_elements;
-          return $mean;
-      }
+    function variance($arr) 
+      { 
+          
+          $num_of_elements = count($arr); 
+            $variance = 0.0; 
+            // calculating mean using array_sum() method 
+          $average = mean($arr);
 
-
-        function variance($arr) 
+          foreach($arr as $i) 
           { 
-              
-              $num_of_elements = count($arr); 
-                $variance = 0.0; 
-                // calculating mean using array_sum() method 
-              $average = array_sum($arr)/$num_of_elements; 
-                
-              foreach($arr as $i) 
-              { 
-                  // sum of squares of differences between  
-                              // all numbers and means. 
-                  $variance += pow(($i - $average), 2); 
-              } 
-                
-              return (float) $variance/($num_of_elements-1);
-              // Input array 
+              // sum of squares of differences between  
+                          // all numbers and means. 
+              $variance += pow(($i - $average), 2); 
+          } 
+            
+          return (float) $variance/($num_of_elements-1);
+          // Input array 
+    
+     } 
+    
+    function likelihoodProb($x,$arr){
+    $partial= 1/sqrt(2*3.14*variance($arr));
+    $powr=(-(pow($x-mean($arr), 2))/(2*variance($arr)));
+    $exponential=exp($powr);
+    $prob=$partial*$exponential;
+    return $prob;
+  }
+      
+    
+    //check for number of error
+    if (count($err)==0) {
+      require "connect.php";
+      //query to select data
+      $sql="select * from tbl_dataSet where Outcome=1 ";
+      //execute query and return result object
+      $result=mysqli_query($conn,$sql);
+      //default array
+      $data=array();
+      if(mysqli_num_rows($result)>0){
+        while($d=mysqli_fetch_assoc($result)){
+          array_push($data,$d);
+        }
+
+        $i=0;
+        foreach ($data as $info){
+          
+           $dbPregnancy[$i]=$info['Pregnancies'];
+           $dbGlucose[$i]=$info['Glucose'];
+           $dbBP[$i]=$info['BloodPressure'];
+           $dbSkin[$i]=$info['SkinThickness'];
+           $dbInsulin[$i]=$info['Insulin'];
+           $dbBMI[$i]=$info['BMI'];
+           $dbPedegree[$i]=$info['DiabetesPedigreeFunction'];
+           $dbAge[$i]=$info['Age'];
+           $i=$i+1;
+        }
         
-        } 
+      }else{
+        echo "data not found";
+    }
 
-      /*-----------------------------likelihood Probability---------------*/
-      function likelihoodProb($x,$arr){
-        $partial= 1/sqrt(2*3.14*variance($arr));
-        $powr=(-(pow($x-mean($arr), 2))/(2*variance($arr)));
-        $exponential=exp($powr);
-        $prob=$partial*$exponential;
-        return $prob;
+    $diabetesResult= likelihoodProb($pregnancy,$dbPregnancy)*likelihoodProb($glucose,$dbGlucose)*likelihoodProb($BP,$dbBP)*likelihoodProb($skin,$dbSkin)*likelihoodProb($insulin,$dbInsulin)*likelihoodProb($BMI,$dbBMI)*likelihoodProb($pedegree,$dbPedegree)*likelihoodProb($age,$dbAge)*0.5;
+
+      require "connect.php";
+       //query to select data
+       $sql="select * from tbl_dataSet where Outcome=0";
+       //execute query and return result object
+       $result=mysqli_query($conn,$sql);
+       //default array
+       $data=array();
+        if(mysqli_num_rows($result)>0){
+          while($d=mysqli_fetch_assoc($result)){
+            array_push($data,$d);
+          }
+      $i=0;
+      foreach ($data as $info){
+        
+         $dbPregnancy[$i]=$info['Pregnancies'];
+         $dbGlucose[$i]=$info['Glucose'];
+         $dbBP[$i]=$info['BloodPressure'];
+         $dbSkin[$i]=$info['SkinThickness'];
+         $dbInsulin[$i]=$info['Insulin'];
+         $dbBMI[$i]=$info['BMI'];
+         $dbPedegree[$i]=$info['DiabetesPedigreeFunction'];
+         $dbAge[$i]=$info['Age'];
+         $i=$i+1;
       }
+      
+    }else{
+      echo "data not found";
+    }
 
-      function maleresult(){
+   $noDiabetesResult= likelihoodProb($pregnancy,$dbPregnancy)*likelihoodProb($glucose,$dbGlucose)*likelihoodProb($BP,$dbBP)*likelihoodProb($skin,$dbSkin)*likelihoodProb($insulin,$dbInsulin)*likelihoodProb($BMI,$dbBMI)*likelihoodProb($pedegree,$dbPedegree)*likelihoodProb($age,$dbAge)*0.5;
 
-           $maleresult= likelihoodProb(6,array(6,5.92,5.58,5.92))*likelihoodProb(130,array(180,190,170,165))*likelihoodProb(8,array(12,11,12,10))*0.5;
-           return $maleresult;
-      }
+    $probDiabetes = $diabetesResult/($diabetesResult+$noDiabetesResult);
+    $probNoDiabetes = $noDiabetesResult/($diabetesResult+$noDiabetesResult);
 
-      function femaleresult(){
+    $probDiabetesPercentage = $probDiabetes*100;
+    $probNoDiabetesPercentage =$probNoDiabetes*100;
+   
 
-          $femaleresult= likelihoodProb(6,array(5,5.5,5.42,5.75))*likelihoodProb(130,array(100,150,130,150))*likelihoodProb(8,array(6,8,7,9))*0.5; 
-          return $femaleresult;
-      }
+  if($diabetesResult>$noDiabetesResult){
+    $msg='<div class="alert alert-danger"> Patient has Diabetes chance of '.($probDiabetesPercentage).'</div>';
+   }else{
+    $msg='<div class="alert alert-success"> Patient has no Diabetes chance of '.($probNoDiabetesPercentage).'</div>';
+   }
 
-
-      function result(){
-         if(maleresult()>femaleresult()){
-          echo "Given is male";
-         }else{
-          echo "Given is female";
-         }
-      }
-
-
-      echo "Male  Mean Height is ".mean(array(6,5.92,5.58,5.92));echo "<br>";
-      echo "Female Mean Height is ".mean(array(5,5.5,5.42,5.75)); echo "<br>";  
-
-      echo "<br>";
-
-      echo "Male Variance Height is ".variance(array(6,5.92,5.58,5.92));echo "<br>";    
-      echo "Female Variance Height is ".variance(array(5,5.5,5.42,5.75));echo "<br>";
-      echo "<br>";
-
-      echo "Male  Mean Weight is ".mean(array(180,190,170,165));echo "<br>";
-      echo "Female Mean Weight is ".mean(array(100,150,130,150)); echo "<br>"; 
-
-      echo "Male Variance Weight is ".variance(array(180,190,170,165));echo "<br>";    
-      echo "Female Variance Weight is ".variance(array(100,150,130,150));echo "<br>";
-      echo "<br>";
-
-      echo "Male  Mean Foot is ".mean(array(12,11,12,10));echo "<br>";
-      echo "Female Mean Foot is ".mean(array(6,8,7,9));echo "<br>";
-      echo "<br>";  
-
-      echo "Male Variance Foot is ".variance(array(12,11,12,10)); echo "<br>";   
-      echo "Female Variance Foot is ".variance(array(6,8,7,9));echo "<br>";
-      echo "<br>";
-
-      echo "Male result is".maleresult(); echo "<br>";
-      echo "Female result is".femaleresult(); echo "<br>";
-      echo "<br>";
-
-      echo result();
-
-     }
+  }
       
   }
 ?>
