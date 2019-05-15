@@ -7,39 +7,40 @@
    $dbBMI=array();
    $dbPedegree=array();
    $dbAge=array();
+   
    $diabetesResult=null;
    $noDiabetesResult=null;
-  $msg='';
+   $probDiabetes=null;
+   $probNoDiabetes=null;
+   $probDiabetesPercentage=null;
+   $probNoDiabetesPercentage=null; 
+
+   $email=null;
+   $pregnancy=null;
+   $glucose=null;
+   $BP=null;
+   $skin=null;
+   $insulin=null;
+   $BMI=null;
+   $pedegree=null;
+   $age=null;
+   $outcome=null;
+   $value=null;
+
+   $msg='';
 
   //check for button click---form submit
   if(isset($_POST['predict'])){
     $err = array();
 
     //check for Patient First Name
-      if (isset($_POST['fname']) && !empty($_POST['fname']) ){
-        $fname = trim($_POST['fname']);
-          if(!preg_match("/^([a-zA-Z]+)$/",$fname)){
-          $err['fname'] = "*Invalid First Name";
+      if (isset($_POST['email']) && !empty($_POST['email']) ){
+        $email = trim($_POST['email']);
+          if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
+          $err['email'] = "*Invalid Patient Email Address";
         } 
       }else {
-        $err['fname'] = "*Enter Patient First Name";
-      }
-
-   //check for Patient Last Name
-    if (isset($_POST['lname']) && !empty($_POST['lname']) ){
-      $lname = trim($_POST['lname']);
-        if(!preg_match("/^([a-zA-Z]+)$/",$lname)){
-        $err['lname'] = "*Invalid last Name";
-      }
-       }else {
-      $err['lname'] = "*Enter Patient Last  Name";
-    }
-
-    //check for gender
-      if (isset($_POST['gender']) && !empty($_POST['gender'])){
-            $gender= $_POST['gender'];
-      } else {
-            $err['gender'] = "*Choose Gender";
+        $err['email'] = "*Enter Patient Email Address";
       }
 
     //check for Pregnancy number
@@ -176,12 +177,20 @@
      } 
     
     function likelihoodProb($x,$arr){
-    $partial= 1/sqrt(2*3.14*variance($arr));
-    $powr=(-(pow($x-mean($arr), 2))/(2*variance($arr)));
-    $exponential=exp($powr);
-    $prob=$partial*$exponential;
-    return $prob;
+      $partial= 1/sqrt(2*3.14*variance($arr));
+      $powr=(-(pow($x-mean($arr), 2))/(2*variance($arr)));
+      $exponential=exp($powr);
+      $prob=$partial*$exponential;
+      return $prob;
   }
+
+  function sqlResult($outcome,$value){
+      require "connect.php";
+      $addsql = "insert into tbl_result (email,pregnancies,glucose,bp,skin,insulin,bmi,pedegree,age,outcome,value) values 
+      ('$email','$pregnancy','$glucose','$BP','$skin','$insulin','$BMI','$pedegree','$age','$outcome','$value')";
+      $result=mysqli_query($conn, $addsql);
+      
+    }
       
     
     //check for number of error
@@ -261,17 +270,32 @@
     
     echo $probNoDiabetes; echo '<br>';
     echo $probNoDiabetesPercentage;echo '<br>';
+    
+    
    
 
   if($diabetesResult>$noDiabetesResult){
     $msg='<div class="alert alert-danger"> Patient has Diabetes chance of '.($probDiabetesPercentage).'%</div>';
+      sqlResult('tested_positive',$probDiabetesPercentage);
+      
+
    }else{
     $msg='<div class="alert alert-success"> Patient has no Diabetes chance of '.($probNoDiabetesPercentage).'%</div>';
+    sqlResult('tested_negative',$probNoDiabetesPercentage);
+     // require "connect.php";
+     //  $addsql = "insert into tbl_result (email,pregnancies,glucose,bp,skin,insulin,bmi,pedegree,age,outcome,value) values 
+     //  ('$email','$pregnancy','$glucose','$BP','$skin','$insulin','$BMI','$pedegree','$age','tested_negative','$probNoDiabetesPercentage')";
+     //  $result=mysqli_query($conn, $addsql);
    }
+}
 
-  }
+}
+   
+//  }
+
+// }
+//   }}
       
-  }
 ?>
 
 
@@ -384,49 +408,17 @@
                         <div class="col-md-6 col-sm-6">
 
                           <div class="form-group">
-                              <label for="inputFname">First Name</label>
-                              <input type="text" class="form-control"  name ="fname" id="inputFname" placeholder="Enter Patient First Name">
+                              <label for="inputEmail">Patient Email</label>
+                              <input type="text" class="form-control"  name ="email" id="inputEmail" placeholder="Enter Patient Email">
                               <span class="errorDisplay">
-                                  <?php if (isset($err['fname'])){
-                                  echo $err['fname'];
+                                  <?php if (isset($err['email'])){
+                                  echo $err['email'];
                                 } ?>
                               </span>
-                          </div>
-
-                          <div class="form-group">
-                              <label for="inputLname">Last Name</label>
-                              <input type="text" class="form-control"  name ="lname" id="inputLname" placeholder="Enter Patient Last Name">
-                              <span class="errorDisplay">
-                                  <?php if (isset($err['lname'])){
-                                  echo $err['lname'];
-                                } ?>
-                              </span>
-                          </div>
-
-                          <div class="form-group">
-                              <label for="inputGender">Choose Gender</label><br>
-                              Male <input type="radio" name ="gender" value='Male' id="inputGender">&nbsp;
-                              Female <input type="radio" name ="gender" value='Female' >
-                              <span class="errorDisplay">
-                                  <?php if (isset($err['gender'])){
-                                  echo $err['gender'];
-                                } ?>
-                              </span>
-                          </div>  
-                          
+                          </div> 
                           <br>
-                          <div class="form-group">
-                            <label for="inputDate">DOB</label>
-                            <input type="date" name ="dob" id="inputDate">&nbsp;
-                            <span class="errorDisplay">
-                                <?php if (isset($err['dob'])){
-                                echo $err['dob'];
-                              } ?>
-                            </span>     
-                          </div>  
 
-                          <br>
-                            <div class="form-group">
+                          <div class="form-group">
                             <label for="inputPregnancy">Pregnancies</label>
                             <input type="text" class="form-control"  name ="pregnancy" id="inputPregnancy" placeholder="Enter Pregnancy Value">
                             <span class="errorDisplay">
@@ -445,11 +437,6 @@
                               } ?>
                             </span>
                           </div>
-
-                        </div>
-
-                        <div class="col-md-6 col-sm-6">
-
 
                           <div class="form-group">
                             <label for="inputBP">Blood Pressure</label>
@@ -470,8 +457,15 @@
                               } ?>
                             </span>
                           </div>
+
+
+
+                        </div>
+
+                        <div class="col-md-6 col-sm-6">
                           
-                            <div class="form-group">
+                          
+                          <div class="form-group">
                             <label for="inputInsulin">Insulin</label>
                             <input type="text" class="form-control" name="insulin" id="inputInsulin" placeholder="Enter Insulin Value">
                             <span class="errorDisplay">
