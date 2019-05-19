@@ -28,10 +28,50 @@
    $value=null;
 
    $msg='';
+$err = array();
+function mean($arr) {
+      $num_of_elements = count($arr);
+      $mean=0.0;
+      $sum=array_sum($arr);
+      $mean=$sum/$num_of_elements;
+      return  (float) $mean;
+    }
+
+
+    function variance($arr) 
+      { 
+          
+          $num_of_elements = count($arr); 
+            $variance = 0.0; 
+            // calculating mean using array_sum() method 
+          $average = mean($arr);
+
+          foreach($arr as $i) 
+          { 
+              // sum of squares of differences between  
+                          // all numbers and means. 
+              $variance += pow(($i - $average), 2); 
+          } 
+            
+          return (float) $variance/($num_of_elements-1);
+          // Input array 
+    
+     } 
+    
+    function likelihoodProb($x,$arr){
+      $partial= 1/sqrt(2*3.14*variance($arr));
+      $powr=(-(pow($x-mean($arr), 2))/(2*variance($arr)));
+      $exponential=exp($powr);
+      $prob=$partial*$exponential;
+      return $prob;
+  }
+
+  
 
   //check for button click---form submit
   if(isset($_POST['predict'])){
-    $err = array();
+    
+    
 
     //check for Patient First Name
       if (isset($_POST['email']) && !empty($_POST['email']) ){
@@ -111,6 +151,7 @@
       $err['insulin'] = "*Enter Insulin Value";
     }
 
+
     //check for BMI
     if (isset($_POST['BMI']) && !empty($_POST['BMI']) ){
       $BMI = trim($_POST['BMI']);
@@ -122,6 +163,7 @@
        }else {
         $err['BMI'] = "*Enter BMI Value";
       }
+
 
     //check for Pedegree Function
     if (isset($_POST['pedegree']) && !empty($_POST['pedegree']) ){
@@ -147,50 +189,8 @@
       $err['age'] = "*Enter your age";
     }
 
-
-    function mean($arr) {
-      $num_of_elements = count($arr);
-      $mean=0.0;
-      $sum=array_sum($arr);
-      $mean=$sum/$num_of_elements;
-      return  (float) $mean;
-    }
-
-    function variance($arr) 
-      { 
-          
-          $num_of_elements = count($arr); 
-            $variance = 0.0; 
-            // calculating mean using array_sum() method 
-          $average = mean($arr);
-
-          foreach($arr as $i) 
-          { 
-              // sum of squares of differences between  
-                          // all numbers and means. 
-              $variance += pow(($i - $average), 2); 
-          } 
-            
-          return (float) $variance/($num_of_elements-1);
-          // Input array 
+}
     
-     } 
-    
-    function likelihoodProb($x,$arr){
-      $partial= 1/sqrt(2*3.14*variance($arr));
-      $powr=(-(pow($x-mean($arr), 2))/(2*variance($arr)));
-      $exponential=exp($powr);
-      $prob=$partial*$exponential;
-      return $prob;
-  }
-
-  function sqlResult($outcome,$value){
-      require "connect.php";
-      $addsql = "insert into tbl_result (email,pregnancies,glucose,bp,skin,insulin,bmi,pedegree,age,outcome,value) values 
-      ('$email','$pregnancy','$glucose','$BP','$skin','$insulin','$BMI','$pedegree','$age','$outcome','$value')";
-      $result=mysqli_query($conn, $addsql);
-      
-    }
       
     
     //check for number of error
@@ -276,20 +276,27 @@
 
   if($diabetesResult>$noDiabetesResult){
     $msg='<div class="alert alert-danger"> Patient has Diabetes chance of '.($probDiabetesPercentage).'%</div>';
-      sqlResult('tested_positive',$probDiabetesPercentage);
+      $outcome='tested_positive';
+      $value=$diabetesResult;
       
 
    }else{
     $msg='<div class="alert alert-success"> Patient has no Diabetes chance of '.($probNoDiabetesPercentage).'%</div>';
-    sqlResult('tested_negative',$probNoDiabetesPercentage);
+    $outcome='tested_negative';
+    $value=$noDiabetesResult;
      // require "connect.php";
      //  $addsql = "insert into tbl_result (email,pregnancies,glucose,bp,skin,insulin,bmi,pedegree,age,outcome,value) values 
      //  ('$email','$pregnancy','$glucose','$BP','$skin','$insulin','$BMI','$pedegree','$age','tested_negative','$probNoDiabetesPercentage')";
      //  $result=mysqli_query($conn, $addsql);
    }
+   require "connect.php";
+      $addsql = "insert into tbl_result (email,pregnancies,glucose,bp,skin,insulin,bmi,pedegree,age,outcome,value) values 
+      ('$email','$pregnancy','$glucose','$BP','$skin','$insulin','$BMI','$pedegree','$age','$outcome','$value')";
+      $result=mysqli_query($conn, $addsql);
 }
 
-}
+
+
   
       
 ?>
