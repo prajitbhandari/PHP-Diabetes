@@ -1,7 +1,9 @@
 <?php 
+
+   $currentEmail=$_COOKIE['email'];
    require "connect.php";
    //query to select data
-   $sql="select * from tbl_doctor";
+   $sql="select * from tbl_result where email='$currentEmail'";
    //execute query and return result object
    $result=mysqli_query($conn,$sql);
    //default array
@@ -113,7 +115,7 @@
                 <div class="text-center g-pad-bottom">
                     <div class="col-md-12 col-sm-12 alert-info" style="width: 98%;
                      margin-left: 12px; border-radius: 8px;">
-                        <h3><i class="fa fa-user-md fa-2x" ></i>&nbsp;Available Doctors</h3>
+                        <h3><i class="fa fa-user-md fa-2x" ></i>&nbsp;View Result</h3>
                                      
                     </div>    
                 </div>
@@ -128,24 +130,38 @@
                             <th scope="col">Id</th>
                             <th scope="col">First Name</th>
                             <th scope="col">Last Name</th>
-                            <th scope="col">Address</th>
                             <th scope="col">E-mail</th>
-                            <th scope="col">Phone</th>
-                            <th scope="col">Qualification</th>
-                            <th scope="col">Query</th>
+                            <th scope="col">Pregnancies</th>
+                            <th scope="col">Glucose</th>
+                            <th scope="col">BP</th>
+                            <th scope="col">Skin Thickness</th>
+                            <th scope="col">Insulin</th>
+                            <th scope="col">BMI</th>
+                            <th scope="col">Pedegree</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Outcome</th>
+                            <th scope="col">Doctor</th>
                           </tr>
                      </thead>
                      <tbody>
-                        <?php foreach ($data as $info){?>
-                          <tr>
-                            <th scope="row"><?php echo $info['Id'] ?></th>
-                            <td><?php echo $info['fname'] ?></td>
-                            <td><?php echo $info['lname'] ?></td>
-                            <td><?php echo $info['docAddress'] ?></td>
-                            <td><?php echo $info['docEmail'] ?></td>
-                            <td><?php echo $info['docPhone'] ?></td>
-                            <td><?php echo $info['docQualification'] ?></td>
-                          </tr>
+                        <?php
+
+                            foreach ($data as $info){?>
+                              <tr>
+                                <th scope="row"><?php echo $info['Id'] ?></th>
+                                <td><?php echo $info['fname'] ?></td>
+                                <td><?php echo $info['lname'] ?></td>
+                                <td><?php echo $info['email'] ?></td>
+                                <td><?php echo $info['pregnancies'] ?></td>
+                                <td><?php echo $info['glucose'] ?></td>
+                                <td><?php echo $info['bp'] ?></td>
+                                <td><?php echo $info['skin'] ?></td>
+                                <td><?php echo $info['insulin'] ?></td>
+                                <td><?php echo $info['bmi'] ?></td>
+                                <td><?php echo $info['pedegree'] ?></td>
+                                <td><?php echo $info['age'] ?></td>
+                                <td><?php echo $info['outcome'] ?></td>
+                              </tr>
                          <?php } ?>  
                       </tbody>
                     </table>

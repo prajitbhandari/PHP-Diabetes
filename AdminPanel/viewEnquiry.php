@@ -99,7 +99,7 @@
               <li><a href="Help.php">Help</a></li>
               <li><a href="addDoctors.php">Add Doctors</a></li>
               <li><a href="manageDoctors.php">Manage Doctors</a></li>
-              <li><a href="manageUsers.php">Manage Users</a></li>
+              <li><a href="manageUsers.php">View Users</a></li>
               <li><a href="viewEnquiry.php">View Enquiry</a></li>
               <li><a href="adminlogout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
@@ -110,7 +110,7 @@
   <!-----------END NAV SECTION-------->
 
     <!--HOME SECTION-->
-      <section id="port-sec">
+      <section>
        <div class="container">
             <div class="row g-pad-bottom">
                 <div class="text-center g-pad-bottom">

@@ -1,3 +1,22 @@
+<?php 
+   require "connect.php";
+   //query to select data
+   $sql="select * from tbl_register";
+   //execute query and return result object
+   $result=mysqli_query($conn,$sql);
+   //default array
+   $data=array();
+    if(mysqli_num_rows($result)>0){
+      while($d=mysqli_fetch_assoc($result)){
+        array_push($data,$d);
+      }
+      
+    }else{
+      echo "data not found";
+    }
+  
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,7 +100,7 @@
               <li><a href="Help.php">Help</a></li>
               <li><a href="addDoctors.php">Add Doctors</a></li>
               <li><a href="manageDoctors.php">Manage Doctors</a></li>
-              <li><a href="manageUsers.php">Manage Users</a></li>
+              <li><a href="manageUsers.php">View Users</a></li>
               <li><a href="viewEnquiry.php">View Enquiry</a></li>
               <li><a href="adminlogout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
@@ -93,7 +112,47 @@
 
     <!--HOME SECTION-->
    <section>
-      <h2 class="text-center">Manage User Coming Soon!!!!!</h2>    
+      <div class="container">
+            <div class="row g-pad-bottom">
+                <div class="text-center g-pad-bottom">
+                     <div class="col-md-12 col-sm-12 alert-info" style="width: 98%;
+                     margin-left: 12px; border-radius: 8px;">
+                        <h4><i class="" ></i>&nbsp;User Details</h4>
+
+                                     
+                    </div>  
+                </div>
+            </div><br/>
+
+            <div class="row g-pad-bottom" >
+                <div class="col-md-12 col-sm-12" >
+                   <table class="table table-bordered table-striped">
+                        <thead class="bg-success">
+                            <tr>
+                              <th scope="col">ID</th>
+                              <th scope="col">First Name</th>
+                              <th scope="col">Last Name</th>
+                              <th scope="col">Email</th>
+                              <th scope="col">Phone</th>
+                              <th scope="col">Address</th>
+                            </tr>
+                       </thead>
+                       <tbody>
+                            <?php foreach ($data as $in){?>
+                              <tr>
+                                <td><?php echo $in['Id'] ?> </td>
+                                <td><?php echo $in['fname'] ?> </td>
+                                <td><?php echo $in['lname'] ?> </td>
+                                <td><?php echo $in['email'] ?> </td>
+                                <td><?php echo $in['phone'] ?> </td>
+                                <td><?php echo $in['address'] ?> </td>  
+                              </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+           </div>
+       </div>   
    </section>
    <br>
     <!-- END Home SECTION -->
