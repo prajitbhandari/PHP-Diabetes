@@ -72,8 +72,27 @@ function mean($arr) {
   if(isset($_POST['predict'])){
     
     
+    //check for Patient  First Name
+    if (isset($_POST['fname']) && !empty($_POST['fname']) ){
+      $fname = trim($_POST['fname']);
+        if(!preg_match("/^([a-zA-Z]+)$/",$fname)){
+        $err['fname'] = "*Invalid First Name";
+      } 
+    }else {
+      $err['fname'] = "*Enter Patient First Name";
+    }
 
-    //check for Patient First Name
+    //check for Patient Last Name
+    if (isset($_POST['lname']) && !empty($_POST['lname']) ){
+      $lname = trim($_POST['lname']);
+        if(!preg_match("/^([a-zA-Z]+)$/",$lname)){
+        $err['lname'] = "*Invalid last Name";
+      }
+       }else {
+      $err['lname'] = "*Enter Patient Last  Name";
+    }
+
+    //check for Patient Email 
       if (isset($_POST['email']) && !empty($_POST['email']) ){
         $email = trim($_POST['email']);
           if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
@@ -194,7 +213,7 @@ function mean($arr) {
       
     
     //check for number of error
-    if (count($err)==0) {
+    if (count($err)==0&&isset($_POST['predict'])) {
       require "connect.php";
       //query to select data
       $sql="select * from tbl_dataSet where Outcome=1 ";
@@ -275,13 +294,13 @@ function mean($arr) {
    
 
   if($diabetesResult>$noDiabetesResult){
-    $msg='<div class="alert alert-danger"> Patient has Diabetes chance of '.($probDiabetesPercentage).'%</div>';
+    $msg='<div class="alert alert-danger"> Patient has Diabetes Chance of '.($probDiabetesPercentage).'%</div>';
       $outcome='tested_positive';
       $value=$diabetesResult;
       
 
    }else{
-    $msg='<div class="alert alert-success"> Patient has no Diabetes chance of '.($probNoDiabetesPercentage).'%</div>';
+    $msg='<div class="alert alert-success"> Patient has no Diabetes Chance of '.($probNoDiabetesPercentage).'%</div>';
     $outcome='tested_negative';
     $value=$noDiabetesResult;
      // require "connect.php";
@@ -290,8 +309,8 @@ function mean($arr) {
      //  $result=mysqli_query($conn, $addsql);
    }
    require "connect.php";
-      $addsql = "insert into tbl_result (email,pregnancies,glucose,bp,skin,insulin,bmi,pedegree,age,outcome,value) values 
-      ('$email','$pregnancy','$glucose','$BP','$skin','$insulin','$BMI','$pedegree','$age','$outcome','$value')";
+      $addsql = "insert into tbl_result (fname,lname,email,pregnancies,glucose,bp,skin,insulin,bmi,pedegree,age,outcome,value) values 
+      ('$fname','$lname','$email','$pregnancy','$glucose','$BP','$skin','$insulin','$BMI','$pedegree','$age','$outcome','$value')";
       $result=mysqli_query($conn, $addsql);
 }
 
@@ -406,20 +425,45 @@ function mean($arr) {
                         <h4 class="text-center">Please Fill up the form to Predict Diabetes</h4>
                         <form  method="POST" action="Predict.php" name="predictForm">
                               <div class="col-md-12 col-sm-12">
-                                  <?php echo $msg; ?>    
+                                 
+                                  <?php
+                                  if(isset($_POST['predict'])){
+                                     echo $msg; 
+                                  }
+                                  
+                                   ?>    
                               </div>
                         <div class="col-md-6 col-sm-6">
+                          
+                          <div class="form-group">
+                              <label for="inputFname">Patient First Name</label>
+                              <input type="text" class="form-control"  name ="fname" id="inputFname" placeholder="Enter Patient First Name">
+                              <span class="errorDisplay">
+                                  <?php if (isset($err['fname'])){
+                                  echo $err['fname'];
+                                } ?>
+                              </span>
+                          </div> 
 
                           <div class="form-group">
-                              <label for="inputEmail">Patient Email</label>
-                              <input type="text" class="form-control"  name ="email" id="inputEmail" placeholder="Enter Patient Email">
+                              <label for="inputLname">Patient Last Name</label>
+                              <input type="text" class="form-control"  name ="lname" id="inputLname" placeholder="Enter Patient Last Name">
+                              <span class="errorDisplay">
+                                  <?php if (isset($err['lname'])){
+                                  echo $err['lname'];
+                                } ?>
+                              </span>
+                          </div> 
+
+                          <div class="form-group">
+                              <label for="inputEmail">Patient Email Address</label>
+                              <input type="text" class="form-control"  name ="email" id="inputEmail" placeholder="Enter Patient Email Address">
                               <span class="errorDisplay">
                                   <?php if (isset($err['email'])){
                                   echo $err['email'];
                                 } ?>
                               </span>
                           </div> 
-                          <br>
 
                           <div class="form-group">
                             <label for="inputPregnancy">Pregnancies</label>
