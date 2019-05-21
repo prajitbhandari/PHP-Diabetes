@@ -15,6 +15,15 @@
    $probDiabetesPercentage=null;
    $probNoDiabetesPercentage=null; 
 
+   echo '<br>';echo '<br>';echo '<br>';echo '<br>';echo '<br>';echo '<br>';echo '<br>';echo '<br>';
+        
+   $currentDate= date('Y/m/d');
+   $requireDate=date("m/d/Y", strtotime($currentDate));
+   echo 'current Date is '.$currentDate;echo '<br>';
+   echo 'Required date is '.$requireDate; 
+   
+
+
    $email=null;
    $pregnancy=null;
    $glucose=null;
@@ -100,6 +109,16 @@ function mean($arr) {
         } 
       }else {
         $err['email'] = "*Enter Patient Email Address";
+      }
+
+      //check for Prediction Date
+      if (isset($_POST['predictionDate']) && !empty($_POST['predictionDate']) ){
+        $predictionDate = trim($_POST['predictionDate']);
+          if($predictionDate!=$requireDate){
+             $err['predictionDate'] = "*Invalid Prediction Date";
+        } 
+      }else {
+        $err['predictionDate'] = "*Enter Prediction Date";
       }
 
     //check for Pregnancy number
@@ -464,6 +483,17 @@ function mean($arr) {
                                 } ?>
                               </span>
                           </div> 
+
+
+                          <div class="form-group">
+                              <label for="inputDate">Prediction Date</label>
+                              <input type="date" class="form-control"  name ="predictionDate" id="inputDate">
+                              <span class="errorDisplay">
+                                  <?php if (isset($err['predictionDate'])){
+                                  echo $err['predictionDate'];
+                                } ?>
+                              </span>
+                          </div>
 
                           <div class="form-group">
                             <label for="inputPregnancy">Pregnancies</label>

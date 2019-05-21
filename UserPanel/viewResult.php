@@ -128,30 +128,22 @@
                       <thead class="bg-success">
                           <tr>
                             <th scope="col">Id</th>
-                            <th scope="col">First Name</th>
-                            <th scope="col">Last Name</th>
-                            <th scope="col">E-mail</th>
                             <th scope="col">Pregnancies</th>
                             <th scope="col">Glucose</th>
                             <th scope="col">BP</th>
                             <th scope="col">Skin Thickness</th>
                             <th scope="col">Insulin</th>
                             <th scope="col">BMI</th>
-                            <th scope="col">Pedegree</th>
+                            <th scope="col">Diabetes Pedegree Function</th>
                             <th scope="col">Age</th>
                             <th scope="col">Outcome</th>
-                            <th scope="col">Doctor</th>
+                            <th scope="col">Consult Doctor</th>
                           </tr>
                      </thead>
                      <tbody>
-                        <?php
-
-                            foreach ($data as $info){?>
+                        <?php foreach ($data as $info){?>
                               <tr>
                                 <th scope="row"><?php echo $info['Id'] ?></th>
-                                <td><?php echo $info['fname'] ?></td>
-                                <td><?php echo $info['lname'] ?></td>
-                                <td><?php echo $info['email'] ?></td>
                                 <td><?php echo $info['pregnancies'] ?></td>
                                 <td><?php echo $info['glucose'] ?></td>
                                 <td><?php echo $info['bp'] ?></td>
@@ -161,6 +153,12 @@
                                 <td><?php echo $info['pedegree'] ?></td>
                                 <td><?php echo $info['age'] ?></td>
                                 <td><?php echo $info['outcome'] ?></td>
+                                <?php if($info['outcome']=='tested_negative'){?>
+                                  <td><a class ="btn btn-primary btn-block" href="consult_doctor.php?id=<?php echo $in['Id']?>"onclick="return confirm('Are you sure u want to Consult?')">Consult</a></td>
+                                <?php } ?>
+                                <?php if($info['outcome']!='tested_negative'){ ?>
+                                  <td>Not Needed</td>
+                                <?php } ?>
                               </tr>
                          <?php } ?>  
                       </tbody>
