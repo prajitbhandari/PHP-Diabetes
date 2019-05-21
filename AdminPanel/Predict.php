@@ -113,7 +113,7 @@ function mean($arr) {
 
       //check for Prediction Date
       if (isset($_POST['predictionDate']) && !empty($_POST['predictionDate']) ){
-        $predictionDate = trim($_POST['predictionDate']);
+        $predictionDate=date("m/d/Y", strtotime($_POST['predictionDate']));
           if($predictionDate!=$requireDate){
              $err['predictionDate'] = "*Invalid Prediction Date";
         } 
