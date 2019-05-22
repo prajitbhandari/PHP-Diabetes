@@ -48,6 +48,16 @@ if(isset($_POST['submit'])){
   <form method="POST" action=""  >
   	<br>
   	Date: <input type="date" name="predictionDate"/><br><br>
+    <label>Choose a browser from this list:
+      <input list="inputEmail" name="inputEmail" /></label>
+        <datalist id="inputEmail">
+          <option value="Chrome">
+          <option value="Firefox">
+          <option value="Internet Explorer">
+          <option value="Opera">
+          <option value="Safari">
+          <option value="Microsoft Edge">
+</datalist>
   	<input type="submit" name="submit">
 
   </form>

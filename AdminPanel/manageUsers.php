@@ -1,7 +1,7 @@
 <?php 
    require "connect.php";
    //query to select data
-   $sql="select * from tbl_register";
+   $sql="select * from tbl_user";
    //execute query and return result object
    $result=mysqli_query($conn,$sql);
    //default array

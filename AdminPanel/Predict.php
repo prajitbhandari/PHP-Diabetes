@@ -15,10 +15,10 @@
    $probDiabetesPercentage=null;
    $probNoDiabetesPercentage=null; 
 
-   echo '<br>';echo '<br>';echo '<br>';echo '<br>';echo '<br>';echo '<br>';echo '<br>';echo '<br>';
+   echo '<br>';
         
-   $currentDate= date('Y/m/d');
-   $requireDate=date("m/d/Y", strtotime($currentDate));
+   $currentDate= date('Y-m-d');
+   $requireDate=date('Y-m-d', strtotime($currentDate));
    echo 'current Date is '.$currentDate;echo '<br>';
    echo 'Required date is '.$requireDate; 
    
@@ -80,46 +80,32 @@ function mean($arr) {
   //check for button click---form submit
   if(isset($_POST['predict'])){
     
-    
-    //check for Patient  First Name
-    if (isset($_POST['fname']) && !empty($_POST['fname']) ){
-      $fname = trim($_POST['fname']);
-        if(!preg_match("/^([a-zA-Z]+)$/",$fname)){
-        $err['fname'] = "*Invalid First Name";
-      } 
-    }else {
-      $err['fname'] = "*Enter Patient First Name";
-    }
-
-    //check for Patient Last Name
-    if (isset($_POST['lname']) && !empty($_POST['lname']) ){
-      $lname = trim($_POST['lname']);
-        if(!preg_match("/^([a-zA-Z]+)$/",$lname)){
-        $err['lname'] = "*Invalid last Name";
-      }
-       }else {
-      $err['lname'] = "*Enter Patient Last  Name";
-    }
-
-    //check for Patient Email 
-      if (isset($_POST['email']) && !empty($_POST['email']) ){
+         // check Patient email
+        if (isset($_POST['email']) && !empty($_POST['email']) ){
         $email = trim($_POST['email']);
-          if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
+
+        if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
           $err['email'] = "*Invalid Patient Email Address";
-        } 
-      }else {
+        }
+        require "connect.php";
+        $sql="select email from tbl_user where email='$email'";
+        $result=mysqli_query($conn, $sql);
+        if(!mysqli_num_rows($result)){
+          $err['email'] = "*Email Not Available";
+        }
+         }else {
         $err['email'] = "*Enter Patient Email Address";
       }
 
-      //check for Prediction Date
+     //check for Prediction Date
       if (isset($_POST['predictionDate']) && !empty($_POST['predictionDate']) ){
-        $predictionDate=date("m/d/Y", strtotime($_POST['predictionDate']));
-          if($predictionDate!=$requireDate){
+        $predictionDate=date("Y-m-d", strtotime($_POST['predictionDate']));
+          if($predictionDate<$requireDate){
              $err['predictionDate'] = "*Invalid Prediction Date";
         } 
       }else {
         $err['predictionDate'] = "*Enter Prediction Date";
-      }
+      } 
 
     //check for Pregnancy number
     if (isset($_POST['pregnancy']) && !empty($_POST['pregnancy']) ){
@@ -179,7 +165,7 @@ function mean($arr) {
       if(!preg_match('/^[0-9]+$/', $insulin)){
         $err['insulin'] = "*Invalid Insulin Value";
       }else if($insulin>500){
-          $err['skin'] = "*Enter Insulin Value less than 500";
+          $err['insulin'] = "*Enter Insulin Value less than 500";
        }
      }
      else{
@@ -315,22 +301,36 @@ function mean($arr) {
   if($diabetesResult>$noDiabetesResult){
     $msg='<div class="alert alert-danger"> Patient has Diabetes Chance of '.($probDiabetesPercentage).'%</div>';
       $outcome='tested_positive';
-      $value=$diabetesResult;
+      $value=$probDiabetesPercentage;
       
 
    }else{
     $msg='<div class="alert alert-success"> Patient has no Diabetes Chance of '.($probNoDiabetesPercentage).'%</div>';
     $outcome='tested_negative';
-    $value=$noDiabetesResult;
+    $value=$probNoDiabetesPercentage;
      // require "connect.php";
      //  $addsql = "insert into tbl_result (email,pregnancies,glucose,bp,skin,insulin,bmi,pedegree,age,outcome,value) values 
      //  ('$email','$pregnancy','$glucose','$BP','$skin','$insulin','$BMI','$pedegree','$age','tested_negative','$probNoDiabetesPercentage')";
      //  $result=mysqli_query($conn, $addsql);
    }
+
    require "connect.php";
-      $addsql = "insert into tbl_result (fname,lname,email,pregnancies,glucose,bp,skin,insulin,bmi,pedegree,age,outcome,value) values 
-      ('$fname','$lname','$email','$pregnancy','$glucose','$BP','$skin','$insulin','$BMI','$pedegree','$age','$outcome','$value')";
+   //query to select data
+   $sql="select * from tbl_result where email='$email' AND date='$predictionDate'";
+   //execute query and return result object
+   $result=mysqli_query($conn,$sql);
+  
+    if(mysqli_num_rows($result)>0){
+          $msg='<div class="alert alert-danger"> Prediction Done Already</div>';
+
+    }else{
+      $addsql = "insert into tbl_result (email,date,pregnancies,glucose,bp,skin,insulin,bmi,pedegree,age,outcome,value) values 
+      ('$email','$predictionDate','$pregnancy','$glucose','$BP','$skin','$insulin','$BMI','$pedegree','$age','$outcome','$value')";
+      echo "<br>";echo "<br>";
+      echo $addsql;
       $result=mysqli_query($conn, $addsql);
+    }
+   
 }
 
 
@@ -454,35 +454,39 @@ function mean($arr) {
                               </div>
                         <div class="col-md-6 col-sm-6">
                           
-                          <div class="form-group">
-                              <label for="inputFname">Patient First Name</label>
-                              <input type="text" class="form-control"  name ="fname" id="inputFname" placeholder="Enter Patient First Name">
-                              <span class="errorDisplay">
-                                  <?php if (isset($err['fname'])){
-                                  echo $err['fname'];
-                                } ?>
-                              </span>
-                          </div> 
+                          <div class="form-group">  
+                             <label>Patient Email
+                                <input list="email" class="form-control" placeholder="Choose Patient Email Address" style="width:540px; position:relative;top: 6px;" name="email"/></label>
+                                  <datalist id="email">
+                                    <?php 
+                                       require "connect.php";
+                                       //query to select data
+                                       $sql="select * from tbl_user";
+                                       //execute query and return result object
+                                       $result=mysqli_query($conn,$sql);
+                                       //default array
+                                       $data=array();
+                                        if(mysqli_num_rows($result)>0){
+                                          while($d=mysqli_fetch_assoc($result)){
+                                            array_push($data,$d);
+                                          }
+                                          
+                                        }else{
+                                          echo "data not found";
+                                        }
+                                      
+                                    ?>
 
-                          <div class="form-group">
-                              <label for="inputLname">Patient Last Name</label>
-                              <input type="text" class="form-control"  name ="lname" id="inputLname" placeholder="Enter Patient Last Name">
-                              <span class="errorDisplay">
-                                  <?php if (isset($err['lname'])){
-                                  echo $err['lname'];
-                                } ?>
-                              </span>
-                          </div> 
-
-                          <div class="form-group">
-                              <label for="inputEmail">Patient Email Address</label>
-                              <input type="text" class="form-control"  name ="email" id="inputEmail" placeholder="Enter Patient Email Address">
-                              <span class="errorDisplay">
+                                    <?php foreach ($data as $info) { ?>
+                                       <option value="<?php echo $info['email']; ?>"> 
+                                    <?php }?>   
+                                  </datalist>
+                                  <span class="errorDisplay">
                                   <?php if (isset($err['email'])){
                                   echo $err['email'];
                                 } ?>
                               </span>
-                          </div> 
+                          </div>
 
 
                           <div class="form-group">
