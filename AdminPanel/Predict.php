@@ -14,15 +14,7 @@
    $probNoDiabetes=null;
    $probDiabetesPercentage=null;
    $probNoDiabetesPercentage=null; 
-
-   echo '<br>';
-        
-   $currentDate= date('Y-m-d');
-   $requireDate=date('Y-m-d', strtotime($currentDate));
-   echo 'current Date is '.$currentDate;echo '<br>';
-   echo 'Required date is '.$requireDate; 
    
-
 
    $email=null;
    $pregnancy=null;
@@ -37,8 +29,9 @@
    $value=null;
 
    $msg='';
-$err = array();
-function mean($arr) {
+   $err = array();
+
+    function mean($arr) {
       $num_of_elements = count($arr);
       $mean=0.0;
       $sum=array_sum($arr);
@@ -96,16 +89,6 @@ function mean($arr) {
          }else {
         $err['email'] = "*Enter Patient Email Address";
       }
-
-     //check for Prediction Date
-      if (isset($_POST['predictionDate']) && !empty($_POST['predictionDate']) ){
-        $predictionDate=date("Y-m-d", strtotime($_POST['predictionDate']));
-          if($predictionDate<$requireDate){
-             $err['predictionDate'] = "*Invalid Prediction Date";
-        } 
-      }else {
-        $err['predictionDate'] = "*Enter Prediction Date";
-      } 
 
     //check for Pregnancy number
     if (isset($_POST['pregnancy']) && !empty($_POST['pregnancy']) ){
@@ -315,21 +298,13 @@ function mean($arr) {
    }
 
    require "connect.php";
-   //query to select data
-   $sql="select * from tbl_result where email='$email' AND date='$predictionDate'";
-   //execute query and return result object
-   $result=mysqli_query($conn,$sql);
-  
-    if(mysqli_num_rows($result)>0){
-          $msg='<div class="alert alert-danger"> Prediction Done Already</div>';
-
-    }else{
+      $currentDate = date('Y-m-d H:i:s');
       $addsql = "insert into tbl_result (email,date,pregnancies,glucose,bp,skin,insulin,bmi,pedegree,age,outcome,value) values 
-      ('$email','$predictionDate','$pregnancy','$glucose','$BP','$skin','$insulin','$BMI','$pedegree','$age','$outcome','$value')";
+      ('$email','$currentDate','$pregnancy','$glucose','$BP','$skin','$insulin','$BMI','$pedegree','$age','$outcome','$value')";
       echo "<br>";echo "<br>";
       echo $addsql;
       $result=mysqli_query($conn, $addsql);
-    }
+    
    
 }
 
@@ -484,17 +459,6 @@ function mean($arr) {
                                   <span class="errorDisplay">
                                   <?php if (isset($err['email'])){
                                   echo $err['email'];
-                                } ?>
-                              </span>
-                          </div>
-
-
-                          <div class="form-group">
-                              <label for="inputDate">Prediction Date</label>
-                              <input type="date" class="form-control"  name ="predictionDate" id="inputDate">
-                              <span class="errorDisplay">
-                                  <?php if (isset($err['predictionDate'])){
-                                  echo $err['predictionDate'];
                                 } ?>
                               </span>
                           </div>

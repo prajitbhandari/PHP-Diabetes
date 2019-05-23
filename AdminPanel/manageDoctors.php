@@ -149,8 +149,8 @@
                                 <td><?php echo $in['docAddress'] ?> </td>
                                 <td><?php echo $in['docQualification'] ?> </td>
                                 <td><?php echo $in['docPassword'] ?> </td>
-                                <td><a class ="btn btn-primary btn-block" href="delete_doctor.php?id=<?php echo $in['Id']?>"onclick="return confirm('Are you sure u want to Delete?')">Delete</a>
-                                <td><a class ="btn btn-danger btn-block" href="edit_doctor.php?id=<?php echo $in['Id']?>"onclick="return confirm('Are you sure u want to Edit?')">Edit</a>  
+                                <td><a class ="btn btn-danger btn-block" href="delete_doctor.php?id=<?php echo $in['Id']?>"onclick="return confirm('Are you sure u want to Delete?')">Delete</a>
+                                <td><a class ="btn btn-primary btn-block" href="edit_doctor.php?id=<?php echo $in['Id']?>"onclick="return confirm('Are you sure u want to Edit?')">Edit</a>  
                               </tr>
                             <?php } ?>
                         </tbody>

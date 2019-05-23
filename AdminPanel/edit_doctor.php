@@ -12,13 +12,13 @@
         array_push($data,$d);
       }
        foreach ($data as $info){
-       $DBfname=$info['fname'];
-       $DBlname=$info['lname'];
-       $DBdocEmail=$info['docEmail'];
-       $DBdocPhone=$info['docPhone'];
-       $DBdocAddress=$info['docAddress'];
-       $DBdocQualification=$info['docQualification'];
-       $DBdocPassword=$info['docPassword'];
+         $DBfname=$info['fname'];
+         $DBlname=$info['lname'];
+         $DBdocEmail=$info['docEmail'];
+         $DBdocPhone=$info['docPhone'];
+         $DBdocAddress=$info['docAddress'];
+         $DBdocQualification=$info['docQualification'];
+         $DBdocPassword=$info['docPassword'];
       }
     }else{
       echo "data not found";
@@ -129,7 +129,7 @@
      else{
         require "connect.php";
         $sql ="update tbl_doctor set fname='$fname',lname='$lname',docEmail='$docEmail',docPhone='$docPhone',docAddress='$docAddress',
-        docQualification='$docQualification' where Id=$Id";
+        docQualification='$docQualification',docPassword='$docPassword' where Id=$Id";
         $res=mysqli_query($conn, $sql);
         if ($res){
           $msg= '<div class="alert alert-success"> Doctor Updated Successfully</div>';
