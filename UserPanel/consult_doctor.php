@@ -1,6 +1,6 @@
 <?php 
 	require "connect.php";
-	$Id=$_GET['id'];
+	$Id=$_GET['Id'];
 	$userSql="Select email from tbl_result where Id='$Id'";
 	echo $userSql;
 	 //execute query and return result object
@@ -11,7 +11,7 @@
         $dbUserEmail=$info['email'];
         echo $dbUserEmail;
        
-		$countDocSql="Select * from tbl_doctor order by id asc"; echo '<br>';
+		$countDocSql="Select * from tbl_doctor order by Id asc"; echo '<br>';
 		echo $countDocSql;
 	    $countDocResult=mysqli_query($conn,$countDocSql);
          //first inner if
@@ -25,8 +25,8 @@
 	  			//assign previously added doctor
 	  			$val=mysqli_fetch_assoc($userDocResult);
 	  			$previousDocEmail=$val['doctorEmail'];
-	      		$addSql="Insert into tbl_user_doctor (userEmail,doctorEmail) values ('$dbUserEmail','$previousDocEmail')";
-      			$addSqlResult =mysqli_query($conn,$addSql);
+	      		// $addSql="Insert into tbl_user_doctor (userEmail,doctorEmail) values ('$dbUserEmail','$previousDocEmail')";
+      			// $addSqlResult =mysqli_query($conn,$addSql);
 		 
       		}else{
       			$checkUserDocSql="Select doctorEmail FROM tbl_user_doctor order by Id desc limit 1";
@@ -37,6 +37,7 @@
 	  				$dbDoctorEmail=$value['docEmail'];
       				$addSql="Insert into tbl_user_doctor (userEmail,doctorEmail) values ('$dbUserEmail','$dbDoctorEmail')";
       				$addSqlResult =mysqli_query($conn,$addSql);
+      				
       			}
       			else{
       				$info=mysqli_fetch_assoc($checkUserDocResult);
@@ -48,18 +49,21 @@
 	  				$nextDocEmailsql="Select docEmail from tbl_doctor where Id>'$prevDocId' limit 1";
 	  				$nextDocEmailResult =mysqli_query($conn,$nextDocEmailsql);
 	  				$value=mysqli_fetch_assoc($nextDocEmailResult);
-	  				$nextDocEmail=$value['doctorEmail'];
+	  				$nextDocEmail=$value['docEmail'];
 	  				if(mysqli_num_rows($nextDocEmailResult)!=1){
       				//assign 1st doctor of table
 	  					$value=mysqli_fetch_assoc($countDocResult);
 	  					$dbDoctorEmail=$value['docEmail'];
 	  					$addSql="Insert into tbl_user_doctor (userEmail,doctorEmail) values ('$dbUserEmail','$dbDoctorEmail')";
       					$addSqlResult =mysqli_query($conn,$addSql);
+      					
+
       				}
       				else{
       					//assign $nextDocEmailResult['docEmail']
       					$addNextSql="Insert into tbl_user_doctor (userEmail,doctorEmail) values ('$dbUserEmail','$nextDocEmail')";
       					$addNextSqlResult =mysqli_query($conn,$addNextSql);
+      					
       				}
       			}
 

@@ -33,9 +33,9 @@ if(isset($_POST['login'])){
 
   if(count($err)==0){
     require 'connect.php';
-    $sql="select * from tbl_register where email='$email' AND password='$password_1'";
+    $sql="select * from tbl_user where email='$email' AND password='$password_1'";
     $result=mysqli_query($conn,$sql);
-    if(mysqli_num_rows($result) == 1){
+    if(mysqli_num_rows($result)>0){
       setcookie('email',$email,time()+7*24*60*60);
       session_start();
       $_SESSION['email']=$email;

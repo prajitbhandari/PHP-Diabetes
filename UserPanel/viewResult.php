@@ -156,10 +156,10 @@
                                 <td><?php echo $info['age'] ?></td>
                                 <td><?php echo $info['outcome'] ?></td>
                                 <td><?php echo $info['value'].'%' ?></td>
-                                <?php if($info['outcome']=='tested_negative'){?>
-                                  <td><a class ="btn btn-primary btn-block" href="consult_doctor.php?id=<?php echo $in['Id']?>"onclick="return confirm('Are you sure u want to Consult?')">Consult</a></td>
+                                <?php if($info['outcome']=='tested_positive'){?>
+                                  <td><a class ="btn btn-primary btn-block" href="consult_doctor.php?Id=<?php echo $info['Id']?>"onclick="return confirm('Are you sure u want to Consult?')">Consult</a></td>
                                 <?php } ?>
-                                <?php if($info['outcome']!='tested_negative'){ ?>
+                                <?php if($info['outcome']=='tested_negative'){ ?>
                                   <td><button type="button" class ="btn btn-primary btn-block" disabled>Not Needed</button></td>
                                 <?php } ?>
                               </tr>

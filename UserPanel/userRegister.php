@@ -14,7 +14,7 @@ if(isset($_POST['register'])){
 	//check for firstname
 	if (isset($_POST['fname']) && !empty($_POST['fname'])){
 		$fname = trim($_POST['fname']);
-		if ( !preg_match('/^[A-Za-z][A-Za-z0-9]{5,31}$/', $fname) ){
+		if ( !preg_match('/^[A-Za-z]+$/', $fname) ){
 			$err['fname'] = "*Invalid First Name";	
 		}
 				
@@ -25,7 +25,7 @@ if(isset($_POST['register'])){
 	//check for username
 	if (isset($_POST['lname']) && !empty($_POST['lname'])){
 		$lname = trim($_POST['lname']);
-		if ( !preg_match('/^[A-Za-z][A-Za-z0-9]{5,31}$/', $lname) ){
+		if ( !preg_match('/^[A-Za-z]+$/', $lname) ){
 			$err['lname'] = "*Invalid Last Name";	
 		}	
 	}else{
