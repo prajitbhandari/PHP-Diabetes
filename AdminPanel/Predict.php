@@ -287,10 +287,6 @@
     $msg='<div class="alert alert-success"> Patient has no Diabetes Chance of '.($probNoDiabetesPercentage).'%</div>';
     $outcome='tested_negative';
     $value=$probNoDiabetesPercentage;
-     // require "connect.php";
-     //  $addsql = "insert into tbl_result (email,pregnancies,glucose,bp,skin,insulin,bmi,pedegree,age,outcome,value) values 
-     //  ('$email','$pregnancy','$glucose','$BP','$skin','$insulin','$BMI','$pedegree','$age','tested_negative','$probNoDiabetesPercentage')";
-     //  $result=mysqli_query($conn, $addsql);
    }
    require "connect.php";
       $currentDate = date('Y-m-d H:i:s');
@@ -349,7 +345,7 @@
         margin-top:2px;
     }
        #footer {
-            position: fixed;
+            /*position: fixed;*/
             width: 100%;
             bottom: 0;
             height: 60px;
@@ -414,38 +410,14 @@
                         <div class="col-md-6 col-sm-6">
                           
                           <div class="form-group">  
-                             <label>Patient Email
-                                <input list="email" class="form-control" placeholder="Choose Patient Email Address" style="width:540px; position:relative;top: 6px;" name="email"/></label>
-                                  <datalist id="email">
-                                    <?php 
-                                       require "connect.php";
-                                       //query to select data
-                                       $sql="select * from tbl_user";
-                                       //execute query and return result object
-                                       $result=mysqli_query($conn,$sql);
-                                       //default array
-                                       $data=array();
-                                        if(mysqli_num_rows($result)>0){
-                                          while($d=mysqli_fetch_assoc($result)){
-                                            array_push($data,$d);
-                                          }
-                                          
-                                        }else{
-                                          echo "data not found";
-                                        }
-                                      
-                                    ?>
-
-                                    <?php foreach ($data as $info) { ?>
-                                       <option value="<?php echo $info['email']; ?>"> 
-                                    <?php }?>   
-                                  </datalist>
-                                  <span class="errorDisplay">
-                                  <?php if (isset($err['email'])){
-                                  echo $err['email'];
+                              <label for="inputEmail">Email</label>
+                              <input type="text" class="form-control" name="email" id="inputEmail" placeholder="Enter Email Address of Patient">
+                                <span class="errorDisplay">
+                                <?php if (isset($err['email'])){
+                                echo $err['email'];
                                 } ?>
-                              </span>
-                          </div>
+                                </span>
+                            </div>
 
                             <br>
                            <div class="form-group">  
@@ -605,31 +577,32 @@
                               } ?>
                             </span>
                           </div>
-
-                          <div class="formgroup">
+                          
+                          <div class="form-group"> 
                             <div class="dropdown">
-                               <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose Algorithm
-                                <span class="caret"></span></button>
-                                <ul class="dropdown-menu">
-                                  <li><a href="#">Gaussian Naive Bayes</a></li>
-                                  <li><a href="#">Naive Bayes</a></li>
-                                </ul>
-                              <span class="errorDisplay">
-                                  <?php if (isset($err['dropdownAlgorithm'])){
-                                  echo $err['dropdownAlgorithm'];
-                                } ?>
-                              </span>
-                            </div>
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose Algorithm
+                              <span class="caret"></span></button>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">Gaussian Naive Bayes</a></li>
+                                <li><a href="#">Naive Bayes</a></li>
+                              </ul>
+                            <span class="errorDisplay">
+                                <?php if (isset($err['dropdownAlgorithm'])){
+                                echo $err['dropdownAlgorithm'];
+                              } ?>
+                            </span>
+                          </div>
 
                           </div>
 
+                          <br><br><br>
                         </div> 
 
                           <div class="form-group">
                              <button type="submit" name="predict" class="btn btn-block btn-primary">Predict</button>
                           </div>
 
-                        </form><br/><br/>
+                        </form>
                     </div>             
             </div>
         </div>

@@ -20,7 +20,7 @@
             // type validation
             if (in_array($filecheck, $fileextstored)){
                 # code...
-                if ($filesize<=5000) {
+                if ($filesize<=500000000) {
                     
                     // $destinationfile='upload/'.$filename;
                     // $result=move_uploaded_file($filetmp, $destinationfile);
@@ -40,8 +40,7 @@
                             }
                             
                             $second=false;
-                            $sqlInsert = $sqlInsert."('$column[0]','$column[1]','$column[2]','$column[3]','$column[4]','$column[5]','$column[6]','$column[7]',
-                            '$column[8]')";
+                            $sqlInsert = $sqlInsert."('$column[0]','$column[1]','$column[2]','$column[3]','$column[4]','$column[5]','$column[6]','$column[7]','$column[8]')";
                              
                             }
                             
@@ -177,9 +176,23 @@
                     <h4>Load New Data Set</h4>
                     <form method="POST" action=" " enctype="multipart/form-data">
                       <input type="file" name="file">
+                      <br>
+                      <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose Algorithm
+                          <span class="caret"></span></button>
+                          <ul class="dropdown-menu">
+                            <li><a href="#">Load Gaussian Data</a></li>
+                            <li><a href="#">Load Naive Bayes Data</a></li>
+                          </ul>
+                        <span class="errorDisplay">
+                            <?php if (isset($err['dropdownAlgorithm'])){
+                            echo $err['dropdownAlgorithm'];
+                          } ?>
+                        </span>
+                      </div>
                       <br><br>
                       <input type="submit" name="upload" value="Upload" class="btn  btn-block btn-primary">
-                 </form>      
+                    </form>      
                 </div>    
             </div>
         </div>
