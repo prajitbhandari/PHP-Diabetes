@@ -28,6 +28,12 @@
     $err['lname'] = "*Enter Doctor Last  Name";
   }
 
+    //check for Gender
+    if (isset($_POST['inputGender']) && !empty($_POST['inputGender'])){
+        $inputGender = trim($_POST['inputGender']);
+      }else{
+        $err['gender'] = "*Select Gender";         
+    }
   
 
   //check for Doctor Email
@@ -95,8 +101,8 @@
   // check for number of error
   if(count($err) == 0) {
       require "connect.php";
-      $addsql = "insert into tbl_doctor(fname,lname,docEmail,docPhone,docAddress,docQualification,docPassword) values 
-      ('$fname','$lname','$docEmail','$docPhone','$docAddress','$docQualification','$docPassword')";
+      $addsql = "insert into tbl_doctor(fname,lname,gender,docEmail,docPhone,docAddress,docQualification,docPassword) values 
+      ('$fname','$lname','$inputGender','$docEmail','$docPhone','$docAddress','$docQualification','$docPassword')";
       $result=mysqli_query($conn, $addsql);
       if ($result){
         $msg='<div class="alert alert-success"> Doctor Added Successful</div>';
@@ -189,13 +195,12 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
               <li><a href="adminIndex.php">Home</a></li>
-              <li><a href="createDataSet.php">Create Data Set</a></li>
+              <li><a href="loadDataSet.php">Load Data Set</a></li>
               <li><a href="Predict.php">Predict Diabetes</a></li>
               <li><a href="Help.php">Help</a></li>
               <li><a href="addDoctors.php">Add Doctors</a></li>
               <li><a href="manageDoctors.php">Manage Doctors</a></li>
               <li><a href="manageUsers.php">View Users</a></li>
-              <li><a href="viewEnquiry.php">View Enquiry</a></li>
               <li><a href="adminlogout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
             <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to Admin Panel</p>
@@ -240,6 +245,18 @@
                       <span class="errorDisplay">
                               <?php if (isset($err['lname'])){
                               echo $err['lname'];
+                            } ?>
+                      </span>
+                          <br>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputGender">Gender:</label>&nbsp;
+                        Male <input type="radio"   name="inputGender" value="Male" id="radioMale" >
+                        Female <input type="radio" name="inputGender" value="Female" id="radioFemale" >
+                      <span class="errorDisplay">
+                              <?php if (isset($err['gender'])){
+                              echo $err['gender'];
                             } ?>
                       </span>
                           <br>

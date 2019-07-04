@@ -83,7 +83,6 @@ if(!isset($_COOKIE['email'])){
                 <li><a href="userIndex.php">Home</a></li>
                 <li><a href="viewResult.php">View Result</a></li>
                 <li><a href="doctorResponse.php">Doctors Response</a></li>
-                <li><a href="Contact.php">Contact Us</a></li>
                 <li><a href="userlogout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
             <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to User Panel</p>
@@ -96,7 +95,7 @@ if(!isset($_COOKIE['email'])){
     <div id="home-sec">
         <div class="container"  >
             <div class="row text-center">
-                <div  class="col-md-12" id="home-block">
+                <div  class="col-md-12">
                     <span class="head-main">Diabetes Prediction System</span> 
                 </div>
             </div>

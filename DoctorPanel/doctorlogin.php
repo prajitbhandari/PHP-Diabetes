@@ -26,7 +26,7 @@ if(isset($_POST['login'])){
   
   if(isset($_POST['docPassword'])&& !empty($_POST['docPassword']))
   {
-    $docPassword=trim($_POST['docPassword']);
+    $docPassword=md5(trim($_POST['docPassword']));
   }else{
     $err['docPassword']= "*Enter Password";
   }
@@ -102,7 +102,6 @@ if(isset($_POST['login'])){
                     </div>
 
                     <button type="submit" name="login" class="btn btn-block btn-success">Login</button><br>
-                    <p class="text-center">Not Yet a Member? <a href="doctorRegister.php">Sign up</a>
                     <br><br>
                   </form>
                   

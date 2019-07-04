@@ -14,6 +14,7 @@
        foreach ($data as $info){
          $DBfname=$info['fname'];
          $DBlname=$info['lname'];
+         $DBgender=$info['gender'];
          $DBdocEmail=$info['docEmail'];
          $DBdocPhone=$info['docPhone'];
          $DBdocAddress=$info['docAddress'];
@@ -28,7 +29,6 @@
 
 
 <?php
-
   $msg='';
   //check for button click---form submit
   if(isset($_POST['update'])){
@@ -43,7 +43,6 @@
        }else {
       $err['fname'] = "*Enter Doctor First Name";
     }
-
      //check for Doctor Last Name
     if (isset($_POST['lname']) && !empty($_POST['lname']) ){
       $lname = trim($_POST['lname']);
@@ -52,6 +51,14 @@
       }
        }else {
       $err['lname'] = "*Enter Doctor Last Name";
+    }
+
+
+    //check for Gender
+    if (isset($_POST['inputGender']) && !empty($_POST['inputGender'])){
+        $inputGender = trim($_POST['inputGender']);
+      }else{
+        $err['gender'] = "*Select Gender";         
     }
 
     //check for Doctor Email
@@ -69,7 +76,6 @@
        }else {
       $err['docEmail'] = "*Enter Doctor Email Address";
     }
-
     
     //check for Doctor Phone
     if (isset($_POST['docPhone']) && !empty($_POST['docPhone'])){
@@ -86,7 +92,6 @@
     }else{
       $err['docPhone'] = "*Enter contact number";
     }
-
     //check for Doctor Address
      if (isset($_POST['docAddress']) && !empty($_POST['docAddress']) ){
       $docAddress = trim($_POST['docAddress']);
@@ -97,7 +102,6 @@
       $err['docAddress'] = "*Enter Doctor Address";
     }
     
-
     //check for Qualification
     if (isset($_POST['docQualification']) && !empty($_POST['docQualification']) ){
       $docQualification = trim($_POST['docQualification']);
@@ -107,7 +111,6 @@
        }else {
       $err['docQualification'] = "*Enter Doctor Qualification";
     }
-
     //check for doctor password
      if(isset($_POST['docPassword'])&& !empty($_POST['docPassword']))
       {
@@ -116,19 +119,18 @@
     else{
         $err['docPassword']= "*Enter Doctor Password";
       }
-
     // check for number of error
     if(count($err) == 0) {
       echo '<br><br><br><br>'; 
       $Id=$_GET['id'];        
-      if($fname==$DBfname && $lname==$DBlname && $docEmail==$DBdocEmail && $docPhone==$DBdocPhone && $docAddress==$DBdocAddress 
+      if($fname==$DBfname && $lname==$DBlname && $inputGender==$DBgender && $docEmail==$DBdocEmail && $docPhone==$DBdocPhone && $docAddress==$DBdocAddress 
         && $docQualification==$DBdocQualification && $docPassword==$DBdocPassword){
           $msg= '<div class="alert alert-danger"> Please Change the content</div>';
         
         }
      else{
         require "connect.php";
-        $sql ="update tbl_doctor set fname='$fname',lname='$lname',docEmail='$docEmail',docPhone='$docPhone',docAddress='$docAddress',
+        $sql ="update tbl_doctor set fname='$fname',lname='$lname',gender='$inputGender',docEmail='$docEmail',docPhone='$docPhone',docAddress='$docAddress',
         docQualification='$docQualification',docPassword='$docPassword' where Id=$Id";
         $res=mysqli_query($conn, $sql);
         if ($res){
@@ -138,9 +140,6 @@
   }else{
           $msg= '<div class="alert alert-danger">Failed to Update Doctor</div>';
       }  
-
-
-
     //keep track of current text field value
    require "connect.php";
    //query to select data
@@ -169,11 +168,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <style type="text/css">
-
       body{
         background-color:/* #0091ea;*/
       }
-
       #my-nav{
         position:absolute; 
         top: 0px; 
@@ -190,7 +187,6 @@
       min-height:650px;
       color:#fff;
     }
-
     .head-main {
         font-size:50px ;
         font-weight:900;
@@ -200,18 +196,15 @@
         color:#ff7043;
     
     }
-
     #home-block{
             position:absolute;
             top:40%;
             left:2%;
     }
-
     section {
         padding-top:2px;
         margin-top:2px;
     }
-
        #footer {
             /*position: fixed;
             width: 100%;
@@ -223,7 +216,6 @@
             text-align: right;
             border-top: 1px solid #d6d6d6;
         }
-
         .errorDisplay{
           color: red;
         }
@@ -245,7 +237,7 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
               <li><a href="adminIndex.php">Home</a></li>
-              <li><a href="createDataSet.php">Create Data Set</a></li>
+              <li><a href="loadDataSet.php">Load Data Set</a></li>
               <li><a href="Predict.php">Predict Diabetes</a></li>
               <li><a href="Help.php">Help</a></li>
               <li><a href="addDoctors.php">Add Doctors</a></li>
@@ -259,7 +251,6 @@
         </div><!--/.container-fluid -->
       </nav><br><br><br><br>
   <!-----------END NAV SECTION-------->
-
     <!--HOME SECTION-->
       <section>
            <div class="container">
@@ -267,12 +258,11 @@
                 <div class="text-center g-pad-bottom">
                    <div class="col-md-6 col-md-offset-3 alert-info" style="width: 559px;
                      margin-left: 306px; border-radius: 8px;">
-                        <h4><i class="fa fa-user-md fa-2x"></i>&nbsp;Update Doctors</h4>
+                        <h4><i class="fa fa-user-md fa-2x"></i>&nbsp;Update Doctor</h4>
                                      
                     </div> 
                 </div>
             </div><br>
-
             <div class="row g-pad-bottom" >
                 <div class="col-md-6 col-md-offset-3">
                   <?php foreach ($data as $info){?>
@@ -291,13 +281,23 @@
                         </span>
                             <br>
                       </div>
-
                       <div class="form-group">
                         <label for="lname">Last Name</label>
                         <input type="text" class="form-control" name="lname" id="lname" value="<?php echo $info['lname']?>">
                         <span class="errorDisplay">
                                 <?php if (isset($err['lname'])){
                                 echo $err['lname'];
+                              } ?>
+                        </span>
+                            <br>
+                      </div>
+
+                       <div class="form-group">
+                        <label for="inputGender">Gender</label>
+                        <input type="text" class="form-control" name="inputGender" id="inputGender" value="<?php echo $info['gender']?>">
+                        <span class="errorDisplay">
+                                <?php if (isset($err['gender'])){
+                                echo $err['gender'];
                               } ?>
                         </span>
                             <br>
@@ -313,7 +313,6 @@
                         </span>
                           <br>
                       </div>
-
                       <div class="form-group">
                         <label for="docPhone">Phone</label>
                         <input type="text" class="form-control" name="docPhone" id="docPhone"value="<?php echo $info['docPhone']?>">
@@ -346,7 +345,6 @@
                         </span>
                             <br>
                       </div>
-
                       <div class="form-group">
                         <label for="docPassword">Password</label>
                         <input type="text" class="form-control" name="docPassword" id="docPassword" value="<?php echo $info['docPassword']?>">
@@ -366,13 +364,11 @@
       </section>
    <br>
     <!-- END Home SECTION -->
-
      <!--FOOTER SECTION -->
     <div id="footer">
         2019 www.yourdomain.com|All Right Reserved  
          
     </div>
     <!-- END FOOTER SECTION -->
-
 </body>
 </html>

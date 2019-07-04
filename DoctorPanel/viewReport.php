@@ -86,17 +86,48 @@
     <!-----------END NAV SECTION-------->
 
     <!--HOME SECTION-->
-    <section  id="services-sec">
-        <div class="container ">
-            <div class="row">
-               <div class="col-md-4 col-sm-4 col-sm-offset-4 " >
-                    <h2>View Report Data</h2>
-                    <h3>Coming Soon!!!</h3>
-                        
-                </div>    
-            </div>
-        </div>
-    </section>
+     <section>
+       <div class="container">
+            <div class="row g-pad-bottom">
+                <div class="text-center g-pad-bottom">
+                    <div class="col-md-12 col-sm-12 alert-info" style="width: 98%;
+                     margin-left: 12px; border-radius: 8px;">
+                        <h3><i class="fa fa-user-md fa-2x" ></i>&nbsp;View User Report </h3>
+                                     
+                    </div>    
+                </div>
+              </div>
+              <br>
+
+           <div class="row g-pad-bottom" >
+                <div class="col-md-12 col-sm-12" >
+                   <table class="table table-bordered table-striped">
+                      <thead class="bg-success">
+                          <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Patient Email</th>
+                            <th scope="col">Predicted Date</th>
+                            <th scope="col">Pregnancies</th>
+                            <th scope="col">Glucose</th>
+                            <th scope="col">BP</th>
+                            <th scope="col">Skin Thickness</th>
+                            <th scope="col">Insulin</th>
+                            <th scope="col">BMI</th>
+                            <th scope="col">DPF</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Outcome</th>
+                            <th scope="col">Probability</th>
+                            <th scope="col">Provide Feedback</th>
+                          </tr>
+                     </thead>
+                     <tbody>
+                         
+                      </tbody>
+                    </table>
+                </div>
+           </div>
+       </div>
+   </section>
     <!-- END Home SECTION -->
 
      <!--FOOTER SECTION -->

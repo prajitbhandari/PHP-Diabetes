@@ -19,6 +19,104 @@
   
 ?>
 
+
+ <?php 
+    $msg='';
+
+    if(isset($_GET['Id'])){
+     
+      require "connect.php";
+      $Id=$_GET['Id'];
+      $userSql="Select email from tbl_result where Id='$Id'";
+      // echo "<br>";echo "<br>";echo "<br>";echo "<br>";
+      // echo $userSql;
+       //execute query and return result object
+      $userResult=mysqli_query($conn,$userSql);
+
+      if(mysqli_num_rows($userResult)>0){
+          $info=mysqli_fetch_assoc($userResult);
+          $dbUserEmail=$info['email'];
+          // echo $dbUserEmail;
+           
+        $countDocSql="Select * from tbl_doctor order by Id asc"; echo '<br>';
+        // echo $countDocSql;
+          $countDocResult=mysqli_query($conn,$countDocSql);
+             //first inner if
+        if(mysqli_num_rows($countDocResult)==0){
+            $msg='<div class="alert alert-danger"> "No doctor Available";</div>';
+        }else{
+            //check if a pateient has been assigned with a doctor already
+            $userDocSql="Select doctorEmail  from tbl_user_doctor where userEmail='$dbUserEmail'";
+            $userDocResult =mysqli_query($conn,$userDocSql);
+            if(mysqli_num_rows($userDocResult)>0){
+              //assign previously added doctor
+              // $val=mysqli_fetch_assoc($userDocResult);
+              // $previousDocEmail=$val['doctorEmail'];
+
+                // $msg='<div class="alert alert-danger"> Doctor Already Consulted </div>';
+         
+              }else{
+                $checkUserDocSql="Select doctorEmail FROM tbl_user_doctor order by Id desc limit 1";
+                $checkUserDocResult=mysqli_query($conn,$checkUserDocSql);
+                if(mysqli_num_rows($checkUserDocResult)!=1){
+                  //assign 1st doctor of table
+                  $value=mysqli_fetch_assoc($countDocResult);
+                  $dbDoctorEmail=$value['docEmail'];
+                  $addSql="Insert into tbl_user_doctor (userEmail,doctorEmail) values ('$dbUserEmail','$dbDoctorEmail')";
+                  $addSqlResult =mysqli_query($conn,$addSql);
+
+                  if($addSqlResult){
+                    $msg='<div class="alert alert-success"> Doctor Consulted Successfully </div>';
+                  }
+                  
+                }
+                else{
+                  $info=mysqli_fetch_assoc($checkUserDocResult);
+                  $prevDocEmail=$info['doctorEmail'];
+                  $prevDocIdsql="Select Id from tbl_doctor where docEmail='$prevDocEmail'";
+                  $prevDocIdResult =mysqli_query($conn,$prevDocIdsql);
+                  $data=mysqli_fetch_assoc($prevDocIdResult);
+                  $prevDocId=$data['Id'];
+                  $nextDocEmailsql="Select docEmail from tbl_doctor where Id>'$prevDocId' limit 1";
+                  $nextDocEmailResult =mysqli_query($conn,$nextDocEmailsql);
+                  $value=mysqli_fetch_assoc($nextDocEmailResult);
+                  $nextDocEmail=$value['docEmail'];
+
+                  if(mysqli_num_rows($nextDocEmailResult)!=1){
+                    //assign first doctor of table for a patient when the list of doctor reaches the last row and then we should start from first doctor 
+                    $value=mysqli_fetch_assoc($countDocResult);
+                    $dbDoctorEmail=$value['docEmail'];
+                    $addSql="Insert into tbl_user_doctor (userEmail,doctorEmail) values ('$dbUserEmail','$dbDoctorEmail')";
+                    $addSqlResult =mysqli_query($conn,$addSql);
+
+                     if($addSqlResult){
+                        $msg='<div class="alert alert-success"> Doctor Consulted Successfully </div>';
+                       } 
+
+                    }
+                    else{
+                      //assign $nextDocEmailResult['docEmail']
+                      $addNextSql="Insert into tbl_user_doctor (userEmail,doctorEmail) values ('$dbUserEmail','$nextDocEmail')";
+                      $addNextSqlResult =mysqli_query($conn,$addNextSql);
+                      if($addNextSqlResult){
+                        $msg='<div class="alert alert-success"> Doctor Consulted Successfully </div>';
+                    } 
+
+                      
+                    }
+                  }
+
+                  
+                }
+          }//end of inner else of first inner if  
+              
+        }//end of main if loop
+
+
+        }
+        ?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -98,7 +196,6 @@
                 <li><a href="userIndex.php">Home</a></li>
                 <li><a href="viewResult.php">View Result</a></li>
                 <li><a href="doctorResponse.php">Doctors Response</a></li>
-                <li><a href="Contact.php">Contact Us</a></li>
                 <li><a href="userlogout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
             <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to User Panel</p>
@@ -123,11 +220,16 @@
 
            <div class="row g-pad-bottom" >
                 <div class="col-md-12 col-sm-12" >
+
+                  <?php 
+                        echo $msg;
+                    ?>
+                    <br>
                    <table class="table table-bordered table-striped">
                       <thead class="bg-success">
                           <tr>
                             <th scope="col">Id</th>
-                            <th scope="col">Date</th>
+                            <th scope="col">Predicted Date</th>
                             <th scope="col">Pregnancies</th>
                             <th scope="col">Glucose</th>
                             <th scope="col">BP</th>
@@ -157,14 +259,15 @@
                                 <td><?php echo $info['outcome'] ?></td>
                                 <td><?php echo $info['value'].'%' ?></td>
                                 <?php if($info['outcome']=='tested_positive'){?>
-                                  <td><a class ="btn btn-primary btn-block" href="consult_doctor.php?Id=<?php echo $info['Id']?>"onclick="return confirm('Are you sure u want to Consult?')">Consult</a></td>
+                                  <td><a class ="btn btn-primary btn-block"  href="viewResult.php?Id=<?php echo $info['Id']?>"onclick="return confirm('Are you sure u want to Consult?')">Consult</a></td>
                                 <?php } ?>
                                 <?php if($info['outcome']=='tested_negative'){ ?>
-                                  <td><button type="button" class ="btn btn-primary btn-block" disabled>Not Needed</button></td>
+                                  <td><input type="button"  value='Not Needed' class ="btn btn-primary btn-block" disabled></td>
                                 <?php } ?>
                               </tr>
-                         <?php } ?>  
-                      </tbody>
+                         <?php } ?> 
+
+                    </tbody>
                     </table>
                 </div>
            </div>

@@ -68,8 +68,8 @@ if(!isset($_COOKIE['adminName'])){
     </style>
 </head>
 <body>
-	<!-----------NAV SECTION-------->
-	<nav class="navbar navbar-inverse">
+ <!-----------NAV SECTION-------->
+  <nav class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -77,32 +77,32 @@ if(!isset($_COOKIE['adminName'])){
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
-            </button>
-            
+            </button>  
           </div>
+          
+
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
               <li><a href="adminIndex.php">Home</a></li>
-              <li><a href="createDataSet.php">Create Data Set</a></li>
+              <li><a href="loadDataSet.php">Load Data Set</a></li>
               <li><a href="Predict.php">Predict Diabetes</a></li>
               <li><a href="Help.php">Help</a></li>
               <li><a href="addDoctors.php">Add Doctors</a></li>
               <li><a href="manageDoctors.php">Manage Doctors</a></li>
               <li><a href="manageUsers.php">View Users</a></li>
-              <li><a href="viewEnquiry.php">View Enquiry</a></li>
               <li><a href="adminlogout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
             <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to Admin Panel</p>
           </div><!--/.nav-collapse -->  
         </div><!--/.container-fluid -->
       </nav>
-	<!-----------END NAV SECTION-------->
+  <!-----------END NAV SECTION-------->
 
     <!--HOME SECTION-->
     <div id="home-sec">
         <div class="container"  >
             <div class="row text-center">
-                <div  class="col-md-12" id="home-block">
+                <div  class="col-md-12">
                     <span class="head-main">Diabetes Prediction System</span> 
                 </div>
             </div>

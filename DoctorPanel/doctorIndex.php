@@ -87,7 +87,7 @@ if(!isset($_COOKIE['docEmail'])){
                 <li><a href="doctorlogout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
             <span class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to Doctor Panel</span>&nbsp;
-            <span class="navbar-text" style="color:#fff;font-size: 16px;">logged in as: </span>
+            <!-- <span class="navbar-text" style="color:#fff;font-size: 16px;">logged in as: </span> -->
           </div><!--/.nav-collapse -->  
         </div><!--/.container-fluid -->
       </nav>
@@ -97,7 +97,7 @@ if(!isset($_COOKIE['docEmail'])){
     <div id="home-sec">
         <div class="container"  >
             <div class="row text-center">
-                <div  class="col-md-12" id="home-block">
+                <div  class="col-md-12">
                     <span class="head-main">Diabetes Prediction System</span> 
                 </div>
             </div>

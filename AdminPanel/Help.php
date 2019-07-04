@@ -94,13 +94,12 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
               <li><a href="adminIndex.php">Home</a></li>
-              <li><a href="createDataSet.php">Create Data Set</a></li>
+              <li><a href="loadDataSet.php">Load Data Set</a></li>
               <li><a href="Predict.php">Predict Diabetes</a></li>
               <li><a href="Help.php">Help</a></li>
               <li><a href="addDoctors.php">Add Doctors</a></li>
               <li><a href="manageDoctors.php">Manage Doctors</a></li>
               <li><a href="manageUsers.php">View Users</a></li>
-              <li><a href="viewEnquiry.php">View Enquiry</a></li>
               <li><a href="adminlogout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
             <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to User Panel</p>

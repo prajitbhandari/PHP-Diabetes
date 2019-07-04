@@ -15,7 +15,6 @@
    $probDiabetesPercentage=null;
    $probNoDiabetesPercentage=null; 
    
-
    $email=null;
    $pregnancy=null;
    $glucose=null;
@@ -27,19 +26,18 @@
    $age=null;
    $outcome=null;
    $value=null;
-
    $msg='';
+   $inputGender='';
    $err = array();
 
     function mean($arr) {
+
       $num_of_elements = count($arr);
       $mean=0.0;
       $sum=array_sum($arr);
       $mean=$sum/$num_of_elements;
       return  (float) $mean;
     }
-
-
     function variance($arr) 
       { 
           
@@ -47,7 +45,6 @@
             $variance = 0.0; 
             // calculating mean using array_sum() method 
           $average = mean($arr);
-
           foreach($arr as $i) 
           { 
               // sum of squares of differences between  
@@ -67,16 +64,12 @@
       $prob=$partial*$exponential;
       return $prob;
   }
-
   
-
   //check for button click---form submit
   if(isset($_POST['predict'])){
-    
          // check Patient email
         if (isset($_POST['email']) && !empty($_POST['email']) ){
         $email = trim($_POST['email']);
-
         if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
           $err['email'] = "*Invalid Patient Email Address";
         }
@@ -90,17 +83,27 @@
         $err['email'] = "*Enter Patient Email Address";
       }
 
-    //check for Pregnancy number
-    if (isset($_POST['pregnancy']) && !empty($_POST['pregnancy']) ){
-      $pregnancy = trim($_POST['pregnancy']);
-      if(!preg_match('/^[0-9]+$/', $pregnancy)){
-        $err['pregnancy'] = "*Invalid Pregnancy Value";
-      }else if($pregnancy>20){
-         $err['pregnancy'] = "*Enter Pregnancy value  less than 20";
-      }
-       
-       }else {
-      $err['pregnancy'] = "*Enter Pregnancy Value";
+      //check for Gender
+    if (isset($_POST['inputGender']) && !empty($_POST['inputGender'])){
+        $inputGender = trim($_POST['inputGender']);
+      }else{
+        $err['gender'] = "*Select Gender";         
+    }
+  
+  //check for Pregnancy number
+   if($inputGender=="Male"){
+              $pregnancy=0;
+    }
+    else if($inputGender=="Female" && isset($_POST['pregnancy']) && !empty($_POST['pregnancy'])){
+              $pregnancy = trim($_POST['pregnancy']);
+                if(!preg_match('/^[0-9]+$/', $pregnancy)){
+                  $err['pregnancy'] = "*Invalid Pregnancy Value";
+               }else if($pregnancy>20){
+                 $err['pregnancy'] = "*Enter Pregnancy value  less than 20";
+               }
+            }
+    else {
+        $err['pregnancy'] = "*Enter Pregnancy Value";
     }
 
     //check for glucose value
@@ -114,7 +117,6 @@
        }else {
       $err['glucose'] = "*Enter Glucose Value";
     }
-
     
     //check for Blood Pressure
     if (isset($_POST['BP']) && !empty($_POST['BP'])){
@@ -127,7 +129,6 @@
     }else {
       $err['BP'] = "*Enter Blood Pressure Value";
     }
-
     //check for SKin Thickness
     if (isset($_POST['skin']) && !empty($_POST['skin'])){
       $skin = trim($_POST['skin']);
@@ -140,7 +141,6 @@
       $err['skin'] = "*Enter Skin Thickness Value";
       }
     
-
     //check for Insulin
     if (isset($_POST['insulin'])){
       if($_POST['insulin']!=""){
@@ -157,8 +157,6 @@
      }else {
       $err['insulin'] = "*Enter Insulin Value";
     }
-
-
     //check for BMI
     if (isset($_POST['BMI']) && !empty($_POST['BMI']) ){
       $BMI = trim($_POST['BMI']);
@@ -170,8 +168,6 @@
        }else {
         $err['BMI'] = "*Enter BMI Value";
       }
-
-
     //check for Pedegree Function
     if (isset($_POST['pedegree']) && !empty($_POST['pedegree']) ){
       $pedegree = trim($_POST['pedegree']);
@@ -183,7 +179,6 @@
        }else {
       $err['pedegree'] = "*Enter Pedegree Value";
     }
-
     //check for age
     if (isset($_POST['age']) && !empty($_POST['age'])){
       $age = trim($_POST['age']);
@@ -195,13 +190,12 @@
     }else{
       $err['age'] = "*Enter your age";
     }
-
-}
+}//end of if(isset($_POST['predict'])){
     
       
     
     //check for number of error
-    if (count($err)==0&&isset($_POST['predict'])) {
+    if (count($err)==0 && isset($_POST['predict'])) {
       require "connect.php";
       //query to select data
       $sql="select * from tbl_dataSet where Outcome=1 ";
@@ -213,7 +207,6 @@
         while($d=mysqli_fetch_assoc($result)){
           array_push($data,$d);
         }
-
         $i=0;
         foreach ($data as $info){
           
@@ -227,13 +220,15 @@
            $dbAge[$i]=$info['Age'];
            $i=$i+1;
         }
+        // print_r($dbPregnancy);
         
       }else{
         echo "data not found";
     }
 
-    $diabetesResult= likelihoodProb($pregnancy,$dbPregnancy)*likelihoodProb($glucose,$dbGlucose)*likelihoodProb($BP,$dbBP)*likelihoodProb($skin,$dbSkin)*likelihoodProb($insulin,$dbInsulin)*likelihoodProb($BMI,$dbBMI)*likelihoodProb($pedegree,$dbPedegree)*likelihoodProb($age,$dbAge)*0.5;
-
+    $diabetesResult= likelihoodProb($pregnancy,$dbPregnancy)*likelihoodProb($glucose,$dbGlucose)*likelihoodProb($BP,$dbBP)*likelihoodProb($skin,$dbSkin)*likelihoodProb($insulin,$dbInsulin)*likelihoodProb($BMI,$dbBMI)*likelihoodProb($pedegree,$dbPedegree)*likelihoodProb($age,$dbAge)*0.34895833333333;
+    // 0.34895833333;
+      
       require "connect.php";
        //query to select data
        $sql="select * from tbl_dataSet where Outcome=0";
@@ -245,25 +240,28 @@
           while($d=mysqli_fetch_assoc($result)){
             array_push($data,$d);
           }
-      $i=0;
-      foreach ($data as $info){
-        
-         $dbPregnancy[$i]=$info['Pregnancies'];
-         $dbGlucose[$i]=$info['Glucose'];
-         $dbBP[$i]=$info['BloodPressure'];
-         $dbSkin[$i]=$info['SkinThickness'];
-         $dbInsulin[$i]=$info['Insulin'];
-         $dbBMI[$i]=$info['BMI'];
-         $dbPedegree[$i]=$info['DiabetesPedigreeFunction'];
-         $dbAge[$i]=$info['Age'];
-         $i=$i+1;
-      }
+          
+          $i=0;
+          foreach ($data as $info){
+            
+             $dbPregnancy[$i]=$info['Pregnancies'];
+             $dbGlucose[$i]=$info['Glucose'];
+             $dbBP[$i]=$info['BloodPressure'];
+             $dbSkin[$i]=$info['SkinThickness'];
+             $dbInsulin[$i]=$info['Insulin'];
+             $dbBMI[$i]=$info['BMI'];
+             $dbPedegree[$i]=$info['DiabetesPedigreeFunction'];
+             $dbAge[$i]=$info['Age'];
+             $i=$i+1;
+          }
+          // print_r($dbPregnancy);
       
     }else{
       echo "data not found";
     }
+   $noDiabetesResult= likelihoodProb($pregnancy,$dbPregnancy)*likelihoodProb($glucose,$dbGlucose)*likelihoodProb($BP,$dbBP)*likelihoodProb($skin,$dbSkin)*likelihoodProb($insulin,$dbInsulin)*likelihoodProb($BMI,$dbBMI)*likelihoodProb($pedegree,$dbPedegree)*likelihoodProb($age,$dbAge)*0.65104166666667;
+   // 0.65104166666;
 
-   $noDiabetesResult= likelihoodProb($pregnancy,$dbPregnancy)*likelihoodProb($glucose,$dbGlucose)*likelihoodProb($BP,$dbBP)*likelihoodProb($skin,$dbSkin)*likelihoodProb($insulin,$dbInsulin)*likelihoodProb($BMI,$dbBMI)*likelihoodProb($pedegree,$dbPedegree)*likelihoodProb($age,$dbAge)*0.5;
 
     $probDiabetes = $diabetesResult/($diabetesResult+$noDiabetesResult);
     $probNoDiabetes = $noDiabetesResult/($diabetesResult+$noDiabetesResult);
@@ -280,13 +278,11 @@
     
     
    
-
-  if($diabetesResult>$noDiabetesResult){
+  if($diabetesResult>=$noDiabetesResult){
     $msg='<div class="alert alert-danger"> Patient has Diabetes Chance of '.($probDiabetesPercentage).'%</div>';
       $outcome='tested_positive';
       $value=$probDiabetesPercentage;
       
-
    }else{
     $msg='<div class="alert alert-success"> Patient has no Diabetes Chance of '.($probNoDiabetesPercentage).'%</div>';
     $outcome='tested_negative';
@@ -296,25 +292,19 @@
      //  ('$email','$pregnancy','$glucose','$BP','$skin','$insulin','$BMI','$pedegree','$age','tested_negative','$probNoDiabetesPercentage')";
      //  $result=mysqli_query($conn, $addsql);
    }
-
    require "connect.php";
       $currentDate = date('Y-m-d H:i:s');
-      $addsql = "insert into tbl_result (email,date,pregnancies,glucose,bp,skin,insulin,bmi,pedegree,age,outcome,value) values 
-      ('$email','$currentDate','$pregnancy','$glucose','$BP','$skin','$insulin','$BMI','$pedegree','$age','$outcome','$value')";
+      $addsql = "insert into tbl_result (email,gender,date,pregnancies,glucose,bp,skin,insulin,bmi,pedegree,age,outcome,value) values 
+      ('$email','$inputGender','$currentDate','$pregnancy','$glucose','$BP','$skin','$insulin','$BMI','$pedegree','$age','$outcome','$value')";
       echo "<br>";echo "<br>";
       echo $addsql;
       $result=mysqli_query($conn, $addsql);
     
    
-}
-
-
-
+}//end of count error
   
       
 ?>
-
-
 
 <!DOCTYPE html>
 <html>
@@ -326,7 +316,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <style type="text/css">
-
       body{
         background-color: /*#0091ea;*/
       }
@@ -341,7 +330,6 @@
       min-height:650px;
       color:#fff;
     }
-
     .head-main {
         font-size:50px ;
         font-weight:900;
@@ -351,18 +339,15 @@
         color:#ff7043;
     
     }
-
     #home-block{
             position:absolute;
             top:40%;
             left:2%;
     }
-
     section {
         padding-top:2px;
         margin-top:2px;
     }
-
        #footer {
             position: fixed;
             width: 100%;
@@ -374,7 +359,6 @@
             text-align: right;
             border-top: 1px solid #d6d6d6;
         }
-
         .errorDisplay{
           color: red;
          }
@@ -396,13 +380,12 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
               <li><a href="adminIndex.php">Home</a></li>
-              <li><a href="createDataSet.php">Create Data Set</a></li>
+              <li><a href="loadDataSet.php">Load Data Set</a></li>
               <li><a href="Predict.php">Predict Diabetes</a></li>
               <li><a href="Help.php">Help</a></li>
               <li><a href="addDoctors.php">Add Doctors</a></li>
               <li><a href="manageDoctors.php">Manage Doctors</a></li>
               <li><a href="manageUsers.php">View Users</a></li>
-              <li><a href="viewEnquiry.php">View Enquiry</a></li>
               <li><a href="adminlogout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
             <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to Admin Panel</p>
@@ -412,7 +395,8 @@
   <!-----------END NAV SECTION-------->
 
     <!--HOME SECTION-->
-    <section>
+
+<section>
         <div class="container">
             <div class="row ">
                    <div class="col-md-12 col-sm-12 ">
@@ -463,14 +447,88 @@
                               </span>
                           </div>
 
-                          <div class="form-group">
-                            <label for="inputPregnancy">Pregnancies</label>
-                            <input type="text" class="form-control"  name ="pregnancy" id="inputPregnancy" placeholder="Enter Pregnancy Value">
+                            <br>
+                           <div class="form-group">  
+
+                             <?php if(isset($_POST['predict'])){?>
+                                <label for="maleCheck">Male</label> 
+  
+                                   <?php if($inputGender == 'Male'){?>
+                                        <input type="radio" onclick="javascript:genderCheck();" name="inputGender" id="maleCheck" value="Male" checked> 
+                                        <label for="femaleCheck">Female</label>
+                                        <input type="radio" onclick="javascript:genderCheck();" name="inputGender" id="femaleCheck" value="Female"><br>
+                                  <?php }?>
+
+                                  <?php if($inputGender == 'Female'){?> 
+                                      <input type="radio" onclick="javascript:genderCheck();" name="inputGender" id="maleCheck" value="Male" > 
+                                      <label for="femaleCheck">Female</label>
+                                      <input type="radio" onclick="javascript:genderCheck();" name="inputGender" id="femaleCheck" value="Female" checked><br>
+                                  <?php }?>
+                             <?php }?>     
+                            
+                            <?php if(!isset($_POST['predict'])){?>
+                                <label for="maleCheck">Male</label> 
+                                <input type="radio" onclick="javascript:genderCheck();" name="inputGender" id="maleCheck" value="Male" checked> 
+                                <label for="femaleCheck">Female</label>
+                                <input type="radio" onclick="javascript:genderCheck();" name="inputGender" id="femaleCheck" value="Female"><br>
+                            <?php }?>
+
                             <span class="errorDisplay">
-                                <?php if (isset($err['pregnancy'])){
+                                <?php if (isset($err['gender'])){
+                                echo $err['gender'];
+                              } ?>
+                            </span> 
+                          </div>  
+
+                          <script type="text/javascript">
+          
+                              function genderCheck() {
+                                if (document.getElementById('femaleCheck').checked) {
+                                document.getElementById('ifYes').style.visibility = 'visible';
+                              }else {
+                                document.getElementById('ifYes').style.visibility = 'hidden';
+                              }
+                            }
+                        </script>
+                           <br>
+                          
+                            <?php if(isset($_POST['predict'])){ ?>
+                                <?php if($inputGender=="Female"){ 
+
+                                  ?>
+                                      <div class="form-group" id="ifYes" style="visibility:visible">
+                                        <label for="inputPregnancy">Pregnancies</label>
+                                        <input type="text" class="form-control"  name ="pregnancy" id="inputPregnancy" value="" placeholder="Enter Pregnancy Value"/>
+                                        <span class="errorDisplay">
+                                        <?php if (isset($err['pregnancy'])){
+                                                echo $err['pregnancy'];
+                                        } ?>
+                                       </span>
+                                      
+                              <?php } ?>
+
+                              <?php if($inputGender=="Male"){ ?>
+                                  <div class="form-group" id="ifYes" style="visibility:hidden">
+                                      <label for="inputPregnancy">Pregnancies</label>
+                                      <input type="text" class="form-control"  name ="pregnancy" id="inputPregnancy" value="" placeholder="Enter Pregnancy Value" />
+                                      <span class="errorDisplay">
+                                      <?php if (isset($err['pregnancy'])){
+                                              echo $err['pregnancy'];
+                                      } ?>
+                                       </span>
+                              <?php } ?>
+                          <?php } ?>
+
+                           <?php if(!isset($_POST['predict'])){ ?>
+                            <div class="form-group" id="ifYes" style="visibility:hidden">
+                              <label for="inputPregnancy">Pregnancies</label>
+                              <input type="text" class="form-control"  name ="pregnancy" id="inputPregnancy" value="" placeholder="Enter Pregnancy Value"/>
+                              <span class="errorDisplay">
+                              <?php if (isset($err['pregnancy'])){
                                 echo $err['pregnancy'];
                               } ?>
-                            </span>
+                              </span>
+                             <?php } ?> 
                           </div>
                           
                           <div class="form-group">
@@ -483,6 +541,7 @@
                             </span>
                           </div>
 
+                          <br>
                           <div class="form-group">
                             <label for="inputBP">Blood Pressure</label>
                             <input type="text" class="form-control"  name="BP" id="inputBP" placeholder="Enter Blood Pressure Value">
@@ -492,6 +551,10 @@
                               } ?>
                             </span>
                           </div>
+                          
+                        </div>
+
+                        <div class="col-md-6 col-sm-6">
                           
                           <div class="form-group">
                             <label for="inputSkin">Skin Thickness</label>
@@ -503,13 +566,6 @@
                             </span>
                           </div>
 
-
-
-                        </div>
-
-                        <div class="col-md-6 col-sm-6">
-                          
-                          
                           <div class="form-group">
                             <label for="inputInsulin">Insulin</label>
                             <input type="text" class="form-control" name="insulin" id="inputInsulin" placeholder="Enter Insulin Value">
@@ -548,6 +604,23 @@
                                 echo $err['age'];
                               } ?>
                             </span>
+                          </div>
+
+                          <div class="formgroup">
+                            <div class="dropdown">
+                               <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose Algorithm
+                                <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                  <li><a href="#">Gaussian Naive Bayes</a></li>
+                                  <li><a href="#">Naive Bayes</a></li>
+                                </ul>
+                              <span class="errorDisplay">
+                                  <?php if (isset($err['dropdownAlgorithm'])){
+                                  echo $err['dropdownAlgorithm'];
+                                } ?>
+                              </span>
+                            </div>
+
                           </div>
 
                         </div> 

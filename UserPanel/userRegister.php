@@ -32,6 +32,13 @@ if(isset($_POST['register'])){
 		$err['lname'] = "*Enter the Last Name";
 	}
 
+	//check for Gender
+    if (isset($_POST['inputGender']) && !empty($_POST['inputGender'])){
+        $inputGender = trim($_POST['inputGender']);
+      }else{
+        $err['gender'] = "*Select Gender";         
+    }
+
 	//check for email
 	if (isset($_POST['email']) && !empty($_POST['email']) ){
 		$email = trim($_POST['email']);
@@ -95,10 +102,10 @@ if(isset($_POST['register'])){
 	//check for number of error
 	if(count($err) == 0) {
 		require "connect.php";
-		$sql = "insert into tbl_user(fname,lname,email,phone,address,password) values 
-		('$fname','$lname','$email','$phone','$address','$password_1')";	
-		echo '<br>';echo '<br>';echo '<br>';echo '<br>';echo '<br>';echo '<br>';echo '<br>';echo '<br>'; 
-		echo $sql;
+		$sql = "insert into tbl_user(fname,lname,gender,email,phone,address,password) values 
+		('$fname','$lname','$inputGender','$email','$phone','$address','$password_1')";	
+		// echo '<br>';echo '<br>';echo '<br>';echo '<br>';echo '<br>';echo '<br>';echo '<br>';echo '<br>'; 
+		// echo $sql;
 		$result=mysqli_query($conn, $sql);
 		
 		if ($result){
@@ -167,6 +174,18 @@ if(isset($_POST['register'])){
                               echo $err['lname'];
                             } ?>
                       </span>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputGender">Gender:</label>&nbsp;
+                        Male <input type="radio"   name="inputGender" value="Male" id="radioMale" >
+                        Female <input type="radio" name="inputGender" value="Female" id="radioFemale" >
+                      <span class="errorDisplay">
+                              <?php if (isset($err['gender'])){
+                              echo $err['gender'];
+                            } ?>
+                      </span>
+                          <br>
                     </div>
 
                     <div class="form-group">

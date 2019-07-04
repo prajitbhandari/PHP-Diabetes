@@ -171,7 +171,7 @@
                    <?php if(isset($_COOKIE['docEmail'])){ ?>
                       <div class="form-group">
                         <label for="docEmail">Email</label>
-                        <input type="text" class="form-control" name="docEmail" id="docEmail" value="<?php echo $_COOKIE['docEmail']?>">
+                        <input type="text" class="form-control" name="docEmail" id="docEmail" placeholder="Enter Email Address" value=""> 
                         <span class="errorDisplay">
                               
                         </span>
