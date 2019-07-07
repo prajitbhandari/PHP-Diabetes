@@ -149,7 +149,7 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
               <li><a href="adminIndex.php">Home</a></li>
-              <li><a href="loadDataSet.php">Load Data Set</a></li>
+              <li><a href="importgaussiandata.php">Load Data Set</a></li>
               <li><a href="Predict.php">Predict Diabetes</a></li>
               <li><a href="Help.php">Help</a></li>
               <li><a href="addDoctors.php">Add Doctors</a></li>
@@ -163,34 +163,42 @@
       </nav>
   <!-----------END NAV SECTION-------->
 
-  <br><br><br><br><br>
+  <br>
 
     <!--HOME SECTION-->
      <section >
         <div class="container ">
-            <div class="row">   
+              <div class="row">
+                  
+                  <div id="navbar">
+                      <ul class="nav navbar-nav navbar-right" style="list-style: none;display: inline-block;position:absolute;top:10%;left:70%; ">
+                        <li style="margin-right:10px;background:green;"><a style="color: white;" href="importgaussiandata.php"  id="btng" 
+                          onmouseover="MouseOver(this,'green');" onmouseout="MouseOut(this,'green');">Gaussian Naive Bayes</a></li>
+
+                        <li style="margin-right:10px;"><a href="importnaivebayesdata.php"  id="btnn" class="btn btn-danger" 
+                          onmouseover="MouseOver(this,'green');" onmouseout="MouseOut(this,'red');">Naive Bayes</a></li>
+                      </ul>
+                  </div>
+                  
+                    <script type="text/javascript">   
+                          function MouseOver(elem,color) {
+                              elem.style.background = color;
+                            }
+
+                            function MouseOut(elem,color) {
+                              elem.style.background = color;
+                            }
+                    </script>                     
+                      <br><br><br><br>    
                 <?php 
                     echo $msg; echo "<br>";
                 ?>
                <div class="col-md-4 col-sm-4 col-sm-offset-4 " >
-                    <h4>Load New Data Set</h4>
+
+                    <h4 style="font-weight: bold;">Load Gaussian Data Set</h4>
                     <form method="POST" action=" " enctype="multipart/form-data">
                       <input type="file" name="file">
                       <br>
-                      <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose Algorithm
-                          <span class="caret"></span></button>
-                          <ul class="dropdown-menu">
-                            <li><a href="#">Load Gaussian Data</a></li>
-                            <li><a href="#">Load Naive Bayes Data</a></li>
-                          </ul>
-                        <span class="errorDisplay">
-                            <?php if (isset($err['dropdownAlgorithm'])){
-                            echo $err['dropdownAlgorithm'];
-                          } ?>
-                        </span>
-                      </div>
-                      <br><br>
                       <input type="submit" name="upload" value="Upload" class="btn  btn-block btn-primary">
                     </form>      
                 </div>    

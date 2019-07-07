@@ -84,7 +84,7 @@ if(!isset($_COOKIE['adminName'])){
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
               <li><a href="adminIndex.php">Home</a></li>
-              <li><a href="loadDataSet.php">Load Data Set</a></li>
+              <li><a href="importgaussiandata.php">Load Data Set</a></li>
               <li><a href="Predict.php">Predict Diabetes</a></li>
               <li><a href="Help.php">Help</a></li>
               <li><a href="addDoctors.php">Add Doctors</a></li>

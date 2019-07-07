@@ -235,16 +235,16 @@
             
           </div>
           <div id="navbar" class="navbar-collapse collapse">
-            <!-- <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right">
               <li><a href="adminIndex.php">Home</a></li>
-              <li><a href="loadDataSet.php">Load Data Set</a></li>
+              <li><a href="importgaussiandata.php">Load Data Set</a></li>
               <li><a href="Predict.php">Predict Diabetes</a></li>
               <li><a href="Help.php">Help</a></li>
               <li><a href="addDoctors.php">Add Doctors</a></li>
               <li><a href="manageDoctors.php">Manage Doctors</a></li>
               <li><a href="manageUsers.php">View Users</a></li>
               <li><a href="adminlogout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-            </ul> -->
+            </ul>
             <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to Admin Panel</p>
           </div><!--/.nav-collapse -->  
         </div><!--/.container-fluid -->
@@ -256,12 +256,31 @@
     <!--HOME SECTION-->
      <section >
         <div class="container ">
-            <div class="row">   
+            <div class="row">  
+                  <div id="navbar">
+                      <ul class="nav navbar-nav navbar-right" style="list-style: none;display: inline-block;position:absolute;top:10%;left:70%; ">
+                        <li style="margin-right:10px;"><a href="importgaussiandata.php" style="color: white;" id="btng" class="btn btn-danger"  onmouseover="MouseOver(this,'green');" onmouseout="MouseOut(this,'red');">Gaussian Naive Bayes</a></li>
+
+                        <li style="margin-right:10px;background: green;"><a href="importnaivebayesdata.php"  id="btnn" 
+                          onmouseover="MouseOver(this,'green');" onmouseout="MouseOut(this,'green');">Naive Bayes</a></li>
+                      </ul>
+                  </div>
+                  
+                    <script type="text/javascript">   
+                          function MouseOver(elem,color) {
+                              elem.style.background = color;
+                            }
+
+                            function MouseOut(elem,color) {
+                              elem.style.background = color;
+                            }
+                    </script>
+
                 <?php 
                     echo $msg; echo "<br>";
                 ?>
                <div class="col-md-4 col-sm-4 col-sm-offset-4 " >
-                    <h4>Load New Data Set</h4>
+                    <h4 style="font-weight: bold">Load Naive Bayes Data Set</h4>
                     <form method="POST" action=" " enctype="multipart/form-data">
                       <input type="file" name="file">
                       <br><br>

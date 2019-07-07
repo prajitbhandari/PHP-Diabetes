@@ -737,9 +737,9 @@
         margin-top:2px;
     }
        #footer {
-            position: fixed;
+            /*position: fixed;*/
             width: 100%;
-            bottom: 0;
+            /*bottom: 0;*/
             height: 60px;
             background-color:#ff5252;
             color: #000;
@@ -787,8 +787,15 @@
 <section>
         <div class="container">
             <div class="row ">
+                  <div id="navbar">
+                    <ul class="nav navbar-nav navbar-right" style="list-style: none;display: inline-block;position:absolute;top:10%;left:70%; ">
+                      <li style="margin-right:10px;"><a href="" class="btn btn-danger">Gaussian Naive Bayes</a></li>
+                      <li><a href="" class="btn btn-danger">Naive Bayes</a></li>  
+                    </ul>
+                  </div>
+                  <br><br><br>
                    <div class="col-md-12 col-sm-12 ">
-                        <h4 class="text-center">Please Fill up the form to Predict Diabetes</h4>
+                        <h4 class="text-center" style="font-weight: bold;">Please Fill up the form to Predict Diabetes Using Naive Bayes Algorithm</h4>
                         <form  method="POST" action="naivebayes.php" name="predictForm">
                               <div class="col-md-12 col-sm-12">
                                  

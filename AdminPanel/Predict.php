@@ -376,7 +376,7 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
               <li><a href="adminIndex.php">Home</a></li>
-              <li><a href="loadDataSet.php">Load Data Set</a></li>
+              <li><a href="importgaussiandata.php">Load Data Set</a></li>
               <li><a href="Predict.php">Predict Diabetes</a></li>
               <li><a href="Help.php">Help</a></li>
               <li><a href="addDoctors.php">Add Doctors</a></li>
@@ -395,8 +395,15 @@
 <section>
         <div class="container">
             <div class="row ">
+                  <div id="navbar">
+                    <ul class="nav navbar-nav navbar-right" style="list-style: none;display: inline-block;position:absolute;top:10%;left:70%; ">
+                      <li style="margin-right:10px;"><a href="" class="btn btn-danger">Gaussian Naive Bayes</a></li>
+                      <li><a href="" class="btn btn-danger">Naive Bayes</a></li>  
+                    </ul>
+                  </div>
+                  <br><br><br>
                    <div class="col-md-12 col-sm-12 ">
-                        <h4 class="text-center">Please Fill up the form to Predict Diabetes</h4>
+                        <h4 class="text-center" style="font-weight: bold;">Please Fill up the form to Predict Diabetes using Gaussian Naive Bayes Algorithm</h4>
                         <form  method="POST" action="Predict.php" name="predictForm">
                               <div class="col-md-12 col-sm-12">
                                  
@@ -577,30 +584,12 @@
                               } ?>
                             </span>
                           </div>
-                          
-                          <div class="form-group"> 
-                            <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose Algorithm
-                              <span class="caret"></span></button>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Gaussian Naive Bayes</a></li>
-                                <li><a href="#">Naive Bayes</a></li>
-                              </ul>
-                            <span class="errorDisplay">
-                                <?php if (isset($err['dropdownAlgorithm'])){
-                                echo $err['dropdownAlgorithm'];
-                              } ?>
-                            </span>
-                          </div>
-
-                          </div>
-
                           <br><br><br>
                         </div> 
 
-                          <div class="form-group">
-                             <button type="submit" name="predict" class="btn btn-block btn-primary">Predict</button>
-                          </div>
+                        <div class="form-group">
+                           <button type="submit" name="predict" class="btn btn-block btn-primary">Predict</button>
+                        </div>
 
                         </form>
                     </div>             
