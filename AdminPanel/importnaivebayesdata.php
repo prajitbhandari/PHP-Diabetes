@@ -259,9 +259,9 @@
             <div class="row">  
                   <div id="navbar">
                       <ul class="nav navbar-nav navbar-right" style="list-style: none;display: inline-block;position:absolute;top:10%;left:70%; ">
-                        <li style="margin-right:10px;"><a href="importgaussiandata.php" style="color: white;" id="btng" class="btn btn-danger"  onmouseover="MouseOver(this,'green');" onmouseout="MouseOut(this,'red');">Gaussian Naive Bayes</a></li>
+                        <li style="margin-right:10px;"><a href="importgaussiandata.php" id="btng" class="btn btn-danger"  onmouseover="MouseOver(this,'green');" onmouseout="MouseOut(this,'red');">Gaussian Naive Bayes</a></li>
 
-                        <li style="margin-right:10px;background: green;"><a href="importnaivebayesdata.php"  id="btnn" 
+                        <li style="margin-right:10px;background: green;"><a style="color: white;" href="importnaivebayesdata.php"  id="btnn" 
                           onmouseover="MouseOver(this,'green');" onmouseout="MouseOut(this,'green');">Naive Bayes</a></li>
                       </ul>
                   </div>

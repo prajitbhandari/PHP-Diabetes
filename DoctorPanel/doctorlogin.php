@@ -26,7 +26,7 @@ if(isset($_POST['login'])){
   
   if(isset($_POST['docPassword'])&& !empty($_POST['docPassword']))
   {
-    $docPassword=md5(trim($_POST['docPassword']));
+    $docPassword=(trim($_POST['docPassword']));
   }else{
     $err['docPassword']= "*Enter Password";
   }

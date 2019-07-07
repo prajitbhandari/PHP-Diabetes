@@ -395,16 +395,30 @@
 <section>
         <div class="container">
             <div class="row ">
-                  <div id="navbar">
-                    <ul class="nav navbar-nav navbar-right" style="list-style: none;display: inline-block;position:absolute;top:10%;left:70%; ">
-                      <li style="margin-right:10px;"><a href="" class="btn btn-danger">Gaussian Naive Bayes</a></li>
-                      <li><a href="" class="btn btn-danger">Naive Bayes</a></li>  
-                    </ul>
+                <div id="navbar">
+                      <ul class="nav navbar-nav navbar-right" style="list-style: none;display: inline-block;position:absolute;top:10%;left:70%; ">
+                        <li style="margin-right:10px;background: green;"><a style="color: white;" href="Predict.php" id="btng"  
+                          onmouseover="MouseOver(this,'green');" onmouseout="MouseOut(this,'green');">Gaussian Naive Bayes</a></li>
+
+                        <li style="margin-right:10px;"><a style="color: white;" href="naivebayesPredict.php"  class="btn btn-danger" id="btnn" 
+                          onmouseover="MouseOver(this,'green');" onmouseout="MouseOut(this,'red');">Naive Bayes</a></li>
+                      </ul>
                   </div>
+                  
+                    <script type="text/javascript">   
+                          function MouseOver(elem,color) {
+                              elem.style.background = color;
+                            }
+
+                            function MouseOut(elem,color) {
+                              elem.style.background = color;
+                            }
+                    </script>
                   <br><br><br>
+
                    <div class="col-md-12 col-sm-12 ">
                         <h4 class="text-center" style="font-weight: bold;">Please Fill up the form to Predict Diabetes using Gaussian Naive Bayes Algorithm</h4>
-                        <form  method="POST" action="Predict.php" name="predictForm">
+                        <form  method="POST" action=" " name="predictForm">
                               <div class="col-md-12 col-sm-12">
                                  
                                   <?php

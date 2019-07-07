@@ -85,7 +85,13 @@ if(!isset($_COOKIE['email'])){
                 <li><a href="doctorResponse.php">Doctors Response</a></li>
                 <li><a href="userlogout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
-            <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to User Panel</p>
+            <span class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to User Panel</span>
+            <span class="navbar-text" style="color:#fff;font-size: 14px;">Logged in as :
+              <?php 
+                if(isset($_COOKIE['email'])){
+                  echo $_COOKIE['email'];
+                  }
+                ?> </span>
           </div><!--/.nav-collapse -->  
         </div><!--/.container-fluid -->
       </nav>

@@ -92,7 +92,14 @@ if(!isset($_COOKIE['adminName'])){
               <li><a href="manageUsers.php">View Users</a></li>
               <li><a href="adminlogout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
-            <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to Admin Panel</p>
+            <span class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to Admin Panel</span> &nbsp;
+            <span class="navbar-text" style="color:#fff;font-size: 14px;">Logged in as :
+              <?php 
+                if(isset($_COOKIE['adminName'])){
+                  echo $_COOKIE['adminName'];
+                  }
+                ?> </span>
+
           </div><!--/.nav-collapse -->  
         </div><!--/.container-fluid -->
       </nav>
