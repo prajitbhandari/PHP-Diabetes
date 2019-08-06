@@ -53,9 +53,7 @@
     $noLikelihoodBMI= null;
     $noLikelihoodDPF= null;
     $noLikelihoodAge= null;
-
-
-
+    
    
    $email=null;
    $pregnancy=null;
@@ -680,13 +678,13 @@
     $value=$probNoDiabetesPercentage;
      
    }
-   // require "connect.php";
-   //    $currentDate = date('Y-m-d H:i:s');
-   //    $addsql = "insert into tbl_naiveBayesResult (email,gender,date,pregnancies,glucose,bp,skin,insulin,bmi,pedegree,age,outcome,value) values 
-   //    ('$email','$inputGender','$currentDate','$pregnancy','$glucose','$BP','$skin','$insulin','$BMI','$pedegree','$age','$outcome','$value')";
-   //    echo "<br>";echo "<br>";
-   //    echo $addsql;
-   //    $result=mysqli_query($conn, $addsql);
+      require "connect.php";
+      $currentDate = date('Y-m-d H:i:s');
+      $addsql = "insert into tbl_naiveresult (email,gender,date,pregnancies,glucose,bp,skin,insulin,bmi,pedegree,age,outcome,value) values 
+     ('$email','$inputGender','$currentDate','$pregnancy','$glucose','$BP','$skin','$insulin','$BMI','$pedegree','$age','$outcome','$value')";
+      echo "<br>";echo "<br>";
+      echo $addsql;
+      $result=mysqli_query($conn, $addsql);     
     
    
 }//end of count error
@@ -811,7 +809,7 @@
                   <br><br><br>
                    <div class="col-md-12 col-sm-12 ">
                         <h4 class="text-center" style="font-weight: bold;">Please Fill up the form to Predict Diabetes Using Naive Bayes Algorithm</h4>
-                        <form  method="POST" action="naivebayes.php" name="predictForm">
+                        <form  method="POST" action=" " name="predictForm">
                               <div class="col-md-12 col-sm-12">
                                  
                                   <?php
