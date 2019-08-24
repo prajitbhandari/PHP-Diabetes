@@ -9,7 +9,7 @@ if (isset($_GET['b'])){
 if(isset($_COOKIE['adminName'])){
     session_start();
     $_SESSION['adminName']=$_COOKIE['adminName'];
-    header('location:adminIndex.php');
+    header('location:index.php');
   }
 
 
@@ -39,7 +39,7 @@ if(isset($_POST['login'])){
       setcookie('adminName',$adminName,time()+7*24*60*60);
       session_start();
       $_SESSION['adminName']=$adminName;
-      header('location:adminIndex.php');
+      header('location:index.php');
       
     }else{
       $msg= '<div class="alert alert-danger">*Invalid Admin Name or Password </div>';
@@ -77,7 +77,7 @@ if(isset($_POST['login'])){
 
            <div class="row g-pad-bottom" >
               <div class="col-md-6 col-md-offset-3">
-                 <form method="POST" action="" name="doctorForm">
+                 <form method="POST" action="" name="adminForm">
                     <?php 
                         echo $msg;
                     ?>
@@ -93,7 +93,7 @@ if(isset($_POST['login'])){
 
                     <div class="form-group">
                       <label for="password">Password</label>
-                      <input type="text" class="form-control" name="password" id="password" placeholder="Enter Your Password">
+                      <input type="password" class="form-control" name="password" id="password" placeholder="Enter Your Password">
                       <span class="errorDisplay">
                               <?php if (isset($err['password'])){
                               echo $err['password'];

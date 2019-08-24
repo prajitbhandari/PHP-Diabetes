@@ -34,7 +34,7 @@ if(!isset($_COOKIE['adminName'])){
                      $first=true;
                      $second=true;
                      echo '<br>';echo '<br>';echo '<br>';echo '<br>';
-                     $sqlInsert = "insert into tbl_dataSet (Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age,Outcome) values";
+                     $sqlInsert = "insert into tbl_testdata (Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age,Outcome) values";
                      
                      while (($column = fgetcsv($file, 10000, ",")) !== FALSE ) { 
                         if(!$first){ // in first step the attributes row is selected so nothing is to be done
@@ -126,16 +126,16 @@ if(!isset($_COOKIE['adminName'])){
         margin-top:2px;
     }
 
-   #footer {
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-            height: 60px;
-            background-color:#538cc6;
-            color: #000;
-            padding: 20px 50px 20px 50px;
-            text-align: right;
-            border-top: 1px solid #d6d6d6;
+  #footer {
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      height: 60px;
+      background-color:#538cc6;
+      color: #000;
+      padding: 20px 50px 20px 50px;
+      text-align: right;
+      border-top: 1px solid #d6d6d6;
         }
     </style>
 </head>
@@ -168,37 +168,18 @@ if(!isset($_COOKIE['adminName'])){
       </nav>
   <!-----------END NAV SECTION-------->
 
+  <br>
+
     <!--HOME SECTION-->
      <section >
         <div class="container ">
-              <div class="row">
-                  
-                  <div id="navbar">
-                      <ul class="nav navbar-nav navbar-right" style="list-style: none;display: inline-block;position:absolute;top:10%;left:70%; ">
-                        <li style="margin-right:10px;background:green;position: fixed;left:56%;"><a style="color: white;" href="importgaussiandata.php"  id="btng" 
-                          onmouseover="MouseOver(this,'green');" onmouseout="MouseOut(this,'green');">Gaussian Naive Bayes</a></li>
-
-                        <li style="margin-right:10px;position: fixed;"><a href="importnaivebayesdata.php"  id="btnn" class="btn btn-danger" 
-                          onmouseover="MouseOver(this,'green');" onmouseout="MouseOut(this,'red');">Naive Bayes</a></li>
-                      </ul>
-                  </div>
-                  
-                    <script type="text/javascript">   
-                          function MouseOver(elem,color) {
-                              elem.style.background = color;
-                            }
-
-                            function MouseOut(elem,color) {
-                              elem.style.background = color;
-                            }
-                    </script>   
-                    <br><br><br><br><br><br>                    
+              <div class="row">  
                 <?php 
                     echo $msg; echo "<br>";
                 ?>
                <div class="col-md-4 col-sm-4 col-sm-offset-4 " >
 
-                    <h4 style="font-weight: bold;">Load Gaussian Data Set</h4>
+                    <h4 style="font-weight: bold;">Load Test Data Set</h4>
                     <form method="POST" action=" " enctype="multipart/form-data">
                       <input type="file" name="file">
                       <br>

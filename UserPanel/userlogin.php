@@ -9,7 +9,7 @@ if (isset($_GET['a'])){
 if(isset($_COOKIE['email'])){
     session_start();
     $_SESSION['email']=$_COOKIE['email'];
-    header('location:userIndex.php');
+    header('location:index.php');
   }
 
 
@@ -39,7 +39,7 @@ if(isset($_POST['login'])){
       setcookie('email',$email,time()+7*24*60*60);
       session_start();
       $_SESSION['email']=$email;
-      header('location:userIndex.php');
+      header('location:index.php');
       
     }else{
       $msg= '<div class="alert alert-danger">*Invalid username or Password </div>';
@@ -93,7 +93,7 @@ if(isset($_POST['login'])){
 
                     <div class="form-group">
                       <label for="password_1">Password</label>
-                      <input type="text" class="form-control" name="password_1" id="password_1" placeholder="Enter Your Password">
+                      <input type="password" class="form-control" name="password_1" id="password_1" placeholder="Enter Your Password">
                       <span class="errorDisplay">
                               <?php if (isset($err['password_1'])){
                               echo $err['password_1'];

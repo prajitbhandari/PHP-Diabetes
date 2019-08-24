@@ -4,7 +4,7 @@ $msg='';
 if(isset($_COOKIE['email'])){
 		session_start();
 		$_SESSION['email']=$_COOKIE['email'];
-		header('location:userIndex.php');
+		header('location:index.php');
 	}
 
 //check for button click---form submit
@@ -113,7 +113,7 @@ if(isset($_POST['register'])){
 			setcookie('email',$email,time()+7*24*60*60);
 			session_start();
 			$_SESSION['email']=$email;
-			header('location:userIndex.php');
+			header('location:index.php');
 
 		}		
 	}else{
@@ -221,7 +221,7 @@ if(isset($_POST['register'])){
                     
                     <div class="form-group">
                       <label for="password_1">Password</label>
-                      <input type="text" class="form-control" name="password_1" id="password_1" placeholder="Enter Your Password">
+                      <input type="password" class="form-control" name="password_1" id="password_1" placeholder="Enter Your Password">
                       <span class="errorDisplay">
                               <?php if (isset($err['password_1'])){
                               echo $err['password_1'];

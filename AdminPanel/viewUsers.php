@@ -1,7 +1,7 @@
 <?php 
    require "connect.php";
    //query to select data
-   $sql="select * from tbl_doctor";
+   $sql="select * from tbl_user";
    //execute query and return result object
    $result=mysqli_query($conn,$sql);
    //default array
@@ -16,6 +16,7 @@
     }
   
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,16 +66,16 @@
     }
 
    #footer {
-        position: fixed;
-        width: 100%;
-        bottom: 0;
-        height: 60px;
-        background-color:#ff5252;
-        color: #000;
-        padding: 20px 50px 20px 50px;
-        text-align: right;
-        border-top: 1px solid #d6d6d6;
-    }
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      height: 60px;
+      background-color:#538cc6;
+      color: #000;
+      padding: 20px 50px 20px 50px;
+      text-align: right;
+      border-top: 1px solid #d6d6d6;
+        }
     </style>
 </head>
 <body>
@@ -93,13 +94,12 @@
 
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="adminIndex.php">Home</a></li>
+              <li><a href="index.php">Home</a></li>
               <li><a href="importgaussiandata.php">Load Data Set</a></li>
+              <li><a href="importTestData.php">Import Test Data Set</a></li>
               <li><a href="Predict.php">Predict Diabetes</a></li>
               <li><a href="Help.php">Help</a></li>
-              <li><a href="addDoctors.php">Add Doctors</a></li>
-              <li><a href="manageDoctors.php">Manage Doctors</a></li>
-              <li><a href="manageUsers.php">View Users</a></li>
+              <li><a href="viewUsers.php">View Users</a></li>
               <li><a href="adminlogout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
             <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to Admin Panel</p>
@@ -109,19 +109,20 @@
   <!-----------END NAV SECTION-------->
 
     <!--HOME SECTION-->
-      <section id="port-sec">
-       <div class="container">
+   <section>
+      <div class="container">
             <div class="row g-pad-bottom">
                 <div class="text-center g-pad-bottom">
                      <div class="col-md-12 col-sm-12 alert-info" style="width: 98%;
                      margin-left: 12px; border-radius: 8px;">
-                        <h4><i class="fa fa-user-md fa-2x" ></i>&nbsp;Manage Doctors</h4>
+                        <h4><i class="" ></i>&nbsp;User Details</h4>
+
                                      
                     </div>  
                 </div>
-            </div><br>
-            
-           <div class="row g-pad-bottom" >
+            </div><br/>
+
+            <div class="row g-pad-bottom" >
                 <div class="col-md-12 col-sm-12" >
                    <table class="table table-bordered table-striped">
                         <thead class="bg-success">
@@ -133,9 +134,6 @@
                               <th scope="col">Email</th>
                               <th scope="col">Phone</th>
                               <th scope="col">Address</th>
-                              <th scope="col">Qualification</th>
-                              <th scope="col">Password</th>                              
-                              <th colspan="2" scope="col" style="text-align: center;">Action</th>
                             </tr>
                        </thead>
                        <tbody>
@@ -145,20 +143,16 @@
                                 <td><?php echo $in['fname'] ?> </td>
                                 <td><?php echo $in['lname'] ?> </td>
                                 <td><?php echo $in['gender'] ?> </td>
-                                <td><?php echo $in['docEmail'] ?> </td>
-                                <td><?php echo $in['docPhone'] ?> </td>
-                                <td><?php echo $in['docAddress'] ?> </td>
-                                <td><?php echo $in['docQualification'] ?> </td>
-                                <td><?php echo $in['docPassword'] ?> </td>
-                                <td><a class ="btn btn-danger btn-block" href="delete_doctor.php?id=<?php echo $in['Id']?>"onclick="return confirm('Are you sure u want to Delete?')">Delete</a>
-                                <td><a class ="btn btn-primary btn-block" href="edit_doctor.php?id=<?php echo $in['Id']?>"onclick="return confirm('Are you sure u want to Edit?')">Edit</a>  
+                                <td><?php echo $in['email'] ?> </td>
+                                <td><?php echo $in['phone'] ?> </td>
+                                <td><?php echo $in['address'] ?> </td>  
                               </tr>
                             <?php } ?>
                         </tbody>
                     </table>
                 </div>
            </div>
-       </div>
+       </div>   
    </section>
    <br>
     <!-- END Home SECTION -->

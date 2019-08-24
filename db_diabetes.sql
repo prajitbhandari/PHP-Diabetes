@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2019 at 03:47 PM
+-- Generation Time: Aug 24, 2019 at 03:46 PM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 5.6.37
 
@@ -44,28 +44,6 @@ INSERT INTO `tbl_admin` (`Id`, `adminName`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_contact`
---
-
-CREATE TABLE `tbl_contact` (
-  `Id` int(11) NOT NULL,
-  `fname` varchar(50) NOT NULL,
-  `lname` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `phone` double NOT NULL,
-  `message` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbl_contact`
---
-
-INSERT INTO `tbl_contact` (`Id`, `fname`, `lname`, `email`, `phone`, `message`) VALUES
-(5, 'Prajit', 'Bhandari', 'prajitbhandari@gmail.com', 9842687243, 'Hello');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tbl_dataset`
 --
 
@@ -87,160 +65,6 @@ CREATE TABLE `tbl_dataset` (
 --
 
 INSERT INTO `tbl_dataset` (`Id`, `Pregnancies`, `Glucose`, `BloodPressure`, `SkinThickness`, `Insulin`, `BMI`, `DiabetesPedigreeFunction`, `Age`, `Outcome`) VALUES
-(1, 6, 148, 72, 35, 0, 33.6, 0.627, 50, 1),
-(2, 1, 85, 66, 29, 0, 26.6, 0.351, 31, 0),
-(3, 8, 183, 64, 0, 0, 23.3, 0.672, 32, 1),
-(4, 1, 89, 66, 23, 94, 28.1, 0.167, 21, 0),
-(5, 0, 137, 40, 35, 168, 43.1, 2.288, 33, 1),
-(6, 5, 116, 74, 0, 0, 25.6, 0.201, 30, 0),
-(7, 3, 78, 50, 32, 88, 31, 0.248, 26, 1),
-(8, 10, 115, 0, 0, 0, 35.3, 0.134, 29, 0),
-(9, 2, 197, 70, 45, 543, 30.5, 0.158, 53, 1),
-(10, 8, 125, 96, 0, 0, 0, 0.232, 54, 1),
-(11, 4, 110, 92, 0, 0, 37.6, 0.191, 30, 0),
-(12, 10, 168, 74, 0, 0, 38, 0.537, 34, 1),
-(13, 10, 139, 80, 0, 0, 27.1, 1.441, 57, 0),
-(14, 1, 189, 60, 23, 846, 30.1, 0.398, 59, 1),
-(15, 5, 166, 72, 19, 175, 25.8, 0.587, 51, 1),
-(16, 7, 100, 0, 0, 0, 30, 0.484, 32, 1),
-(17, 0, 118, 84, 47, 230, 45.8, 0.551, 31, 1),
-(18, 7, 107, 74, 0, 0, 29.6, 0.254, 31, 1),
-(19, 1, 103, 30, 38, 83, 43.3, 0.183, 33, 0),
-(20, 1, 115, 70, 30, 96, 34.6, 0.529, 32, 1),
-(21, 3, 126, 88, 41, 235, 39.3, 0.704, 27, 0),
-(22, 8, 99, 84, 0, 0, 35.4, 0.388, 50, 0),
-(23, 7, 196, 90, 0, 0, 39.8, 0.451, 41, 1),
-(24, 9, 119, 80, 35, 0, 29, 0.263, 29, 1),
-(25, 11, 143, 94, 33, 146, 36.6, 0.254, 51, 1),
-(26, 10, 125, 70, 26, 115, 31.1, 0.205, 41, 1),
-(27, 7, 147, 76, 0, 0, 39.4, 0.257, 43, 1),
-(28, 1, 97, 66, 15, 140, 23.2, 0.487, 22, 0),
-(29, 13, 145, 82, 19, 110, 22.2, 0.245, 57, 0),
-(30, 5, 117, 92, 0, 0, 34.1, 0.337, 38, 0),
-(31, 5, 109, 75, 26, 0, 36, 0.546, 60, 0),
-(32, 3, 158, 76, 36, 245, 31.6, 0.851, 28, 1),
-(33, 3, 88, 58, 11, 54, 24.8, 0.267, 22, 0),
-(34, 6, 92, 92, 0, 0, 19.9, 0.188, 28, 0),
-(35, 10, 122, 78, 31, 0, 27.6, 0.512, 45, 0),
-(36, 4, 103, 60, 33, 192, 24, 0.966, 33, 0),
-(37, 11, 138, 76, 0, 0, 33.2, 0.42, 35, 0),
-(38, 9, 102, 76, 37, 0, 32.9, 0.665, 46, 1),
-(39, 2, 90, 68, 42, 0, 38.2, 0.503, 27, 1),
-(40, 4, 111, 72, 47, 207, 37.1, 1.39, 56, 1),
-(41, 3, 180, 64, 25, 70, 34, 0.271, 26, 0),
-(42, 7, 133, 84, 0, 0, 40.2, 0.696, 37, 0),
-(43, 7, 106, 92, 18, 0, 22.7, 0.235, 48, 0),
-(44, 9, 171, 110, 24, 240, 45.4, 0.721, 54, 1),
-(45, 7, 159, 64, 0, 0, 27.4, 0.294, 40, 0),
-(46, 0, 180, 66, 39, 0, 42, 1.893, 25, 1),
-(47, 1, 146, 56, 0, 0, 29.7, 0.564, 29, 0),
-(48, 2, 71, 70, 27, 0, 28, 0.586, 22, 0),
-(49, 7, 103, 66, 32, 0, 39.1, 0.344, 31, 1),
-(50, 7, 105, 0, 0, 0, 0, 0.305, 24, 0),
-(51, 1, 103, 80, 11, 82, 19.4, 0.491, 22, 0),
-(52, 1, 101, 50, 15, 36, 24.2, 0.526, 26, 0),
-(53, 5, 88, 66, 21, 23, 24.4, 0.342, 30, 0),
-(54, 8, 176, 90, 34, 300, 33.7, 0.467, 58, 1),
-(55, 7, 150, 66, 42, 342, 34.7, 0.718, 42, 0),
-(56, 1, 73, 50, 10, 0, 23, 0.248, 21, 0),
-(57, 7, 187, 68, 39, 304, 37.7, 0.254, 41, 1),
-(58, 0, 100, 88, 60, 110, 46.8, 0.962, 31, 0),
-(59, 0, 146, 82, 0, 0, 40.5, 1.781, 44, 0),
-(60, 0, 105, 64, 41, 142, 41.5, 0.173, 22, 0),
-(61, 2, 84, 0, 0, 0, 0, 0.304, 21, 0),
-(62, 8, 133, 72, 0, 0, 32.9, 0.27, 39, 1),
-(63, 5, 44, 62, 0, 0, 25, 0.587, 36, 0),
-(64, 2, 141, 58, 34, 128, 25.4, 0.699, 24, 0),
-(65, 7, 114, 66, 0, 0, 32.8, 0.258, 42, 1),
-(66, 5, 99, 74, 27, 0, 29, 0.203, 32, 0),
-(67, 0, 109, 88, 30, 0, 32.5, 0.855, 38, 1),
-(68, 2, 109, 92, 0, 0, 42.7, 0.845, 54, 0),
-(69, 1, 95, 66, 13, 38, 19.6, 0.334, 25, 0),
-(70, 4, 146, 85, 27, 100, 28.9, 0.189, 27, 0),
-(71, 2, 100, 66, 20, 90, 32.9, 0.867, 28, 1),
-(72, 5, 139, 64, 35, 140, 28.6, 0.411, 26, 0),
-(73, 13, 126, 90, 0, 0, 43.4, 0.583, 42, 1),
-(74, 4, 129, 86, 20, 270, 35.1, 0.231, 23, 0),
-(75, 1, 79, 75, 30, 0, 32, 0.396, 22, 0),
-(76, 1, 0, 48, 20, 0, 24.7, 0.14, 22, 0),
-(77, 7, 62, 78, 0, 0, 32.6, 0.391, 41, 0),
-(78, 5, 95, 72, 33, 0, 37.7, 0.37, 27, 0),
-(79, 0, 131, 0, 0, 0, 43.2, 0.27, 26, 1),
-(80, 2, 112, 66, 22, 0, 25, 0.307, 24, 0),
-(81, 3, 113, 44, 13, 0, 22.4, 0.14, 22, 0),
-(82, 2, 74, 0, 0, 0, 0, 0.102, 22, 0),
-(83, 7, 83, 78, 26, 71, 29.3, 0.767, 36, 0),
-(84, 0, 101, 65, 28, 0, 24.6, 0.237, 22, 0),
-(85, 5, 137, 108, 0, 0, 48.8, 0.227, 37, 1),
-(86, 2, 110, 74, 29, 125, 32.4, 0.698, 27, 0),
-(87, 13, 106, 72, 54, 0, 36.6, 0.178, 45, 0),
-(88, 2, 100, 68, 25, 71, 38.5, 0.324, 26, 0),
-(89, 15, 136, 70, 32, 110, 37.1, 0.153, 43, 1),
-(90, 1, 107, 68, 19, 0, 26.5, 0.165, 24, 0),
-(91, 1, 80, 55, 0, 0, 19.1, 0.258, 21, 0),
-(92, 4, 123, 80, 15, 176, 32, 0.443, 34, 0),
-(93, 7, 81, 78, 40, 48, 46.7, 0.261, 42, 0),
-(94, 4, 134, 72, 0, 0, 23.8, 0.277, 60, 1),
-(95, 2, 142, 82, 18, 64, 24.7, 0.761, 21, 0),
-(96, 6, 144, 72, 27, 228, 33.9, 0.255, 40, 0),
-(97, 2, 92, 62, 28, 0, 31.6, 0.13, 24, 0),
-(98, 1, 71, 48, 18, 76, 20.4, 0.323, 22, 0),
-(99, 6, 93, 50, 30, 64, 28.7, 0.356, 23, 0),
-(100, 1, 122, 90, 51, 220, 49.7, 0.325, 31, 1),
-(101, 1, 163, 72, 0, 0, 39, 1.222, 33, 1),
-(102, 1, 151, 60, 0, 0, 26.1, 0.179, 22, 0),
-(103, 0, 125, 96, 0, 0, 22.5, 0.262, 21, 0),
-(104, 1, 81, 72, 18, 40, 26.6, 0.283, 24, 0),
-(105, 2, 85, 65, 0, 0, 39.6, 0.93, 27, 0),
-(106, 1, 126, 56, 29, 152, 28.7, 0.801, 21, 0),
-(107, 1, 96, 122, 0, 0, 22.4, 0.207, 27, 0),
-(108, 4, 144, 58, 28, 140, 29.5, 0.287, 37, 0),
-(109, 3, 83, 58, 31, 18, 34.3, 0.336, 25, 0),
-(110, 0, 95, 85, 25, 36, 37.4, 0.247, 24, 1),
-(111, 3, 171, 72, 33, 135, 33.3, 0.199, 24, 1),
-(112, 8, 155, 62, 26, 495, 34, 0.543, 46, 1),
-(113, 1, 89, 76, 34, 37, 31.2, 0.192, 23, 0),
-(114, 4, 76, 62, 0, 0, 34, 0.391, 25, 0),
-(115, 7, 160, 54, 32, 175, 30.5, 0.588, 39, 1),
-(116, 4, 146, 92, 0, 0, 31.2, 0.539, 61, 1),
-(117, 5, 124, 74, 0, 0, 34, 0.22, 38, 1),
-(118, 5, 78, 48, 0, 0, 33.7, 0.654, 25, 0),
-(119, 4, 97, 60, 23, 0, 28.2, 0.443, 22, 0),
-(120, 4, 99, 76, 15, 51, 23.2, 0.223, 21, 0),
-(121, 0, 162, 76, 56, 100, 53.2, 0.759, 25, 1),
-(122, 6, 111, 64, 39, 0, 34.2, 0.26, 24, 0),
-(123, 2, 107, 74, 30, 100, 33.6, 0.404, 23, 0),
-(124, 5, 132, 80, 0, 0, 26.8, 0.186, 69, 0),
-(125, 0, 113, 76, 0, 0, 33.3, 0.278, 23, 1),
-(126, 1, 88, 30, 42, 99, 55, 0.496, 26, 1),
-(127, 3, 120, 70, 30, 135, 42.9, 0.452, 30, 0),
-(128, 1, 118, 58, 36, 94, 33.3, 0.261, 23, 0),
-(129, 1, 117, 88, 24, 145, 34.5, 0.403, 40, 1),
-(130, 0, 105, 84, 0, 0, 27.9, 0.741, 62, 1),
-(131, 4, 173, 70, 14, 168, 29.7, 0.361, 33, 1),
-(132, 9, 122, 56, 0, 0, 33.3, 1.114, 33, 1),
-(133, 3, 170, 64, 37, 225, 34.5, 0.356, 30, 1),
-(134, 8, 84, 74, 31, 0, 38.3, 0.457, 39, 0),
-(135, 2, 96, 68, 13, 49, 21.1, 0.647, 26, 0),
-(136, 2, 125, 60, 20, 140, 33.8, 0.088, 31, 0),
-(137, 0, 100, 70, 26, 50, 30.8, 0.597, 21, 0),
-(138, 0, 93, 60, 25, 92, 28.7, 0.532, 22, 0),
-(139, 0, 129, 80, 0, 0, 31.2, 0.703, 29, 0),
-(140, 5, 105, 72, 29, 325, 36.9, 0.159, 28, 0),
-(141, 3, 128, 78, 0, 0, 21.1, 0.268, 55, 0),
-(142, 5, 106, 82, 30, 0, 39.5, 0.286, 38, 0),
-(143, 2, 108, 52, 26, 63, 32.5, 0.318, 22, 0),
-(144, 10, 108, 66, 0, 0, 32.4, 0.272, 42, 1),
-(145, 4, 154, 62, 31, 284, 32.8, 0.237, 23, 0),
-(146, 0, 102, 75, 23, 0, 0, 0.572, 21, 0),
-(147, 9, 57, 80, 37, 0, 32.8, 0.096, 41, 0),
-(148, 2, 106, 64, 35, 119, 30.5, 1.4, 34, 0),
-(149, 5, 147, 78, 0, 0, 33.7, 0.218, 65, 0),
-(150, 2, 90, 70, 17, 0, 27.3, 0.085, 22, 0),
-(151, 1, 136, 74, 50, 204, 37.4, 0.399, 24, 0),
-(152, 4, 114, 65, 0, 0, 21.9, 0.432, 37, 0),
-(153, 9, 156, 86, 28, 155, 34.3, 1.189, 42, 1),
-(154, 1, 153, 82, 42, 485, 40.6, 0.687, 23, 0),
 (155, 8, 188, 78, 0, 0, 47.9, 0.137, 43, 1),
 (156, 7, 152, 88, 44, 0, 50, 0.337, 36, 1),
 (157, 2, 99, 52, 15, 94, 24.6, 0.637, 21, 0),
@@ -859,61 +683,13 @@ INSERT INTO `tbl_dataset` (`Id`, `Pregnancies`, `Glucose`, `BloodPressure`, `Ski
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_doctor`
---
-
-CREATE TABLE `tbl_doctor` (
-  `Id` int(11) NOT NULL,
-  `fname` varchar(20) NOT NULL,
-  `lname` varchar(20) NOT NULL,
-  `docEmail` varchar(50) NOT NULL,
-  `docPhone` double NOT NULL,
-  `docAddress` varchar(50) NOT NULL,
-  `docQualification` varchar(50) NOT NULL,
-  `docPassword` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbl_doctor`
---
-
-INSERT INTO `tbl_doctor` (`Id`, `fname`, `lname`, `docEmail`, `docPhone`, `docAddress`, `docQualification`, `docPassword`) VALUES
-(1, 'Prabin', 'Bhandari', 'prabinbhandari@gmail.com', 9842687243, 'kathmandu', 'MD', 'prabin123'),
-(2, 'Sushant', 'Bhandari', 'sushantbhandari@gmail.com', 9844612345, 'bhaktapur', 'MBBS', 'sushant123'),
-(3, 'Abon', 'Khanal', 'abonkhanal@gmail.com', 9842688243, 'Birtamod', 'MD', 'abon123'),
-(4, 'Sahil', 'Mainali', 'sahilmainali@gmail.com', 9842587543, 'Bhadrapur', 'MBBS', 'sahil123');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_feedback`
---
-
-CREATE TABLE `tbl_feedback` (
-  `Id` int(11) NOT NULL,
-  `fname` varchar(50) NOT NULL,
-  `lname` varchar(50) NOT NULL,
-  `feedback` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbl_feedback`
---
-
-INSERT INTO `tbl_feedback` (`Id`, `fname`, `lname`, `feedback`) VALUES
-(5, 'Ram', 'Thapa', 'Take Medicine'),
-(6, 'XYZ', 'ABCD', 'Have fun');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tbl_help`
 --
 
 CREATE TABLE `tbl_help` (
   `Id` int(11) NOT NULL,
   `attribute` varchar(50) NOT NULL,
-  `description` varchar(50) NOT NULL,
+  `description` varchar(100) NOT NULL,
   `value` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -923,13 +699,652 @@ CREATE TABLE `tbl_help` (
 
 INSERT INTO `tbl_help` (`Id`, `attribute`, `description`, `value`) VALUES
 (1, 'Pregnancy', 'Number of times pregnant', 'Continuous'),
-(2, 'Glucose', 'Plasma glucose concentration a 2 hours in an oral ', 'Continuous'),
+(2, 'Glucose', 'Plasma glucose concentration for 2 hours in an oral glucose test', 'Continuous'),
 (3, 'Blood Pressure', 'Diastolic blood pressure (mm Hg)', 'Continuous'),
 (4, 'Skin Thickness', 'Triceps skin fold thickness (mm)', 'Continuous'),
 (5, 'Insulin', '2-Hour serum insulin \r\n                           ', 'Continuous'),
 (6, 'BMI', 'Body mass index (weight in kg/(height in m)^2)', 'Continuous'),
 (7, 'Diabetes Pedigree Function', 'Diabetes Pedigree function', 'Continuous'),
-(9, 'Age', 'year', 'Conitnuous');
+(9, 'Age', 'Birth Age of Patient', 'Conitnuous');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_naivedataset`
+--
+
+CREATE TABLE `tbl_naivedataset` (
+  `Id` int(11) NOT NULL,
+  `Pregnancies` varchar(20) NOT NULL,
+  `Glucose` varchar(20) NOT NULL,
+  `BloodPressure` varchar(20) NOT NULL,
+  `SkinThickness` varchar(20) NOT NULL,
+  `Insulin` varchar(20) NOT NULL,
+  `BMI` varchar(20) NOT NULL,
+  `DiabetesPedigreeFunction` varchar(20) NOT NULL,
+  `Age` varchar(20) NOT NULL,
+  `Outcome` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_naivedataset`
+--
+
+INSERT INTO `tbl_naivedataset` (`Id`, `Pregnancies`, `Glucose`, `BloodPressure`, `SkinThickness`, `Insulin`, `BMI`, `DiabetesPedigreeFunction`, `Age`, `Outcome`) VALUES
+(155, 'high', 'medium', 'low', 'low', 'low', 'high', 'low', 'adult', 1),
+(156, 'high', 'medium', 'medium', 'high', 'low', 'high', 'low', 'middleaged', 1),
+(157, 'medium', 'low', 'low', 'low', 'medium', 'high', 'medium', 'young', 0),
+(158, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'medium', 'young', 0),
+(159, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'low', 'young', 0),
+(160, 'high', 'medium', 'low', 'high', 'medium', 'high', 'medium', 'adult', 1),
+(161, 'medium', 'medium', 'high', 'high', 'low', 'high', 'low', 'middleaged', 0),
+(162, 'high', 'low', 'low', 'high', 'medium', 'high', 'low', 'adult', 0),
+(163, 'low', 'low', 'medium', 'high', 'high', 'high', 'low', 'young', 0),
+(164, 'medium', 'low', 'low', 'medium', 'low', 'high', 'low', 'young', 0),
+(165, 'low', 'low', 'medium', 'low', 'low', 'high', 'medium', 'middleaged', 1),
+(166, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'medium', 'adult', 1),
+(167, 'medium', 'medium', 'low', 'high', 'low', 'high', 'low', 'young', 0),
+(168, 'medium', 'low', 'low', 'low', 'low', 'high', 'medium', 'middleaged', 0),
+(169, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 0),
+(170, 'medium', 'low', 'high', 'low', 'medium', 'high', 'low', 'young', 0),
+(171, 'medium', 'low', 'medium', 'low', 'low', 'high', 'low', 'middleaged', 1),
+(172, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'high', 'young', 1),
+(173, 'medium', 'low', 'low', 'medium', 'low', 'high', 'medium', 'young', 0),
+(174, 'medium', 'low', 'low', 'high', 'medium', 'high', 'medium', 'young', 0),
+(175, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'low', 'middleaged', 0),
+(176, 'high', 'medium', 'low', 'high', 'medium', 'high', 'medium', 'middleaged', 1),
+(177, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'adult', 0),
+(178, 'low', 'low', 'high', 'high', 'medium', 'high', 'low', 'young', 1),
+(179, 'medium', 'medium', 'low', 'low', 'low', 'high', 'low', 'adult', 0),
+(180, 'medium', 'low', 'medium', 'low', 'low', 'high', 'high', 'middleaged', 1),
+(181, 'medium', 'low', 'medium', 'low', 'low', 'medium', 'low', 'middleaged', 0),
+(182, 'low', 'low', 'low', 'medium', 'medium', 'high', 'medium', 'young', 0),
+(183, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'low', 'young', 0),
+(184, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 0),
+(185, 'medium', 'medium', 'low', 'low', 'low', 'high', 'low', 'adult', 0),
+(186, 'high', 'medium', 'low', 'high', 'low', 'high', 'medium', 'adult', 1),
+(187, 'high', 'medium', 'low', 'high', 'high', 'high', 'medium', 'adult', 1),
+(188, 'medium', 'low', 'high', 'high', 'medium', 'high', 'high', 'middleaged', 1),
+(189, 'high', 'low', 'low', 'high', 'medium', 'high', 'medium', 'middleaged', 1),
+(190, 'medium', 'low', 'medium', 'high', 'medium', 'high', 'low', 'young', 1),
+(191, 'medium', 'low', 'low', 'low', 'low', 'medium', 'low', 'young', 0),
+(192, 'high', 'low', 'low', 'high', 'medium', 'high', 'low', 'adult', 0),
+(193, 'high', 'medium', 'low', 'low', 'low', 'high', 'low', 'middleaged', 1),
+(194, 'high', 'low', 'low', 'low', 'low', 'high', 'high', 'adult', 1),
+(195, 'high', 'low', 'low', 'medium', 'low', 'high', 'low', 'adult', 0),
+(196, 'medium', 'medium', 'medium', 'high', 'high', 'high', 'low', 'young', 1),
+(197, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 0),
+(198, 'medium', 'low', 'low', 'low', 'medium', 'medium', 'medium', 'young', 1),
+(199, 'medium', 'low', 'low', 'high', 'medium', 'high', 'high', 'young', 1),
+(200, 'medium', 'medium', 'low', 'high', 'high', 'high', 'low', 'young', 1),
+(201, 'low', 'low', 'medium', 'low', 'low', 'high', 'medium', 'young', 0),
+(202, 'medium', 'low', 'medium', 'low', 'low', 'high', 'low', 'young', 0),
+(203, 'low', 'low', 'low', 'medium', 'low', 'high', 'medium', 'middleaged', 0),
+(204, 'medium', 'low', 'low', 'low', 'medium', 'medium', 'low', 'young', 0),
+(205, 'medium', 'low', 'low', 'high', 'high', 'high', 'low', 'adult', 0),
+(206, 'medium', 'low', 'low', 'high', 'low', 'medium', 'low', 'young', 0),
+(207, 'high', 'medium', 'low', 'high', 'high', 'high', 'medium', 'adult', 1),
+(208, 'medium', 'medium', 'high', 'low', 'low', 'high', 'low', 'adult', 1),
+(209, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(210, 'high', 'medium', 'medium', 'high', 'low', 'high', 'low', 'adult', 1),
+(211, 'medium', 'low', 'low', 'medium', 'low', 'high', 'low', 'young', 0),
+(212, 'low', 'medium', 'medium', 'high', 'low', 'high', 'low', 'young', 0),
+(213, 'high', 'medium', 'high', 'high', 'low', 'high', 'low', 'adult', 0),
+(214, 'low', 'medium', 'low', 'high', 'medium', 'high', 'low', 'young', 1),
+(215, 'high', 'low', 'medium', 'high', 'high', 'high', 'low', 'middleaged', 1),
+(216, 'high', 'medium', 'low', 'high', 'high', 'high', 'medium', 'middleaged', 1),
+(217, 'medium', 'low', 'low', 'high', 'medium', 'high', 'high', 'young', 1),
+(218, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'middleaged', 0),
+(219, 'medium', 'low', 'low', 'medium', 'low', 'high', 'high', 'middleaged', 1),
+(220, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'adult', 1),
+(221, 'low', 'medium', 'low', 'high', 'high', 'high', 'high', 'young', 1),
+(222, 'medium', 'medium', 'high', 'low', 'low', 'high', 'medium', 'adult', 1),
+(223, 'high', 'low', 'low', 'low', 'low', 'high', 'low', 'middleaged', 0),
+(224, 'high', 'medium', 'low', 'high', 'high', 'high', 'medium', 'adult', 0),
+(225, 'medium', 'low', 'low', 'low', 'medium', 'medium', 'medium', 'young', 0),
+(226, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(227, 'low', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 0),
+(228, 'medium', 'medium', 'low', 'high', 'low', 'high', 'medium', 'young', 1),
+(229, 'medium', 'medium', 'low', 'high', 'high', 'high', 'high', 'middleaged', 0),
+(230, 'low', 'low', 'medium', 'high', 'medium', 'high', 'low', 'young', 0),
+(231, 'medium', 'medium', 'medium', 'low', 'low', 'high', 'medium', 'young', 1),
+(232, 'medium', 'low', 'medium', 'high', 'high', 'high', 'low', 'adult', 1),
+(233, 'medium', 'low', 'medium', 'high', 'medium', 'high', 'high', 'young', 0),
+(234, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 0),
+(235, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(236, 'medium', 'medium', 'low', 'low', 'low', 'high', 'low', 'young', 1),
+(237, 'high', 'medium', 'medium', 'medium', 'high', 'high', 'high', 'adult', 1),
+(238, 'low', 'medium', 'high', 'high', 'low', 'high', 'medium', 'young', 1),
+(239, 'high', 'medium', 'medium', 'medium', 'low', 'high', 'medium', 'middleaged', 1),
+(240, 'low', 'low', 'low', 'low', 'low', 'medium', 'high', 'young', 0),
+(241, 'medium', 'low', 'low', 'medium', 'low', 'high', 'low', 'young', 0),
+(242, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(243, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 1),
+(244, 'medium', 'low', 'low', 'medium', 'high', 'high', 'high', 'middleaged', 1),
+(245, 'medium', 'medium', 'low', 'high', 'high', 'high', 'low', 'young', 0),
+(246, 'high', 'medium', 'medium', 'low', 'low', 'high', 'high', 'adult', 1),
+(247, 'high', 'low', 'low', 'low', 'low', 'high', 'low', 'adult', 0),
+(248, 'low', 'medium', 'high', 'high', 'high', 'high', 'low', 'young', 0),
+(249, 'high', 'low', 'low', 'high', 'high', 'high', 'low', 'middleaged', 0),
+(250, 'medium', 'low', 'medium', 'medium', 'low', 'high', 'low', 'young', 0),
+(251, 'high', 'low', 'low', 'low', 'low', 'high', 'low', 'adult', 0),
+(252, 'medium', 'low', 'medium', 'low', 'low', 'high', 'low', 'young', 0),
+(253, 'medium', 'low', 'medium', 'low', 'medium', 'high', 'low', 'young', 0),
+(254, 'low', 'low', 'low', 'high', 'low', 'high', 'low', 'young', 0),
+(255, 'high', 'low', 'low', 'low', 'high', 'high', 'high', 'adult', 1),
+(256, 'medium', 'low', 'low', 'high', 'low', 'high', 'high', 'young', 1),
+(257, 'medium', 'low', 'low', 'high', 'low', 'high', 'high', 'middleaged', 0),
+(258, 'medium', 'low', 'low', 'medium', 'low', 'high', 'low', 'young', 0),
+(259, 'medium', 'medium', 'low', 'low', 'high', 'high', 'medium', 'young', 0),
+(260, 'high', 'medium', 'low', 'high', 'medium', 'high', 'high', 'adult', 1),
+(261, 'medium', 'medium', 'low', 'low', 'medium', 'high', 'low', 'middleaged', 0),
+(262, 'medium', 'medium', 'low', 'low', 'low', 'high', 'medium', 'young', 1),
+(263, 'medium', 'low', 'low', 'high', 'low', 'high', 'medium', 'young', 0),
+(264, 'medium', 'medium', 'medium', 'low', 'low', 'high', 'low', 'adult', 0),
+(265, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'middleaged', 1),
+(266, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'high', 'adult', 0),
+(267, 'low', 'low', 'low', 'low', 'low', 'high', 'high', 'young', 1),
+(268, 'medium', 'low', 'low', 'high', 'low', 'high', 'high', 'young', 0),
+(269, 'low', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 0),
+(270, 'medium', 'medium', 'low', 'low', 'low', 'high', 'low', 'young', 1),
+(271, 'high', 'low', 'medium', 'high', 'low', 'high', 'high', 'middleaged', 1),
+(272, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(273, 'medium', 'low', 'low', 'low', 'low', 'medium', 'low', 'adult', 0),
+(274, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(275, 'high', 'low', 'low', 'low', 'low', 'high', 'low', 'adult', 0),
+(276, 'medium', 'low', 'low', 'high', 'medium', 'high', 'medium', 'young', 0),
+(277, 'high', 'low', 'low', 'medium', 'low', 'high', 'low', 'young', 1),
+(278, 'low', 'low', 'low', 'medium', 'medium', 'high', 'low', 'young', 0),
+(279, 'medium', 'low', 'low', 'low', 'low', 'high', 'medium', 'adult', 0),
+(280, 'medium', 'low', 'low', 'low', 'high', 'high', 'medium', 'young', 0),
+(281, 'low', 'medium', 'low', 'low', 'low', 'high', 'low', 'young', 1),
+(282, 'high', 'low', 'low', 'high', 'medium', 'high', 'low', 'middleaged', 0),
+(283, 'high', 'low', 'medium', 'low', 'medium', 'high', 'low', 'middleaged', 0),
+(284, 'high', 'medium', 'medium', 'low', 'low', 'high', 'low', 'adult', 1),
+(285, 'medium', 'low', 'medium', 'low', 'low', 'high', 'low', 'adult', 1),
+(286, 'high', 'low', 'low', 'high', 'medium', 'high', 'medium', 'adult', 0),
+(287, 'medium', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'middleaged', 0),
+(288, 'medium', 'low', 'medium', 'high', 'high', 'high', 'medium', 'young', 1),
+(289, 'medium', 'low', 'low', 'low', 'medium', 'medium', 'low', 'young', 0),
+(290, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'middleaged', 0),
+(291, 'low', 'low', 'medium', 'high', 'medium', 'high', 'low', 'young', 0),
+(292, 'low', 'low', 'low', 'high', 'medium', 'high', 'medium', 'young', 1),
+(293, 'medium', 'low', 'low', 'high', 'high', 'high', 'high', 'middleaged', 1),
+(294, 'medium', 'low', 'low', 'high', 'high', 'high', 'medium', 'young', 1),
+(295, 'low', 'medium', 'low', 'low', 'low', 'medium', 'low', 'adult', 0),
+(296, 'medium', 'medium', 'low', 'high', 'medium', 'high', 'medium', 'young', 0),
+(297, 'medium', 'medium', 'low', 'high', 'high', 'high', 'low', 'young', 1),
+(298, 'low', 'low', 'medium', 'high', 'high', 'high', 'high', 'young', 0),
+(299, 'high', 'low', 'low', 'high', 'high', 'high', 'low', 'adult', 1),
+(300, 'high', 'low', 'low', 'low', 'low', 'medium', 'medium', 'adult', 0),
+(301, 'low', 'medium', 'low', 'low', 'low', 'high', 'medium', 'middleaged', 1),
+(302, 'medium', 'medium', 'low', 'high', 'medium', 'high', 'low', 'young', 1),
+(303, 'medium', 'low', 'medium', 'high', 'medium', 'high', 'low', 'middleaged', 0),
+(304, 'medium', 'low', 'high', 'low', 'low', 'high', 'low', 'young', 1),
+(305, 'medium', 'medium', 'low', 'low', 'low', 'medium', 'low', 'middleaged', 0),
+(306, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(307, 'high', 'medium', 'low', 'medium', 'medium', 'high', 'low', 'adult', 1),
+(308, 'low', 'low', 'low', 'low', 'medium', 'high', 'low', 'young', 0),
+(309, 'low', 'low', 'low', 'medium', 'high', 'high', 'high', 'young', 1),
+(310, 'medium', 'low', 'low', 'high', 'high', 'high', 'medium', 'middleaged', 1),
+(311, 'medium', 'low', 'low', 'high', 'low', 'high', 'low', 'adult', 0),
+(312, 'low', 'low', 'low', 'high', 'medium', 'high', 'medium', 'young', 0),
+(313, 'medium', 'medium', 'low', 'low', 'medium', 'high', 'low', 'young', 1),
+(314, 'medium', 'low', 'low', 'low', 'medium', 'high', 'medium', 'young', 0),
+(315, 'high', 'low', 'medium', 'high', 'low', 'high', 'high', 'adult', 1),
+(316, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'low', 'young', 0),
+(317, 'medium', 'low', 'medium', 'low', 'medium', 'medium', 'low', 'middleaged', 0),
+(318, 'medium', 'medium', 'low', 'low', 'low', 'high', 'low', 'young', 1),
+(319, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(320, 'medium', 'medium', 'low', 'low', 'low', 'medium', 'low', 'adult', 1),
+(321, 'medium', 'low', 'low', 'low', 'high', 'high', 'high', 'middleaged', 0),
+(322, 'medium', 'low', 'low', 'high', 'low', 'high', 'low', 'young', 1),
+(323, 'low', 'low', 'low', 'medium', 'low', 'high', 'low', 'middleaged', 1),
+(324, 'high', 'medium', 'high', 'high', 'medium', 'high', 'medium', 'adult', 1),
+(325, 'medium', 'low', 'low', 'high', 'low', 'high', 'low', 'young', 0),
+(326, 'medium', 'medium', 'low', 'medium', 'high', 'high', 'low', 'young', 0),
+(327, 'medium', 'low', 'low', 'high', 'medium', 'high', 'medium', 'middleaged', 1),
+(328, 'high', 'medium', 'low', 'low', 'low', 'high', 'low', 'middleaged', 0),
+(329, 'medium', 'low', 'medium', 'high', 'medium', 'high', 'low', 'young', 1),
+(330, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'middleaged', 0),
+(331, 'high', 'low', 'low', 'medium', 'low', 'medium', 'high', 'adult', 0),
+(332, 'medium', 'low', 'low', 'low', 'medium', 'high', 'low', 'young', 0),
+(333, 'medium', 'medium', 'low', 'low', 'low', 'high', 'low', 'adult', 1),
+(334, 'high', 'low', 'medium', 'low', 'low', 'medium', 'low', 'adult', 0),
+(335, 'medium', 'low', 'low', 'medium', 'medium', 'medium', 'low', 'young', 0),
+(336, 'low', 'medium', 'low', 'high', 'high', 'high', 'low', 'young', 0),
+(337, 'low', 'low', 'low', 'low', 'low', 'high', 'high', 'adult', 0),
+(338, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'adult', 1),
+(339, 'high', 'medium', 'low', 'high', 'high', 'high', 'medium', 'middleaged', 1),
+(340, 'high', 'medium', 'medium', 'low', 'low', 'high', 'low', 'adult', 1),
+(341, 'medium', 'low', 'low', 'low', 'medium', 'high', 'low', 'young', 0),
+(342, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'medium', 'middleaged', 0),
+(343, 'medium', 'low', 'low', 'high', 'low', 'high', 'low', 'young', 0),
+(344, 'medium', 'low', 'medium', 'low', 'low', 'high', 'low', 'middleaged', 0),
+(345, 'high', 'low', 'low', 'low', 'low', 'high', 'low', 'adult', 0),
+(346, 'high', 'low', 'medium', 'high', 'medium', 'high', 'low', 'adult', 0),
+(347, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'medium', 'young', 0),
+(348, 'medium', 'low', 'low', 'low', 'low', 'medium', 'low', 'young', 0),
+(349, 'medium', 'low', 'low', 'medium', 'medium', 'medium', 'low', 'young', 0),
+(350, 'medium', 'low', 'medium', 'high', 'low', 'high', 'low', 'middleaged', 1),
+(351, 'medium', 'low', 'medium', 'low', 'low', 'high', 'low', 'young', 0),
+(352, 'medium', 'low', 'medium', 'low', 'low', 'high', 'low', 'middleaged', 0),
+(353, 'medium', 'low', 'medium', 'high', 'low', 'high', 'low', 'adult', 0),
+(354, 'medium', 'low', 'low', 'low', 'medium', 'high', 'high', 'young', 0),
+(355, 'medium', 'low', 'low', 'low', 'low', 'high', 'high', 'young', 0),
+(356, 'high', 'medium', 'medium', 'low', 'low', 'high', 'low', 'adult', 1),
+(357, 'medium', 'low', 'low', 'high', 'high', 'high', 'high', 'young', 1),
+(358, 'high', 'low', 'low', 'high', 'low', 'high', 'high', 'adult', 1),
+(359, 'high', 'low', 'low', 'high', 'medium', 'high', 'low', 'adult', 0),
+(360, 'medium', 'medium', 'low', 'high', 'high', 'high', 'medium', 'young', 1),
+(361, 'medium', 'medium', 'low', 'high', 'high', 'high', 'high', 'young', 1),
+(362, 'medium', 'medium', 'low', 'low', 'low', 'high', 'low', 'adult', 0),
+(363, 'medium', 'low', 'high', 'high', 'low', 'high', 'low', 'adult', 0),
+(364, 'medium', 'medium', 'low', 'low', 'low', 'high', 'high', 'adult', 1),
+(365, 'medium', 'medium', 'low', 'high', 'high', 'high', 'low', 'middleaged', 0),
+(366, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'middleaged', 0),
+(367, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 1),
+(368, 'low', 'low', 'low', 'low', 'low', 'medium', 'low', 'young', 0),
+(369, 'medium', 'low', 'medium', 'low', 'medium', 'high', 'low', 'young', 0),
+(370, 'medium', 'low', 'high', 'high', 'medium', 'high', 'low', 'adult', 1),
+(371, 'medium', 'medium', 'medium', 'high', 'high', 'high', 'high', 'young', 1),
+(372, 'low', 'low', 'low', 'medium', 'medium', 'low', 'high', 'young', 0),
+(373, 'low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'young', 0),
+(374, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(375, 'medium', 'low', 'low', 'high', 'medium', 'high', 'medium', 'young', 0),
+(376, 'high', 'medium', 'medium', 'high', 'high', 'high', 'high', 'adult', 1),
+(377, 'low', 'low', 'medium', 'low', 'medium', 'high', 'low', 'young', 0),
+(378, 'medium', 'low', 'low', 'high', 'medium', 'high', 'high', 'young', 0),
+(379, 'medium', 'medium', 'low', 'low', 'low', 'high', 'low', 'middleaged', 1),
+(380, 'low', 'low', 'high', 'high', 'medium', 'high', 'high', 'middleaged', 0),
+(381, 'medium', 'low', 'low', 'high', 'medium', 'high', 'medium', 'young', 0),
+(382, 'low', 'low', 'low', 'medium', 'low', 'medium', 'low', 'young', 0),
+(383, 'medium', 'low', 'low', 'low', 'high', 'high', 'high', 'young', 0),
+(384, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'high', 'young', 0),
+(385, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'low', 'young', 0),
+(386, 'medium', 'low', 'low', 'low', 'medium', 'medium', 'low', 'young', 0),
+(387, 'medium', 'low', 'low', 'high', 'low', 'high', 'medium', 'middleaged', 1),
+(388, 'high', 'low', 'high', 'high', 'low', 'high', 'low', 'adult', 1),
+(389, 'medium', 'medium', 'medium', 'high', 'high', 'high', 'low', 'adult', 1),
+(390, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'high', 'young', 0),
+(391, 'medium', 'low', 'low', 'high', 'high', 'high', 'low', 'adult', 0),
+(392, 'medium', 'medium', 'low', 'low', 'low', 'high', 'low', 'young', 1),
+(393, 'medium', 'low', 'low', 'low', 'high', 'medium', 'low', 'young', 0),
+(394, 'medium', 'low', 'low', 'low', 'medium', 'medium', 'low', 'middleaged', 0),
+(395, 'medium', 'medium', 'low', 'low', 'low', 'high', 'medium', 'middleaged', 1),
+(396, 'medium', 'low', 'low', 'medium', 'high', 'high', 'high', 'young', 0),
+(397, 'medium', 'low', 'low', 'high', 'medium', 'high', 'high', 'middleaged', 0),
+(398, 'low', 'low', 'low', 'high', 'low', 'high', 'low', 'young', 1),
+(399, 'medium', 'low', 'low', 'low', 'low', 'medium', 'low', 'young', 0),
+(400, 'medium', 'medium', 'low', 'high', 'low', 'high', 'low', 'young', 1),
+(401, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'middleaged', 1),
+(402, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'adult', 0),
+(403, 'medium', 'low', 'medium', 'high', 'medium', 'high', 'low', 'middleaged', 1),
+(404, 'high', 'low', 'low', 'high', 'low', 'high', 'low', 'middleaged', 0),
+(405, 'medium', 'medium', 'low', 'low', 'low', 'high', 'low', 'adult', 1),
+(406, 'medium', 'low', 'low', 'high', 'medium', 'high', 'high', 'young', 0),
+(407, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'adult', 1),
+(408, 'low', 'low', 'low', 'low', 'low', 'medium', 'low', 'young', 0),
+(409, 'high', 'medium', 'low', 'low', 'low', 'high', 'high', 'middleaged', 1),
+(410, 'medium', 'medium', 'low', 'high', 'high', 'high', 'medium', 'young', 1),
+(411, 'medium', 'low', 'high', 'high', 'low', 'high', 'medium', 'young', 0),
+(412, 'medium', 'low', 'low', 'high', 'high', 'high', 'high', 'young', 0),
+(413, 'medium', 'medium', 'medium', 'medium', 'high', 'high', 'high', 'young', 0),
+(414, 'medium', 'medium', 'low', 'medium', 'medium', 'high', 'low', 'young', 0),
+(415, 'low', 'low', 'low', 'high', 'high', 'high', 'high', 'young', 1),
+(416, 'medium', 'medium', 'medium', 'high', 'high', 'high', 'low', 'young', 1),
+(417, 'medium', 'low', 'low', 'medium', 'low', 'high', 'high', 'young', 0),
+(418, 'medium', 'medium', 'medium', 'high', 'low', 'high', 'high', 'middleaged', 1),
+(419, 'medium', 'low', 'low', 'low', 'low', 'medium', 'medium', 'young', 0),
+(420, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 1),
+(421, 'medium', 'low', 'medium', 'high', 'high', 'high', 'high', 'young', 0),
+(422, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'high', 'young', 0),
+(423, 'low', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(424, 'medium', 'low', 'low', 'medium', 'low', 'high', 'low', 'young', 0),
+(425, 'high', 'medium', 'low', 'high', 'high', 'high', 'high', 'middleaged', 1),
+(426, 'medium', 'medium', 'low', 'high', 'high', 'high', 'low', 'middleaged', 1),
+(427, 'low', 'low', 'low', 'low', 'low', 'low', 'low', 'young', 0),
+(428, 'medium', 'medium', 'low', 'high', 'high', 'high', 'low', 'middleaged', 1),
+(429, 'low', 'low', 'high', 'high', 'medium', 'high', 'low', 'young', 0),
+(430, 'medium', 'low', 'medium', 'high', 'high', 'high', 'low', 'adult', 1),
+(431, 'medium', 'low', 'low', 'low', 'low', 'medium', 'low', 'young', 0),
+(432, 'medium', 'low', 'low', 'low', 'medium', 'high', 'high', 'middleaged', 0),
+(433, 'medium', 'low', 'low', 'low', 'medium', 'high', 'high', 'young', 0),
+(434, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 0),
+(435, 'medium', 'low', 'low', 'low', 'low', 'high', 'high', 'middleaged', 0),
+(436, 'low', 'medium', 'low', 'low', 'low', 'high', 'low', 'young', 1),
+(437, 'high', 'medium', 'medium', 'high', 'low', 'high', 'low', 'adult', 0),
+(438, 'medium', 'medium', 'low', 'low', 'low', 'high', 'low', 'young', 0),
+(439, 'medium', 'low', 'low', 'low', 'low', 'medium', 'low', 'young', 0),
+(440, 'medium', 'low', 'medium', 'low', 'low', 'high', 'medium', 'middleaged', 0),
+(441, 'low', 'medium', 'high', 'high', 'low', 'high', 'low', 'adult', 1),
+(442, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'low', 'young', 0),
+(443, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(444, 'high', 'low', 'low', 'low', 'low', 'high', 'high', 'middleaged', 1),
+(445, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'middleaged', 1),
+(446, 'low', 'medium', 'low', 'high', 'low', 'high', 'high', 'young', 1),
+(447, 'medium', 'low', 'low', 'low', 'medium', 'high', 'medium', 'young', 0),
+(448, 'low', 'low', 'medium', 'high', 'medium', 'high', 'low', 'young', 0),
+(449, 'low', 'low', 'low', 'high', 'medium', 'high', 'high', 'young', 1),
+(450, 'low', 'low', 'low', 'medium', 'medium', 'high', 'low', 'young', 0),
+(451, 'medium', 'low', 'low', 'low', 'medium', 'medium', 'low', 'young', 0),
+(452, 'medium', 'low', 'low', 'low', 'low', 'high', 'high', 'young', 1),
+(453, 'low', 'low', 'low', 'high', 'high', 'high', 'low', 'young', 0),
+(454, 'medium', 'low', 'low', 'low', 'low', 'medium', 'medium', 'adult', 0),
+(455, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(456, 'high', 'medium', 'low', 'high', 'low', 'high', 'low', 'middleaged', 1),
+(457, 'medium', 'low', 'low', 'low', 'low', 'high', 'medium', 'adult', 0),
+(458, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(459, 'high', 'medium', 'medium', 'high', 'high', 'high', 'high', 'adult', 1),
+(460, 'high', 'low', 'low', 'high', 'medium', 'high', 'low', 'adult', 0),
+(461, 'high', 'low', 'low', 'medium', 'medium', 'medium', 'medium', 'adult', 0),
+(462, 'medium', 'low', 'low', 'low', 'low', 'medium', 'low', 'young', 0),
+(463, 'high', 'low', 'low', 'high', 'medium', 'high', 'medium', 'middleaged', 0),
+(464, 'medium', 'low', 'low', 'high', 'low', 'high', 'low', 'middleaged', 0),
+(465, 'high', 'low', 'high', 'low', 'low', 'medium', 'high', 'middleaged', 0),
+(466, 'low', 'low', 'low', 'low', 'medium', 'medium', 'low', 'young', 0),
+(467, 'low', 'low', 'low', 'low', 'medium', 'high', 'low', 'young', 0),
+(468, 'low', 'low', 'low', 'high', 'medium', 'high', 'medium', 'young', 0),
+(469, 'high', 'low', 'low', 'low', 'low', 'high', 'low', 'middleaged', 1),
+(470, 'medium', 'medium', 'low', 'high', 'medium', 'high', 'high', 'young', 0),
+(471, 'medium', 'medium', 'medium', 'high', 'low', 'high', 'medium', 'young', 0),
+(472, 'low', 'low', 'low', 'high', 'low', 'high', 'low', 'young', 0),
+(473, 'low', 'low', 'low', 'high', 'low', 'high', 'low', 'young', 0),
+(474, 'high', 'low', 'high', 'low', 'low', 'high', 'low', 'adult', 0),
+(475, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 0),
+(476, 'low', 'low', 'medium', 'high', 'low', 'high', 'low', 'adult', 0),
+(477, 'medium', 'low', 'medium', 'high', 'high', 'high', 'medium', 'young', 1),
+(478, 'high', 'low', 'low', 'low', 'medium', 'medium', 'low', 'middleaged', 0),
+(479, 'high', 'low', 'low', 'high', 'medium', 'high', 'low', 'middleaged', 0),
+(480, 'medium', 'low', 'medium', 'high', 'low', 'high', 'low', 'adult', 0),
+(481, 'medium', 'medium', 'low', 'high', 'high', 'high', 'low', 'middleaged', 1),
+(482, 'low', 'low', 'medium', 'high', 'low', 'high', 'low', 'young', 0),
+(483, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'low', 'young', 0),
+(484, 'low', 'low', 'medium', 'high', 'medium', 'high', 'low', 'young', 0),
+(485, 'low', 'medium', 'low', 'low', 'low', 'high', 'medium', 'middleaged', 1),
+(486, 'low', 'low', 'low', 'high', 'high', 'high', 'low', 'young', 1),
+(487, 'medium', 'low', 'low', 'high', 'high', 'high', 'high', 'young', 0),
+(488, 'low', 'medium', 'low', 'high', 'high', 'high', 'high', 'adult', 0),
+(489, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 0),
+(490, 'high', 'medium', 'medium', 'low', 'low', 'high', 'high', 'adult', 0),
+(491, 'medium', 'low', 'low', 'high', 'medium', 'high', 'medium', 'young', 0),
+(492, 'medium', 'low', 'high', 'high', 'low', 'high', 'low', 'adult', 0),
+(493, 'medium', 'low', 'low', 'high', 'low', 'high', 'low', 'middleaged', 0),
+(494, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'high', 'adult', 1),
+(495, 'medium', 'low', 'low', 'low', 'low', 'low', 'low', 'young', 0),
+(496, 'medium', 'medium', 'low', 'low', 'low', 'high', 'low', 'adult', 0),
+(497, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'middleaged', 0),
+(498, 'medium', 'low', 'low', 'low', 'medium', 'high', 'high', 'young', 0),
+(499, 'high', 'medium', 'low', 'high', 'medium', 'high', 'low', 'adult', 1),
+(500, 'medium', 'medium', 'low', 'high', 'high', 'high', 'medium', 'middleaged', 0),
+(501, 'medium', 'low', 'high', 'medium', 'medium', 'high', 'low', 'young', 0),
+(502, 'medium', 'low', 'low', 'high', 'low', 'high', 'low', 'young', 0),
+(503, 'medium', 'low', 'low', 'high', 'low', 'high', 'medium', 'adult', 1),
+(504, 'high', 'low', 'low', 'high', 'medium', 'high', 'medium', 'adult', 0),
+(505, 'medium', 'low', 'low', 'high', 'low', 'high', 'low', 'adult', 0),
+(506, 'high', 'low', 'medium', 'low', 'low', 'high', 'low', 'middleaged', 0),
+(507, 'low', 'medium', 'high', 'high', 'medium', 'high', 'low', 'middleaged', 1),
+(508, 'medium', 'low', 'low', 'medium', 'high', 'high', 'medium', 'young', 0),
+(509, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'high', 'young', 0),
+(510, 'high', 'low', 'low', 'low', 'low', 'high', 'low', 'adult', 0),
+(511, 'high', 'low', 'low', 'high', 'low', 'high', 'low', 'adult', 1),
+(512, 'low', 'low', 'low', 'low', 'high', 'medium', 'low', 'young', 0),
+(513, 'high', 'low', 'low', 'low', 'low', 'high', 'low', 'adult', 0),
+(514, 'medium', 'low', 'low', 'low', 'low', 'high', 'high', 'young', 0),
+(515, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'low', 'young', 0),
+(516, 'medium', 'medium', 'low', 'medium', 'medium', 'high', 'low', 'young', 1),
+(517, 'high', 'medium', 'medium', 'high', 'medium', 'high', 'medium', 'adult', 1),
+(518, 'high', 'low', 'medium', 'low', 'low', 'high', 'low', 'adult', 0),
+(519, 'high', 'low', 'low', 'low', 'low', 'high', 'low', 'adult', 0),
+(520, 'medium', 'low', 'high', 'low', 'high', 'medium', 'high', 'adult', 0),
+(521, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(522, 'medium', 'low', 'medium', 'high', 'medium', 'high', 'low', 'young', 0),
+(523, 'medium', 'low', 'low', 'low', 'low', 'low', 'low', 'young', 0),
+(524, 'high', 'low', 'low', 'low', 'low', 'high', 'medium', 'adult', 1),
+(525, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 0),
+(526, 'medium', 'low', 'low', 'medium', 'low', 'medium', 'low', 'young', 0),
+(527, 'medium', 'low', 'low', 'medium', 'medium', 'medium', 'low', 'young', 0),
+(528, 'medium', 'low', 'low', 'low', 'medium', 'high', 'low', 'young', 0),
+(529, 'low', 'low', 'low', 'high', 'high', 'high', 'low', 'young', 0),
+(530, 'low', 'low', 'low', 'low', 'low', 'high', 'medium', 'middleaged', 0),
+(531, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'medium', 'young', 0),
+(532, 'low', 'low', 'low', 'low', 'low', 'high', 'medium', 'young', 0),
+(533, 'medium', 'low', 'low', 'high', 'medium', 'high', 'high', 'young', 0),
+(534, 'medium', 'low', 'low', 'low', 'low', 'high', 'high', 'middleaged', 0),
+(535, 'medium', 'low', 'low', 'high', 'medium', 'high', 'high', 'young', 0),
+(536, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 1),
+(537, 'low', 'low', 'high', 'low', 'low', 'high', 'low', 'adult', 0),
+(538, 'low', 'low', 'low', 'low', 'low', 'medium', 'medium', 'adult', 0),
+(539, 'low', 'low', 'medium', 'high', 'high', 'high', 'medium', 'young', 0),
+(540, 'medium', 'low', 'high', 'high', 'medium', 'high', 'high', 'middleaged', 1),
+(541, 'high', 'low', 'low', 'high', 'high', 'high', 'medium', 'adult', 1),
+(542, 'medium', 'low', 'low', 'high', 'high', 'high', 'high', 'young', 1),
+(543, 'high', 'low', 'medium', 'high', 'low', 'high', 'medium', 'adult', 1),
+(544, 'medium', 'low', 'high', 'medium', 'medium', 'high', 'low', 'young', 0),
+(545, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(546, 'high', 'medium', 'high', 'high', 'high', 'high', 'low', 'middleaged', 1),
+(547, 'medium', 'medium', 'low', 'high', 'high', 'high', 'high', 'adult', 1),
+(548, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'low', 'young', 0),
+(549, 'medium', 'medium', 'medium', 'high', 'medium', 'high', 'low', 'adult', 0),
+(550, 'medium', 'medium', 'high', 'high', 'low', 'high', 'medium', 'middleaged', 0),
+(551, 'medium', 'low', 'low', 'high', 'low', 'high', 'low', 'young', 0),
+(552, 'medium', 'low', 'low', 'high', 'medium', 'high', 'high', 'young', 0),
+(553, 'medium', 'low', 'medium', 'low', 'low', 'high', 'low', 'adult', 0),
+(554, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'low', 'young', 0),
+(555, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'low', 'young', 0),
+(556, 'high', 'low', 'low', 'high', 'high', 'high', 'low', 'middleaged', 0),
+(557, 'medium', 'low', 'low', 'high', 'low', 'high', 'low', 'middleaged', 0),
+(558, 'high', 'low', 'low', 'low', 'low', 'high', 'low', 'adult', 0),
+(559, 'high', 'low', 'low', 'high', 'low', 'high', 'low', 'adult', 0),
+(560, 'high', 'low', 'low', 'low', 'low', 'high', 'low', 'middleaged', 0),
+(561, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'adult', 1),
+(562, 'low', 'medium', 'low', 'high', 'high', 'high', 'high', 'young', 1),
+(563, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(564, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'low', 'middleaged', 0),
+(565, 'low', 'low', 'medium', 'low', 'low', 'high', 'medium', 'young', 0),
+(566, 'medium', 'low', 'low', 'low', 'medium', 'high', 'medium', 'young', 0),
+(567, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(568, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'adult', 0),
+(569, 'medium', 'medium', 'low', 'high', 'medium', 'high', 'low', 'middleaged', 0),
+(570, 'low', 'low', 'low', 'high', 'medium', 'high', 'low', 'middleaged', 1),
+(571, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'middleaged', 0),
+(572, 'medium', 'low', 'high', 'low', 'low', 'medium', 'low', 'young', 0),
+(573, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(574, 'medium', 'low', 'low', 'low', 'medium', 'high', 'low', 'young', 0),
+(575, 'medium', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'young', 0),
+(576, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(577, 'medium', 'low', 'low', 'medium', 'medium', 'medium', 'medium', 'middleaged', 0),
+(578, 'medium', 'low', 'medium', 'low', 'low', 'high', 'medium', 'young', 1),
+(579, 'high', 'low', 'low', 'low', 'low', 'high', 'low', 'middleaged', 0),
+(580, 'medium', 'medium', 'low', 'high', 'low', 'high', 'high', 'adult', 1),
+(581, 'low', 'medium', 'high', 'high', 'low', 'high', 'low', 'young', 1),
+(582, 'medium', 'low', 'low', 'high', 'low', 'high', 'low', 'young', 0),
+(583, 'high', 'low', 'low', 'low', 'low', 'high', 'low', 'adult', 0),
+(584, 'high', 'low', 'low', 'low', 'low', 'high', 'low', 'adult', 0),
+(585, 'high', 'low', 'low', 'medium', 'high', 'high', 'medium', 'adult', 1),
+(586, 'medium', 'low', 'low', 'low', 'low', 'medium', 'low', 'young', 0),
+(587, 'high', 'medium', 'low', 'low', 'low', 'high', 'low', 'adult', 1),
+(588, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 0),
+(589, 'medium', 'medium', 'medium', 'high', 'medium', 'high', 'high', 'adult', 1),
+(590, 'low', 'low', 'low', 'low', 'low', 'medium', 'low', 'young', 0),
+(591, 'high', 'low', 'medium', 'high', 'low', 'high', 'high', 'adult', 1),
+(592, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(593, 'medium', 'low', 'medium', 'low', 'low', 'high', 'low', 'adult', 1),
+(594, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'high', 'young', 0),
+(595, 'medium', 'low', 'low', 'high', 'high', 'high', 'medium', 'middleaged', 0),
+(596, 'low', 'medium', 'medium', 'low', 'high', 'high', 'medium', 'young', 1),
+(597, 'low', 'low', 'low', 'low', 'low', 'high', 'low', 'adult', 0),
+(598, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'high', 'young', 0),
+(599, 'medium', 'medium', 'low', 'low', 'low', 'high', 'low', 'middleaged', 1),
+(600, 'medium', 'low', 'low', 'medium', 'medium', 'medium', 'low', 'young', 0),
+(601, 'medium', 'low', 'medium', 'medium', 'low', 'high', 'low', 'young', 0),
+(602, 'medium', 'low', 'low', 'low', 'low', 'medium', 'low', 'young', 0),
+(603, 'medium', 'low', 'low', 'high', 'low', 'high', 'low', 'middleaged', 0),
+(604, 'high', 'medium', 'low', 'high', 'medium', 'high', 'medium', 'adult', 1),
+(605, 'medium', 'medium', 'low', 'low', 'low', 'high', 'low', 'middleaged', 1),
+(606, 'medium', 'low', 'low', 'high', 'low', 'high', 'high', 'young', 0),
+(607, 'medium', 'medium', 'low', 'high', 'high', 'high', 'high', 'young', 1),
+(608, 'medium', 'low', 'low', 'high', 'medium', 'medium', 'low', 'young', 0),
+(609, 'low', 'medium', 'medium', 'high', 'high', 'high', 'low', 'young', 0),
+(610, 'medium', 'low', 'low', 'low', 'high', 'medium', 'low', 'young', 0),
+(611, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'low', 'young', 0),
+(612, 'medium', 'medium', 'low', 'medium', 'high', 'high', 'high', 'middleaged', 1),
+(613, 'high', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'adult', 1),
+(614, 'medium', 'low', 'medium', 'high', 'low', 'high', 'medium', 'young', 0),
+(615, 'high', 'low', 'low', 'high', 'medium', 'high', 'high', 'adult', 1),
+(616, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 0),
+(617, 'medium', 'low', 'high', 'low', 'low', 'high', 'low', 'middleaged', 0),
+(618, 'medium', 'low', 'low', 'low', 'low', 'medium', 'low', 'young', 0),
+(619, 'high', 'low', 'medium', 'medium', 'low', 'high', 'high', 'adult', 1),
+(620, 'low', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 1),
+(621, 'medium', 'low', 'medium', 'high', 'medium', 'high', 'low', 'young', 0),
+(622, 'medium', 'low', 'low', 'medium', 'low', 'high', 'high', 'young', 0),
+(623, 'medium', 'medium', 'high', 'low', 'low', 'high', 'high', 'adult', 0),
+(624, 'low', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(625, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 0),
+(626, 'medium', 'low', 'medium', 'high', 'medium', 'high', 'low', 'young', 0),
+(627, 'low', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 0),
+(628, 'low', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 0),
+(629, 'medium', 'low', 'medium', 'low', 'low', 'high', 'low', 'adult', 0),
+(630, 'medium', 'low', 'low', 'medium', 'low', 'high', 'low', 'young', 0),
+(631, 'high', 'low', 'low', 'low', 'low', 'high', 'medium', 'middleaged', 1),
+(632, 'low', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(633, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 0),
+(634, 'medium', 'low', 'medium', 'low', 'high', 'high', 'low', 'young', 0),
+(635, 'high', 'low', 'low', 'low', 'low', 'high', 'low', 'middleaged', 0),
+(636, 'high', 'low', 'low', 'low', 'low', 'high', 'low', 'middleaged', 1),
+(637, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'adult', 0),
+(638, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'medium', 'young', 0),
+(639, 'high', 'low', 'low', 'high', 'medium', 'high', 'medium', 'middleaged', 1),
+(640, 'medium', 'low', 'low', 'low', 'medium', 'medium', 'low', 'young', 0),
+(641, 'low', 'low', 'medium', 'low', 'medium', 'high', 'medium', 'young', 0),
+(642, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 0),
+(643, 'medium', 'medium', 'medium', 'low', 'low', 'high', 'low', 'adult', 1),
+(644, 'medium', 'low', 'low', 'low', 'low', 'high', 'medium', 'middleaged', 0),
+(645, 'medium', 'low', 'low', 'high', 'medium', 'high', 'medium', 'young', 0),
+(646, 'medium', 'medium', 'low', 'high', 'high', 'high', 'low', 'middleaged', 0),
+(647, 'medium', 'medium', 'low', 'low', 'medium', 'medium', 'low', 'middleaged', 1),
+(648, 'low', 'medium', 'low', 'high', 'medium', 'high', 'low', 'young', 1),
+(649, 'high', 'low', 'medium', 'high', 'medium', 'high', 'low', 'adult', 1),
+(650, 'low', 'low', 'low', 'high', 'low', 'high', 'low', 'young', 0),
+(651, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(652, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'low', 'young', 0),
+(653, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(654, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 0),
+(655, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(656, 'medium', 'medium', 'low', 'high', 'high', 'high', 'low', 'young', 1),
+(657, 'medium', 'low', 'low', 'high', 'medium', 'medium', 'low', 'young', 0),
+(658, 'medium', 'low', 'medium', 'high', 'high', 'high', 'high', 'adult', 0),
+(659, 'high', 'low', 'high', 'low', 'low', 'high', 'low', 'adult', 0),
+(660, 'medium', 'low', 'medium', 'high', 'medium', 'high', 'high', 'young', 1),
+(661, 'high', 'medium', 'medium', 'low', 'low', 'high', 'low', 'adult', 0),
+(662, 'medium', 'medium', 'low', 'high', 'low', 'high', 'high', 'young', 1),
+(663, 'high', 'medium', 'high', 'high', 'high', 'high', 'low', 'adult', 1),
+(664, 'high', 'medium', 'medium', 'high', 'medium', 'high', 'medium', 'adult', 1),
+(665, 'medium', 'low', 'low', 'high', 'low', 'high', 'low', 'adult', 1),
+(666, 'medium', 'low', 'medium', 'high', 'medium', 'high', 'low', 'young', 0),
+(667, 'medium', 'medium', 'medium', 'medium', 'low', 'high', 'low', 'adult', 1),
+(668, 'high', 'low', 'low', 'high', 'low', 'high', 'low', 'adult', 1),
+(669, 'medium', 'low', 'low', 'high', 'high', 'high', 'low', 'adult', 0),
+(670, 'high', 'medium', 'low', 'high', 'medium', 'high', 'low', 'adult', 0),
+(671, 'medium', 'medium', 'low', 'high', 'high', 'high', 'medium', 'adult', 0),
+(672, 'medium', 'low', 'low', 'low', 'low', 'high', 'high', 'young', 0),
+(673, 'high', 'low', 'high', 'medium', 'medium', 'high', 'low', 'adult', 0),
+(674, 'medium', 'low', 'high', 'high', 'high', 'high', 'medium', 'young', 0),
+(675, 'high', 'low', 'medium', 'low', 'low', 'high', 'high', 'adult', 0),
+(676, 'medium', 'medium', 'low', 'low', 'low', 'high', 'low', 'middleaged', 1),
+(677, 'high', 'medium', 'medium', 'low', 'low', 'high', 'low', 'adult', 1),
+(678, 'low', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 0),
+(679, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 1),
+(680, 'medium', 'low', 'low', 'low', 'high', 'high', 'medium', 'young', 0),
+(681, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(682, 'low', 'medium', 'low', 'high', 'low', 'high', 'low', 'young', 1),
+(683, 'low', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(684, 'medium', 'low', 'medium', 'low', 'low', 'high', 'high', 'young', 1),
+(685, 'medium', 'low', 'medium', 'low', 'low', 'low', 'medium', 'adult', 0),
+(686, 'medium', 'low', 'low', 'high', 'high', 'high', 'high', 'young', 0),
+(687, 'medium', 'low', 'low', 'low', 'low', 'medium', 'low', 'young', 0),
+(688, 'medium', 'low', 'low', 'medium', 'low', 'high', 'low', 'young', 0),
+(689, 'medium', 'medium', 'low', 'high', 'high', 'high', 'medium', 'young', 0),
+(690, 'medium', 'medium', 'medium', 'high', 'high', 'high', 'low', 'adult', 1),
+(691, 'high', 'low', 'medium', 'low', 'low', 'high', 'medium', 'middleaged', 0),
+(692, 'high', 'medium', 'high', 'low', 'low', 'high', 'low', 'adult', 1),
+(693, 'medium', 'low', 'low', 'high', 'medium', 'high', 'medium', 'young', 0),
+(694, 'high', 'low', 'low', 'high', 'medium', 'high', 'low', 'adult', 1),
+(695, 'medium', 'low', 'low', 'low', 'low', 'medium', 'low', 'young', 0),
+(696, 'high', 'medium', 'high', 'medium', 'high', 'high', 'low', 'adult', 1),
+(697, 'medium', 'medium', 'low', 'medium', 'medium', 'high', 'low', 'middleaged', 1),
+(698, 'low', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 0),
+(699, 'medium', 'low', 'medium', 'low', 'medium', 'high', 'high', 'young', 0),
+(700, 'medium', 'low', 'low', 'low', 'low', 'high', 'high', 'young', 0),
+(701, 'medium', 'low', 'low', 'high', 'high', 'high', 'low', 'young', 0),
+(702, 'medium', 'low', 'low', 'high', 'low', 'high', 'high', 'adult', 1),
+(703, 'medium', 'medium', 'medium', 'high', 'low', 'high', 'high', 'adult', 1),
+(704, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'adult', 0),
+(705, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'low', 'young', 0),
+(706, 'medium', 'low', 'medium', 'high', 'low', 'high', 'low', 'young', 0),
+(707, 'high', 'low', 'low', 'low', 'low', 'low', 'low', 'middleaged', 1),
+(708, 'medium', 'low', 'low', 'medium', 'high', 'high', 'low', 'young', 0),
+(709, 'high', 'medium', 'low', 'low', 'low', 'high', 'low', 'adult', 1),
+(710, 'medium', 'low', 'low', 'high', 'medium', 'high', 'medium', 'young', 1),
+(711, 'medium', 'medium', 'low', 'low', 'high', 'high', 'low', 'young', 0),
+(712, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'adult', 0),
+(713, 'high', 'low', 'low', 'high', 'low', 'high', 'low', 'middleaged', 1),
+(714, 'low', 'low', 'low', 'medium', 'high', 'high', 'low', 'young', 0),
+(715, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'middleaged', 0),
+(716, 'high', 'medium', 'low', 'high', 'high', 'high', 'medium', 'middleaged', 1),
+(717, 'medium', 'medium', 'low', 'high', 'high', 'high', 'high', 'middleaged', 1),
+(718, 'high', 'low', 'low', 'medium', 'low', 'medium', 'high', 'adult', 0),
+(719, 'medium', 'low', 'low', 'high', 'high', 'high', 'low', 'young', 0),
+(720, 'medium', 'low', 'low', 'high', 'low', 'high', 'low', 'adult', 1),
+(721, 'medium', 'low', 'medium', 'medium', 'low', 'high', 'low', 'middleaged', 0),
+(722, 'medium', 'low', 'low', 'high', 'high', 'high', 'low', 'young', 0),
+(723, 'medium', 'medium', 'low', 'high', 'medium', 'high', 'low', 'adult', 1),
+(724, 'medium', 'low', 'medium', 'high', 'medium', 'high', 'low', 'adult', 0),
+(725, 'medium', 'low', 'high', 'low', 'low', 'high', 'low', 'adult', 0),
+(726, 'medium', 'low', 'low', 'high', 'low', 'high', 'low', 'middleaged', 0),
+(727, 'medium', 'low', 'low', 'high', 'high', 'high', 'low', 'young', 0),
+(728, 'low', 'medium', 'medium', 'high', 'low', 'high', 'low', 'young', 0),
+(729, 'medium', 'medium', 'medium', 'low', 'low', 'medium', 'low', 'young', 0),
+(730, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 0),
+(731, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'low', 'middleaged', 1),
+(732, 'high', 'low', 'medium', 'low', 'low', 'high', 'low', 'young', 1),
+(733, 'medium', 'medium', 'medium', 'high', 'medium', 'high', 'medium', 'young', 1),
+(734, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(735, 'medium', 'low', 'low', 'low', 'low', 'medium', 'high', 'adult', 0),
+(736, 'medium', 'low', 'low', 'high', 'low', 'high', 'low', 'young', 0),
+(737, 'low', 'low', 'medium', 'high', 'medium', 'high', 'high', 'young', 0),
+(738, 'high', 'low', 'low', 'medium', 'low', 'high', 'medium', 'adult', 0),
+(739, 'medium', 'low', 'low', 'low', 'medium', 'high', 'low', 'young', 0),
+(740, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'adult', 1),
+(741, 'high', 'low', 'medium', 'high', 'medium', 'high', 'medium', 'adult', 1),
+(742, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'low', 'young', 0),
+(743, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'low', 'young', 0),
+(744, 'high', 'medium', 'high', 'low', 'low', 'high', 'medium', 'adult', 1),
+(745, 'high', 'medium', 'medium', 'high', 'medium', 'high', 'high', 'middleaged', 0),
+(746, 'high', 'low', 'medium', 'high', 'medium', 'high', 'low', 'adult', 0),
+(747, 'medium', 'medium', 'high', 'high', 'low', 'high', 'low', 'young', 1),
+(748, 'medium', 'low', 'low', 'high', 'medium', 'high', 'high', 'middleaged', 0),
+(749, 'medium', 'medium', 'low', 'medium', 'high', 'high', 'low', 'middleaged', 1),
+(750, 'medium', 'medium', 'low', 'low', 'low', 'high', 'low', 'adult', 1),
+(751, 'medium', 'low', 'low', 'low', 'low', 'high', 'high', 'young', 1),
+(752, 'medium', 'low', 'low', 'high', 'medium', 'high', 'low', 'young', 0),
+(753, 'medium', 'low', 'low', 'medium', 'low', 'high', 'low', 'young', 0),
+(754, 'low', 'medium', 'medium', 'high', 'high', 'high', 'low', 'young', 1),
+(755, 'high', 'medium', 'low', 'high', 'low', 'high', 'low', 'adult', 1),
+(756, 'medium', 'low', 'medium', 'high', 'medium', 'high', 'high', 'middleaged', 1),
+(757, 'high', 'low', 'high', 'high', 'low', 'high', 'low', 'middleaged', 0),
+(758, 'low', 'low', 'low', 'low', 'low', 'high', 'low', 'adult', 1),
+(759, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'young', 0),
+(760, 'medium', 'medium', 'high', 'low', 'low', 'high', 'low', 'adult', 1),
+(761, 'medium', 'low', 'low', 'high', 'medium', 'high', 'medium', 'young', 0),
+(762, 'high', 'medium', 'low', 'high', 'low', 'high', 'low', 'adult', 1),
+(763, 'high', 'low', 'low', 'low', 'low', 'medium', 'low', 'middleaged', 0),
+(764, 'high', 'low', 'low', 'high', 'high', 'high', 'low', 'adult', 0),
+(765, 'medium', 'low', 'low', 'high', 'low', 'high', 'low', 'young', 0),
+(766, 'medium', 'low', 'low', 'medium', 'medium', 'high', 'low', 'middleaged', 0),
+(767, 'medium', 'low', 'low', 'low', 'low', 'high', 'low', 'adult', 1),
+(768, 'medium', 'low', 'low', 'high', 'low', 'high', 'low', 'young', 0);
 
 -- --------------------------------------------------------
 
@@ -940,6 +1355,7 @@ INSERT INTO `tbl_help` (`Id`, `attribute`, `description`, `value`) VALUES
 CREATE TABLE `tbl_result` (
   `Id` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
+  `gender` varchar(10) NOT NULL,
   `date` datetime NOT NULL,
   `pregnancies` double NOT NULL,
   `glucose` double NOT NULL,
@@ -949,20 +1365,383 @@ CREATE TABLE `tbl_result` (
   `bmi` double NOT NULL,
   `pedegree` double NOT NULL,
   `age` double NOT NULL,
-  `outcome` varchar(50) NOT NULL,
-  `value` varchar(50) NOT NULL
+  `gaussianOutcome` varchar(50) NOT NULL,
+  `gaussianValue` double NOT NULL,
+  `naiveOutcome` varchar(50) NOT NULL,
+  `naiveValue` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_result`
 --
 
-INSERT INTO `tbl_result` (`Id`, `email`, `date`, `pregnancies`, `glucose`, `bp`, `skin`, `insulin`, `bmi`, `pedegree`, `age`, `outcome`, `value`) VALUES
-(19, 'prajitbhandari@gmail.com', '2019-05-22 10:42:39', 10, 110, 120, 21, 115, 22, 0.8, 30, 'tested_positive', '67.6'),
-(20, 'prajitbhandari@gmail.com', '2019-05-22 10:42:39', 10, 110, 120, 21, 115, 22, 0.8, 30, 'tested_positive', '67.6'),
-(21, 'prajitbhandari@gmail.com', '2019-05-22 10:47:41', 6, 148, 72, 35, 0, 33.6, 0.627, 50, 'tested_positive', '79.1'),
-(22, 'prajitbhandari@gmail.com', '2019-05-22 10:49:41', 1, 85, 66, 29, 0, 26.6, 0.351, 31, 'tested_negative', '96.4'),
-(23, 'prajitbhandari@gmail.com', '2019-05-23 18:08:30', 6, 110, 66, 10, 55, 33.6, 0.627, 50, 'tested_negative', '63.2');
+INSERT INTO `tbl_result` (`Id`, `email`, `gender`, `date`, `pregnancies`, `glucose`, `bp`, `skin`, `insulin`, `bmi`, `pedegree`, `age`, `gaussianOutcome`, `gaussianValue`, `naiveOutcome`, `naiveValue`) VALUES
+(1, 'prajitbhandari@gmail.com', 'Male', '2019-08-19 08:11:09', 0, 110, 120, 21, 115, 33.6, 0.627, 23, '0', 74.4, '1', 100),
+(2, 'prajitbhandari@gmail.com', 'Male', '2019-08-19 08:11:45', 0, 85, 72, 40, 0, 26.6, 0.351, 23, '0', 98.1, '1', 100),
+(3, 'ram@gmail.com', 'Male', '2019-08-21 14:56:05', 0, 10, 64, 35, 168, 33.6, 0.254, 22, '0', 95.2, '1', 100),
+(4, 'prajitbhandari@gmail.com', 'Male', '2019-08-22 09:00:55', 0, 110, 66, 21, 115, 26.6, 0.254, 30, '0', 96.8, '1', 100),
+(5, 'prajitbhandari@gmail.com', 'Male', '2019-08-22 09:00:55', 0, 110, 66, 21, 115, 26.6, 0.254, 30, '0', 96.8, '1', 100),
+(6, 'prajitbhandari@gmail.com', 'Male', '2019-08-22 09:00:55', 0, 110, 66, 21, 115, 26.6, 0.254, 30, '0', 96.8, '1', 100);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_testdata`
+--
+
+CREATE TABLE `tbl_testdata` (
+  `Id` int(11) NOT NULL,
+  `Pregnancies` double NOT NULL,
+  `Glucose` double NOT NULL,
+  `BloodPressure` double NOT NULL,
+  `SkinThickness` double NOT NULL,
+  `Insulin` double NOT NULL,
+  `BMI` double NOT NULL,
+  `DiabetesPedigreeFunction` double NOT NULL,
+  `Age` double NOT NULL,
+  `Outcome` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_testdata`
+--
+
+INSERT INTO `tbl_testdata` (`Id`, `Pregnancies`, `Glucose`, `BloodPressure`, `SkinThickness`, `Insulin`, `BMI`, `DiabetesPedigreeFunction`, `Age`, `Outcome`) VALUES
+(1, 6, 148, 72, 35, 0, 33.6, 0.627, 50, 1),
+(2, 1, 85, 66, 29, 0, 26.6, 0.351, 31, 0),
+(3, 8, 183, 64, 0, 0, 23.3, 0.672, 32, 1),
+(4, 1, 89, 66, 23, 94, 28.1, 0.167, 21, 0),
+(5, 0, 137, 40, 35, 168, 43.1, 2.288, 33, 1),
+(6, 5, 116, 74, 0, 0, 25.6, 0.201, 30, 0),
+(7, 3, 78, 50, 32, 88, 31, 0.248, 26, 1),
+(8, 10, 115, 0, 0, 0, 35.3, 0.134, 29, 0),
+(9, 2, 197, 70, 45, 543, 30.5, 0.158, 53, 1),
+(10, 8, 125, 96, 0, 0, 0, 0.232, 54, 1),
+(11, 4, 110, 92, 0, 0, 37.6, 0.191, 30, 0),
+(12, 10, 168, 74, 0, 0, 38, 0.537, 34, 1),
+(13, 10, 139, 80, 0, 0, 27.1, 1.441, 57, 0),
+(14, 1, 189, 60, 23, 846, 30.1, 0.398, 59, 1),
+(15, 5, 166, 72, 19, 175, 25.8, 0.587, 51, 1),
+(16, 7, 100, 0, 0, 0, 30, 0.484, 32, 1),
+(17, 0, 118, 84, 47, 230, 45.8, 0.551, 31, 1),
+(18, 7, 107, 74, 0, 0, 29.6, 0.254, 31, 1),
+(19, 1, 103, 30, 38, 83, 43.3, 0.183, 33, 0),
+(20, 1, 115, 70, 30, 96, 34.6, 0.529, 32, 1),
+(21, 3, 126, 88, 41, 235, 39.3, 0.704, 27, 0),
+(22, 8, 99, 84, 0, 0, 35.4, 0.388, 50, 0),
+(23, 7, 196, 90, 0, 0, 39.8, 0.451, 41, 1),
+(24, 9, 119, 80, 35, 0, 29, 0.263, 29, 1),
+(25, 11, 143, 94, 33, 146, 36.6, 0.254, 51, 1),
+(26, 10, 125, 70, 26, 115, 31.1, 0.205, 41, 1),
+(27, 7, 147, 76, 0, 0, 39.4, 0.257, 43, 1),
+(28, 1, 97, 66, 15, 140, 23.2, 0.487, 22, 0),
+(29, 13, 145, 82, 19, 110, 22.2, 0.245, 57, 0),
+(30, 5, 117, 92, 0, 0, 34.1, 0.337, 38, 0),
+(31, 5, 109, 75, 26, 0, 36, 0.546, 60, 0),
+(32, 3, 158, 76, 36, 245, 31.6, 0.851, 28, 1),
+(33, 3, 88, 58, 11, 54, 24.8, 0.267, 22, 0),
+(34, 6, 92, 92, 0, 0, 19.9, 0.188, 28, 0),
+(35, 10, 122, 78, 31, 0, 27.6, 0.512, 45, 0),
+(36, 4, 103, 60, 33, 192, 24, 0.966, 33, 0),
+(37, 11, 138, 76, 0, 0, 33.2, 0.42, 35, 0),
+(38, 9, 102, 76, 37, 0, 32.9, 0.665, 46, 1),
+(39, 2, 90, 68, 42, 0, 38.2, 0.503, 27, 1),
+(40, 4, 111, 72, 47, 207, 37.1, 1.39, 56, 1),
+(41, 3, 180, 64, 25, 70, 34, 0.271, 26, 0),
+(42, 7, 133, 84, 0, 0, 40.2, 0.696, 37, 0),
+(43, 7, 106, 92, 18, 0, 22.7, 0.235, 48, 0),
+(44, 9, 171, 110, 24, 240, 45.4, 0.721, 54, 1),
+(45, 7, 159, 64, 0, 0, 27.4, 0.294, 40, 0),
+(46, 0, 180, 66, 39, 0, 42, 1.893, 25, 1),
+(47, 1, 146, 56, 0, 0, 29.7, 0.564, 29, 0),
+(48, 2, 71, 70, 27, 0, 28, 0.586, 22, 0),
+(49, 7, 103, 66, 32, 0, 39.1, 0.344, 31, 1),
+(50, 7, 105, 0, 0, 0, 0, 0.305, 24, 0),
+(51, 1, 103, 80, 11, 82, 19.4, 0.491, 22, 0),
+(52, 1, 101, 50, 15, 36, 24.2, 0.526, 26, 0),
+(53, 5, 88, 66, 21, 23, 24.4, 0.342, 30, 0),
+(54, 8, 176, 90, 34, 300, 33.7, 0.467, 58, 1),
+(55, 7, 150, 66, 42, 342, 34.7, 0.718, 42, 0),
+(56, 1, 73, 50, 10, 0, 23, 0.248, 21, 0),
+(57, 7, 187, 68, 39, 304, 37.7, 0.254, 41, 1),
+(58, 0, 100, 88, 60, 110, 46.8, 0.962, 31, 0),
+(59, 0, 146, 82, 0, 0, 40.5, 1.781, 44, 0),
+(60, 0, 105, 64, 41, 142, 41.5, 0.173, 22, 0),
+(61, 2, 84, 0, 0, 0, 0, 0.304, 21, 0),
+(62, 8, 133, 72, 0, 0, 32.9, 0.27, 39, 1),
+(63, 5, 44, 62, 0, 0, 25, 0.587, 36, 0),
+(64, 2, 141, 58, 34, 128, 25.4, 0.699, 24, 0),
+(65, 7, 114, 66, 0, 0, 32.8, 0.258, 42, 1),
+(66, 5, 99, 74, 27, 0, 29, 0.203, 32, 0),
+(67, 0, 109, 88, 30, 0, 32.5, 0.855, 38, 1),
+(68, 2, 109, 92, 0, 0, 42.7, 0.845, 54, 0),
+(69, 1, 95, 66, 13, 38, 19.6, 0.334, 25, 0),
+(70, 4, 146, 85, 27, 100, 28.9, 0.189, 27, 0),
+(71, 2, 100, 66, 20, 90, 32.9, 0.867, 28, 1),
+(72, 5, 139, 64, 35, 140, 28.6, 0.411, 26, 0),
+(73, 13, 126, 90, 0, 0, 43.4, 0.583, 42, 1),
+(74, 4, 129, 86, 20, 270, 35.1, 0.231, 23, 0),
+(75, 1, 79, 75, 30, 0, 32, 0.396, 22, 0),
+(76, 1, 0, 48, 20, 0, 24.7, 0.14, 22, 0),
+(77, 7, 62, 78, 0, 0, 32.6, 0.391, 41, 0),
+(78, 5, 95, 72, 33, 0, 37.7, 0.37, 27, 0),
+(79, 0, 131, 0, 0, 0, 43.2, 0.27, 26, 1),
+(80, 2, 112, 66, 22, 0, 25, 0.307, 24, 0),
+(81, 3, 113, 44, 13, 0, 22.4, 0.14, 22, 0),
+(82, 2, 74, 0, 0, 0, 0, 0.102, 22, 0),
+(83, 7, 83, 78, 26, 71, 29.3, 0.767, 36, 0),
+(84, 0, 101, 65, 28, 0, 24.6, 0.237, 22, 0),
+(85, 5, 137, 108, 0, 0, 48.8, 0.227, 37, 1),
+(86, 2, 110, 74, 29, 125, 32.4, 0.698, 27, 0),
+(87, 13, 106, 72, 54, 0, 36.6, 0.178, 45, 0),
+(88, 2, 100, 68, 25, 71, 38.5, 0.324, 26, 0),
+(89, 15, 136, 70, 32, 110, 37.1, 0.153, 43, 1),
+(90, 1, 107, 68, 19, 0, 26.5, 0.165, 24, 0),
+(91, 1, 80, 55, 0, 0, 19.1, 0.258, 21, 0),
+(92, 4, 123, 80, 15, 176, 32, 0.443, 34, 0),
+(93, 7, 81, 78, 40, 48, 46.7, 0.261, 42, 0),
+(94, 4, 134, 72, 0, 0, 23.8, 0.277, 60, 1),
+(95, 2, 142, 82, 18, 64, 24.7, 0.761, 21, 0),
+(96, 6, 144, 72, 27, 228, 33.9, 0.255, 40, 0),
+(97, 2, 92, 62, 28, 0, 31.6, 0.13, 24, 0),
+(98, 1, 71, 48, 18, 76, 20.4, 0.323, 22, 0),
+(99, 6, 93, 50, 30, 64, 28.7, 0.356, 23, 0),
+(100, 1, 122, 90, 51, 220, 49.7, 0.325, 31, 1),
+(101, 1, 163, 72, 0, 0, 39, 1.222, 33, 1),
+(102, 1, 151, 60, 0, 0, 26.1, 0.179, 22, 0),
+(103, 0, 125, 96, 0, 0, 22.5, 0.262, 21, 0),
+(104, 1, 81, 72, 18, 40, 26.6, 0.283, 24, 0),
+(105, 2, 85, 65, 0, 0, 39.6, 0.93, 27, 0),
+(106, 1, 126, 56, 29, 152, 28.7, 0.801, 21, 0),
+(107, 1, 96, 122, 0, 0, 22.4, 0.207, 27, 0),
+(108, 4, 144, 58, 28, 140, 29.5, 0.287, 37, 0),
+(109, 3, 83, 58, 31, 18, 34.3, 0.336, 25, 0),
+(110, 0, 95, 85, 25, 36, 37.4, 0.247, 24, 1),
+(111, 3, 171, 72, 33, 135, 33.3, 0.199, 24, 1),
+(112, 8, 155, 62, 26, 495, 34, 0.543, 46, 1),
+(113, 1, 89, 76, 34, 37, 31.2, 0.192, 23, 0),
+(114, 4, 76, 62, 0, 0, 34, 0.391, 25, 0),
+(115, 7, 160, 54, 32, 175, 30.5, 0.588, 39, 1),
+(116, 4, 146, 92, 0, 0, 31.2, 0.539, 61, 1),
+(117, 5, 124, 74, 0, 0, 34, 0.22, 38, 1),
+(118, 5, 78, 48, 0, 0, 33.7, 0.654, 25, 0),
+(119, 4, 97, 60, 23, 0, 28.2, 0.443, 22, 0),
+(120, 4, 99, 76, 15, 51, 23.2, 0.223, 21, 0),
+(121, 0, 162, 76, 56, 100, 53.2, 0.759, 25, 1),
+(122, 6, 111, 64, 39, 0, 34.2, 0.26, 24, 0),
+(123, 2, 107, 74, 30, 100, 33.6, 0.404, 23, 0),
+(124, 5, 132, 80, 0, 0, 26.8, 0.186, 69, 0),
+(125, 0, 113, 76, 0, 0, 33.3, 0.278, 23, 1),
+(126, 1, 88, 30, 42, 99, 55, 0.496, 26, 1),
+(127, 3, 120, 70, 30, 135, 42.9, 0.452, 30, 0),
+(128, 1, 118, 58, 36, 94, 33.3, 0.261, 23, 0),
+(129, 1, 117, 88, 24, 145, 34.5, 0.403, 40, 1),
+(130, 0, 105, 84, 0, 0, 27.9, 0.741, 62, 1),
+(131, 4, 173, 70, 14, 168, 29.7, 0.361, 33, 1),
+(132, 9, 122, 56, 0, 0, 33.3, 1.114, 33, 1),
+(133, 3, 170, 64, 37, 225, 34.5, 0.356, 30, 1),
+(134, 8, 84, 74, 31, 0, 38.3, 0.457, 39, 0),
+(135, 2, 96, 68, 13, 49, 21.1, 0.647, 26, 0),
+(136, 2, 125, 60, 20, 140, 33.8, 0.088, 31, 0),
+(137, 0, 100, 70, 26, 50, 30.8, 0.597, 21, 0),
+(138, 0, 93, 60, 25, 92, 28.7, 0.532, 22, 0),
+(139, 0, 129, 80, 0, 0, 31.2, 0.703, 29, 0),
+(140, 5, 105, 72, 29, 325, 36.9, 0.159, 28, 0),
+(141, 3, 128, 78, 0, 0, 21.1, 0.268, 55, 0),
+(142, 5, 106, 82, 30, 0, 39.5, 0.286, 38, 0),
+(143, 2, 108, 52, 26, 63, 32.5, 0.318, 22, 0),
+(144, 10, 108, 66, 0, 0, 32.4, 0.272, 42, 1),
+(145, 4, 154, 62, 31, 284, 32.8, 0.237, 23, 0),
+(146, 0, 102, 75, 23, 0, 0, 0.572, 21, 0),
+(147, 9, 57, 80, 37, 0, 32.8, 0.096, 41, 0),
+(148, 2, 106, 64, 35, 119, 30.5, 1.4, 34, 0),
+(149, 5, 147, 78, 0, 0, 33.7, 0.218, 65, 0),
+(150, 2, 90, 70, 17, 0, 27.3, 0.085, 22, 0),
+(151, 1, 136, 74, 50, 204, 37.4, 0.399, 24, 0),
+(152, 4, 114, 65, 0, 0, 21.9, 0.432, 37, 0),
+(153, 9, 156, 86, 28, 155, 34.3, 1.189, 42, 1),
+(154, 1, 153, 82, 42, 485, 40.6, 0.687, 23, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_testresult`
+--
+
+CREATE TABLE `tbl_testresult` (
+  `Id` int(11) NOT NULL,
+  `pregnancies` double NOT NULL,
+  `glucose` double NOT NULL,
+  `bp` double NOT NULL,
+  `skin` double NOT NULL,
+  `insulin` double NOT NULL,
+  `bmi` double NOT NULL,
+  `pedegree` double NOT NULL,
+  `age` double NOT NULL,
+  `outcome` int(11) NOT NULL,
+  `gaussianPredicted` varchar(20) NOT NULL,
+  `naivePredicted` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_testresult`
+--
+
+INSERT INTO `tbl_testresult` (`Id`, `pregnancies`, `glucose`, `bp`, `skin`, `insulin`, `bmi`, `pedegree`, `age`, `outcome`, `gaussianPredicted`, `naivePredicted`) VALUES
+(1, 6, 148, 72, 35, 0, 33.6, 0.627, 50, 1, 'TP', 'TP'),
+(2, 1, 85, 66, 29, 0, 26.6, 0.351, 31, 0, 'TN', 'TN'),
+(3, 8, 183, 64, 0, 0, 23.3, 0.672, 32, 1, 'TP', 'TP'),
+(4, 1, 89, 66, 23, 94, 28.1, 0.167, 21, 0, 'TN', 'TN'),
+(5, 0, 137, 40, 35, 168, 43.1, 2.288, 33, 1, 'TP', 'TP'),
+(6, 5, 116, 74, 0, 0, 25.6, 0.201, 30, 0, 'TN', 'TN'),
+(7, 3, 78, 50, 32, 88, 31, 0.248, 26, 1, 'FN', 'FN'),
+(8, 10, 115, 0, 0, 0, 35.3, 0.134, 29, 0, 'FP', 'TN'),
+(9, 2, 197, 70, 45, 543, 30.5, 0.158, 53, 1, 'TP', 'TP'),
+(10, 8, 125, 96, 0, 0, 0, 0.232, 54, 1, 'FN', 'FN'),
+(11, 4, 110, 92, 0, 0, 37.6, 0.191, 30, 0, 'TN', 'TN'),
+(12, 10, 168, 74, 0, 0, 38, 0.537, 34, 1, 'TP', 'TP'),
+(13, 10, 139, 80, 0, 0, 27.1, 1.441, 57, 0, 'FP', 'FP'),
+(14, 1, 189, 60, 23, 846, 30.1, 0.398, 59, 1, 'TP', 'TP'),
+(15, 5, 166, 72, 19, 175, 25.8, 0.587, 51, 1, 'TP', 'TP'),
+(16, 7, 100, 0, 0, 0, 30, 0.484, 32, 1, 'TP', 'FN'),
+(17, 0, 118, 84, 47, 230, 45.8, 0.551, 31, 1, 'TP', 'TP'),
+(18, 7, 107, 74, 0, 0, 29.6, 0.254, 31, 1, 'FN', 'FN'),
+(19, 1, 103, 30, 38, 83, 43.3, 0.183, 33, 0, 'TN', 'TN'),
+(20, 1, 115, 70, 30, 96, 34.6, 0.529, 32, 1, 'FN', 'FN'),
+(21, 3, 126, 88, 41, 235, 39.3, 0.704, 27, 0, 'FP', 'TN'),
+(22, 8, 99, 84, 0, 0, 35.4, 0.388, 50, 0, 'TN', 'FP'),
+(23, 7, 196, 90, 0, 0, 39.8, 0.451, 41, 1, 'TP', 'TP'),
+(24, 9, 119, 80, 35, 0, 29, 0.263, 29, 1, 'FN', 'FN'),
+(25, 11, 143, 94, 33, 146, 36.6, 0.254, 51, 1, 'TP', 'TP'),
+(26, 10, 125, 70, 26, 115, 31.1, 0.205, 41, 1, 'FN', 'FN'),
+(27, 7, 147, 76, 0, 0, 39.4, 0.257, 43, 1, 'TP', 'TP'),
+(28, 1, 97, 66, 15, 140, 23.2, 0.487, 22, 0, 'TN', 'TN'),
+(29, 13, 145, 82, 19, 110, 22.2, 0.245, 57, 0, 'FP', 'TN'),
+(30, 5, 117, 92, 0, 0, 34.1, 0.337, 38, 0, 'TN', 'TN'),
+(31, 5, 109, 75, 26, 0, 36, 0.546, 60, 0, 'TN', 'FP'),
+(32, 3, 158, 76, 36, 245, 31.6, 0.851, 28, 1, 'TP', 'TP'),
+(33, 3, 88, 58, 11, 54, 24.8, 0.267, 22, 0, 'TN', 'TN'),
+(34, 6, 92, 92, 0, 0, 19.9, 0.188, 28, 0, 'TN', 'TN'),
+(35, 10, 122, 78, 31, 0, 27.6, 0.512, 45, 0, 'TN', 'FP'),
+(36, 4, 103, 60, 33, 192, 24, 0.966, 33, 0, 'TN', 'TN'),
+(37, 11, 138, 76, 0, 0, 33.2, 0.42, 35, 0, 'FP', 'TN'),
+(38, 9, 102, 76, 37, 0, 32.9, 0.665, 46, 1, 'FN', 'TP'),
+(39, 2, 90, 68, 42, 0, 38.2, 0.503, 27, 1, 'FN', 'FN'),
+(40, 4, 111, 72, 47, 207, 37.1, 1.39, 56, 1, 'TP', 'TP'),
+(41, 3, 180, 64, 25, 70, 34, 0.271, 26, 0, 'FP', 'TN'),
+(42, 7, 133, 84, 0, 0, 40.2, 0.696, 37, 0, 'FP', 'FP'),
+(43, 7, 106, 92, 18, 0, 22.7, 0.235, 48, 0, 'TN', 'TN'),
+(44, 9, 171, 110, 24, 240, 45.4, 0.721, 54, 1, 'TP', 'TP'),
+(45, 7, 159, 64, 0, 0, 27.4, 0.294, 40, 0, 'FP', 'FP'),
+(46, 0, 180, 66, 39, 0, 42, 1.893, 25, 1, 'TP', 'TP'),
+(47, 1, 146, 56, 0, 0, 29.7, 0.564, 29, 0, 'TN', 'FP'),
+(48, 2, 71, 70, 27, 0, 28, 0.586, 22, 0, 'TN', 'TN'),
+(49, 7, 103, 66, 32, 0, 39.1, 0.344, 31, 1, 'FN', 'TP'),
+(50, 7, 105, 0, 0, 0, 0, 0.305, 24, 0, 'TN', 'TN'),
+(51, 1, 103, 80, 11, 82, 19.4, 0.491, 22, 0, 'TN', 'TN'),
+(52, 1, 101, 50, 15, 36, 24.2, 0.526, 26, 0, 'TN', 'TN'),
+(53, 5, 88, 66, 21, 23, 24.4, 0.342, 30, 0, 'TN', 'TN'),
+(54, 8, 176, 90, 34, 300, 33.7, 0.467, 58, 1, 'TP', 'TP'),
+(55, 7, 150, 66, 42, 342, 34.7, 0.718, 42, 0, 'FP', 'FP'),
+(56, 1, 73, 50, 10, 0, 23, 0.248, 21, 0, 'TN', 'TN'),
+(57, 7, 187, 68, 39, 304, 37.7, 0.254, 41, 1, 'TP', 'TP'),
+(58, 0, 100, 88, 60, 110, 46.8, 0.962, 31, 0, 'FP', 'TN'),
+(59, 0, 146, 82, 0, 0, 40.5, 1.781, 44, 0, 'FP', 'FP'),
+(60, 0, 105, 64, 41, 142, 41.5, 0.173, 22, 0, 'TN', 'TN'),
+(61, 2, 84, 0, 0, 0, 0, 0.304, 21, 0, 'TN', 'TN'),
+(62, 8, 133, 72, 0, 0, 32.9, 0.27, 39, 1, 'FN', 'FN'),
+(63, 5, 44, 62, 0, 0, 25, 0.587, 36, 0, 'TN', 'TN'),
+(64, 2, 141, 58, 34, 128, 25.4, 0.699, 24, 0, 'TN', 'TN'),
+(65, 7, 114, 66, 0, 0, 32.8, 0.258, 42, 1, 'FN', 'FN'),
+(66, 5, 99, 74, 27, 0, 29, 0.203, 32, 0, 'TN', 'TN'),
+(67, 0, 109, 88, 30, 0, 32.5, 0.855, 38, 1, 'FN', 'TP'),
+(68, 2, 109, 92, 0, 0, 42.7, 0.845, 54, 0, 'TN', 'FP'),
+(69, 1, 95, 66, 13, 38, 19.6, 0.334, 25, 0, 'TN', 'TN'),
+(70, 4, 146, 85, 27, 100, 28.9, 0.189, 27, 0, 'TN', 'TN'),
+(71, 2, 100, 66, 20, 90, 32.9, 0.867, 28, 1, 'FN', 'FN'),
+(72, 5, 139, 64, 35, 140, 28.6, 0.411, 26, 0, 'TN', 'TN'),
+(73, 13, 126, 90, 0, 0, 43.4, 0.583, 42, 1, 'TP', 'TP'),
+(74, 4, 129, 86, 20, 270, 35.1, 0.231, 23, 0, 'TN', 'TN'),
+(75, 1, 79, 75, 30, 0, 32, 0.396, 22, 0, 'TN', 'TN'),
+(76, 1, 0, 48, 20, 0, 24.7, 0.14, 22, 0, 'TN', 'TN'),
+(77, 7, 62, 78, 0, 0, 32.6, 0.391, 41, 0, 'TN', 'TN'),
+(78, 5, 95, 72, 33, 0, 37.7, 0.37, 27, 0, 'TN', 'TN'),
+(79, 0, 131, 0, 0, 0, 43.2, 0.27, 26, 1, 'TP', 'FN'),
+(80, 2, 112, 66, 22, 0, 25, 0.307, 24, 0, 'TN', 'TN'),
+(81, 3, 113, 44, 13, 0, 22.4, 0.14, 22, 0, 'TN', 'TN'),
+(82, 2, 74, 0, 0, 0, 0, 0.102, 22, 0, 'TN', 'TN'),
+(83, 7, 83, 78, 26, 71, 29.3, 0.767, 36, 0, 'TN', 'FP'),
+(84, 0, 101, 65, 28, 0, 24.6, 0.237, 22, 0, 'TN', 'TN'),
+(85, 5, 137, 108, 0, 0, 48.8, 0.227, 37, 1, 'TP', 'FN'),
+(86, 2, 110, 74, 29, 125, 32.4, 0.698, 27, 0, 'TN', 'TN'),
+(87, 13, 106, 72, 54, 0, 36.6, 0.178, 45, 0, 'FP', 'FP'),
+(88, 2, 100, 68, 25, 71, 38.5, 0.324, 26, 0, 'TN', 'TN'),
+(89, 15, 136, 70, 32, 110, 37.1, 0.153, 43, 1, 'TP', 'FN'),
+(90, 1, 107, 68, 19, 0, 26.5, 0.165, 24, 0, 'TN', 'TN'),
+(91, 1, 80, 55, 0, 0, 19.1, 0.258, 21, 0, 'TN', 'TN'),
+(92, 4, 123, 80, 15, 176, 32, 0.443, 34, 0, 'TN', 'TN'),
+(93, 7, 81, 78, 40, 48, 46.7, 0.261, 42, 0, 'TN', 'TN'),
+(94, 4, 134, 72, 0, 0, 23.8, 0.277, 60, 1, 'FN', 'FN'),
+(95, 2, 142, 82, 18, 64, 24.7, 0.761, 21, 0, 'TN', 'TN'),
+(96, 6, 144, 72, 27, 228, 33.9, 0.255, 40, 0, 'FP', 'FP'),
+(97, 2, 92, 62, 28, 0, 31.6, 0.13, 24, 0, 'TN', 'TN'),
+(98, 1, 71, 48, 18, 76, 20.4, 0.323, 22, 0, 'TN', 'TN'),
+(99, 6, 93, 50, 30, 64, 28.7, 0.356, 23, 0, 'TN', 'TN'),
+(100, 1, 122, 90, 51, 220, 49.7, 0.325, 31, 1, 'TP', 'TP'),
+(101, 1, 163, 72, 0, 0, 39, 1.222, 33, 1, 'TP', 'TP'),
+(102, 1, 151, 60, 0, 0, 26.1, 0.179, 22, 0, 'TN', 'TN'),
+(103, 0, 125, 96, 0, 0, 22.5, 0.262, 21, 0, 'TN', 'TN'),
+(104, 1, 81, 72, 18, 40, 26.6, 0.283, 24, 0, 'TN', 'TN'),
+(105, 2, 85, 65, 0, 0, 39.6, 0.93, 27, 0, 'TN', 'TN'),
+(106, 1, 126, 56, 29, 152, 28.7, 0.801, 21, 0, 'TN', 'TN'),
+(107, 1, 96, 122, 0, 0, 22.4, 0.207, 27, 0, 'TN', 'TN'),
+(108, 4, 144, 58, 28, 140, 29.5, 0.287, 37, 0, 'TN', 'FP'),
+(109, 3, 83, 58, 31, 18, 34.3, 0.336, 25, 0, 'TN', 'TN'),
+(110, 0, 95, 85, 25, 36, 37.4, 0.247, 24, 1, 'FN', 'FN'),
+(111, 3, 171, 72, 33, 135, 33.3, 0.199, 24, 1, 'TP', 'FN'),
+(112, 8, 155, 62, 26, 495, 34, 0.543, 46, 1, 'TP', 'TP'),
+(113, 1, 89, 76, 34, 37, 31.2, 0.192, 23, 0, 'TN', 'TN'),
+(114, 4, 76, 62, 0, 0, 34, 0.391, 25, 0, 'TN', 'TN'),
+(115, 7, 160, 54, 32, 175, 30.5, 0.588, 39, 1, 'TP', 'TP'),
+(116, 4, 146, 92, 0, 0, 31.2, 0.539, 61, 1, 'TP', 'TP'),
+(117, 5, 124, 74, 0, 0, 34, 0.22, 38, 1, 'FN', 'FN'),
+(118, 5, 78, 48, 0, 0, 33.7, 0.654, 25, 0, 'TN', 'TN'),
+(119, 4, 97, 60, 23, 0, 28.2, 0.443, 22, 0, 'TN', 'TN'),
+(120, 4, 99, 76, 15, 51, 23.2, 0.223, 21, 0, 'TN', 'TN'),
+(121, 0, 162, 76, 56, 100, 53.2, 0.759, 25, 1, 'TP', 'TP'),
+(122, 6, 111, 64, 39, 0, 34.2, 0.26, 24, 0, 'TN', 'TN'),
+(123, 2, 107, 74, 30, 100, 33.6, 0.404, 23, 0, 'TN', 'TN'),
+(124, 5, 132, 80, 0, 0, 26.8, 0.186, 69, 0, 'TN', 'TN'),
+(125, 0, 113, 76, 0, 0, 33.3, 0.278, 23, 1, 'FN', 'FN'),
+(126, 1, 88, 30, 42, 99, 55, 0.496, 26, 1, 'FN', 'FN'),
+(127, 3, 120, 70, 30, 135, 42.9, 0.452, 30, 0, 'TN', 'TN'),
+(128, 1, 118, 58, 36, 94, 33.3, 0.261, 23, 0, 'TN', 'TN'),
+(129, 1, 117, 88, 24, 145, 34.5, 0.403, 40, 1, 'FN', 'FN'),
+(130, 0, 105, 84, 0, 0, 27.9, 0.741, 62, 1, 'FN', 'TP'),
+(131, 4, 173, 70, 14, 168, 29.7, 0.361, 33, 1, 'TP', 'TP'),
+(132, 9, 122, 56, 0, 0, 33.3, 1.114, 33, 1, 'TP', 'TP'),
+(133, 3, 170, 64, 37, 225, 34.5, 0.356, 30, 1, 'TP', 'TP'),
+(134, 8, 84, 74, 31, 0, 38.3, 0.457, 39, 0, 'TN', 'FP'),
+(135, 2, 96, 68, 13, 49, 21.1, 0.647, 26, 0, 'TN', 'TN'),
+(136, 2, 125, 60, 20, 140, 33.8, 0.088, 31, 0, 'TN', 'TN'),
+(137, 0, 100, 70, 26, 50, 30.8, 0.597, 21, 0, 'TN', 'TN'),
+(138, 0, 93, 60, 25, 92, 28.7, 0.532, 22, 0, 'TN', 'TN'),
+(139, 0, 129, 80, 0, 0, 31.2, 0.703, 29, 0, 'TN', 'TN'),
+(140, 5, 105, 72, 29, 325, 36.9, 0.159, 28, 0, 'TN', 'TN'),
+(141, 3, 128, 78, 0, 0, 21.1, 0.268, 55, 0, 'TN', 'TN'),
+(142, 5, 106, 82, 30, 0, 39.5, 0.286, 38, 0, 'TN', 'TN'),
+(143, 2, 108, 52, 26, 63, 32.5, 0.318, 22, 0, 'TN', 'TN'),
+(144, 10, 108, 66, 0, 0, 32.4, 0.272, 42, 1, 'FN', 'FN'),
+(145, 4, 154, 62, 31, 284, 32.8, 0.237, 23, 0, 'FP', 'FP'),
+(146, 0, 102, 75, 23, 0, 0, 0.572, 21, 0, 'TN', 'TN'),
+(147, 9, 57, 80, 37, 0, 32.8, 0.096, 41, 0, 'TN', 'FP'),
+(148, 2, 106, 64, 35, 119, 30.5, 1.4, 34, 0, 'TN', 'TN'),
+(149, 5, 147, 78, 0, 0, 33.7, 0.218, 65, 0, 'FP', 'FP'),
+(150, 2, 90, 70, 17, 0, 27.3, 0.085, 22, 0, 'TN', 'TN'),
+(151, 1, 136, 74, 50, 204, 37.4, 0.399, 24, 0, 'TN', 'TN'),
+(152, 4, 114, 65, 0, 0, 21.9, 0.432, 37, 0, 'TN', 'TN'),
+(153, 9, 156, 86, 28, 155, 34.3, 1.189, 42, 1, 'TP', 'TP'),
+(154, 1, 153, 82, 42, 485, 40.6, 0.687, 23, 0, 'FP', 'FP');
 
 -- --------------------------------------------------------
 
@@ -974,6 +1753,7 @@ CREATE TABLE `tbl_user` (
   `Id` int(11) NOT NULL,
   `fname` varchar(20) NOT NULL,
   `lname` varchar(20) NOT NULL,
+  `gender` varchar(10) NOT NULL,
   `email` varchar(50) NOT NULL,
   `phone` double NOT NULL,
   `address` varchar(50) NOT NULL,
@@ -984,29 +1764,17 @@ CREATE TABLE `tbl_user` (
 -- Dumping data for table `tbl_user`
 --
 
-INSERT INTO `tbl_user` (`Id`, `fname`, `lname`, `email`, `phone`, `address`, `password`) VALUES
-(1, 'Prajit', 'Bhandari', 'prajitbhandari@gmail.com', 9842687243, 'kathmandu', 'admin12345'),
-(2, 'Pramod', 'Gautam', 'pramodgautam@gmail.com', 9842685487, 'Dharan', 'pramod123');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_user_doctor`
---
-
-CREATE TABLE `tbl_user_doctor` (
-  `Id` int(11) NOT NULL,
-  `userEmail` varchar(50) NOT NULL,
-  `doctorEmail` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbl_user_doctor`
---
-
-INSERT INTO `tbl_user_doctor` (`Id`, `userEmail`, `doctorEmail`) VALUES
-(9, 'prajitbhandari@gmail.com', 'abonkhanal@gmail.com'),
-(27, 'prajitbhandari@gmail.com', 'abonkhanal@gmail.com');
+INSERT INTO `tbl_user` (`Id`, `fname`, `lname`, `gender`, `email`, `phone`, `address`, `password`) VALUES
+(1, 'Prajit', 'Bhandari', 'Male', 'prajitbhandari@gmail.com', 9842687243, 'kathmandu', 'user123'),
+(2, 'Pramod', 'Gautam', 'Male', 'pramodgautam@gmail.com', 9842685487, 'Dharan', 'user123'),
+(3, 'Sudarshan', 'Uprety', 'Male', 'suprety@gmail.com', 9842687241, 'Ktm', 'user123'),
+(4, 'Anish', 'Pokhrel', 'Male', 'anishpokhrel@gmail.com', 9842687244, 'kathmandu', 'user123'),
+(5, 'Sahil', 'Mainali', 'Male', 'parasmainali10@gmail.com', 9816948023, 'kathmandu', 'user123'),
+(6, 'Dhiraj', 'Jha', 'Male', 'callmedhiraj@gmail.com', 9812345645, 'ktm', 'user123'),
+(7, 'Hari', 'Karki', 'Male', 'ghari@gmail.com', 9855566677, 'BTM', 'user123'),
+(8, 'Ram', 'Karki', 'Male', 'ram@gmail.com', 9800000000, 'ktm', 'user1223'),
+(9, 'Bipu', 'Katwal', 'Male', 'bipuk@gmail.com', 9852645345, 'Birtamode', 'user123'),
+(10, 'Asim', 'Pandey', 'Male', 'asimbcn@gmail.com', 9852687943, 'Kapan', 'user123');
 
 --
 -- Indexes for dumped tables
@@ -1019,37 +1787,21 @@ ALTER TABLE `tbl_admin`
   ADD PRIMARY KEY (`Id`);
 
 --
--- Indexes for table `tbl_contact`
---
-ALTER TABLE `tbl_contact`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `phone` (`phone`);
-
---
 -- Indexes for table `tbl_dataset`
 --
 ALTER TABLE `tbl_dataset`
   ADD PRIMARY KEY (`Id`);
 
 --
--- Indexes for table `tbl_doctor`
---
-ALTER TABLE `tbl_doctor`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `docEmail` (`docEmail`),
-  ADD UNIQUE KEY `docPhone` (`docPhone`);
-
---
--- Indexes for table `tbl_feedback`
---
-ALTER TABLE `tbl_feedback`
-  ADD PRIMARY KEY (`Id`);
-
---
 -- Indexes for table `tbl_help`
 --
 ALTER TABLE `tbl_help`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `tbl_naivedataset`
+--
+ALTER TABLE `tbl_naivedataset`
   ADD PRIMARY KEY (`Id`);
 
 --
@@ -1060,6 +1812,18 @@ ALTER TABLE `tbl_result`
   ADD KEY `email` (`email`);
 
 --
+-- Indexes for table `tbl_testdata`
+--
+ALTER TABLE `tbl_testdata`
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `tbl_testresult`
+--
+ALTER TABLE `tbl_testresult`
+  ADD PRIMARY KEY (`Id`);
+
+--
 -- Indexes for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
@@ -1067,14 +1831,6 @@ ALTER TABLE `tbl_user`
   ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `phone` (`phone`),
   ADD KEY `email_2` (`email`);
-
---
--- Indexes for table `tbl_user_doctor`
---
-ALTER TABLE `tbl_user_doctor`
-  ADD PRIMARY KEY (`Id`),
-  ADD KEY `userEmail` (`userEmail`,`doctorEmail`),
-  ADD KEY `doctorEmail` (`doctorEmail`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -1087,28 +1843,10 @@ ALTER TABLE `tbl_admin`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `tbl_contact`
---
-ALTER TABLE `tbl_contact`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
 -- AUTO_INCREMENT for table `tbl_dataset`
 --
 ALTER TABLE `tbl_dataset`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=769;
-
---
--- AUTO_INCREMENT for table `tbl_doctor`
---
-ALTER TABLE `tbl_doctor`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `tbl_feedback`
---
-ALTER TABLE `tbl_feedback`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_help`
@@ -1117,22 +1855,34 @@ ALTER TABLE `tbl_help`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT for table `tbl_naivedataset`
+--
+ALTER TABLE `tbl_naivedataset`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=769;
+
+--
 -- AUTO_INCREMENT for table `tbl_result`
 --
 ALTER TABLE `tbl_result`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `tbl_testdata`
+--
+ALTER TABLE `tbl_testdata`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
+
+--
+-- AUTO_INCREMENT for table `tbl_testresult`
+--
+ALTER TABLE `tbl_testresult`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `tbl_user_doctor`
---
-ALTER TABLE `tbl_user_doctor`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
@@ -1143,13 +1893,6 @@ ALTER TABLE `tbl_user_doctor`
 --
 ALTER TABLE `tbl_result`
   ADD CONSTRAINT `tbl_result_ibfk_1` FOREIGN KEY (`email`) REFERENCES `tbl_user` (`email`);
-
---
--- Constraints for table `tbl_user_doctor`
---
-ALTER TABLE `tbl_user_doctor`
-  ADD CONSTRAINT `tbl_user_doctor_ibfk_1` FOREIGN KEY (`doctorEmail`) REFERENCES `tbl_doctor` (`docEmail`),
-  ADD CONSTRAINT `tbl_user_doctor_ibfk_2` FOREIGN KEY (`userEmail`) REFERENCES `tbl_user` (`email`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

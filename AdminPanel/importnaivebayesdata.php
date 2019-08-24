@@ -1,4 +1,10 @@
 <?php
+if(!isset($_COOKIE['adminName'])){
+  header('location:adminlogin.php?b=1');
+  }
+?>
+
+<?php
 
   function getPregnancy($pregnancyValue){
     if($pregnancyValue==0){
@@ -16,7 +22,7 @@
       return "low";
     }else if ($glucoseValue>=140 && $glucoseValue<=199) {
       return "medium";
-    }else if($glucoseValue>=7){
+    }else{
       return "high";
     }
   }
@@ -59,7 +65,7 @@
       return "low";
     }else if ($bmiValue>=18 && $bmiValue<=24) {
       return "medium";
-    }else if($bmiValue>=7){
+    }else {
       return "high";
     }
     
@@ -86,9 +92,6 @@
     }
     
   }
-
-
-
 
 
     $msg='';
@@ -213,12 +216,12 @@
         width: 100%;
         bottom: 0;
         height: 60px;
-        background-color:#ff5252;
+        background-color:#538cc6;
         color: #000;
         padding: 20px 50px 20px 50px;
         text-align: right;
         border-top: 1px solid #d6d6d6;
-    }
+        }
     </style>
 </head>
 <body>
@@ -236,13 +239,12 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="adminIndex.php">Home</a></li>
+              <li><a href="index.php">Home</a></li>
               <li><a href="importgaussiandata.php">Load Data Set</a></li>
+              <li><a href="importTestData.php">Import Test Data Set</a></li>
               <li><a href="Predict.php">Predict Diabetes</a></li>
               <li><a href="Help.php">Help</a></li>
-              <li><a href="addDoctors.php">Add Doctors</a></li>
-              <li><a href="manageDoctors.php">Manage Doctors</a></li>
-              <li><a href="manageUsers.php">View Users</a></li>
+              <li><a href="viewUsers.php">View Users</a></li>
               <li><a href="adminlogout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
             <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to Admin Panel</p>
@@ -251,17 +253,16 @@
       </nav>
   <!-----------END NAV SECTION-------->
 
-  <br><br><br><br><br>
-
     <!--HOME SECTION-->
+
      <section >
         <div class="container ">
             <div class="row">  
                   <div id="navbar">
                       <ul class="nav navbar-nav navbar-right" style="list-style: none;display: inline-block;position:absolute;top:10%;left:70%; ">
-                        <li style="margin-right:10px;"><a href="importgaussiandata.php" id="btng" class="btn btn-danger"  onmouseover="MouseOver(this,'green');" onmouseout="MouseOut(this,'red');">Gaussian Naive Bayes</a></li>
+                        <li style="margin-right:10px;position: fixed;left: 56%"><a href="importgaussiandata.php" id="btng" class="btn btn-danger"  onmouseover="MouseOver(this,'green');" onmouseout="MouseOut(this,'red');">Gaussian Naive Bayes</a></li>
 
-                        <li style="margin-right:10px;background: green;"><a style="color: white;" href="importnaivebayesdata.php"  id="btnn" 
+                        <li style="margin-right:10px;background: green;position: fixed;"><a style="color: white;" href="importnaivebayesdata.php"  id="btnn" 
                           onmouseover="MouseOver(this,'green');" onmouseout="MouseOut(this,'green');">Naive Bayes</a></li>
                       </ul>
                   </div>
@@ -275,10 +276,11 @@
                               elem.style.background = color;
                             }
                     </script>
-
+                    <br><br><br><br><br><br> 
                 <?php 
-                    echo $msg; echo "<br>";
+                    echo $msg; echo "<br>";echo "<br>";echo "<br>";
                 ?>
+
                <div class="col-md-4 col-sm-4 col-sm-offset-4 " >
                     <h4 style="font-weight: bold">Load Naive Bayes Data Set</h4>
                     <form method="POST" action=" " enctype="multipart/form-data">

@@ -6,7 +6,6 @@
 
 
 
-
 <?php
    //Gaussian Global Variables
   $dbPregnancy=array();
@@ -17,6 +16,7 @@
   $dbBMI=array();
   $dbPedegree=array();
   $dbAge=array();
+
    
   $diabetesResult=null;
   $noDiabetesResult=null;
@@ -25,7 +25,7 @@
   $probDiabetesPercentage=null;
   $probNoDiabetesPercentage=null; 
    
-  $email=null;
+  // $email=null;
   $pregnancy=null;
   $glucose=null;
   $BP=null;
@@ -34,11 +34,12 @@
   $BMI=null;
   $pedegree=null;
   $age=null;
-  $outcome=null;
-  $value=null;
+  $gaussianPredicted=null;
+  $naivePredicted=null;
+  // $value=null;
   
   $msg='';
-  $inputGender='';
+  // $inputGender='';
   
   $err = array();
   $data=array();
@@ -54,8 +55,19 @@
   $valueCount=array();
   $yesCount=array();
   $noCount=array();
+
+
+  $gDBTP=null;
+  $gDBTN=null;
+  $gDBFP=null;
+  $gDBFN=null;
  
   // Naive Bayes Global variables
+
+  $nDBTP=null;
+  $nDBTN=null;
+  $nDBFP=null;
+  $nDBFN=null;
 
   $diabetesResult=null;
   $noDiabetesResult=null;
@@ -108,7 +120,7 @@
   $noLikelihoodAge= null;
     
    
-  $email=null;
+  // $email=null;
   $pregnancy=null;
   $glucose=null;
   $BP=null;
@@ -122,7 +134,7 @@
 
   $msg='';
   $show='';
-  $inputGender='';
+  // $inputGender='';
   $err=array();
    
   $yesdata0=array();
@@ -147,6 +159,28 @@
   $nodata7=array();
   $nodata8=array();
   $nodata9=array();
+
+
+  $gTP=0;
+  $gTN=0;
+  $gFN=0;
+  $gFP=0;
+
+  $gPrecision=null;
+  $gRecall=null;
+  $gF1=null;
+
+  $nTP=0;
+  $nTN=0;
+  $nFN=0;
+  $nFP=0;
+
+  $nPrecision=null;
+  $nRecall=null;
+  $nF1=null;
+
+  $gAccuracy=null;
+  $nAccuracy=null;
 
 // Functions for Gaussian Naive Bayes 
     
@@ -186,7 +220,7 @@
   }
 
 
-  // Functions for Naive Bayes\
+  // Functions for Naive Bayes
   function getPregnancy($pregnancyValue){
     if($pregnancyValue==0){
       return "low";
@@ -270,196 +304,38 @@
       }
     
   }
-  
-  //check for button click---form submit
-  if(isset($_POST['predict'])){
-     // check Patient email
-    if (isset($_POST['email']) && !empty($_POST['email']) ){
-    $email = trim($_POST['email']);
-    if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
-      $err['email'] = "*Invalid Patient Email Address";
-    }
+   
     require "connect.php";
-    $sql="select email from tbl_user where email='$email'";
-    $result=mysqli_query($conn, $sql);
-    if(!mysqli_num_rows($result)){
-      $err['email'] = "*Email Not Available";
-    }
-     }else {
-    $err['email'] = "*Enter Patient Email Address";
-  }
 
-    //check for Gender
-  if (isset($_POST['inputGender']) && !empty($_POST['inputGender'])){
-      $inputGender = trim($_POST['inputGender']);
-      require "connect.php";
-      $sql="select * from tbl_user where email='$email' AND gender!='$inputGender'";
-      $result=mysqli_query($conn, $sql);
-      if(mysqli_num_rows($result)>0){
-        $err['gender'] = "*Select valid Gender";
-      }
-
-    }else{
-      $err['gender'] = "*Select Gender";         
-  }
-  
-  //check for Pregnancy number
-  if($inputGender=="Male"){
-      $pregnancy=0;
-    }
-    else if ($inputGender=="Female" && isset($_POST['pregnancy'])){
-        if($_POST['pregnancy']!=""){
-          $pregnancy = trim($_POST['pregnancy']);
-          if(!preg_match('/^[0-9]+$/', $pregnancy)){
-            $err['pregnancy'] = "*Invalid Pregnancy  Value";
+       $sql="select * from tbl_testdata;";  
+         //execute query and return result object
+       $result=mysqli_query($conn,$sql);
+       //default array
+       $testdata=array();
+        if(mysqli_num_rows($result)>0){
+          while($d=mysqli_fetch_assoc($result)){
+            array_push($testdata,$d);
+          }
           
-          }else if($pregnancy>20){
-            $err['pregnancy'] = "*Enter Pregnancy Value less than 20";
-         }
-       }
-       else{
-        $err['pregnancy'] = "*Enter Glucose Value";
-       }
-      }else {
-        $err['pregnancy'] = "*Enter Pregnancy Value";
-  }
-
-    //check for glucose value
-       
-  if (isset($_POST['glucose'])){
-    if($_POST['glucose']!=""){
-     $glucose = trim($_POST['glucose']);
-    if(!preg_match('/^[0-9]+$/', $glucose)){
-      $err['glucose'] = "*Invalid Glucose  Value";
-    }else if($glucose>500){
-        $err['glucose'] = "*Enter Glucose Value less than 500";
-     }
-   }
-   else{
-    $err['glucose'] = "*Enter Glucose Value";
-   }
-   }else {
-    $err['glucose'] = "*Enter Glucose Value";
-  }
-
-  //check for Blood Pressure
-  if (isset($_POST['BP'])){
-    if($_POST['BP']!=""){
-    $BP = trim($_POST['BP']);
-    if(!preg_match('/^[0-9]+$/', $BP)){
-      $err['BP'] = "*Invalid BloodPressure  Value";
-    }else if($BP>500){
-        $err['BP'] = "*Enter BloodPressure Value less than 50";
-     }
-   }
-   else{
-    $err['BP'] = "*Enter BloodPressure Value";
-   }
-   }else {
-    $err['BP'] = "*Enter BloodPressure Value";
-  }
-  
-  
-
-  //check for Skin Thickness
-  if (isset($_POST['skin'])){
-    if($_POST['skin']!=""){
-    $skin = trim($_POST['skin']);
-    if(!preg_match('/^[0-9]+$/', $skin)){
-      $err['skin'] = "*Invalid SkinThickness  Value";
-    }else if($skin>100){
-        $err['skin'] = "*Enter SkinThickness Value less than 100";
-     }
-   }
-   else{
-    $err['skin'] = "*Enter SkinThickness Value";
-   }
-   }else {
-    $err['skin'] = "*Enter SkinThickness Value";
-  }
-  //check for Insulin
-  if (isset($_POST['insulin'])){
-    if($_POST['insulin']!=""){
-    $insulin = trim($_POST['insulin']);
-    if(!preg_match('/^[0-9]+$/', $insulin)){
-      $err['insulin'] = "*Invalid Insulin Value";
-    }else if($insulin>850){
-        $err['insulin'] = "*Enter Insulin Value less than 850";
-     }
-   }
-   else{
-    $err['insulin'] = "*Enter Insulin Value";
-   }
-   }else {
-    $err['insulin'] = "*Enter Insulin Value";
-  }
-
-
-  //check for BMI
-  if (isset($_POST['BMI'])){
-    if($_POST['BMI']!=""){
-    $BMI = trim($_POST['BMI']);
-    if($BMI==0){
-        $BMI=0.0;
-      }
-    else if(!preg_match('/^([0-9]+\.?[0-9]+)$/', $BMI)){
-      $err['BMI'] = "*Invalid BMI Value";
-    }else if($BMI>100){
-        $err['BMI'] = "*Enter BMI Value less than 100";
-     }
-   }
-   else{
-    $err['BMI'] = "*Enter BMI Value";
-   }
-   }else {
-    $err['BMI'] = "*Enter BMI Value";
-  }
-
+        }else{
+          echo "data not found";
+        }
+        
+        foreach ($testdata as $key ) {
+      # code...
+        $pregnancy=$key['Pregnancies'];
+        $glucose=$key['Glucose'];
+        $BP=$key['BloodPressure'];
+        $skin=$key['SkinThickness'];
+        $insulin=$key['Insulin'];
+        $BMI=$key['BMI'];
+        $pedegree=$key['DiabetesPedigreeFunction'];
+        $age=$key['Age'];
+        $outcome=$key['Outcome'];  
     
 
-  //check for Pedegree Function
-  if (isset($_POST['pedegree'])){
-    if($_POST['pedegree']!=""){
-      $pedegree = trim($_POST['pedegree']);
-      if($pedegree==0){
-        $pedegree=0.0;
-      }
-      else if(!preg_match('/^([0-9]+\.?[0-9]+)$/', $pedegree)){
-        $err['pedegree'] = "*Invalid Pedegree Value";
-      }else if($pedegree>50){
-          $err['pedegree'] = "*Enter Pedegree Value less than 50";
-       }
-    }
-   else{
-    $err['pedegree'] = "*Enter Pedegree Value";
-   }
-   }else {
-    $err['pedegree'] = "*Enter Pedegree Value";
-  }
-
-
-  //check for age
-  if (isset($_POST['age'])){
-    if($_POST['age']!=""){
-    $age = trim($_POST['age']);
-    if(!preg_match('/^[0-9]+$/', $age)){
-      $err['age'] = "*Invalid Age Value";
-    }else if($age<21 || $age>100){
-        $err['age'] = "*Enter Age between 21 and 100";
-    }
-   }
-   else{
-    $err['age'] = "*Enter Age Value";
-   }
-   }else {
-    $err['age'] = "*Enter Age Value";
-  }
-}//end of if(isset($_POST['predict'])){
-    
-      
-    
 //check for number of error
-  if (count($err)==0 && isset($_POST['predict'])) {
+
     require "connect.php";
     //query to select data
     $sql="select * from tbl_dataSet where Outcome=1 ";
@@ -590,23 +466,24 @@
       $probDiabetesPercentage = round($probDiabetes,3)*100;
       $probNoDiabetesPercentage =round($probNoDiabetes,3)*100;
 
-    // echo "<br><br><br>";
-    // echo $probDiabetes; echo '<br>';
+    // echo "Gaussian Diabetes Probability is ".$probDiabetes; echo '<br>';
     // echo $probDiabetesPercentage;echo '<br>';
     
-    // echo $probNoDiabetes; echo '<br>';
+    // echo "Gaussian No Diabetes Probability is ".$probNoDiabetes; echo '<br>';
     // echo $probNoDiabetesPercentage;echo '<br>';
+    // echo "<br>";echo "<br>";
+
     
     
    
       if($diabetesResult>=$noDiabetesResult){
         $msg='<div class="alert alert-danger"> Using Gaussian Naive Bayes Patient has Diabetes Chance of '.($probDiabetesPercentage).'%</div>';
-          $gaussianOutcome=1;
+          $gaussianPredicted=1;
           $gaussianValue=$probDiabetesPercentage;
           
        }else{
         $msg='<div class="alert alert-success"> Using Gaussian Naive Bayes Patient has no Diabetes Chance of '.($probNoDiabetesPercentage).'%</div>';
-        $gaussianOutcome=0;
+        $gaussianPredicted=0;
         $gaussianValue=$probNoDiabetesPercentage;
        }
    
@@ -933,7 +810,7 @@
               echo "data not found";
             }
 
-          
+          $noLikelihoodPregnancy= $DBnoResultPregnancy/$DBnoDiabetes;
           $noLikelihoodGlucose= $DBnoResultGlucose/$DBnoDiabetes;
           $noLikelihoodBP= $DBnoResultBP/$DBnoDiabetes;
           $noLikelihoodSkin= $DBnoResultSkin/$DBnoDiabetes;
@@ -955,97 +832,340 @@
           $probNoDiabetesPercentage =round($probNoDiabetes,3)*100;
 
           // echo "<br><br><br>";
-          // echo $probDiabetes; echo '<br>';
+          // echo "Naive Diabetes Probability is ".$probDiabetes; echo '<br>';
           // echo $probDiabetesPercentage;echo '<br>';
           
           // echo $probNoDiabetes; echo '<br>';
-          // echo $probNoDiabetesPercentage;echo '<br>';
+          // echo "Naive Bayes NO Diabetes Probability is ".$probNoDiabetesPercentage;echo '<br>';
+          // echo "<br>";echo "<br>";
         
         
        
           if($diabetesResult>=$noDiabetesResult){
             $show='<div class="alert alert-danger"> Using Naive Bayes Patient has Diabetes Chance of '.($probDiabetesPercentage).'%</div>';
-              $naiveOutcome=1;
+              $naivePredicted=1;
               $naiveValue=$probDiabetesPercentage;
               
            }else{
             $show='<div class="alert alert-success"> Using Naive Bayes Patient has no Diabetes Chance of '.($probNoDiabetesPercentage).'%</div>';
-            $naiveOutcome=0;
+            $naivePredicted=0;
             $naiveValue=$probNoDiabetesPercentage;
              
            }
+          
 
-          require "connect.php";
-          $currentDate = date('Y-m-d H:i:s');
-          $addsql = "insert into tbl_result (email,gender,date,pregnancies,glucose,bp,skin,insulin,bmi,pedegree,age,gaussianOutcome,gaussianValue,naiveOutcome,naiveValue) values 
-         ('$email','$inputGender','$currentDate','$pregnancy','$glucose','$BP','$skin','$insulin','$BMI','$pedegree','$age','$gaussianOutcome','$gaussianValue','$naiveOutcome','$naiveValue')";
-          echo $addsql;
-          $result=mysqli_query($conn, $addsql);  
+          
+           if($key['Outcome']==1 && $gaussianPredicted==1 ){ 
+             $gaussianPredicted="TP";
+             $gTP=$gTP+1;  
+           }
+           
+           else if($key['Outcome']==0 && $gaussianPredicted==0 ){ 
+            $gaussianPredicted="TN";
+             $gTN=$gTN+1;
+           }                     
+           else if($key['Outcome']==0 && $gaussianPredicted==1 ){ 
+            $gaussianPredicted="FP";
+             $gFP=$gFP+1;
+           }
+           else if($key['Outcome']==1 && $gaussianPredicted==0 ){ 
+             $gaussianPredicted="FN";
+             $gFN=$gFN+1;
+           }
+
+
+           if($key['Outcome']==1 && $naivePredicted==1 ){ 
+             $naivePredicted="TP";
+             $nTP=$nTP+1;
+           }
+           else if($key['Outcome']==0 && $naivePredicted==0 ){ 
+             $naivePredicted="TN";
+             $nTN=$nTN+1;
+           }
+            else if($key['Outcome']==0 && $naivePredicted==1 ){ 
+             $naivePredicted="FP";
+             $nFP=$nFP+1;
+           }
+           else if($key['Outcome']==1 && $naivePredicted==0 ){
+             $naivePredicted="FN";  
+             $nFN=$nFN+1;
+           }
+           
+
+           if(!isset($_COOKIE['test'])){
+              require "connect.php";
+              $addsql = "insert into tbl_testResult (pregnancies,glucose,bp,skin,insulin,bmi,pedegree,age,outcome,gaussianPredicted,naivePredicted) values 
+             ('$pregnancy','$glucose','$BP','$skin','$insulin','$BMI','$pedegree','$age','$outcome','$gaussianPredicted','$naivePredicted')";
+              // echo $addsql;echo "<br>";
+               if (mysqli_query($conn, $addsql)){
+                setcookie('test',$addsql,time()+7*24*60*60);
+              }
+          }
+
     
-      }//end of count error     
+         //  echo "<br>";echo "<br>";echo "<br>";
+      }//end of main for each loop
+
+      //Count positive and negative values for Gaussian
+        require "connect.php";
+
+       $sql="select COUNT(ID) as gaussTP from tbl_testResult WHERE gaussianPredicted='TP'";  
+         //execute query and return result object
+       $result=mysqli_query($conn,$sql);
+       //default array
+       $gaussdata1=array();
+        if(mysqli_num_rows($result)>0){
+          while($d=mysqli_fetch_assoc($result)){
+            array_push($gaussdata1,$d);
+          }
+          foreach ($gaussdata1 as $value){
+                 $gDBTP=$value['gaussTP'];
+              }
+          
+        }else{
+          echo "data not found";
+        }
+
+        require "connect.php";
+
+       $sql="select COUNT(ID) as gaussTN from tbl_testResult WHERE gaussianPredicted='TN'";  
+         //execute query and return result object
+       $result=mysqli_query($conn,$sql);
+       //default array
+       $gaussdata2=array();
+        if(mysqli_num_rows($result)>0){
+          while($d=mysqli_fetch_assoc($result)){
+            array_push($gaussdata2,$d);
+          }
+          foreach ($gaussdata2 as $value){
+                 $gDBTN=$value['gaussTN'];
+              }
+          
+        }else{
+          echo "data not found";
+          }
+
+
+         require "connect.php";
+
+       $sql="select COUNT(ID) as gaussFP from tbl_testResult WHERE gaussianPredicted='FP'";  
+         //execute query and return result object
+       $result=mysqli_query($conn,$sql);
+       //default array
+       $gaussdata3=array();
+        if(mysqli_num_rows($result)>0){
+          while($d=mysqli_fetch_assoc($result)){
+            array_push($gaussdata3,$d);
+          }
+          foreach ($gaussdata3 as $value){
+                 $gDBFP=$value['gaussFP'];
+              }
+        }else{
+          echo "data not found";
+        }
+
+
+       require "connect.php";
+
+       $sql="select COUNT(ID) as gaussFN from tbl_testResult WHERE gaussianPredicted='FN'";  
+         //execute query and return result object
+       $result=mysqli_query($conn,$sql);
+       //default array
+       $gaussdata4=array();
+        if(mysqli_num_rows($result)>0){
+          while($d=mysqli_fetch_assoc($result)){
+            array_push($gaussdata4,$d);
+          }
+          foreach ($gaussdata4 as $value){
+                 $gDBFN=$value['gaussFN'];
+              }
+          
+        }else{
+          echo "data not found";
+        }
+
+        //positive and negative values for Naive  
+         require "connect.php";
+         $sql="select COUNT(ID) as naiveTP from tbl_testResult WHERE naivePredicted='TP'";  
+           //execute query and return result object
+         $result=mysqli_query($conn,$sql);
+         //default array
+         $naivedata1=array();
+          if(mysqli_num_rows($result)>0){
+            while($d=mysqli_fetch_assoc($result)){
+              array_push($naivedata1,$d);
+            }
+            foreach ($naivedata1 as $value){
+                   $nDBTP=$value['naiveTP'];
+                }
+            
+          }else{
+            echo "data not found";
+          } 
+
+          require "connect.php"; 
+       $sql="select COUNT(ID) as naiveTN from tbl_testResult WHERE naivePredicted='TN'";  
+         //execute query and return result object
+       $result=mysqli_query($conn,$sql);
+       //default array
+       $naivedata2=array();
+        if(mysqli_num_rows($result)>0){
+          while($d=mysqli_fetch_assoc($result)){
+            array_push($naivedata2,$d);
+          }
+          foreach ($naivedata2 as $value){
+                 $nDBTN=$value['naiveTN'];
+              }
+          
+        }else{
+          echo "data not found";
+        }
+
+      require "connect.php";
+      $sql="select COUNT(ID) as naiveFP from tbl_testResult WHERE naivePredicted='FP'";  
+         //execute query and return result object
+       $result=mysqli_query($conn,$sql);
+       //default array
+       $naivedata3=array();
+        if(mysqli_num_rows($result)>0){
+          while($d=mysqli_fetch_assoc($result)){
+            array_push($naivedata3,$d);
+          }
+          foreach ($naivedata3 as $value){
+                 $nDBFP=$value['naiveFP'];
+              }
+          
+        }else{
+          echo "data not found";
+        }
+
+       require "connect.php";
+       $sql="select COUNT(ID) as naiveFN from tbl_testResult WHERE naivePredicted='FN'";  
+         //execute query and return result object
+       $result=mysqli_query($conn,$sql);
+       //default array
+       $naivedata4=array();
+        if(mysqli_num_rows($result)>0){
+          while($d=mysqli_fetch_assoc($result)){
+            array_push($naivedata4,$d);
+          }
+          foreach ($naivedata4 as $value){
+                 $nDBFN=$value['naiveFN'];
+              }
+          
+        }else{
+          echo "data not found";
+        } 
+
+        
+        // echo "Gaussian TP ".$gDBTP;echo "<br>";echo "<br>";
+        // echo "Gaussian TN ".$gDBTN;echo "<br>";echo "<br>";
+        // echo "Gaussian FP ".$gDBFP;echo "<br>";echo "<br>";
+        // echo "Gaussian FN ".$gDBFN;echo "<br>";echo "<br>";
+
+        // echo "Naive TP ".$nDBTP;echo "<br>";echo "<br>";
+        // echo "Naive TN ".$nDBTN;echo "<br>";echo "<br>";
+        // echo "Naive FP ".$nDBFP;echo "<br>";echo "<br>";
+        // echo "Naive FN ".$nDBFN;echo "<br>";echo "<br>";
+
+        //gaussian Accuracy
+        $gPrecision = $gDBTP/($gDBTP+$gDBFP);
+        $gRecall = $gDBTP/($gDBTP+$gDBFN);
+        $gF1= 2*($gRecall * $gPrecision) / ($gRecall + $gPrecision);
+        $gAccuracy=$gF1*100;
+
+
+        //Naive Accuracy
+        $nPrecision = $nDBTP/($nDBTP+$nDBFP);
+        $nRecall = $nDBTP/($nDBTP+$nDBFN);
+        $nF1 = 2*($nRecall * $nPrecision) / ($nRecall + $nPrecision);
+        $nAccuracy=$nF1*100;    
+   ?>
+
+
+<?php 
+   require "connect.php";
+   //query to select data
+   $sql="select * from tbl_testResult";
+   //execute query and return result object
+   $result=mysqli_query($conn,$sql);
+   //default array
+   $resultdata=array();
+    if(mysqli_num_rows($result)>0){
+      while($d=mysqli_fetch_assoc($result)){
+        array_push($resultdata,$d);
+      }
+      
+    }else{
+      echo "data not found";
+    }
+  
 ?>
 
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <title>Diabetes Prediction System</title>
-      <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-        <style type="text/css">
-          body{
-            background-color: /*#0091ea;*/
-          }
-          #home-sec { 
-          background: url(../img/1.jpg) no-repeat 50% 50%;
-          background-attachment: fixed;
-          background-size: cover;
-          width: 100%;
-          display: block;
-          height: auto;
-          padding-top:190px;
-          min-height:650px;
-          color:#fff;
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Diabetes Prediction System</title>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style type="text/css">
+
+      body{
+        background-color:/* #0091ea;*/
+      }
+      #home-sec { 
+      background: url(../img/1.jpg) no-repeat 50% 50%;
+      background-attachment: fixed;
+      background-size: cover;
+      width: 100%;
+      display: block;
+      height: auto;
+      padding-top:190px;
+      min-height:650px;
+      color:#fff;
+    }
+
+    .head-main {
+        font-size:50px ;
+        font-weight:900;
+        border:5px outset  #fff;
+        padding:15px;
+        text-transform:uppercase;
+        color:#ff7043;
+    
+    }
+
+    #home-block{
+            position:absolute;
+            top:40%;
+            left:2%;
+    }
+
+    section {
+        padding-top:2px;
+        margin-top:2px;
+    }
+
+   #footer {
+      /*position: fixed;*/
+      width: 100%;
+      bottom: 0;
+      height: 60px;
+      background-color:#538cc6;
+      color: #000;
+      padding: 20px 50px 20px 50px;
+      text-align: right;
+      border-top: 1px solid #d6d6d6;
         }
-        .head-main {
-            font-size:50px ;
-            font-weight:900;
-            border:5px outset  #fff;
-            padding:15px;
-            text-transform:uppercase;
-            color:#ff7043;
-        
-        }
-        #home-block{
-                position:absolute;
-                top:40%;
-                left:2%;
-        }
-        section {
-            padding-top:2px;
-            margin-top:2px;
-        }
-           #footer {
-            /*position: fixed;*/
-            width: 100%;
-            bottom: 0;
-            height: 60px;
-            background-color:#538cc6;
-            color: #000;
-            padding: 20px 50px 20px 50px;
-            text-align: right;
-            border-top: 1px solid #d6d6d6;
-        }
-            .errorDisplay{
-              color: red;
-             }
-        </style>
-    </head>
-    <body>
-      <!-----------NAV SECTION-------->
-      <nav class="navbar navbar-inverse" style="top:0px;position:relative;width: 100%">
+    </style>
+</head>
+<body>
+  <!-----------NAV SECTION-------->
+  <nav class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -1053,9 +1173,10 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
-            </button>
-                
+            </button>  
           </div>
+          
+
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
               <li><a href="index.php">Home</a></li>
@@ -1070,232 +1191,161 @@
           </div><!--/.nav-collapse -->  
         </div><!--/.container-fluid -->
       </nav>
-      <!-----------END NAV SECTION-------->
+  <!-----------END NAV SECTION-------->
 
-        <!--HOME SECTION-->
-       
-<section id="gaussianPage">
-  <div class="container">
-      <div class="row ">
-         <div class="col-md-12 col-sm-12 ">
+    <!--HOME SECTION-->
+   <section>
+      <div class="container">
             <div class="row g-pad-bottom">
-              <div class="text-center g-pad-bottom">
-                  <div class="col-md-6 col-sm-6 " style="width:30%;height:30%;left:16%;position:absolute;top:8%;
-                   margin-left: 12px;border-radius: 8px;">
-                      <a href="testResult.php?p=1" 
-                      class="btn btn-primary" style="padding:10px;width:40%;">Accuracy</a>             
-                  </div> 
-
-                  <div class="col-md-6 col-sm-6 alert alert-warning" style="width: 30%;height:30%;left:66%;
-                   margin-left: 12px; border-radius: 8px;">
-                      <h3>Range for Diabetes</h3>
-                      <p>Probability (0-39)%: Low</p>
-                      <p style="margin-left:30px;">Probability (40-69)%: Medium</p>
-                      <p style="margin-left:17px;">Probability (70-100)%: High</p>             
-                  </div>    
-              </div>
-            </div>
-              <h4 class="text-center" style="font-weight: bold;">Please Fill up the form to Predict Diabetes using Naive Bayes and Gaussian Naive Bayes Algorithm</h4>
-              <form  method="POST" action=" " name="predictForm">
-            <div class="col-md-12 col-sm-12">
-               
-                <?php
-                if(isset($_POST['predict'])){
-                   echo $msg;
-                   echo $show; 
-                }
-                
-                 ?>    
-            </div>
-            <div class="col-md-6 col-sm-6">
-              
-              <div class="form-group">  
-                  <label for="inputEmail">Email</label>
-                  <input type="text" class="form-control" name="email" id="inputEmail" placeholder="Enter Email Address of Patient">
-                    <span class="errorDisplay">
-                    <?php if (isset($err['email'])){
-                    echo $err['email'];
-                    } ?>
-                    </span>
+                <div class="text-center g-pad-bottom">
+                     <div class="col-md-12 col-sm-12 " style="width: 98%;
+                     margin-left: 12px; border-radius: 8px;">
+                        <h4>Testing Data Set for Prediction</h4>               
+                    </div>  
                 </div>
+            </div><br/>
 
-                <br>
-               <div class="form-group">  
+            <div class="row g-pad-bottom" >
+                <div class="col-md-12 col-sm-12" >
+                   <table class="table table-bordered table-striped">
+                        <thead class="bg-success">
+                            <tr>
+                              <th scope="col">Pregnancies</th>
+                              <th scope="col">Glucose</th>
+                              <th scope="col">Blood Pressure</th>
+                              <th scope="col">Skin Thickness</th>
+                              <th scope="col">Insulin</th>
+                              <th scope="col">BMI</th>
+                              <th scope="col">DPF</th>
+                              <th scope="col">Age</th>
+                              <th scope="col">Outcome</th>
+                              <th scope="col">GaussianPredicted</th>
+                              <th scope="col">naivePredicted</th>
+                            </tr>
+                       </thead>
+                       <tbody>
+                            <?php foreach ($resultdata as $in){?>
+                              <tr>
+                                <td><?php echo $in['pregnancies'] ?> </td>
+                                <td><?php echo $in['glucose'] ?> </td>
+                                <td><?php echo $in['bp'] ?> </td>
+                                <td><?php echo $in['skin'] ?> </td>
+                                <td><?php echo $in['insulin'] ?> </td>
+                                <td><?php echo $in['bmi'] ?> </td>  
+                                <td><?php echo $in['pedegree'] ?> </td>  
+                                <td><?php echo $in['age'] ?> </td> 
+                                <td><?php echo $in['outcome'] ?> </td>   
+                                <td><?php echo $in['gaussianPredicted'] ?> </td>
+                                <td><?php echo $in['naivePredicted'] ?> </td>  
+                              </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+           </div>
 
-               <?php if(isset($_POST['predict'])){?>
-                  <label for="maleCheck">Male</label> 
+           <div class="row g-pad-bottom" >
+                <div class="col-md-12 col-sm-12" >
+                   <table class="table table-bordered table-striped">
+                    <caption style="text-align: center">Confusion Matrix for Gaussian Naive Bayes</caption>
+                        <thead class="bg-success">
+                            <tr>
+                              <th scope="col" style="visibility: hidden;"></th>
+                              <th scope="col">Predicted No</th>
+                              <th scope="col">Predicted Yes</th>
+                            </tr>
+                            <tr>
+                              <th scope="col">Actual No </th>
+                              <th scope="col">TN: <?php echo $gDBTN?></th>
+                              <th scope="col">FP: <?php echo $gDBFP?></th>
+                            </tr>
+                            <tr>
+                              <th scope="col">Actual Yes</th>
+                              <th scope="col">FN: <?php echo $gDBFN?></th>
+                              <th scope="col">TP: <?php echo $gDBTP?></th>
+                              
+                            </tr>
+                       </thead>
+                    </table>
+                </div>
+           </div>
 
-                     <?php if($inputGender == 'Male'){?>
-                          <input type="radio" onclick="javascript:genderCheck();" name="inputGender" id="maleCheck" value="Male" checked> 
-                          <label for="femaleCheck">Female</label>
-                          <input type="radio" onclick="javascript:genderCheck();" name="inputGender" id="femaleCheck" value="Female"><br>
-                    <?php }?>
+           <div class="row g-pad-bottom" style="position: relative;left:25%">
+                <div class="col-md-6 col-sm-6" >
+                   <table class="table table-bordered table-striped">
+                    <caption style="text-align: center">Accuracy  for Gaussian Naive Bayes</caption>
+                        <thead class="bg-success" style="width:50px;">
+                            <tr>
+                              <th scope="col">Precision:  </th>
+                              <th scope="col"><?php echo $gPrecision;?> </th>
+                            </tr>
+                            <tr>
+                              <th scope="col">Recall: </th>
+                              <th scope="col"><?php echo $gRecall;?> </th>
+                            </tr>
+                            <tr>
+                              <th scope="col">F1-Score:  </th> 
+                              <th scope="col" style="background: red;"><?php echo $gF1?> </th>                              
+                            </tr>
+                       </thead>
+                    </table>
+                </div>
+           </div>
 
-                    <?php if($inputGender == 'Female'){?> 
-                        <input type="radio" onclick="javascript:genderCheck();" name="inputGender" id="maleCheck" value="Male" > 
-                        <label for="femaleCheck">Female</label>
-                        <input type="radio" onclick="javascript:genderCheck();" name="inputGender" id="femaleCheck" value="Female" checked><br>
-                    <?php }?>
-               <?php }?>     
-              
-              <?php if(!isset($_POST['predict'])){?>
-                  <label for="maleCheck">Male</label> 
-                  <input type="radio" onclick="javascript:genderCheck();" name="inputGender" id="maleCheck" value="Male" checked> 
-                  <label for="femaleCheck">Female</label>
-                  <input type="radio" onclick="javascript:genderCheck();" name="inputGender" id="femaleCheck" value="Female"><br>
-              <?php }?>
+           <div class="row g-pad-bottom" >
+                <div class="col-md-12 col-sm-12" >
+                   <table class="table table-bordered table-striped">
+                    <caption style="text-align: center">Confusion Matrix for Naive Bayes</caption>
+                        <thead class="bg-success">
+                            <tr>
+                              <th scope="col" style="visibility: hidden;"></th>
+                              <th scope="col">Predicted No</th>
+                              <th scope="col">Predicted Yes</th>
+                            </tr>
+                            <tr>
+                              <th scope="col">Actual No </th>
+                              <th scope="col">TN: <?php echo $nDBTN?></th>
+                              <th scope="col">FP: <?php echo $nDBFP?></th>
+                            </tr>
+                            <tr>
+                              <th scope="col">Actual Yes</th>
+                              <th scope="col">FN: <?php echo $nDBFN?></th>
+                              <th scope="col">TP: <?php echo $nDBTP?></th>
+                              
+                            </tr>
+                       </thead>
+                    </table>
+                </div>
+           </div>
 
-              <span class="errorDisplay">
-                  <?php if (isset($err['gender'])){
-                  echo $err['gender'];
-                } ?>
-              </span> 
-            </div>  
+           <div class="row g-pad-bottom"  style="position: relative;left:25%"">
+                <div class="col-md-6 col-sm-6" >
+                   <table class="table table-bordered table-striped">
+                    <caption style="text-align: center">Accuracy  for Naive Bayes</caption>
+                        <thead class="bg-success">
+                          <tr>                           
+                            <th scope="col">Precision:  </th>
+                            <th scope="col"><?php echo $nPrecision;?> </th>
+                          </tr>
+                          <tr>
+                            <th scope="col">Recall: </th>
+                            <th scope="col"><?php echo $nRecall;?> </th>
+                          </tr>
+                          <tr>
+                            <th scope="col">F1-Score: </th> 
+                            <th scope="col" style="background: red"><?php echo $nF1?> </th>                             
+                          </tr>
+                       </thead>
+                    </table>
+                </div>
+           </div>
 
-            <script type="text/javascript">
 
-                function genderCheck() {
-                  if (document.getElementById('femaleCheck').checked) {
-                  document.getElementById('ifYes').style.visibility = 'visible';
-                }else {
-                  document.getElementById('ifYes').style.visibility = 'hidden';
-                }
-              }
-          </script>
-             <br>
-            
-              <?php if(isset($_POST['predict'])){ ?>
-                  <?php if($inputGender=="Female"){ 
-
-                    ?>
-                        <div class="form-group" id="ifYes" style="visibility:visible">
-                          <label for="inputPregnancy">Pregnancies</label>
-                          <input type="text" class="form-control"  name ="pregnancy" id="inputPregnancy" value="" placeholder="Enter Pregnancy Value Less Than 20"/>
-                          <span class="errorDisplay">
-                          <?php if (isset($err['pregnancy'])){
-                                  echo $err['pregnancy'];
-                          } ?>
-                         </span>
-                        
-                <?php } ?>
-
-                <?php if($inputGender=="Male"){ ?>
-                    <div class="form-group" id="ifYes" style="visibility:hidden">
-                        <label for="inputPregnancy">Pregnancies</label>
-                        <input type="text" class="form-control"  name ="pregnancy" id="inputPregnancy" value="" placeholder="Enter Pregnancy Value Less Than 20" />
-                        <span class="errorDisplay">
-                        <?php if (isset($err['pregnancy'])){
-                                echo $err['pregnancy'];
-                        } ?>
-                         </span>
-                <?php } ?>
-            <?php } ?>
-
-             <?php if(!isset($_POST['predict'])){ ?>
-              <div class="form-group" id="ifYes" style="visibility:hidden">
-                <label for="inputPregnancy">Pregnancies</label>
-                <input type="text" class="form-control"  name ="pregnancy" id="inputPregnancy" value="" placeholder="Enter Pregnancy Value Less Than 20"/>
-                <span class="errorDisplay">
-                <?php if (isset($err['pregnancy'])){
-                  echo $err['pregnancy'];
-                } ?>
-                </span>
-               <?php } ?> 
-            </div>
-            
-            <div class="form-group">
-              <label for="inputGlucose">Glucose</label>
-              <input type="text" class="form-control" name="glucose" id="inputGlucose" placeholder="Enter Glucose Value Less Than 500">
-              <span class="errorDisplay">
-                  <?php if (isset($err['glucose'])){
-                  echo $err['glucose'];
-                } ?>
-              </span>
-            </div>
-
-            <br>
-            <div class="form-group">
-              <label for="inputBP">Blood Pressure</label>
-              <input type="text" class="form-control"  name="BP" id="inputBP" placeholder="Enter Blood Pressure Value Less Than 500">
-              <span class="errorDisplay">
-                  <?php if (isset($err['BP'])){
-                  echo $err['BP'];
-                } ?>
-              </span>
-            </div>
-            
-          </div>
-
-          <div class="col-md-6 col-sm-6">
-            
-            <div class="form-group">
-              <label for="inputSkin">Skin Thickness</label>
-              <input type="text" class="form-control" name="skin" id="inputSkin" placeholder="Enter Skin Thickness Value Less Than 100">
-              <span class="errorDisplay">
-                  <?php if (isset($err['skin'])){
-                  echo $err['skin'];
-                } ?>
-              </span>
-            </div>
-
-            <div class="form-group">
-              <label for="inputInsulin">Insulin</label>
-              <input type="text" class="form-control" name="insulin" id="inputInsulin" placeholder="Enter Insulin Value Less Than  850">
-              <span class="errorDisplay">
-                  <?php if (isset($err['insulin'])){
-                  echo $err['insulin'];
-                } ?>
-              </span>
-            </div>
-            
-            <div class="form-group">
-              <label for="inputBMI">BMI</label>
-              <input type="text" class="form-control" name="BMI" id="inputBMI" placeholder="Enter BMI Value Less Than 100">
-              <span class="errorDisplay">
-                  <?php if (isset($err['BMI'])){
-                  echo $err['BMI'];
-                } ?>
-              </span>
-            </div>
-            
-            <div class="form-group" style="margin-top:25px;">
-              <label for="inputPedegree">Diabetes Pedegree Function</label>
-              <input type="text" class="form-control" name="pedegree" id="inputPedegree" placeholder="Enter Diabetes Pedegree Function Value Less Than  50">
-              <span class="errorDisplay">
-                  <?php if (isset($err['pedegree'])){
-                  echo $err['pedegree'];
-                } ?>
-              </span>
-            </div>
            
-
-            <div class="form-group" style="margin-top:30px;">
-              <label for="inputAge">Age</label>
-              <input type="text" class="form-control" name="age" id="inputAge" placeholder="Enter Age range of  21 to 100">
-              <span class="errorDisplay">
-                  <?php if (isset($err['age'])){
-                  echo $err['age'];
-                } ?>
-              </span>
-            </div>
-            <br><br><br>
-          </div> 
-
-          <div class="form-group">
-             <button type="submit" name="predict" class="btn btn-block btn-primary">Predict</button>
-          </div>
-
-          </form>
-        </div>             
-      </div>
-    </div>
-  </section><br>
-        <!-- END Home SECTION -->
-
-
-    <!-- Naive Bayes Algorithm Implementation Part -->
-
-    
+       </div>   
+   </section>
+   <br>
+    <!-- END Home SECTION -->
 
      <!--FOOTER SECTION -->
     <div id="footer">

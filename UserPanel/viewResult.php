@@ -1,10 +1,15 @@
 <?php 
+if(!isset($_COOKIE['email'])){
+    header('location:userlogin.php?a=1');
+  }
+?>
 
+<?php 
    $currentEmail=$_COOKIE['email'];
    require "connect.php";
-   //query to select data
-   $sql="select * from tbl_result where email='$currentEmail'";
-   //execute query and return result object
+
+   $sql="select * from tbl_result where email='$currentEmail'";  
+     //execute query and return result object
    $result=mysqli_query($conn,$sql);
    //default array
    $data=array();
@@ -18,104 +23,6 @@
     }
   
 ?>
-
-
- <?php 
-    $msg='';
-
-    if(isset($_GET['Id'])){
-     
-      require "connect.php";
-      $Id=$_GET['Id'];
-      $userSql="Select email from tbl_result where Id='$Id'";
-      // echo "<br>";echo "<br>";echo "<br>";echo "<br>";
-      // echo $userSql;
-       //execute query and return result object
-      $userResult=mysqli_query($conn,$userSql);
-
-      if(mysqli_num_rows($userResult)>0){
-          $info=mysqli_fetch_assoc($userResult);
-          $dbUserEmail=$info['email'];
-          // echo $dbUserEmail;
-           
-        $countDocSql="Select * from tbl_doctor order by Id asc"; echo '<br>';
-        // echo $countDocSql;
-          $countDocResult=mysqli_query($conn,$countDocSql);
-             //first inner if
-        if(mysqli_num_rows($countDocResult)==0){
-            $msg='<div class="alert alert-danger"> "No doctor Available";</div>';
-        }else{
-            //check if a pateient has been assigned with a doctor already
-            $userDocSql="Select doctorEmail  from tbl_user_doctor where userEmail='$dbUserEmail'";
-            $userDocResult =mysqli_query($conn,$userDocSql);
-            if(mysqli_num_rows($userDocResult)>0){
-              //assign previously added doctor
-              // $val=mysqli_fetch_assoc($userDocResult);
-              // $previousDocEmail=$val['doctorEmail'];
-
-                // $msg='<div class="alert alert-danger"> Doctor Already Consulted </div>';
-         
-              }else{
-                $checkUserDocSql="Select doctorEmail FROM tbl_user_doctor order by Id desc limit 1";
-                $checkUserDocResult=mysqli_query($conn,$checkUserDocSql);
-                if(mysqli_num_rows($checkUserDocResult)!=1){
-                  //assign 1st doctor of table
-                  $value=mysqli_fetch_assoc($countDocResult);
-                  $dbDoctorEmail=$value['docEmail'];
-                  $addSql="Insert into tbl_user_doctor (userEmail,doctorEmail) values ('$dbUserEmail','$dbDoctorEmail')";
-                  $addSqlResult =mysqli_query($conn,$addSql);
-
-                  if($addSqlResult){
-                    $msg='<div class="alert alert-success"> Doctor Consulted Successfully </div>';
-                  }
-                  
-                }
-                else{
-                  $info=mysqli_fetch_assoc($checkUserDocResult);
-                  $prevDocEmail=$info['doctorEmail'];
-                  $prevDocIdsql="Select Id from tbl_doctor where docEmail='$prevDocEmail'";
-                  $prevDocIdResult =mysqli_query($conn,$prevDocIdsql);
-                  $data=mysqli_fetch_assoc($prevDocIdResult);
-                  $prevDocId=$data['Id'];
-                  $nextDocEmailsql="Select docEmail from tbl_doctor where Id>'$prevDocId' limit 1";
-                  $nextDocEmailResult =mysqli_query($conn,$nextDocEmailsql);
-                  $value=mysqli_fetch_assoc($nextDocEmailResult);
-                  $nextDocEmail=$value['docEmail'];
-
-                  if(mysqli_num_rows($nextDocEmailResult)!=1){
-                    //assign first doctor of table for a patient when the list of doctor reaches the last row and then we should start from first doctor 
-                    $value=mysqli_fetch_assoc($countDocResult);
-                    $dbDoctorEmail=$value['docEmail'];
-                    $addSql="Insert into tbl_user_doctor (userEmail,doctorEmail) values ('$dbUserEmail','$dbDoctorEmail')";
-                    $addSqlResult =mysqli_query($conn,$addSql);
-
-                     if($addSqlResult){
-                        $msg='<div class="alert alert-success"> Doctor Consulted Successfully </div>';
-                       } 
-
-                    }
-                    else{
-                      //assign $nextDocEmailResult['docEmail']
-                      $addNextSql="Insert into tbl_user_doctor (userEmail,doctorEmail) values ('$dbUserEmail','$nextDocEmail')";
-                      $addNextSqlResult =mysqli_query($conn,$addNextSql);
-                      if($addNextSqlResult){
-                        $msg='<div class="alert alert-success"> Doctor Consulted Successfully </div>';
-                    } 
-
-                      
-                    }
-                  }
-
-                  
-                }
-          }//end of inner else of first inner if  
-              
-        }//end of main if loop
-
-
-        }
-        ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -166,15 +73,15 @@
     }
 
        #footer {
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-            height: 60px;
-            background-color:#ff5252;
-            color: #000;
-            padding: 20px 50px 20px 50px;
-            text-align: right;
-            border-top: 1px solid #d6d6d6;
+          position: fixed;
+          width: 100%;
+          bottom: 0;
+          height: 60px;
+          background-color:#538cc6;
+          color: #000;
+          padding: 20px 50px 20px 50px;
+          text-align: right;
+          border-top: 1px solid #d6d6d6;
         }
     </style>
 </head>
@@ -193,9 +100,8 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="userIndex.php">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <li><a href="viewResult.php">View Result</a></li>
-                <li><a href="doctorResponse.php">Doctors Response</a></li>
                 <li><a href="userlogout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
             <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to User Panel</p>
@@ -217,18 +123,24 @@
                 </div>
               </div>
               <br>
+            <div class="row g-pad-bottom">
+                <div class="text-center g-pad-bottom">
+                    <div class="col-md-12 col-sm-12 alert alert-warning" style="width: 30%;height:30%;left:68%;
+                     margin-left: 12px; border-radius: 8px;">
+                        <h3>Range for Diabetes</h3>
+                        <p>Probability (0-39)%: Low</p>
+                        <p style="margin-left:30px;">Probability (40-69)%: Medium</p>
+                        <p style="margin-left:17px;">Probability (70-100)%: High</p>             
+                    </div>    
+                </div>
+              </div>
 
            <div class="row g-pad-bottom" >
                 <div class="col-md-12 col-sm-12" >
-
-                  <?php 
-                        echo $msg;
-                    ?>
-                    <br>
+                   <h4 class="text-center" style="font-weight: bold;">Diabetes Result Based on  Naive Bayes and Gaussian Naive Bayes Algorithm</h4>
                    <table class="table table-bordered table-striped">
                       <thead class="bg-success">
                           <tr>
-                            <th scope="col">Id</th>
                             <th scope="col">Predicted Date</th>
                             <th scope="col">Pregnancies</th>
                             <th scope="col">Glucose</th>
@@ -238,15 +150,16 @@
                             <th scope="col">BMI</th>
                             <th scope="col">DPF</th>
                             <th scope="col">Age</th>
-                            <th scope="col">Outcome</th>
-                            <th scope="col">Probability</th>
-                            <th scope="col">Consult Doctor</th>
+                            <th scope="col">Outcome for Gaussian </th>
+                            <th scope="col">Probability for Gaussian</th>
+                            <th scope="col">Outcome for Naive Bayes </th>
+                            <th scope="col">Probability for Naive Bayes</th>
+
                           </tr>
-                     </thead>
+                     </thead> 
                      <tbody>
-                        <?php foreach ($data as $info){?>
+                       <?php foreach ($data as $info){?>
                               <tr>
-                                <th scope="row"><?php echo $info['Id'] ?></th>
                                 <td><?php echo $info['date'] ?></td>
                                 <td><?php echo $info['pregnancies'] ?></td>
                                 <td><?php echo $info['glucose'] ?></td>
@@ -256,16 +169,13 @@
                                 <td><?php echo $info['bmi'] ?></td>
                                 <td><?php echo $info['pedegree'] ?></td>
                                 <td><?php echo $info['age'] ?></td>
-                                <td><?php echo $info['outcome'] ?></td>
-                                <td><?php echo $info['value'].'%' ?></td>
-                                <?php if($info['outcome']=='tested_positive'){?>
-                                  <td><a class ="btn btn-primary btn-block"  href="viewResult.php?Id=<?php echo $info['Id']?>"onclick="return confirm('Are you sure u want to Consult?')">Consult</a></td>
-                                <?php } ?>
-                                <?php if($info['outcome']=='tested_negative'){ ?>
-                                  <td><input type="button"  value='Not Needed' class ="btn btn-primary btn-block" disabled></td>
-                                <?php } ?>
+                                <td><?php echo $info['gaussianOutcome']?></td>
+                                <td><?php echo $info['gaussianValue'].'%'?></td>
+                                <td><?php echo $info['naiveOutcome']?></td>
+                                <td><?php echo $info['naiveValue'].'%'?></td>
+                                
                               </tr>
-                         <?php } ?> 
+                         <?php } ?>
 
                     </tbody>
                     </table>

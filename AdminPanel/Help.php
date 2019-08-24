@@ -1,3 +1,9 @@
+<?php
+if(!isset($_COOKIE['adminName'])){
+  header('location:adminlogin.php?b=1');
+  }
+?>
+
 <?php 
  require "connect.php";
  //query to select data
@@ -70,7 +76,7 @@
             width: 100%;
             bottom: 0;
             height: 60px;
-            background-color:#ff5252;
+            background-color:#538cc6;
             color: #000;
             padding: 20px 50px 20px 50px;
             text-align: right;
@@ -93,13 +99,12 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="adminIndex.php">Home</a></li>
+              <li><a href="index.php">Home</a></li>
               <li><a href="importgaussiandata.php">Load Data Set</a></li>
+              <li><a href="importTestData.php">Import Test Data Set</a></li>
               <li><a href="Predict.php">Predict Diabetes</a></li>
               <li><a href="Help.php">Help</a></li>
-              <li><a href="addDoctors.php">Add Doctors</a></li>
-              <li><a href="manageDoctors.php">Manage Doctors</a></li>
-              <li><a href="manageUsers.php">View Users</a></li>
+              <li><a href="viewUsers.php">View Users</a></li>
               <li><a href="adminlogout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
             <p class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to User Panel</p>

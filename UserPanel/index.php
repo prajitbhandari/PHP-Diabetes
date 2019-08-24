@@ -17,18 +17,19 @@ if(!isset($_COOKIE['email'])){
     <style type="text/css">
 
     	body{
-    		background-color: #0091ea;
+    		background-color: #fff;
     	}
 	    #home-sec { 
-			background: url(../img/1.jpg) no-repeat 50% 50%;
-			background-attachment: fixed;
-			background-size: cover;
-			width: 100%;
-			display: block;
-			height: auto;
-			padding-top:190px;
-			min-height:650px;
-			color:#fff;
+			background: url(./user.jpg) no-repeat 50% 50%;
+			background-size:cover;
+      position: relative;
+      top:-20px;
+      /*height: 180px;*/
+      width: 100%;
+      display: block;
+      padding-top:190px;
+      min-height:650px;
+      color:#fff;
 		}
 
 		.head-main {
@@ -53,11 +54,11 @@ if(!isset($_COOKIE['email'])){
 		}
 
        #footer {
-            position: fixed;
+            /*position: fixed;*/
             width: 100%;
             bottom: 0;
             height: 60px;
-            background-color:#ff5252;
+            background-color:#538cc6;
             color: #000;
             padding: 20px 50px 20px 50px;
             text-align: right;
@@ -80,9 +81,8 @@ if(!isset($_COOKIE['email'])){
 
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="userIndex.php">Home</a></li>
+                <li><a href="index.php">Home</a></li>
                 <li><a href="viewResult.php">View Result</a></li>
-                <li><a href="doctorResponse.php">Doctors Response</a></li>
                 <li><a href="userlogout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
             <span class="navbar-text" style="color:#fff;font-size: 16px;">Welcome to User Panel</span>
